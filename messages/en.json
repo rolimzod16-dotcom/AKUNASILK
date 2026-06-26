@@ -1,0 +1,555 @@
+{
+  "meta": {
+    "title": "GREATSILKTRAILS — Buy Silk Road Tour Packages",
+    "description": "Book all-inclusive Silk Road tour packages. Fixed prices, instant inquiry, departures year-round. Uzbekistan, Kyrgyzstan, China & more."
+  },
+  "nav": {
+    "home": "Home",
+    "destinations": "Destinations",
+    "journeys": "Journeys",
+    "experiences": "Experiences",
+    "heritage": "Heritage",
+    "stories": "Stories",
+    "about": "About",
+    "partners": "Partners",
+    "contact": "Contact",
+    "tours": "Journeys",
+    "pricing": "Pricing",
+    "portfolio": "Experiences",
+    "blog": "Stories",
+    "faq": "FAQ",
+    "book": "Buy a Tour",
+    "planYourJourney": "Plan Your Journey"
+  },
+  "hero": {
+    "badge": "6 packages · All-inclusive · From $1,980",
+    "title": "Silk Road. Packaged.",
+    "subtitle": "Fixed-price tour packages with hotels, guides, transfers & meals included. Pick a route — we handle everything.",
+    "priceFrom": "From ${price}",
+    "cta": "Shop Packages",
+    "ctaSecondary": "View bestseller",
+    "bestseller": "Bestseller",
+    "spotsUrgent": "Only {count} spots left on next departure",
+    "trust": "Free cancellation up to 60 days · Secure booking · 4,200+ travelers"
+  },
+  "shop": {
+    "title": "Choose your package",
+    "subtitle": "All tours include guide, hotels, transfers & most meals. Pay once — travel worry-free.",
+    "bestseller": "Bestseller",
+    "buy": "Buy",
+    "buyNow": "Buy Now",
+    "buyPackage": "Shop Tour Packages",
+    "details": "Details",
+    "departure": "Departs",
+    "nextDeparture": "Next departure",
+    "orMonthly": "or ~${price}/mo with installments",
+    "reviews": "reviews",
+    "mostPopular": "Most Popular",
+    "pricingTitle": "Pick your tier",
+    "pricingSubtitle": "Same destinations. Different comfort levels.",
+    "packageIncludes": "Every package includes",
+    "highlights": "Trip highlights",
+    "askExpert": "Ask an expert",
+    "available": "Spots available",
+    "guaranteeShort": "60-day free cancellation · Best price guarantee",
+    "compareHint": "Not sure which package? Compare all routes.",
+    "includes": {
+      "title": "All-inclusive. No surprises.",
+      "subtitle": "Every GREATSILKTRAILS package ships with everything below — no hidden fees at checkout.",
+      "items": {
+        "guide": { "title": "Expert Guide", "desc": "Local historian, full trip" },
+        "hotel": { "title": "Hotels", "desc": "Boutique & heritage stays" },
+        "transfer": { "title": "Transfers", "desc": "Airport pickup & all transport" },
+        "meals": { "title": "Meals", "desc": "Breakfast + most dinners" },
+        "tickets": { "title": "Entrance Fees", "desc": "Museums, sites, activities" },
+        "support": { "title": "24/7 Support", "desc": "On-trip assistance always" }
+      }
+    }
+  },
+  "scrollStory": {
+    "title": "Every mile. A masterpiece.",
+    "subtitle": "Scroll through three worlds connected by the greatest trade route in history.",
+    "panels": {
+      "desert": {
+        "label": "Chapter I",
+        "title": "Desert. Infinite.",
+        "desc": "Cross the Karakum under a canopy of stars. Hear silence the way caravans did two thousand years ago."
+      },
+      "mountains": {
+        "label": "Chapter II",
+        "title": "Peaks. Untamed.",
+        "desc": "The Pamir Highway rises above the clouds. Eagle hunters, alpine lakes, and the roof of the world await."
+      },
+      "cities": {
+        "label": "Chapter III",
+        "title": "Cities. Timeless.",
+        "desc": "Samarkand's blue domes glow at dawn. Bazaars pulse with spices, silk, and stories passed hand to hand."
+      }
+    }
+  },
+  "stats": {
+    "travelers": "Happy Travelers",
+    "tours": "Curated Routes",
+    "countries": "Countries",
+    "years": "Years of Expertise"
+  },
+  "features": {
+    "title": "Why Travel With Us",
+    "subtitle": "We don't sell trips — we design passages through time.",
+    "items": {
+      "expert": {
+        "title": "Local Masters",
+        "desc": "Historians, artisans, and nomadic guides who live the Silk Road story every day."
+      },
+      "luxury": {
+        "title": "Refined Comfort",
+        "desc": "Boutique caravanserais, heritage hotels, and private desert camps — never compromise."
+      },
+      "custom": {
+        "title": "Tailored Routes",
+        "desc": "Every itinerary is sculpted to your pace, passions, and curiosity."
+      },
+      "safety": {
+        "title": "Seamless Logistics",
+        "desc": "Visas, transfers, permits — handled quietly so you focus on wonder."
+      }
+    }
+  },
+  "tours": {
+    "title": "Signature Journeys",
+    "subtitle": "Handpicked routes through the heart of the Silk Road",
+    "from": "from",
+    "days": "days",
+    "viewAll": "View All Tours",
+    "spotsLeft": "{count} spots left",
+    "difficulty": {
+      "easy": "Leisure",
+      "moderate": "Moderate",
+      "adventurous": "Adventurous"
+    },
+    "items": {
+      "golden-caravan": {
+        "title": "Golden Caravan",
+        "desc": "Samarkand's blue domes, Bukhara's bazaars, and Khiva's walled city — the crown jewels of Central Asia.",
+        "highlights": ["Registan at dawn", "Silk weaving workshop", "Desert yurt dinner"]
+      },
+      "desert-echoes": {
+        "title": "Desert Echoes",
+        "desc": "Darvaza's flaming crater, ancient Merv ruins, and the endless Karakum sands under starlit skies.",
+        "highlights": ["Door to Hell at night", "UNESCO Merv", "Camel caravan trek"]
+      },
+      "heavenly-mountains": {
+        "title": "Heavenly Mountains",
+        "desc": "Alpine lakes, eagle hunters, and felt-making traditions in the Tian Shan and Almaty highlands.",
+        "highlights": ["Issyk-Kul lake", "Eagle hunting demo", "Nomadic horse trek"]
+      },
+      "jade-gate": {
+        "title": "Jade Gate Expedition",
+        "desc": "From Xi'an's Terracotta Warriors to Dunhuang's Mogao Caves — trace China's Silk Road origins.",
+        "highlights": ["Terracotta Army", "Mogao Caves", "Camel market in Kashgar"]
+      },
+      "spice-and-silk": {
+        "title": "Spice & Silk",
+        "desc": "Georgian wine cellars, Baku's flame towers, and Caucasus mountain villages where East meets West.",
+        "highlights": ["Wine tasting in Kakheti", "Old Baku walk", "Sheki Khan Palace"]
+      },
+      "pamir-odyssey": {
+        "title": "Pamir Odyssey",
+        "desc": "The legendary Pamir Highway — Wakhan Valley views, remote villages, and the roof of the world.",
+        "highlights": ["Pamir Highway drive", "Wakhan Corridor", "Homestay with Pamiri families"]
+      }
+    }
+  },
+  "timeline": {
+    "title": "2,000 Years of the Silk Road",
+    "subtitle": "Follow the thread of history as you travel",
+    "events": {
+      "130bce": { "year": "130 BCE", "title": "Zhang Qian Opens the West", "desc": "Han dynasty envoy discovers the western routes, igniting centuries of trade." },
+      "1stc": { "year": "1st Century", "title": "Rome Meets the East", "desc": "Roman nobles drape themselves in Chinese silk — a luxury worth its weight in gold." },
+      "7thc": { "year": "7th Century", "title": "Golden Age of Samarkand", "desc": "Under the Sogdians, Samarkand becomes the crossroads of the world." },
+      "13thc": { "year": "13th Century", "title": "Marco Polo's Caravan", "desc": "The Venetian merchant documents wonders from Kashgar to Khanbaliq." },
+      "2013": { "year": "2013", "title": "Silk Road Revival", "desc": "UNESCO and nations unite to preserve and celebrate this living heritage." },
+      "today": { "year": "Today", "title": "Your Journey Begins", "desc": "The road awaits — not as history, but as an experience you'll carry forever." }
+    }
+  },
+  "testimonials": {
+    "title": "4.9 out of 5",
+    "subtitle": "Trusted by 4,200+ travelers who booked with us.",
+    "items": {
+      "1": { "text": "Standing in Registan Square at sunrise felt like stepping through a portal. GREATSILKTRAILS made every moment effortless.", "author": "Elena M.", "location": "Moscow" },
+      "2": { "text": "The Pamir Highway tour changed how I see travel. Remote, raw, and absolutely magnificent.", "author": "James K.", "location": "London" },
+      "3": { "text": "Our family trip through Uzbekistan was magical. The kids still talk about the desert yurt dinner.", "author": "Sarah & Tom", "location": "Berlin" }
+    }
+  },
+  "partners": {
+    "title": "Our Partners",
+    "subtitle": "Local experts we trust on every Silk Road corridor",
+    "intro": "Every GREATSILKTRAILS package is delivered through vetted hotels, DMCs, and cultural institutions — not anonymous third parties. These are the teams that greet you at the airport, unlock closed monuments, and cook dinner in the desert.",
+    "viewAll": "Meet all partners",
+    "visitWebsite": "Visit website",
+    "pageIntro": "We work exclusively with partners who share our standards for safety, authenticity, and fair treatment of local communities. Below is the network behind your journey.",
+    "stats": "{count} partners across Central Asia, China, and the Caucasus",
+    "becomeTitle": "Become a partner",
+    "becomeDesc": "Hotels, DMCs, guides, and cultural institutions along the Silk Road — if you share our values, we would love to hear from you.",
+    "becomeCta": "Partner with us",
+    "categories": {
+      "hotel": "Hotels & Lodging",
+      "dmc": "Destination Management",
+      "hospitality": "Homestays & Hospitality",
+      "transport": "Airlines & Transport",
+      "cultural": "Culture & Tourism"
+    },
+    "categoryDesc": {
+      "hotel": "Boutique properties and heritage hotels where you rest between caravan days.",
+      "dmc": "Ground teams that handle logistics, permits, and on-the-road expertise.",
+      "hospitality": "Family homestays and community lodges in remote mountain valleys.",
+      "transport": "Air and road partners that connect your journey across borders.",
+      "cultural": "Museums, tourism boards, and institutions that open doors others cannot."
+    },
+    "items": {
+      "registan-palace": {
+        "name": "Registan Palace Hotel",
+        "desc": "Steps from Samarkand's Registan Square — our signature base for Golden Caravan departures, with rooftop views and historian-led briefings."
+      },
+      "asia-adventures": {
+        "name": "Asia Adventures DMC",
+        "desc": "Tashkent-based ground operator managing visas, permits, and private transport across Uzbekistan and Turkmenistan."
+      },
+      "pamiri-homestays": {
+        "name": "Pamiri Homestay Network",
+        "desc": "Community-owned lodges along the Wakhan Valley — authentic meals, apricot orchards, and the warmest welcomes on the Pamir Highway."
+      },
+      "turkish-airlines": {
+        "name": "Turkish Airlines",
+        "desc": "Preferred carrier for Istanbul connections to Tashkent, Bishkek, and Dushanbe with reliable schedules and generous baggage."
+      },
+      "caravan-serai": {
+        "name": "Caravan Serai Group",
+        "desc": "Restored caravanserai properties in Bukhara and Khiva — sleeping where merchants rested for a thousand years."
+      },
+      "nomad-trails": {
+        "name": "Nomad Trails Kyrgyzstan",
+        "desc": "Horse trekking, jailoo camps, and Issyk-Kul extensions — the Kyrgyz team behind our Heavenly Mountains itinerary."
+      },
+      "uzbekistan-tourism": {
+        "name": "Uzbekistan Tourism Board",
+        "desc": "Official partner for heritage site access, festival calendars, and priority entry at major monuments during peak season."
+      },
+      "silk-road-xian": {
+        "name": "Silk Road Expeditions",
+        "desc": "Xi'an-based specialists for Jade Gate departures — Terracotta Army, Mogao Caves logistics, and China border formalities."
+      }
+    }
+  },
+  "cta": {
+    "title": "Book your package today.",
+    "subtitle": "Select a tour, send an inquiry — we confirm your spot within 24 hours.",
+    "button": "Buy a Tour Package",
+    "guarantee": "60-day money-back guarantee · Secure payment · Visa support included"
+  },
+  "about": {
+    "title": "Our Story",
+    "subtitle": "Born from a passion for the road less traveled",
+    "mission": "GREATSILKTRAILS was founded in 2012 by explorers who believed the Silk Road deserved more than bus tours and checklist sightseeing. We design journeys that honor history while embracing modern comfort.",
+    "values": {
+      "authentic": { "title": "Authenticity", "desc": "Real encounters with real people — artisans, nomads, scholars." },
+      "sustainable": { "title": "Sustainability", "desc": "We support local communities and minimize our footprint." },
+      "excellence": { "title": "Excellence", "desc": "Every detail curated, every moment considered." }
+    },
+    "team": {
+      "title": "Meet the Caravan Leaders",
+      "members": {
+        "1": { "name": "Aziz Karimov", "role": "Founder & Lead Guide", "bio": "20 years guiding across Central Asia. PhD in Silk Road history." },
+        "2": { "name": "Mei Lin", "role": "China Route Specialist", "bio": "Former archaeologist at Dunhuang Research Institute." },
+        "3": { "name": "Nino Beridze", "role": "Caucasus Director", "desc": "Georgian hospitality expert and certified sommelier." }
+      }
+    }
+  },
+  "pricing": {
+    "title": "Transparent Pricing",
+    "subtitle": "Premium experiences with no hidden fees",
+    "included": "What's Included",
+    "includedItems": ["Expert local guides", "Boutique accommodations", "Private transfers", "Most meals", "Entrance fees", "24/7 support"],
+    "tiers": {
+      "explorer": { "name": "Explorer", "price": "from $1,980", "desc": "8–10 day journeys, small groups up to 12", "features": ["Group tours", "Standard hotels", "Shared transfers"] },
+      "signature": { "name": "Signature", "price": "from $2,650", "desc": "11–14 day premium routes, groups up to 8", "features": ["Smaller groups", "Heritage hotels", "Private guide", "Cultural workshops"], "popular": true },
+      "bespoke": { "name": "Bespoke", "price": "Custom quote", "desc": "Fully private, any duration, your dream itinerary", "features": ["Private car & guide", "Luxury lodges", "Helicopter options", "Personal concierge"] }
+    }
+  },
+  "portfolio": {
+    "title": "Journey Gallery",
+    "subtitle": "Moments captured along the Silk Road"
+  },
+  "blog": {
+    "title": "Road Journal",
+    "subtitle": "Stories, guides, and inspiration from the trail",
+    "readMore": "Read Article",
+    "backToStories": "All Stories",
+    "readTime": "{minutes} min read",
+    "posts": {
+      "samarkand-blue-domes": {
+        "title": "Why Samarkand's Blue Domes Will Change You",
+        "excerpt": "A dawn visit to Registan reveals colors that photographs can never capture.",
+        "body": [
+          "Stand in Registan Square before the city wakes and you understand why merchants called Samarkand the jewel of the Silk Road. The turquoise tiles catch the first light in a way no camera can reproduce — a living blue that shifts from cobalt to aquamarine as the sun climbs.",
+          "Our Golden Caravan tour includes a private dawn visit with a local historian who reads the tilework like a manuscript. You learn which patterns are Timurid, which are Soviet restoration, and which stories the madrasahs still whisper to students at prayer time.",
+          "By the time tour buses arrive at nine, you have already walked the same stones as Ibn Battuta. That is the difference between visiting Samarkand and truly arriving there."
+        ]
+      },
+      "caravan-life-desert": {
+        "title": "A Night in the Karakum Desert",
+        "excerpt": "Sleeping under a billion stars, listening to the silence of the sands.",
+        "body": [
+          "The Karakum does not reward hurry. On our Desert Echoes itinerary we leave the highway behind and set camp where caravans once rested between Merv and Khiva — no light pollution, no signal, only wind over dunes.",
+          "Dinner is cooked in a sand pit: lamb, onions, and rice sealed under embers the way nomads have done for centuries. Afterward, your guide points out constellations named by Persian astronomers long before Western star charts existed.",
+          "Sleep comes easily in a felt yurt. You wake to tea brewed on a dung fire and a horizon that has not changed in a thousand years."
+        ]
+      },
+      "pamir-highway-guide": {
+        "title": "The Ultimate Pamir Highway Guide",
+        "excerpt": "Everything you need to know before tackling the world's most scenic road.",
+        "body": [
+          "The Pamir Highway is not a road you conquer — it is one you respect. At 4,000+ metres, altitude affects everyone differently. We acclimatise in Osh and Dushanbe before the high passes, with medical kits and oxygen on every vehicle.",
+          "Border crossings between Tajikistan and Kyrgyzstan require paperwork we handle in advance. You need a valid passport, comfortable layers, and a willingness to spend six hours without Wi-Fi while the Wakhan Valley unfolds beside you.",
+          "The payoff is Afghanistan visible across the river, glaciers at arm's length, and homestays where Pamiri families serve apricot jam with every meal. Pack light, bring sunscreen, and trust your driver — ours have driven this route for decades."
+        ]
+      },
+      "silk-road-cuisine": {
+        "title": "Tasting the Silk Road: 10 Dishes You Must Try",
+        "excerpt": "From plov in Tashkent to khinkali in Tbilisi — a culinary caravan.",
+        "body": [
+          "Every GREATSILKTRAILS package treats food as culture, not fuel. In Uzbekistan that means plov cooked in massive kazans — rice, carrot, and lamb layered with cumin and barberry. In Kyrgyzstan it is beshbarmak eaten with your hands around a low table.",
+          "Do not skip lagman in Kashgar, manti steamed in Bishkek, or khachapuri on the Georgian extension. Our guides book family-run restaurants away from tourist traps and explain the trade-route origins of spices you thought were local.",
+          "Vegetarians and halal diets are accommodated with 48 hours' notice. Bring an appetite; portion sizes on the Silk Road are generous by design."
+        ]
+      }
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Everything you need before you depart",
+    "items": {
+      "visa": { "q": "Do I need a visa?", "a": "Requirements vary by country. We provide full visa support and invitation letters for Uzbekistan, Turkmenistan, Tajikistan, and China." },
+      "group": { "q": "What is the group size?", "a": "Explorer tours: up to 12 guests. Signature tours: up to 8. Bespoke tours are fully private." },
+      "fitness": { "q": "How physically demanding are the tours?", "a": "Most tours are leisurely to moderate. Pamir Odyssey is adventurous — we recommend good fitness and altitude tolerance." },
+      "cancel": { "q": "What is your cancellation policy?", "a": "Full refund up to 60 days before departure. 50% refund 30–60 days. Flexible rebooking within 12 months." },
+      "insurance": { "q": "Is travel insurance included?", "a": "We strongly recommend comprehensive travel insurance. We can recommend trusted providers." },
+      "solo": { "q": "Can I travel solo?", "a": "Absolutely! About 40% of our travelers come solo. We'll match you with like-minded companions." }
+    }
+  },
+  "contact": {
+    "title": "Book Your Package",
+    "subtitle": "Select a tour package — we confirm your spot within 24 hours",
+    "form": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "phone": "Phone (optional)",
+      "tour": "Interested Tour",
+      "message": "Tell us about your dream trip",
+      "submit": "Book This Package",
+      "submitting": "Sending inquiry…",
+      "success": "Thank you! We'll be in touch soon.",
+      "successDetail": "Your inquiry reference: {id}. Save it for your records.",
+      "error": "Something went wrong. Please try again or email us directly.",
+      "tourOptions": {
+        "any": "Not sure yet",
+        "golden-caravan": "Golden Caravan",
+        "desert-echoes": "Desert Echoes",
+        "heavenly-mountains": "Heavenly Mountains",
+        "jade-gate": "Jade Gate Expedition",
+        "spice-and-silk": "Spice & Silk",
+        "pamir-odyssey": "Pamir Odyssey",
+        "bespoke": "Bespoke Private Tour"
+      }
+    },
+    "info": {
+      "email": "hello@greatsilktrails.com",
+      "phone": "+998 71 200 45 67",
+      "whatsapp": "Message on WhatsApp",
+      "hours": "Mon–Sat, 9:00–19:00 (GMT+5)"
+    }
+  },
+  "footer": {
+    "tagline": "All-inclusive Silk Road tour packages. Book online.",
+    "rights": "© 2026 GREATSILKTRAILS. All rights reserved.",
+    "newsletter": "Join the Caravan",
+    "newsletterDesc": "Monthly inspiration from the Silk Road.",
+    "subscribe": "Subscribe",
+    "emailPlaceholder": "your@email.com",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "cancellation": "Cancellation Policy"
+  },
+  "pages": {
+    "tours": { "title": "Journeys", "subtitle": "6 all-inclusive Silk Road packages — compare prices and book online" },
+    "journeys": { "title": "Journeys", "subtitle": "6 all-inclusive Silk Road packages — compare prices and book online" },
+    "destinations": {
+      "title": "Destinations",
+      "subtitle": "14 countries along the greatest trade route — pick your region, book your package"
+    },
+    "experiences": { "title": "Experiences", "subtitle": "Moments captured along the Silk Road" },
+    "heritage": {
+      "title": "Heritage",
+      "subtitle": "Two millennia of trade, culture, and wonder — the legacy you travel through"
+    },
+    "stories": { "title": "Stories", "subtitle": "Traveler tales and road notes from the trail" },
+    "about": { "title": "About Us" },
+    "pricing": { "title": "Pricing" },
+    "portfolio": { "title": "Experiences" },
+    "blog": { "title": "Stories" },
+    "faq": { "title": "FAQ" },
+    "contact": { "title": "Contact" },
+    "partners": {
+      "title": "Our Partners",
+      "subtitle": "Trusted hotels, DMCs, and local experts along every corridor we travel"
+    },
+    "privacy": { "title": "Privacy Policy", "subtitle": "How we collect, use, and protect your information" },
+    "terms": { "title": "Terms of Service", "subtitle": "Booking conditions for GREATSILKTRAILS tour packages" },
+    "cancellation": { "title": "Cancellation Policy", "subtitle": "Refunds, rebooking, and departure changes" }
+  },
+  "legal": {
+    "privacy": {
+      "lastUpdated": "Last updated: June 2026",
+      "sections": [
+        {
+          "title": "Information We Collect",
+          "paragraphs": [
+            "When you submit a booking inquiry, we collect your name, email address, optional phone number, selected tour, message content, and browser locale. We use this solely to respond to your request and prepare a travel proposal.",
+            "We do not sell personal data to third parties. Payment details, when collected, are processed by licensed payment providers and are not stored on our servers."
+          ]
+        },
+        {
+          "title": "How We Use Your Data",
+          "paragraphs": [
+            "Inquiry data is stored securely and used to confirm availability, send itineraries, and communicate before, during, and after your trip. With your consent we may send occasional travel inspiration — you can unsubscribe at any time.",
+            "We may share necessary contact details with local ground partners (hotels, guides, transport) solely to deliver the services you booked."
+          ]
+        },
+        {
+          "title": "Your Rights",
+          "paragraphs": [
+            "You may request access, correction, or deletion of your personal data by emailing hello@greatsilktrails.com. We respond within 30 days.",
+            "If you are in the EU or UK, you have additional rights under GDPR including data portability and the right to lodge a complaint with your supervisory authority."
+          ]
+        }
+      ]
+    },
+    "terms": {
+      "lastUpdated": "Last updated: June 2026",
+      "sections": [
+        {
+          "title": "Booking & Confirmation",
+          "paragraphs": [
+            "Submitting an inquiry does not constitute a confirmed booking. A tour is confirmed only after we send written confirmation and receive the required deposit.",
+            "Prices quoted on the website are per person based on double occupancy unless stated otherwise. Single supplements, visa fees, and optional activities may apply."
+          ]
+        },
+        {
+          "title": "Traveler Responsibilities",
+          "paragraphs": [
+            "You are responsible for valid passports (minimum 6 months validity), required visas, vaccinations, and travel insurance. We provide visa support letters where applicable but cannot guarantee embassy approval.",
+            "You must disclose health conditions that may affect participation, especially on high-altitude or physically demanding itineraries such as Pamir Odyssey."
+          ]
+        },
+        {
+          "title": "Itinerary Changes",
+          "paragraphs": [
+            "We reserve the right to modify routes, accommodations, or activities due to weather, border closures, or force majeure. We will offer comparable alternatives of equal or greater value.",
+            "GREATSILKTRAILS acts as an intermediary between you and local service providers. Our liability is limited to the tour price paid, except where prohibited by applicable law."
+          ]
+        }
+      ]
+    },
+    "cancellation": {
+      "lastUpdated": "Last updated: June 2026",
+      "sections": [
+        {
+          "title": "Standard Refund Schedule",
+          "paragraphs": [
+            "More than 60 days before departure: full refund of amounts paid minus a $150 administrative fee per person.",
+            "30–60 days before departure: 50% refund of the tour price.",
+            "Less than 30 days before departure: no refund, but credit toward a future departure within 12 months (subject to availability)."
+          ]
+        },
+        {
+          "title": "Rebooking & Transfers",
+          "paragraphs": [
+            "One free date change is permitted up to 45 days before departure, subject to availability and any fare differences.",
+            "If GREATSILKTRAILS cancels a departure, you receive a full refund or transfer to another date at no extra cost."
+          ]
+        },
+        {
+          "title": "Travel Insurance",
+          "paragraphs": [
+            "We strongly recommend comprehensive travel insurance covering cancellation, medical evacuation, and trip interruption — especially for remote Silk Road segments.",
+            "Claims related to personal illness, visa denial after timely application, or failure to meet group departure points are not eligible for operator refunds beyond the schedule above."
+          ]
+        }
+      ]
+    }
+  },
+  "destinations": {
+    "uzbekistan": { "name": "Uzbekistan", "desc": "Samarkand, Bukhara, Khiva — the crown jewels of Central Asia." },
+    "kyrgyzstan": { "name": "Kyrgyzstan", "desc": "Alpine lakes, nomadic traditions, and the Tian Shan mountains." },
+    "china": { "name": "China", "desc": "Xi'an, Dunhuang, Kashgar — where the Silk Road begins." },
+    "tajikistan": { "name": "Tajikistan", "desc": "Pamir Highway, Wakhan Valley — the roof of the world." },
+    "turkmenistan": { "name": "Turkmenistan", "desc": "Darvaza, Merv, endless desert under infinite stars." },
+    "georgia": { "name": "Georgia & Caucasus", "desc": "Wine, mountains, where East meets West." },
+    "bookCta": "View packages"
+  },
+  "heritage": {
+    "intro": "The Silk Road wasn't a single path — it was a network connecting empires, ideas, and treasures for over 2,000 years. Every GREATSILKTRAILS package follows in the footsteps of merchants, scholars, and explorers who shaped the world.",
+    "cta": "Book a journey through history"
+  },
+  "video": {
+    "title": "See the Silk Road in motion",
+    "subtitle": "Desert caravans, golden dunes, ancient cities — experience what awaits on your journey.",
+    "heroScenes": {
+      "caravan": "Gobi Desert · Camel Caravan",
+      "desert": "Silk Road · Desert Crossing",
+      "dunes": "Karakum · Golden Dunes",
+      "samarkand": "Samarkand · Registan Square",
+      "pamir": "Pamir · Mountain Pass"
+    },
+    "clips": {
+      "desert": { "title": "Camel Caravan", "location": "Gobi Desert · China" },
+      "mountains": { "title": "Desert Trails", "location": "Karakum · Turkmenistan" },
+      "cities": { "title": "Registan Square", "location": "Samarkand · Uzbekistan" }
+    }
+  },
+  "silkRoad": {
+    "title": "7,000 miles. One legendary route.",
+    "subtitle": "From Xi'an to Istanbul — trace the path merchants traveled for millennia.",
+    "desc": "Every GREATSILKTRAILS package follows authentic Silk Road corridors through living cities, desert crossings, and mountain passes.",
+    "mapTitle": "The Silk Road",
+    "mapEra": "Trade routes c. 200 BCE — 1500 CE",
+    "mapSubtitle": "From Chang'an, capital of Han China, to Constantinople — approx. 7,000 miles of caravan trails",
+    "mapLegend": "Principal trading posts & caravanserais",
+    "distance": "500 leagues",
+    "routeLabel": "Via Serica",
+    "caspianSea": "Mare Caspium",
+    "aralSea": "Mare Aral",
+    "desertLabel": "Deserta Karakorum",
+    "pamirRange": "Montes Pamir",
+    "westTerminus": "Terminus Occidentalis",
+    "eastTerminus": "Terminus Orientalis",
+    "caravanStatus": "Caravan en route — {city}, {region}",
+    "caravanStatusShort": "Caravan en route",
+    "historicalRegions": {
+      "anatolia": "Anatolia",
+      "persia": "Persia",
+      "khorasan": "Khorasan",
+      "transoxiana": "Transoxiana",
+      "serica": "Serica"
+    },
+    "cities": {
+      "xian": { "name": "Xi'an", "historical": "Chang'an", "era": "Han capital", "country": "China", "tag": "Eastern terminus — Terracotta Army & ancient capital" },
+      "dunhuang": { "name": "Dunhuang", "historical": "Shazhou", "era": "Garrison oasis", "country": "China", "tag": "Mogao Caves & edge of the Gobi Desert" },
+      "samarkand": { "name": "Samarkand", "historical": "Marakanda", "era": "Sogdian hub", "country": "Uzbekistan", "tag": "Registan Square — jewel of the Silk Road" },
+      "bukhara": { "name": "Bukhara", "historical": "Bukhoro", "era": "Scholarly city", "country": "Uzbekistan", "tag": "Living museum of medieval architecture" },
+      "merv": { "name": "Merv", "historical": "Antiochia Margiana", "era": "Parthian oasis", "country": "Turkmenistan", "tag": "Ancient oasis at the crossroads of empires" },
+      "tehran": { "name": "Tehran", "historical": "Rhages", "era": "Persian gateway", "country": "Iran", "tag": "Persian heritage & gateway to the west" },
+      "istanbul": { "name": "Istanbul", "historical": "Constantinople", "era": "Byzantine capital", "country": "Turkey", "tag": "Western terminus — where continents meet" }
+    }
+  }
+}

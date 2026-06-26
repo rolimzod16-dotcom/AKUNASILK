@@ -1,0 +1,171 @@
+[
+  {
+    "id": "partner-1",
+    "slug": "registan-palace",
+    "published": true,
+    "category": "hotel",
+    "country": "Uzbekistan",
+    "initials": "RP",
+    "featured": true,
+    "content": {
+      "en": {
+        "name": "Registan Palace Hotel",
+        "desc": "Steps from Samarkand's Registan Square — our signature base for Golden Caravan departures."
+      },
+      "ru": {
+        "name": "Registan Palace Hotel",
+        "desc": "В шаге от площади Регистан в Самарканде — база для «Золотого каравана»."
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "partner-2",
+    "slug": "asia-adventures",
+    "published": true,
+    "category": "dmc",
+    "country": "Uzbekistan",
+    "initials": "AA",
+    "featured": true,
+    "content": {
+      "en": {
+        "name": "Asia Adventures DMC",
+        "desc": "Tashkent-based ground operator managing visas, permits, and private transport."
+      },
+      "ru": {
+        "name": "Asia Adventures DMC",
+        "desc": "Оператор в Ташкенте: визы, разрешения и частный транспорт."
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "partner-3",
+    "slug": "pamiri-homestays",
+    "published": true,
+    "category": "hospitality",
+    "country": "Tajikistan",
+    "initials": "PH",
+    "featured": true,
+    "content": {
+      "en": {
+        "name": "Pamiri Homestay Network",
+        "desc": "Community-owned lodges along the Wakhan Valley on the Pamir Highway."
+      },
+      "ru": {
+        "name": "Pamiri Homestay Network",
+        "desc": "Общинные лоджи в Ваханской долине на Памирском тракте."
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "partner-4",
+    "slug": "turkish-airlines",
+    "published": true,
+    "category": "transport",
+    "country": "Turkey",
+    "initials": "TK",
+    "featured": true,
+    "website": "https://www.turkishairlines.com",
+    "content": {
+      "en": {
+        "name": "Turkish Airlines",
+        "desc": "Preferred carrier for Istanbul connections to Central Asia."
+      },
+      "ru": {
+        "name": "Turkish Airlines",
+        "desc": "Предпочтительный перевозчик для стыковок через Стамбул."
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "partner-5",
+    "slug": "caravan-serai",
+    "published": true,
+    "category": "hotel",
+    "country": "Uzbekistan",
+    "initials": "CS",
+    "featured": true,
+    "content": {
+      "en": {
+        "name": "Caravan Serai Group",
+        "desc": "Restored caravanserai properties in Bukhara and Khiva."
+      },
+      "ru": {
+        "name": "Caravan Serai Group",
+        "desc": "Восстановленные караван-сараи в Бухаре и Хиве."
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "partner-6",
+    "slug": "nomad-trails",
+    "published": true,
+    "category": "dmc",
+    "country": "Kyrgyzstan",
+    "initials": "NT",
+    "featured": true,
+    "content": {
+      "en": {
+        "name": "Nomad Trails Kyrgyzstan",
+        "desc": "Horse trekking and jailoo camps for our Heavenly Mountains itinerary."
+      },
+      "ru": {
+        "name": "Nomad Trails Kyrgyzstan",
+        "desc": "Конные походы и джайлоо для тура «Небесные горы»."
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "partner-7",
+    "slug": "uzbekistan-tourism",
+    "published": true,
+    "category": "cultural",
+    "country": "Uzbekistan",
+    "initials": "UT",
+    "featured": false,
+    "content": {
+      "en": {
+        "name": "Uzbekistan Tourism Board",
+        "desc": "Official partner for heritage site access and festival calendars."
+      },
+      "ru": {
+        "name": "Uzbekistan Tourism Board",
+        "desc": "Официальный партнёр для доступа к памятникам и фестивалям."
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "partner-8",
+    "slug": "silk-road-xian",
+    "published": true,
+    "category": "dmc",
+    "country": "China",
+    "initials": "SX",
+    "featured": false,
+    "content": {
+      "en": {
+        "name": "Silk Road Expeditions",
+        "desc": "Xi'an-based specialists for Jade Gate departures and China border formalities."
+      },
+      "ru": {
+        "name": "Silk Road Expeditions",
+        "desc": "Специалисты в Сиане для «Нефритовых врат» и формальностей на границе."
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  }
+]

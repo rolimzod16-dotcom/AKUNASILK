@@ -1,0 +1,242 @@
+[
+  {
+    "id": "tour-1",
+    "slug": "golden-caravan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=1200&q=80",
+    "duration": 12,
+    "price": 2890,
+    "originalPrice": 3290,
+    "countries": [
+      "Uzbekistan"
+    ],
+    "difficulty": "easy",
+    "featured": true,
+    "bestseller": true,
+    "spotsLeft": 4,
+    "nextDeparture": "2026-09-15",
+    "rating": 4.9,
+    "reviews": 312,
+    "content": {
+      "en": {
+        "title": "Golden Caravan",
+        "desc": "Samarkand's blue domes, Bukhara's bazaars, and Khiva's walled city — the crown jewels of Central Asia.",
+        "highlights": [
+          "Registan at dawn",
+          "Silk weaving workshop",
+          "Desert yurt dinner"
+        ]
+      },
+      "ru": {
+        "title": "Золотой караван",
+        "desc": "Голубые купола Самарканда, базары Бухары и город-крепость Хива — жемчужины Центральной Азии.",
+        "highlights": [
+          "Регистан на рассвете",
+          "Мастерская шёлка",
+          "Ужин в юрте"
+        ]
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "tour-2",
+    "slug": "desert-echoes",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200&q=80",
+    "duration": 10,
+    "price": 2450,
+    "countries": [
+      "Turkmenistan",
+      "Uzbekistan"
+    ],
+    "difficulty": "moderate",
+    "featured": true,
+    "spotsLeft": 6,
+    "nextDeparture": "2026-10-02",
+    "rating": 4.8,
+    "reviews": 187,
+    "content": {
+      "en": {
+        "title": "Desert Echoes",
+        "desc": "Darvaza's flaming crater, ancient Merv ruins, and the endless Karakum sands under starlit skies.",
+        "highlights": [
+          "Door to Hell at night",
+          "UNESCO Merv",
+          "Camel caravan trek"
+        ]
+      },
+      "ru": {
+        "title": "Эхо пустыни",
+        "desc": "Пылающий кратер Дарваза, древний Мерв и бескрайние пески Каракумов под звёздным небом.",
+        "highlights": [
+          "Врата ада ночью",
+          "Мерв (ЮНЕСКО)",
+          "Верблюжий караван"
+        ]
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "tour-3",
+    "slug": "heavenly-mountains",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+    "duration": 8,
+    "price": 1980,
+    "originalPrice": 2190,
+    "countries": [
+      "Kyrgyzstan",
+      "Kazakhstan"
+    ],
+    "difficulty": "moderate",
+    "featured": true,
+    "spotsLeft": 8,
+    "nextDeparture": "2026-08-20",
+    "rating": 4.9,
+    "reviews": 245,
+    "content": {
+      "en": {
+        "title": "Heavenly Mountains",
+        "desc": "Alpine lakes, eagle hunters, and felt-making traditions in the Tian Shan and Almaty highlands.",
+        "highlights": [
+          "Issyk-Kul lake",
+          "Eagle hunting demo",
+          "Nomadic horse trek"
+        ]
+      },
+      "ru": {
+        "title": "Небесные горы",
+        "desc": "Альпийские озёра, беркутчики и традиции войлока в горах Тянь-Шаня и Алматы.",
+        "highlights": [
+          "Озеро Иссык-Куль",
+          "Демонстрация беркутничества",
+          "Конный поход"
+        ]
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "tour-4",
+    "slug": "jade-gate",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1200&q=80",
+    "duration": 14,
+    "price": 3490,
+    "countries": [
+      "China"
+    ],
+    "difficulty": "easy",
+    "featured": false,
+    "spotsLeft": 3,
+    "nextDeparture": "2026-11-10",
+    "rating": 4.7,
+    "reviews": 156,
+    "content": {
+      "en": {
+        "title": "Jade Gate Expedition",
+        "desc": "From Xi'an's Terracotta Warriors to Dunhuang's Mogao Caves — trace China's Silk Road origins.",
+        "highlights": [
+          "Terracotta Army",
+          "Mogao Caves",
+          "Camel market in Kashgar"
+        ]
+      },
+      "ru": {
+        "title": "Нефритовые врата",
+        "desc": "От терракотовой армии Сианя до пещер Могао в Дуньхуане — истоки Шёлкового пути в Китае.",
+        "highlights": [
+          "Терракотовая армия",
+          "Пещеры Могао",
+          "Верблюжий рынок в Кашгаре"
+        ]
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "tour-5",
+    "slug": "spice-and-silk",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1565007996395-3ab4ddc7a9b0?w=1200&q=80",
+    "duration": 11,
+    "price": 2650,
+    "countries": [
+      "Georgia",
+      "Azerbaijan"
+    ],
+    "difficulty": "easy",
+    "featured": false,
+    "spotsLeft": 5,
+    "nextDeparture": "2026-09-28",
+    "rating": 4.8,
+    "reviews": 198,
+    "content": {
+      "en": {
+        "title": "Spice & Silk",
+        "desc": "Georgian wine cellars, Baku's flame towers, and Caucasus mountain villages where East meets West.",
+        "highlights": [
+          "Wine tasting in Kakheti",
+          "Old Baku walk",
+          "Sheki Khan Palace"
+        ]
+      },
+      "ru": {
+        "title": "Специи и шёлк",
+        "desc": "Грузинские винные погреба, пламенные башни Баку и горные сёла Кавказа, где Восток встречает Запад.",
+        "highlights": [
+          "Дегустация в Кахетии",
+          "Прогулка по старому Баку",
+          "Дворец хана в Шеки"
+        ]
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  },
+  {
+    "id": "tour-6",
+    "slug": "pamir-odyssey",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80",
+    "duration": 9,
+    "price": 2280,
+    "countries": [
+      "Tajikistan"
+    ],
+    "difficulty": "adventurous",
+    "featured": false,
+    "spotsLeft": 2,
+    "nextDeparture": "2026-08-05",
+    "rating": 5,
+    "reviews": 89,
+    "content": {
+      "en": {
+        "title": "Pamir Odyssey",
+        "desc": "The legendary Pamir Highway — Wakhan Valley views, remote villages, and the roof of the world.",
+        "highlights": [
+          "Pamir Highway drive",
+          "Wakhan Corridor",
+          "Homestay with Pamiri families"
+        ]
+      },
+      "ru": {
+        "title": "Памирская одиссея",
+        "desc": "Легендарный Памирский тракт — виды Ваханской долины, отдалённые сёла и крыша мира.",
+        "highlights": [
+          "Памирский тракт",
+          "Ваханский коридор",
+          "Дом у памирской семьи"
+        ]
+      }
+    },
+    "createdAt": "2026-06-26T10:24:11.184Z",
+    "updatedAt": "2026-06-26T10:24:11.184Z"
+  }
+]
