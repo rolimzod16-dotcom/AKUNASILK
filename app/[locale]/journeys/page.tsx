@@ -1,6 +1,7 @@
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/shared/PageHero";
-import TourCard from "@/components/tours/TourCard";
+import JourneyCatalog from "@/components/journeys/JourneyCatalog";
 import { getPublishedTours, getTourContent } from "@/lib/data/tours";
 
 export async function generateMetadata({
@@ -13,6 +14,14 @@ export async function generateMetadata({
   return { title: `${t("title")} | GREATSILKTRAILS` };
 }
 
+function CatalogFallback() {
+  return (
+    <div className="mx-auto max-w-[1200px] px-6 pb-20">
+      <div className="h-32 animate-pulse rounded-2xl bg-silk-gold/10" />
+    </div>
+  );
+}
+
 export default async function JourneysPage({
   params,
 }: {
@@ -21,24 +30,17 @@ export default async function JourneysPage({
   const { locale } = await params;
   const pages = await getTranslations({ locale, namespace: "pages.journeys" });
   const tours = await getPublishedTours();
+  const items = tours.map((tour) => ({
+    tour,
+    content: getTourContent(tour, locale),
+  }));
 
   return (
     <>
       <PageHero title={pages("title")} subtitle={pages("subtitle")} />
-      <section className="pb-20">
-        <div className="mx-auto max-w-[1200px] px-6">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {tours.map((tour, i) => (
-              <TourCard
-                key={tour.id}
-                tour={tour}
-                content={getTourContent(tour, locale)}
-                index={i}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
+      <Suspense fallback={<CatalogFallback />}>
+        <JourneyCatalog items={items} />
+      </Suspense>
     </>
   );
 }

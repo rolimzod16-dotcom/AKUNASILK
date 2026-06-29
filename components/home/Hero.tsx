@@ -10,6 +10,7 @@ import SilkDivider from "@/components/shared/SilkDivider";
 import SilkParticles from "@/components/shared/SilkParticles";
 import SilkRoadVideoBackground from "@/components/shared/SilkRoadVideoBackground";
 import { ScrollScale } from "@/components/shared/ScrollReveal";
+import TripFinder from "@/components/home/TripFinder";
 import type { Tour } from "@/lib/data/tours";
 
 const item = {
@@ -89,9 +90,7 @@ export default function Hero({ tour, tourTitle }: HeroProps) {
               </Button>
             </motion.div>
 
-            <motion.p variants={item} className="mt-4 text-xs text-silk-sand/60">
-              {t("trust")}
-            </motion.p>
+            <TripFinder />
           </motion.div>
         </div>
       </SilkRoadVideoBackground>

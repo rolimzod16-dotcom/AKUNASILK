@@ -85,6 +85,9 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
               <MapPin className="size-3.5" />
               {tour.countries.join(" · ")}
             </span>
+            <Badge variant="outline" className="border-silk-gold/30 text-[10px] font-semibold text-silk-indigo">
+              {t(`difficulty.${tour.difficulty}`)}
+            </Badge>
           </div>
         </CardHeader>
 
@@ -114,15 +117,15 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
               </span>
             </div>
             <p className="text-xs text-apple-muted">
-              {shop("orMonthly", { price: monthly })}
+              {shop("perPerson")} · {shop("orMonthly", { price: monthly })}
             </p>
           </div>
           <div className="flex w-full gap-2 sm:w-auto">
             <Button variant="silkOutline" size="pill-sm" className="flex-1 sm:flex-none" asChild>
-              <Link href={`/journeys/${tour.slug}`}>{shop("details")}</Link>
+              <Link href={`/journeys/${tour.slug}`}>{shop("viewTrip")}</Link>
             </Button>
             <Button variant="silk" size="pill-sm" className="flex-1 sm:flex-none" asChild>
-              <Link href={`/contact?tour=${tour.slug}`}>{shop("buy")}</Link>
+              <Link href={`/contact?tour=${tour.slug}`}>{shop("getQuote")}</Link>
             </Button>
           </div>
         </CardFooter>

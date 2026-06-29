@@ -6,7 +6,7 @@
   "nav": {
     "home": "Home",
     "destinations": "Destinations",
-    "journeys": "Journeys",
+    "journeys": "Tours",
     "experiences": "Experiences",
     "heritage": "Heritage",
     "stories": "Stories",
@@ -19,15 +19,54 @@
     "blog": "Stories",
     "faq": "FAQ",
     "book": "Buy a Tour",
-    "planYourJourney": "Plan Your Journey"
+    "planYourJourney": "Plan Your Journey",
+    "getQuote": "Get a Quote"
+  },
+  "traveler": {
+    "trust": {
+      "cancel": { "title": "Free cancellation", "desc": "Full refund up to 60 days before departure" },
+      "support": { "title": "24/7 trip support", "desc": "English-speaking team before & during your trip" },
+      "guides": { "title": "Local expert guides", "desc": "Historians & nomadic hosts on every route" },
+      "secure": { "title": "Secure booking", "desc": "Clear pricing · No hidden fees at checkout" }
+    },
+    "finder": {
+      "title": "Where do you want to go?",
+      "viewAll": "Browse all tours",
+      "regions": {
+        "uzbekistan": "Uzbekistan",
+        "centralAsia": "Central Asia",
+        "pamir": "Pamir Highway",
+        "china": "China Silk Road",
+        "caucasus": "Caucasus"
+      }
+    },
+    "catalog": {
+      "filterTitle": "Find your trip",
+      "results": "{count, plural, one {# tour} other {# tours}} found",
+      "sort": "Sort by",
+      "sortOptions": {
+        "recommended": "Recommended",
+        "priceAsc": "Price: low to high",
+        "priceDesc": "Price: high to low",
+        "duration": "Shortest first",
+        "departure": "Soonest departure"
+      },
+      "difficulty": { "all": "All levels" },
+      "regionActive": "Region filter on",
+      "empty": "No tours match these filters. Try another difficulty or browse all tours."
+    },
+    "help": {
+      "whatsapp": "Chat on WhatsApp",
+      "faq": "Travel FAQ"
+    }
   },
   "hero": {
-    "badge": "6 packages · All-inclusive · From $1,980",
-    "title": "Silk Road. Packaged.",
-    "subtitle": "Fixed-price tour packages with hotels, guides, transfers & meals included. Pick a route — we handle everything.",
+    "badge": "Small groups · English guides · All-inclusive",
+    "title": "Silk Road tours, made simple.",
+    "subtitle": "Fixed prices in USD. Hotels, transfers, visas support & most meals included — book with confidence from abroad.",
     "priceFrom": "From ${price}",
-    "cta": "Shop Packages",
-    "ctaSecondary": "View bestseller",
+    "cta": "Browse tours",
+    "ctaSecondary": "See bestseller",
     "bestseller": "Bestseller",
     "spotsUrgent": "Only {count} spots left on next departure",
     "trust": "Free cancellation up to 60 days · Secure booking · 4,200+ travelers"
@@ -36,8 +75,11 @@
     "title": "Choose your package",
     "subtitle": "All tours include guide, hotels, transfers & most meals. Pay once — travel worry-free.",
     "bestseller": "Bestseller",
-    "buy": "Buy",
-    "buyNow": "Buy Now",
+    "buy": "Get quote",
+    "buyNow": "Get a quote",
+    "getQuote": "Get quote",
+    "viewTrip": "View trip",
+    "perPerson": "per person",
     "buyPackage": "Shop Tour Packages",
     "details": "Details",
     "departure": "Departs",
@@ -376,13 +418,15 @@
     "newsletterDesc": "Monthly inspiration from the Silk Road.",
     "subscribe": "Subscribe",
     "emailPlaceholder": "your@email.com",
+    "explore": "Plan your trip",
+    "company": "Company",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "cancellation": "Cancellation Policy"
   },
   "pages": {
     "tours": { "title": "Journeys", "subtitle": "6 all-inclusive Silk Road packages — compare prices and book online" },
-    "journeys": { "title": "Journeys", "subtitle": "6 all-inclusive Silk Road packages — compare prices and book online" },
+    "journeys": { "title": "Silk Road Tours", "subtitle": "Compare all-inclusive packages — filter by region, difficulty, and departure date" },
     "destinations": {
       "title": "Destinations",
       "subtitle": "14 countries along the greatest trade route — pick your region, book your package"

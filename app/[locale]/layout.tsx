@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import FloatingHelp from "@/components/layout/FloatingHelp";
+import StickyMobileCTA from "@/components/layout/StickyMobileCTA";
 import "../globals.css";
 
 const inter = Inter({
@@ -58,8 +60,10 @@ export default async function LocaleLayout({
       <body className="min-h-screen bg-silk-cream font-sans antialiased [--font-sans:var(--font-inter)]">
         <NextIntlClientProvider messages={messages}>
           <Header />
-          <main className="pb-20 md:pb-0">{children}</main>
+          <main className="pb-24 lg:pb-0">{children}</main>
           <Footer />
+          <FloatingHelp />
+          <StickyMobileCTA />
         </NextIntlClientProvider>
       </body>
     </html>
