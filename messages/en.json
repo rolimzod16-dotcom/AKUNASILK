@@ -367,6 +367,160 @@
       }
     }
   },
+  "automation": {
+    "heroBook": "Reserve in 60 sec",
+    "wizard": {
+      "title": "Reserve your spot",
+      "subtitle": "3 quick steps · 24-hour courtesy hold · no payment now",
+      "step": "Step {current} of {total}",
+      "holdBadge": "24h hold",
+      "step1Hint": "Pick the route that matches your dream trip — or let us recommend one.",
+      "step2Hint": "Tell us who's traveling. Dates are flexible — we'll align with the best departure.",
+      "step3Hint": "Almost done. We'll email your itinerary options within 24 hours.",
+      "chooseTour": "Select tour",
+      "tourAny": "Help me choose",
+      "tourBespoke": "Bespoke private tour",
+      "days": "days",
+      "scarcity": "Only {count} spots left — popular dates fill fast",
+      "trustLine": "Free cancellation up to 60 days · English support · secure inquiry",
+      "travelers": "Number of travelers",
+      "travelerCount": "{count, plural, one {# traveler} other {# travelers}}",
+      "preferredDate": "Preferred departure (optional)",
+      "dateFlexible": "Flexible dates? Leave blank — we'll suggest the best windows.",
+      "urgencyLine": "Most travelers confirm within 24 hours of receiving their itinerary.",
+      "name": "Full name",
+      "email": "Email",
+      "phone": "Phone / WhatsApp",
+      "notes": "Special requests (optional)",
+      "notesPlaceholder": "Dietary needs, room type, celebration trip…",
+      "privacyNote": "We only use your details to prepare your trip proposal.",
+      "continue": "Continue",
+      "back": "Back",
+      "reserve": "Reserve my spot",
+      "error": "Could not submit. Try again or use the chat assistant.",
+      "successTitle": "You're on the list!",
+      "successSubtitle": "Your 24-hour courtesy hold is active",
+      "successBody": "Check your inbox — we sent a confirmation with your reference number.",
+      "reference": "Reference: {id}",
+      "next1": "Specialist reviews availability (usually same day)",
+      "next2": "You receive itinerary + deposit link by email",
+      "next3": "Pay deposit to lock your departure date",
+      "done": "Continue browsing",
+      "messageHeader": "Automated booking request",
+      "fieldTour": "Tour",
+      "fieldTravelers": "Travelers",
+      "fieldDate": "Preferred date",
+      "fieldNotes": "Notes",
+      "fieldSource": "Source"
+    },
+    "concierge": {
+      "title": "Silk Concierge",
+      "online": "Replies instantly · EN / RU",
+      "fab": "Ask anything",
+      "placeholder": "Visa, price, cancellation…",
+      "welcome": "Hi! I'm your Silk Road travel assistant. Ask about visas, prices, what's included — or tap a quick topic below.",
+      "welcomeTour": "You're viewing {tour}. I can answer questions about this trip and help you reserve in under a minute.",
+      "bookCta": "Reserve this trip now",
+      "holdNote": "24-hour hold · no payment required now",
+      "quick": {
+        "visa": "Visa help",
+        "price": "Tour price",
+        "cancel": "Cancellation",
+        "included": "What's included",
+        "solo": "Solo travel",
+        "payment": "How to pay"
+      },
+      "answers": {
+        "visa": "We handle visa support and invitation letters for Uzbekistan, Turkmenistan, Tajikistan, and China. Send us your passport scan after booking — typical processing is 5–10 business days.",
+        "price": "All prices on the site are per person in USD, all-inclusive (hotels, guide, transfers, most meals). No hidden fees at checkout.",
+        "cancel": "Full refund up to 60 days before departure. 50% refund 30–60 days out. Free rebooking within 12 months if plans change.",
+        "included": "Every package includes boutique hotels, expert guide, airport transfers, entrance fees, breakfast + most dinners, and 24/7 on-trip support.",
+        "solo": "About 40% of our travelers come solo. We assign a roommate on request or arrange a single supplement — you're never alone in the group.",
+        "payment": "Reserve with a 30% deposit after we confirm availability. Balance due 45 days before departure. Installment plans available on request.",
+        "group": "Small groups: Explorer tours up to 12 guests, Signature up to 8. Bespoke tours are fully private.",
+        "when": "Departures run year-round. Next dates are shown on each tour page — we can also arrange private departures for 4+ travelers.",
+        "safety": "We work only with licensed local partners. Comprehensive travel insurance is strongly recommended — we can suggest trusted providers.",
+        "fallback": "Great question! For details tailored to your dates, tap \"Reserve this trip now\" — a specialist replies within 24 hours. Or ask about visa, price, cancellation, or what's included."
+      },
+      "tourPrice": "{tour} is ${price} per person, all-inclusive. Tap Reserve to hold your spot for 24 hours.",
+      "tourWhen": "Next departure for {tour}: {date}. Flexible? We'll find the best window for you.",
+      "tourSpots": "Only {count} spots left on the next {tour} departure — these dates sell out quickly."
+    },
+    "social": {
+      "events": {
+        "e1": "Sarah from London reserved Golden Caravan · 3 min ago",
+        "e2": "Marco from Milan booked Pamir Odyssey · 12 min ago",
+        "e3": "Yuki from Tokyo inquired Jade Gate · 8 min ago",
+        "e4": "Emma from Sydney reserved Desert Echoes · 22 min ago",
+        "e5": "Hans from Berlin booked Heavenly Mountains · 5 min ago",
+        "e6": "42 travelers viewing tours right now",
+        "e7": "Next Golden Caravan departure: 4 spots left",
+        "e8": "Free cancellation · 4,200+ happy travelers"
+      }
+    },
+    "matcher": {
+      "title": "Find your perfect Silk Road trip",
+      "subtitle": "60-second quiz · instant recommendation · one-click reserve",
+      "step": "Question {current} of {total}",
+      "questions": {
+        "style": {
+          "title": "What excites you most?",
+          "options": {
+            "culture": "Ancient cities & bazaars",
+            "adventure": "Mountains & off-road",
+            "nature": "Lakes, valleys & nomad life",
+            "luxury": "Wine, cuisine & boutique stays"
+          }
+        },
+        "duration": {
+          "title": "How long can you travel?",
+          "options": {
+            "short": "5–8 days",
+            "medium": "9–12 days",
+            "long": "13+ days"
+          }
+        },
+        "region": {
+          "title": "Which region calls you?",
+          "options": {
+            "uzbekistan": "Uzbekistan classics",
+            "centralAsia": "Multi-country Central Asia",
+            "pamir": "Pamir Highway",
+            "china": "China Silk Road",
+            "caucasus": "Caucasus extension"
+          }
+        }
+      },
+      "resultTitle": "Your match",
+      "resultBody": "Based on your answers, this route fits you best. Reserve now — we'll hold your spot for 24 hours.",
+      "bookMatch": "Reserve this trip",
+      "retake": "Retake quiz",
+      "matcherNote": "Trip matcher recommended: {tour}",
+      "tours": {
+        "golden-caravan": "Golden Caravan",
+        "desert-echoes": "Desert Echoes",
+        "heavenly-mountains": "Heavenly Mountains",
+        "jade-gate": "Jade Gate Expedition",
+        "spice-and-silk": "Spice & Silk",
+        "pamir-odyssey": "Pamir Odyssey"
+      }
+    },
+    "tour": {
+      "reserveNow": "Reserve now — 24h hold",
+      "scarcity": "🔥 Only {count} spots on next departure",
+      "priceLock": "Price locked at ${price} when you reserve today"
+    },
+    "tourFaq": {
+      "title": "Quick answers",
+      "items": {
+        "visa": { "q": "Visa support?", "a": "Full invitation letters & step-by-step guidance included." },
+        "cancel": { "q": "Can I cancel?", "a": "Free refund up to 60 days before departure." },
+        "group": { "q": "Group size?", "a": "Small groups up to 12 — never crowded bus tours." },
+        "solo": { "q": "Solo-friendly?", "a": "40% of guests travel solo. Roommate matching available." },
+        "payment": { "q": "When do I pay?", "a": "30% deposit after confirmation. Balance 45 days before trip." }
+      }
+    }
+  },
   "faq": {
     "title": "Frequently Asked Questions",
     "subtitle": "Everything you need before you depart",

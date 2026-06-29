@@ -1,9 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
 import { MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import BookNowButton from "@/components/automation/BookNowButton";
 
 export default function StickyMobileCTA() {
   const nav = useTranslations("nav");
@@ -17,9 +17,13 @@ export default function StickyMobileCTA() {
             WhatsApp
           </a>
         </Button>
-        <Button variant="silk" size="pill-sm" className="flex-1 text-xs font-semibold" asChild>
-          <Link href="/contact">{nav("getQuote")}</Link>
-        </Button>
+        <BookNowButton
+          variant="silk"
+          size="pill-sm"
+          className="flex-1 text-xs font-semibold"
+          prefill={{ source: "header" }}
+          label={nav("getQuote")}
+        />
       </div>
     </div>
   );

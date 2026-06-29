@@ -3,14 +3,14 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
-import { Button } from "@/components/ui/button";
+
 import SilkRouteStrip from "@/components/shared/SilkRouteStrip";
 import SilkDivider from "@/components/shared/SilkDivider";
 import SilkParticles from "@/components/shared/SilkParticles";
 import SilkRoadVideoBackground from "@/components/shared/SilkRoadVideoBackground";
 import { ScrollScale } from "@/components/shared/ScrollReveal";
 import TripFinder from "@/components/home/TripFinder";
+import HeroActions from "@/components/home/HeroActions";
 import type { Tour } from "@/lib/data/tours";
 
 const item = {
@@ -71,23 +71,8 @@ export default function Hero({ tour, tourTitle }: HeroProps) {
               <span className="text-gradient-silk">{t("priceFrom", { price: "1,980" })}</span>
             </motion.p>
 
-            <motion.div
-              variants={item}
-              className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
-            >
-              <Button variant="silk" size="pill" className="silk-glow-pulse" asChild>
-                <Link href="/journeys">{t("cta")}</Link>
-              </Button>
-              <Button
-                variant="silkOutline"
-                size="pill"
-                className="border-silk-gold/60 bg-white/10 text-white backdrop-blur-sm hover:bg-silk-gold/20 hover:text-white"
-                asChild
-              >
-                <Link href={`/journeys/${tour.slug}`}>
-                  {t("ctaSecondary")} ›
-                </Link>
-              </Button>
+            <motion.div variants={item}>
+              <HeroActions bestsellerSlug={tour.slug} />
             </motion.div>
 
             <TripFinder />

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { appendFile, mkdir } from "fs/promises";
 import path from "path";
-import { getPublishedTours } from "@/lib/cms/tours";
+import { getPublishedTours, getTourContent } from "@/lib/cms/tours";
 
 async function getValidTourSlugs(): Promise<Set<string>> {
   const tours = await getPublishedTours();
@@ -15,9 +15,13 @@ type ContactPayload = {
   tour: string;
   message: string;
   locale?: string;
+  travelers?: number;
+  preferredDate?: string;
+  source?: string;
+  sendClientConfirmation?: boolean;
 };
 
-async function sendViaResend(payload: ContactPayload, inquiryId: string) {
+async function sendOperatorEmail(payload: ContactPayload, inquiryId: string) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL ?? "hello@greatsilktrails.com";
   const from = process.env.CONTACT_FROM_EMAIL ?? "GREATSILKTRAILS <onboarding@resend.dev>";
@@ -41,10 +45,102 @@ async function sendViaResend(payload: ContactPayload, inquiryId: string) {
         `Email: ${payload.email}`,
         `Phone: ${payload.phone || "—"}`,
         `Tour: ${payload.tour}`,
+        `Travelers: ${payload.travelers ?? "—"}`,
+        `Preferred date: ${payload.preferredDate || "—"}`,
+        `Source: ${payload.source || "contact-form"}`,
         `Locale: ${payload.locale || "en"}`,
         "",
         payload.message,
       ].join("\n"),
+    }),
+  });
+
+  return res.ok;
+}
+
+async function sendClientConfirmation(payload: ContactPayload, inquiryId: string) {
+  const apiKey = process.env.RESEND_API_KEY;
+  const from = process.env.CONTACT_FROM_EMAIL ?? "GREATSILKTRAILS <onboarding@resend.dev>";
+  const supportEmail = process.env.CONTACT_TO_EMAIL ?? "hello@greatsilktrails.com";
+
+  if (!apiKey || !payload.sendClientConfirmation) return false;
+
+  const locale = payload.locale === "ru" ? "ru" : "en";
+  const tourRecord = (await getPublishedTours()).find((t) => t.slug === payload.tour);
+  const tourName =
+    payload.tour === "any"
+      ? locale === "ru"
+        ? "Тур на выбор"
+        : "Tour to be confirmed"
+      : payload.tour === "bespoke"
+        ? locale === "ru"
+          ? "Индивидуальный тур"
+          : "Bespoke private tour"
+        : tourRecord
+          ? getTourContent(tourRecord, locale).title
+          : payload.tour;
+
+  const isRu = locale === "ru";
+  const subject = isRu
+    ? `Ваша заявка ${inquiryId} — GREATSILKTRAILS`
+    : `Your trip request ${inquiryId} — GREATSILKTRAILS`;
+
+  const text = isRu
+    ? [
+        `Здравствуйте, ${payload.name}!`,
+        "",
+        "Спасибо за заявку на тур по Шёлковому пути. Мы зарезервировали ваш запрос на 24 часа.",
+        "",
+        `Номер заявки: ${inquiryId}`,
+        `Тур: ${tourName}`,
+        payload.travelers ? `Путешественников: ${payload.travelers}` : null,
+        payload.preferredDate ? `Предпочтительная дата: ${payload.preferredDate}` : null,
+        "",
+        "Что дальше:",
+        "1. Менеджер свяжется с вами в течение 24 часов.",
+        "2. Вы получите программу и варианты оплаты.",
+        "3. После депозита место подтверждается официально.",
+        "",
+        `Вопросы? Напишите нам: ${supportEmail}`,
+        "",
+        "GREATSILKTRAILS — путешествия по Шёлковому пути",
+      ]
+        .filter(Boolean)
+        .join("\n")
+    : [
+        `Hi ${payload.name},`,
+        "",
+        "Thank you for your Silk Road trip request. We've placed a 24-hour courtesy hold on your inquiry.",
+        "",
+        `Reference: ${inquiryId}`,
+        `Tour: ${tourName}`,
+        payload.travelers ? `Travelers: ${payload.travelers}` : null,
+        payload.preferredDate ? `Preferred date: ${payload.preferredDate}` : null,
+        "",
+        "What happens next:",
+        "1. A travel specialist replies within 24 hours.",
+        "2. You receive a day-by-day itinerary and payment options.",
+        "3. Your spot is confirmed after deposit.",
+        "",
+        `Questions? Email us: ${supportEmail}`,
+        "",
+        "GREATSILKTRAILS — Silk Road tours, made simple.",
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: [payload.email],
+      reply_to: supportEmail,
+      subject,
+      text,
     }),
   });
 
@@ -84,11 +180,19 @@ export async function POST(request: Request) {
       tour,
       message: body.message.trim(),
       locale: body.locale,
+      travelers:
+        typeof body.travelers === "number" && body.travelers >= 1 && body.travelers <= 12
+          ? body.travelers
+          : undefined,
+      preferredDate: body.preferredDate?.trim(),
+      source: body.source?.trim(),
+      sendClientConfirmation: body.sendClientConfirmation,
     };
 
     const inquiryId = `GST-${Date.now().toString(36).toUpperCase()}`;
     await saveInquiry(payload, inquiryId);
-    await sendViaResend(payload, inquiryId);
+    await sendOperatorEmail(payload, inquiryId);
+    await sendClientConfirmation(payload, inquiryId);
 
     return NextResponse.json({ ok: true, inquiryId });
   } catch {

@@ -4,6 +4,7 @@ import { Check, Star, Calendar, MapPin, Users } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import { Button } from "@/components/ui/button";
+import TourDetailActions from "@/components/automation/TourDetailActions";
 import { Badge } from "@/components/ui/badge";
 import SilkDivider from "@/components/shared/SilkDivider";
 
@@ -142,16 +143,11 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
                 </div>
               </div>
 
-              <Button variant="silk" size="pill" className="mt-6 w-full" asChild>
-                <Link href={`/contact?tour=${slug}`}>{shop("buyNow")}</Link>
-              </Button>
-              <Button variant="silkOutline" size="pill" className="mt-3 w-full" asChild>
-                <Link href="/contact">{shop("askExpert")}</Link>
-              </Button>
-
-              <p className="mt-4 text-center text-[11px] text-apple-muted">
-                {shop("guaranteeShort")}
-              </p>
+              <TourDetailActions
+                slug={slug}
+                price={tour.price}
+                spotsLeft={tour.spotsLeft}
+              />
             </div>
           </div>
         </div>

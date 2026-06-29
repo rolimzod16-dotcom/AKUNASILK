@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import FloatingHelp from "@/components/layout/FloatingHelp";
+import AutomationShell from "@/components/automation/AutomationShell";
 import StickyMobileCTA from "@/components/layout/StickyMobileCTA";
 import "../globals.css";
 
@@ -59,11 +59,12 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${inter.variable} ${cormorant.variable}`}>
       <body className="min-h-screen bg-silk-cream font-sans antialiased [--font-sans:var(--font-inter)]">
         <NextIntlClientProvider messages={messages}>
-          <Header />
-          <main className="pb-24 lg:pb-0">{children}</main>
-          <Footer />
-          <FloatingHelp />
-          <StickyMobileCTA />
+          <AutomationShell>
+            <Header />
+            <main className="pb-24 lg:pb-0">{children}</main>
+            <Footer />
+            <StickyMobileCTA />
+          </AutomationShell>
         </NextIntlClientProvider>
       </body>
     </html>

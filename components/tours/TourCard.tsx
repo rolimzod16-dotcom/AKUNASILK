@@ -7,6 +7,7 @@ import { Calendar, MapPin, Star } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import { Button } from "@/components/ui/button";
+import BookNowButton from "@/components/automation/BookNowButton";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
@@ -124,9 +125,13 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
             <Button variant="silkOutline" size="pill-sm" className="flex-1 sm:flex-none" asChild>
               <Link href={`/journeys/${tour.slug}`}>{shop("viewTrip")}</Link>
             </Button>
-            <Button variant="silk" size="pill-sm" className="flex-1 sm:flex-none" asChild>
-              <Link href={`/contact?tour=${tour.slug}`}>{shop("getQuote")}</Link>
-            </Button>
+            <BookNowButton
+              variant="silk"
+              size="pill-sm"
+              className="flex-1 sm:flex-none"
+              prefill={{ tourSlug: tour.slug, source: "card" }}
+              label={shop("getQuote")}
+            />
           </div>
         </CardFooter>
       </Card>

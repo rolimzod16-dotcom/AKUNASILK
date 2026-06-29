@@ -1,6 +1,8 @@
 import { getLocale } from "next-intl/server";
 import Hero from "@/components/home/Hero";
 import TrustBar from "@/components/layout/TrustBar";
+import SocialProofTicker from "@/components/automation/SocialProofTicker";
+import TripMatcher from "@/components/automation/TripMatcher";
 import { getBestseller, getTourContent } from "@/lib/data/tours";
 import VideoShowcase from "@/components/home/VideoShowcase";
 import SilkRoadSection from "@/components/home/SilkRoadSection";
@@ -20,9 +22,11 @@ export default async function HomePage() {
     <>
       <Hero tour={bestseller} tourTitle={bestsellerContent.title} />
       <TrustBar />
+      <SocialProofTicker />
       <VideoShowcase />
       <SilkRoadSection />
       <TourShowcase />
+      <TripMatcher />
       <PackageIncludes />
       <PricingTiers />
       <PartnersSection />

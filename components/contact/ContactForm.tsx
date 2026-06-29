@@ -78,7 +78,16 @@ export default function ContactForm({ tourOptions }: ContactFormProps) {
               const res = await fetch("/api/contact", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name, email, phone, tour, message, locale }),
+                body: JSON.stringify({
+                  name,
+                  email,
+                  phone,
+                  tour,
+                  message,
+                  locale,
+                  sendClientConfirmation: true,
+                  source: "contact-form",
+                }),
               });
               const data = (await res.json()) as { ok?: boolean; inquiryId?: string; error?: string };
               if (!res.ok) {

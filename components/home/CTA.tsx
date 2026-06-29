@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
+import BookNowButton from "@/components/automation/BookNowButton";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SilkDivider from "@/components/shared/SilkDivider";
 import VideoBackground from "@/components/shared/VideoBackground";
@@ -36,9 +36,13 @@ export default function CTA() {
               {t("subtitle")}
             </p>
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-              <Button variant="silk" size="pill" className="silk-glow-pulse" asChild>
-                <Link href="/contact">{t("button")}</Link>
-              </Button>
+              <BookNowButton
+                variant="silk"
+                size="pill"
+                className="silk-glow-pulse"
+                prefill={{ source: "hero" }}
+                label={t("button")}
+              />
               <Button
                 variant="link"
                 className="text-silk-gold hover:text-silk-gold-light"

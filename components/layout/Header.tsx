@@ -6,6 +6,7 @@ import { Menu, Globe, Phone, MessageCircle } from "lucide-react";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import BookNowButton from "@/components/automation/BookNowButton";
 import {
   Sheet,
   SheetContent,
@@ -124,14 +125,13 @@ export default function Header() {
             <span className="uppercase">{locale}</span>
           </button>
 
-          <Button
+          <BookNowButton
             variant="silk"
             size="pill-sm"
             className="hidden font-semibold shadow-md sm:inline-flex"
-            asChild
-          >
-            <Link href="/contact">{t("getQuote")}</Link>
-          </Button>
+            prefill={{ source: "header" }}
+            label={t("getQuote")}
+          />
 
           <Sheet>
             <SheetTrigger asChild>
@@ -177,9 +177,13 @@ export default function Header() {
                 ))}
               </nav>
               <div className="mt-6 space-y-2">
-                <Button variant="silk" size="pill" className="w-full" asChild>
-                  <Link href="/contact">{t("getQuote")}</Link>
-                </Button>
+                <BookNowButton
+                  variant="silk"
+                  size="pill"
+                  className="w-full"
+                  prefill={{ source: "header" }}
+                  label={t("getQuote")}
+                />
                 <a
                   href="https://wa.me/998712004567"
                   target="_blank"
