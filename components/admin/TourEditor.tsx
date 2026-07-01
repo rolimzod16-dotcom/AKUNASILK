@@ -4,6 +4,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Save, Trash2 } from "lucide-react";
 import type { CmsTour } from "@/lib/cms/types";
+import {
+  COUNTRY_LABELS,
+  getCountriesByCorridor,
+  getCorridorLabel,
+  SILK_ROAD_CORRIDORS,
+  type CountrySlug,
+} from "@/lib/countries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -43,7 +50,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...form,
-          countries: form.countries,
+          countrySlugs: form.countrySlugs,
         }),
       });
       if (!res.ok) throw new Error("Save failed");
@@ -150,17 +157,46 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
               onChange={(e) => setForm({ ...form, nextDeparture: e.target.value })}
             />
           </div>
-          <div className="space-y-2">
-            <Label>Countries (comma-separated)</Label>
-            <Input
-              value={form.countries.join(", ")}
-              onChange={(e) =>
-                setForm({
-                  ...form,
-                  countries: e.target.value.split(",").map((c) => c.trim()).filter(Boolean),
-                })
-              }
-            />
+          <div className="space-y-4 sm:col-span-2">
+            <Label>Silk Road countries on route</Label>
+            <p className="text-xs text-apple-muted">
+              Only countries historically on the Silk Road. Powers destination filters — add cities in tour descriptions separately.
+            </p>
+            {SILK_ROAD_CORRIDORS.map((corridor) => (
+              <div key={corridor}>
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-silk-turquoise">
+                  {getCorridorLabel(corridor, "en")}
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                  {getCountriesByCorridor(corridor).map((slug) => {
+                    const checked = form.countrySlugs?.includes(slug) ?? false;
+                    return (
+                      <label
+                        key={slug}
+                        className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm transition ${
+                          checked
+                            ? "border-silk-gold bg-silk-gold/10 text-silk-indigo"
+                            : "border-silk-gold/20 hover:border-silk-gold/40"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => {
+                            const current = form.countrySlugs ?? [];
+                            const next = checked
+                              ? current.filter((s) => s !== slug)
+                              : [...current, slug];
+                            setForm({ ...form, countrySlugs: next as CountrySlug[] });
+                          }}
+                        />
+                        {COUNTRY_LABELS[slug].en}
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
           <div className="space-y-2">
             <Label>Difficulty</Label>

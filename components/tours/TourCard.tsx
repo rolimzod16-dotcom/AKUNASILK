@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Calendar, MapPin, Star } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
+import { countrySlugsToLabels, resolveTourCountrySlugs } from "@/lib/countries";
 import { Button } from "@/components/ui/button";
 import BookNowButton from "@/components/automation/BookNowButton";
 import { Badge } from "@/components/ui/badge";
@@ -84,7 +85,7 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
             </span>
             <span className="flex items-center gap-1">
               <MapPin className="size-3.5" />
-              {tour.countries.join(" · ")}
+              {countrySlugsToLabels(resolveTourCountrySlugs(tour), locale).join(" · ")}
             </span>
             <Badge variant="outline" className="border-silk-gold/30 text-[10px] font-semibold text-silk-indigo">
               {t(`difficulty.${tour.difficulty}`)}

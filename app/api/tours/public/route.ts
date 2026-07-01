@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getPublishedTours, getTourContent } from "@/lib/cms/tours";
+import { resolveTourCountrySlugs } from "@/lib/countries";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -18,6 +19,7 @@ export async function GET(request: Request) {
       nextDeparture: tour.nextDeparture,
       difficulty: tour.difficulty,
       countries: tour.countries,
+      countrySlugs: resolveTourCountrySlugs(tour),
       bestseller: tour.bestseller,
       image: tour.image,
       rating: tour.rating,

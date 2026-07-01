@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Check, Star, Calendar, MapPin, Users } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
+import { countrySlugsToLabels, resolveTourCountrySlugs } from "@/lib/countries";
 import { Button } from "@/components/ui/button";
 import TourDetailActions from "@/components/automation/TourDetailActions";
 import { Badge } from "@/components/ui/badge";
@@ -129,7 +130,8 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
                 <div className="flex items-center gap-3 text-apple-subtle">
                   <MapPin className="size-4 text-silk-turquoise" />
                   <span>
-                    {tour.duration} {t("days")} · {tour.countries.join(", ")}
+                    {tour.duration} {t("days")} ·{" "}
+                    {countrySlugsToLabels(resolveTourCountrySlugs(tour), locale).join(", ")}
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-apple-subtle">

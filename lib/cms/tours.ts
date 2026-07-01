@@ -1,11 +1,17 @@
 import type { CmsLocale, CmsTour, TourContent } from "./types";
 import { readCmsJson, writeCmsJson, cmsNow, newId, slugify } from "./storage";
 import { seedTours } from "./seed";
+import { syncTourCountries, type CountrySlug } from "@/lib/countries";
 
 const FILE = "tours.json";
 
+function normalizeTours(tours: CmsTour[]): CmsTour[] {
+  return tours.map(syncTourCountries);
+}
+
 export async function getAllTours(): Promise<CmsTour[]> {
-  return readCmsJson<CmsTour[]>(FILE, seedTours);
+  const tours = await readCmsJson<CmsTour[]>(FILE, seedTours);
+  return normalizeTours(tours);
 }
 
 export async function getPublishedTours(): Promise<CmsTour[]> {
@@ -73,6 +79,7 @@ export function createEmptyTour(): CmsTour {
     image: "",
     duration: 7,
     price: 1990,
+    countrySlugs: [],
     countries: [],
     difficulty: "easy",
     featured: false,
@@ -93,14 +100,14 @@ export function normalizeTourInput(input: Partial<CmsTour> & { id?: string }): C
   const base = input.id ? undefined : createEmptyTour();
   const existing = base ?? createEmptyTour();
   const slug = slugify(input.slug || input.content?.en?.title || existing.slug || "new-tour");
-  return {
+  return syncTourCountries({
     ...existing,
     ...input,
     id: input.id ?? existing.id,
     slug,
-    countries: Array.isArray(input.countries)
-      ? input.countries
-      : existing.countries,
+    countrySlugs: Array.isArray(input.countrySlugs)
+      ? (input.countrySlugs as CountrySlug[])
+      : existing.countrySlugs ?? [],
     content: {
       en: {
         title: input.content?.en?.title ?? existing.content.en.title,
@@ -115,5 +122,5 @@ export function normalizeTourInput(input: Partial<CmsTour> & { id?: string }): C
     },
     updatedAt: cmsNow(),
     createdAt: input.createdAt ?? existing.createdAt,
-  };
+  });
 }

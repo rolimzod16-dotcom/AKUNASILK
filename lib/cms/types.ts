@@ -1,3 +1,5 @@
+import type { CountrySlug } from "@/lib/countries";
+
 export type CmsLocale = "en" | "ru";
 
 export type TourContent = {
@@ -14,6 +16,9 @@ export type CmsTour = {
   duration: number;
   price: number;
   originalPrice?: number;
+  /** Canonical slugs for filtering — source of truth in admin */
+  countrySlugs: CountrySlug[];
+  /** English display labels — kept in sync with countrySlugs */
   countries: string[];
   difficulty: "easy" | "moderate" | "adventurous";
   featured: boolean;

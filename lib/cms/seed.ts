@@ -1,9 +1,10 @@
 import type { CmsPartner, CmsStory, CmsTour } from "./types";
 import { cmsNow } from "./storage";
+import { syncTourCountries } from "@/lib/countries";
 
 const now = cmsNow();
 
-export const seedTours: CmsTour[] = [
+const rawSeedTours = [
   {
     id: "tour-1",
     slug: "golden-caravan",
@@ -181,7 +182,11 @@ export const seedTours: CmsTour[] = [
     createdAt: now,
     updatedAt: now,
   },
-];
+] satisfies Omit<CmsTour, "countrySlugs">[];
+
+export const seedTours: CmsTour[] = rawSeedTours.map((tour) =>
+  syncTourCountries(tour as CmsTour)
+);
 
 export const seedStories: CmsStory[] = [
   {

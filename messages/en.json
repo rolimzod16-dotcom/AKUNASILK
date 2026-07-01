@@ -35,8 +35,9 @@
       "regions": {
         "uzbekistan": "Uzbekistan",
         "centralAsia": "Central Asia",
-        "pamir": "Pamir Highway",
+        "pamir": "Pamir & Hindu Kush",
         "china": "China Silk Road",
+        "persia": "Persia",
         "caucasus": "Caucasus"
       }
     },
@@ -52,8 +53,22 @@
         "departure": "Soonest departure"
       },
       "difficulty": { "all": "All levels" },
+      "filterByCountry": "Silk Road countries",
+      "silkRoadNote": "Only countries on historic caravan routes — UNESCO Silk Roads corridors.",
+      "countryActive": "Showing tours in {country}",
       "regionActive": "Region filter on",
-      "empty": "No tours match these filters. Try another difficulty or browse all tours."
+      "regionActiveLabel": "Region: {region}",
+      "clearFilter": "Show all tours",
+      "regions": {
+        "central": "Central Asia",
+        "pamir": "Pamir & Hindu Kush",
+        "china": "China",
+        "persia": "Persia",
+        "southAsia": "South Asia",
+        "caucasus": "Caucasus",
+        "anatolia": "Anatolia"
+      },
+      "empty": "No tours match these filters. Try another country or browse all tours."
     },
     "help": {
       "whatsapp": "Chat on WhatsApp",
@@ -583,7 +598,7 @@
     "journeys": { "title": "Silk Road Tours", "subtitle": "Compare all-inclusive packages — filter by region, difficulty, and departure date" },
     "destinations": {
       "title": "Destinations",
-      "subtitle": "14 countries along the greatest trade route — pick your region, book your package"
+      "subtitle": "14 Silk Road countries — historic caravan corridors from China to Anatolia"
     },
     "experiences": { "title": "Experiences", "subtitle": "Moments captured along the Silk Road" },
     "heritage": {
@@ -687,13 +702,31 @@
     }
   },
   "destinations": {
-    "uzbekistan": { "name": "Uzbekistan", "desc": "Samarkand, Bukhara, Khiva — the crown jewels of Central Asia." },
-    "kyrgyzstan": { "name": "Kyrgyzstan", "desc": "Alpine lakes, nomadic traditions, and the Tian Shan mountains." },
-    "china": { "name": "China", "desc": "Xi'an, Dunhuang, Kashgar — where the Silk Road begins." },
-    "tajikistan": { "name": "Tajikistan", "desc": "Pamir Highway, Wakhan Valley — the roof of the world." },
-    "turkmenistan": { "name": "Turkmenistan", "desc": "Darvaza, Merv, endless desert under infinite stars." },
-    "georgia": { "name": "Georgia & Caucasus", "desc": "Wine, mountains, where East meets West." },
-    "bookCta": "View packages"
+    "china": { "name": "China", "desc": "Eastern terminus of the Silk Road — where silk caravans began their westward journey." },
+    "kazakhstan": { "name": "Kazakhstan", "desc": "Northern Silk Road corridor through the Tian Shan — gateway between China and Central Asia." },
+    "kyrgyzstan": { "name": "Kyrgyzstan", "desc": "Mountain passes and nomadic routes linking the Fergana Valley to China." },
+    "uzbekistan": { "name": "Uzbekistan", "desc": "Heart of Transoxiana — UNESCO Silk Roads hub where east–west caravan routes converged." },
+    "turkmenistan": { "name": "Turkmenistan", "desc": "Zarafshan–Karakum corridor — a core UNESCO Silk Road segment across the Karakum." },
+    "tajikistan": { "name": "Tajikistan", "desc": "Pamir branch of the Silk Road — high-altitude routes between Central Asia and China." },
+    "afghanistan": { "name": "Afghanistan", "desc": "Southern Silk Road crossroads — the Hindu Kush linked Persia to the Indian subcontinent." },
+    "iran": { "name": "Iran", "desc": "Persian corridor — for centuries the main westward artery for silk, spices, and ideas." },
+    "pakistan": { "name": "Pakistan", "desc": "Karakoram branch — the southern route over the world's highest passes." },
+    "india": { "name": "India", "desc": "Southern Silk Road terminus — spices, gems, and Buddhism flowed north along caravan trails." },
+    "georgia": { "name": "Georgia", "desc": "Caucasus transit corridor — bridge between the Caspian and Black Sea trade networks." },
+    "armenia": { "name": "Armenia", "desc": "Ancient crossroads of Persian and Anatolian caravan routes through the Caucasus." },
+    "azerbaijan": { "name": "Azerbaijan", "desc": "Caspian Sea corridor — linking Central Asian silk to Caucasus and beyond." },
+    "turkey": { "name": "Turkey", "desc": "Western gateway of the Silk Road — Anatolian routes carried goods toward the Mediterranean." },
+    "bookCta": "View tours in this country",
+    "corridors": {
+      "east": "Where the Silk Road began — Han dynasty routes into Central Asia.",
+      "tianshan": "Northern route around the Taklamakan, through the Tian Shan mountains.",
+      "transoxiana": "UNESCO Zarafshan–Karakum corridor — the richest segment of the Silk Road.",
+      "pamir": "Pamir and Hindu Kush passes — among the most dramatic caravan routes on earth.",
+      "persia": "Persian plateau — the great westward highway for silk and culture.",
+      "southAsia": "Karakoram and Indus routes connecting Central Asia to the Indian subcontinent.",
+      "caucasus": "Trans-Caucasian trade routes between the Caspian and Mediterranean worlds.",
+      "anatolia": "Final overland stretch before goods reached Mediterranean ports."
+    }
   },
   "heritage": {
     "intro": "The Silk Road wasn't a single path — it was a network connecting empires, ideas, and treasures for over 2,000 years. Every GREATSILKTRAILS package follows in the footsteps of merchants, scholars, and explorers who shaped the world.",

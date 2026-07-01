@@ -38,7 +38,10 @@
       }
     },
     "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z"
+    "updatedAt": "2026-06-26T10:24:11.184Z",
+    "countrySlugs": [
+      "uzbekistan"
+    ]
   },
   {
     "id": "tour-2",
@@ -78,7 +81,11 @@
       }
     },
     "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z"
+    "updatedAt": "2026-06-26T10:24:11.184Z",
+    "countrySlugs": [
+      "turkmenistan",
+      "uzbekistan"
+    ]
   },
   {
     "id": "tour-3",
@@ -119,7 +126,11 @@
       }
     },
     "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z"
+    "updatedAt": "2026-06-26T10:24:11.184Z",
+    "countrySlugs": [
+      "kyrgyzstan",
+      "kazakhstan"
+    ]
   },
   {
     "id": "tour-4",
@@ -158,7 +169,10 @@
       }
     },
     "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z"
+    "updatedAt": "2026-06-26T10:24:11.184Z",
+    "countrySlugs": [
+      "china"
+    ]
   },
   {
     "id": "tour-5",
@@ -198,7 +212,11 @@
       }
     },
     "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z"
+    "updatedAt": "2026-06-26T10:24:11.184Z",
+    "countrySlugs": [
+      "georgia",
+      "azerbaijan"
+    ]
   },
   {
     "id": "tour-6",
@@ -237,6 +255,9 @@
       }
     },
     "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z"
+    "updatedAt": "2026-06-26T10:24:11.184Z",
+    "countrySlugs": [
+      "tajikistan"
+    ]
   }
 ]

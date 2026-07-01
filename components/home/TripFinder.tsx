@@ -7,10 +7,11 @@ import { Search, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const regions = [
-  { key: "uzbekistan", href: "/journeys?region=uzbekistan" },
+  { key: "uzbekistan", href: "/journeys?country=uzbekistan" },
   { key: "centralAsia", href: "/journeys?region=central" },
   { key: "pamir", href: "/journeys?region=pamir" },
   { key: "china", href: "/journeys?region=china" },
+  { key: "persia", href: "/journeys?region=persia" },
   { key: "caucasus", href: "/journeys?region=caucasus" },
 ] as const;
 
