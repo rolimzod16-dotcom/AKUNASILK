@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 
 type TourEditorProps = {
   tour: CmsTour;
@@ -112,14 +113,13 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
               placeholder="golden-caravan"
             />
           </div>
-          <div className="space-y-2 sm:col-span-2">
-            <Label>Cover image URL</Label>
-            <Input
-              value={form.image}
-              onChange={(e) => setForm({ ...form, image: e.target.value })}
-              placeholder="https://..."
-            />
-          </div>
+          <ImageUploadField
+            label="Cover image"
+            folder="tours"
+            value={form.image}
+            onChange={(image) => setForm({ ...form, image })}
+            hint="Upload a photo — we compress it automatically so the site stays fast."
+          />
           <div className="space-y-2">
             <Label>Price (USD)</Label>
             <Input

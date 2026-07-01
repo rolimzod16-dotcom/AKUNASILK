@@ -50,3 +50,6 @@ next-env.d.ts
 
 # local inquiry submissions (not CMS content)
 /data/inquiries.jsonl
+
+# uploaded CMS images (local dev only; production uses Vercel Blob)
+/public/uploads/

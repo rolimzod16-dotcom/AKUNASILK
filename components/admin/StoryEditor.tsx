@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ImageUploadField from "@/components/admin/ImageUploadField";
 
 type StoryEditorProps = {
   story: CmsStory;
@@ -76,10 +77,13 @@ export default function StoryEditor({ story, isNew }: StoryEditorProps) {
             <Label>Date</Label>
             <Input type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} />
           </div>
-          <div className="space-y-2 sm:col-span-2">
-            <Label>Image URL</Label>
-            <Input value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} />
-          </div>
+          <ImageUploadField
+            label="Cover image"
+            folder="stories"
+            value={form.image}
+            onChange={(image) => setForm({ ...form, image })}
+            hint="Upload a photo — auto-compressed for fast page loads."
+          />
           <div className="space-y-2">
             <Label>Read time (min)</Label>
             <Input type="number" value={form.readTime} onChange={(e) => setForm({ ...form, readTime: Number(e.target.value) })} />
