@@ -716,7 +716,10 @@
     "armenia": { "name": "Armenia", "desc": "Ancient crossroads of Persian and Anatolian caravan routes through the Caucasus." },
     "azerbaijan": { "name": "Azerbaijan", "desc": "Caspian Sea corridor — linking Central Asian silk to Caucasus and beyond." },
     "turkey": { "name": "Turkey", "desc": "Western gateway of the Silk Road — Anatolian routes carried goods toward the Mediterranean." },
-    "bookCta": "View tours in this country",
+    "bookCta": "View tours",
+    "filterAll": "All countries",
+    "stats": "{countries} Silk Road countries · {corridors} corridors",
+    "results": "{count, plural, one {# country} other {# countries}}",
     "corridors": {
       "east": "Where the Silk Road began — Han dynasty routes into Central Asia.",
       "tianshan": "Northern route around the Taklamakan, through the Tian Shan mountains.",

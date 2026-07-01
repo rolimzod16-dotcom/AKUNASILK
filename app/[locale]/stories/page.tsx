@@ -27,8 +27,8 @@ export default async function StoriesPage({
 
   return (
     <>
-      <PageHero title={pages("title")} subtitle={pages("subtitle")} />
-      <section className="pb-20">
+      <PageHero title={pages("title")} subtitle={pages("subtitle")} compact />
+      <section className="pb-12 pt-2">
         <div className="mx-auto max-w-[980px] px-6">
           <div className="grid gap-8 md:grid-cols-2">
             {posts.map((post, i) => {

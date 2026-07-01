@@ -68,7 +68,7 @@ export default async function PartnersPage({
 
   return (
     <>
-      <PageHero title={pages("title")} subtitle={pages("subtitle")} />
+      <PageHero title={pages("title")} subtitle={pages("subtitle")} compact />
 
       <section className="apple-section">
         <div className="mx-auto max-w-[780px] px-6 text-center">

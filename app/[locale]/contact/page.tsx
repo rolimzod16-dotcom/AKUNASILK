@@ -49,7 +49,7 @@ export default async function ContactPage({
 
   return (
     <>
-      <PageHero title={pages("title")} subtitle={t("subtitle")} />
+      <PageHero title={pages("title")} subtitle={t("subtitle")} compact />
       <section className="apple-section">
         <div className="mx-auto max-w-[980px] px-6">
           <div className="grid gap-10 lg:grid-cols-5">

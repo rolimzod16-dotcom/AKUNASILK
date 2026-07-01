@@ -8,12 +8,10 @@ import { SlidersHorizontal, X } from "lucide-react";
 import TourCard from "@/components/tours/TourCard";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import {
-  getCountriesByCorridor,
+  COUNTRY_SLUGS,
   getCountryLabel,
-  getCorridorLabel,
   isCountrySlug,
   isRegionSlug,
-  SILK_ROAD_CORRIDORS,
   tourMatchesCountry,
   tourMatchesRegion,
 } from "@/lib/countries";
@@ -81,9 +79,9 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
       : null;
 
   return (
-    <section className="pb-20">
+    <section className="pb-12">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
-        <div className="mb-8 rounded-2xl border border-silk-gold/20 bg-white p-4 shadow-sm sm:p-5">
+        <div className="mb-4 rounded-2xl border border-silk-gold/20 bg-white p-3 shadow-sm sm:p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-sm font-semibold text-silk-indigo">
               <SlidersHorizontal className="size-4 text-silk-gold" />
@@ -111,41 +109,31 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
             </div>
           )}
 
-          <div className="mt-4 space-y-4">
-            <p className="text-[10px] font-bold uppercase tracking-wider text-apple-muted">
+          <div className="mt-3">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
               {t("filterByCountry")}
             </p>
-            {SILK_ROAD_CORRIDORS.map((corridor) => {
-              const countries = getCountriesByCorridor(corridor);
-              return (
-                <div key={corridor}>
-                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-wide text-silk-turquoise">
-                    {getCorridorLabel(corridor, locale)}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {countries.map((slug) => {
-                      const active = activeCountry === slug;
-                      return (
-                        <Link
-                          key={slug}
-                          href={active ? "/journeys" : `/journeys?country=${slug}`}
-                          className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
-                            active
-                              ? "bg-silk-indigo text-silk-gold"
-                              : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
-                          }`}
-                        >
-                          {getCountryLabel(slug, locale)}
-                        </Link>
-                      );
-                    })}
-                  </div>
-                </div>
-              );
-            })}
+            <div className="flex flex-wrap gap-1.5">
+              {COUNTRY_SLUGS.map((slug) => {
+                const active = activeCountry === slug;
+                return (
+                  <Link
+                    key={slug}
+                    href={active ? "/journeys" : `/journeys?country=${slug}`}
+                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
+                      active
+                        ? "bg-silk-indigo text-silk-gold"
+                        : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
+                    }`}
+                  >
+                    {getCountryLabel(slug, locale)}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-1.5">
             {difficulties.map((d) => (
               <button
                 key={d}
@@ -191,7 +179,7 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
             )}
           </div>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filtered.map(({ tour, content }, i) => (
               <TourCard key={tour.id} tour={tour} content={content} index={i} />
             ))}

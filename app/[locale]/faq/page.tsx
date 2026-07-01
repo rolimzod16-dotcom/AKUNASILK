@@ -23,7 +23,7 @@ export default async function FAQPage({
 
   return (
     <>
-      <PageHero title={pages("title")} subtitle={t("subtitle")} />
+      <PageHero title={pages("title")} subtitle={t("subtitle")} compact />
       <section className="py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <FAQAccordion />

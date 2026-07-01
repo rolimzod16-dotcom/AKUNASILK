@@ -16,7 +16,7 @@ export async function generateMetadata({
 
 function CatalogFallback() {
   return (
-    <div className="mx-auto max-w-[1200px] px-6 pb-20">
+    <div className="mx-auto max-w-[1200px] px-6 pb-12">
       <div className="h-32 animate-pulse rounded-2xl bg-silk-gold/10" />
     </div>
   );
@@ -37,7 +37,7 @@ export default async function JourneysPage({
 
   return (
     <>
-      <PageHero title={pages("title")} subtitle={pages("subtitle")} />
+      <PageHero title={pages("title")} subtitle={pages("subtitle")} compact />
       <Suspense fallback={<CatalogFallback />}>
         <JourneyCatalog items={items} />
       </Suspense>
