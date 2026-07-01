@@ -39,8 +39,17 @@ export default function AdminLoginPage() {
               if (res.ok) {
                 router.push("/admin");
                 router.refresh();
+                return;
+              }
+              const data = (await res.json().catch(() => ({}))) as { error?: string };
+              if (res.status === 503) {
+                setError(
+                  "Admin password is not set on the server. Add ADMIN_PASSWORD in Vercel → Settings → Environment Variables, then redeploy."
+                );
+              } else if (res.status === 401) {
+                setError("Wrong password. Try again or check ADMIN_PASSWORD in your .env.local (local) or Vercel env (production).");
               } else {
-                setError("Invalid password or admin not configured.");
+                setError(data.error ?? "Login failed. Please try again.");
               }
               setLoading(false);
             }}
