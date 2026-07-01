@@ -52,4 +52,5 @@ next-env.d.ts
 /data/inquiries.jsonl
 
 # uploaded CMS images (local dev only; production uses Vercel Blob)
-/public/uploads/
+/public/uploads/*
+!/public/uploads/.gitkeep
