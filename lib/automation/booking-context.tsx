@@ -17,7 +17,7 @@ export type BookingPrefill = {
   email?: string;
   phone?: string;
   notes?: string;
-  source?: "wizard" | "concierge" | "matcher" | "card" | "hero" | "header";
+  source?: "wizard" | "concierge" | "matcher" | "card" | "hero" | "header" | "info-page" | "travel-styles";
 };
 
 type BookingContextValue = {

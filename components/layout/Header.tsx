@@ -14,25 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
-const primaryNav = [
-  { key: "journeys", href: "/journeys" },
-  { key: "destinations", href: "/destinations" },
-  { key: "about", href: "/about" },
-  { key: "faq", href: "/faq" },
-  { key: "stories", href: "/stories" },
-] as const;
-
-const secondaryNav = [
-  { key: "experiences", href: "/experiences" },
-  { key: "heritage", href: "/heritage" },
-  { key: "partners", href: "/partners" },
-  { key: "contact", href: "/contact" },
-] as const;
-
-function isActive(pathname: string, href: string) {
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
+import NavMenu from "@/components/layout/NavMenu";
 
 export default function Header() {
   const t = useTranslations("nav");
@@ -75,25 +57,7 @@ export default function Header() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex xl:gap-2">
-          {primaryNav.map(({ key, href }) => {
-            const active = isActive(pathname, href);
-            return (
-              <Link
-                key={key}
-                href={href}
-                className={cn(
-                  "rounded-lg px-3 py-2 text-sm font-medium transition-colors",
-                  active
-                    ? "bg-silk-gold/15 text-silk-indigo"
-                    : "text-apple-subtle hover:bg-silk-cream hover:text-silk-indigo"
-                )}
-              >
-                {t(key)}
-              </Link>
-            );
-          })}
-        </nav>
+        <NavMenu />
 
         <div className="flex shrink-0 items-center gap-2">
           <a
@@ -150,32 +114,9 @@ export default function Header() {
                   GREAT<span className="text-silk-gold">SILK</span>TRAILS
                 </SheetTitle>
               </SheetHeader>
-              <nav className="mt-6 flex flex-col gap-1">
-                {primaryNav.map(({ key, href }) => (
-                  <Link
-                    key={key}
-                    href={href}
-                    className={cn(
-                      "rounded-xl px-4 py-3 text-sm font-semibold transition",
-                      isActive(pathname, href)
-                        ? "bg-silk-gold/20 text-silk-indigo"
-                        : "text-apple-subtle hover:bg-silk-cream"
-                    )}
-                  >
-                    {t(key)}
-                  </Link>
-                ))}
-                <div className="my-2 border-t border-silk-gold/15" />
-                {secondaryNav.map(({ key, href }) => (
-                  <Link
-                    key={key}
-                    href={href}
-                    className="rounded-xl px-4 py-2.5 text-sm text-apple-muted hover:bg-silk-cream hover:text-silk-indigo"
-                  >
-                    {t(key)}
-                  </Link>
-                ))}
-              </nav>
+              <div className="mt-6">
+                <NavMenu variant="mobile" />
+              </div>
               <div className="mt-6 space-y-2">
                 <BookNowButton
                   variant="silk"

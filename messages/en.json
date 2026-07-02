@@ -5,6 +5,41 @@
   },
   "nav": {
     "home": "Home",
+    "silkTrails": "Silk Trails",
+    "destination": "Destination",
+    "travelStyles": "Travel Styles",
+    "servicesLogistics": "Services & Logistics",
+    "aboutGst": "About GST",
+    "viewAll": "View all",
+    "tourChina": "Silk Road Origins Trail — China",
+    "tourKyrgyzstan": "Nomads & Mountains Silk Trail — Kyrgyzstan",
+    "tourUzbekistan": "Golden Cities Silk Trail — Uzbekistan",
+    "tourTajikistan": "Pamir Silk Trail — Tajikistan (Flagship)",
+    "tourKazakhstan": "Great Steppe Silk Trail — Kazakhstan",
+    "tourTurkmenistan": "Caravan Desert Silk Trail — Turkmenistan",
+    "tourPakistan": "Karakoram Silk Trail — Pakistan",
+    "tourIran": "Persian Silk Trail — Iran",
+    "tourTurkey": "Anatolian Silk Trail — Turkey",
+    "destTajikistan": "Tajikistan",
+    "destKyrgyzstan": "Kyrgyzstan",
+    "destUzbekistan": "Uzbekistan",
+    "destKazakhstan": "Kazakhstan",
+    "destChina": "China",
+    "destPakistan": "Pakistan",
+    "destTurkmenistan": "Turkmenistan",
+    "destIran": "Iran",
+    "destTurkey": "Turkey",
+    "styleOverland": "Overland & 4x4",
+    "styleHorseRiding": "Horse Riding",
+    "styleTrekking": "Trekking",
+    "styleCulture": "Culture & Cities",
+    "stylePhoto": "Photo Journeys",
+    "serviceVisa": "Visa Support & Invitation Letters",
+    "servicePermits": "Permits & Special Access (GBAO, etc.)",
+    "serviceTransport": "Transport & Car Rental",
+    "serviceDrivers": "Drivers & Guides",
+    "serviceAccommodation": "Accommodation & Logistics",
+    "serviceTailorMade": "Tailor-Made Journeys",
     "destinations": "Destinations",
     "journeys": "Tours",
     "experiences": "Experiences",
@@ -618,7 +653,73 @@
     },
     "privacy": { "title": "Privacy Policy", "subtitle": "How we collect, use, and protect your information" },
     "terms": { "title": "Terms of Service", "subtitle": "Booking conditions for GREATSILKTRAILS tour packages" },
-    "cancellation": { "title": "Cancellation Policy", "subtitle": "Refunds, rebooking, and departure changes" }
+    "cancellation": { "title": "Cancellation Policy", "subtitle": "Refunds, rebooking, and departure changes" },
+    "travelStyles": {
+      "title": "Travel Styles",
+      "subtitle": "How you want to experience the Silk Road — from 4x4 overland to photo-led journeys",
+      "cta": "Plan your journey",
+      "styles": {
+        "overland": {
+          "title": "Overland & 4x4",
+          "desc": "High-altitude passes, remote valleys, and multi-country road expeditions with experienced drivers and support vehicles."
+        },
+        "horseRiding": {
+          "title": "Horse Riding",
+          "desc": "Jailoo camps, nomadic trails, and horseback routes through Kyrgyzstan and the Pamir foothills."
+        },
+        "culture": {
+          "title": "Culture & Cities",
+          "desc": "Caravanserai cities, bazaars, UNESCO medinas, and living craft traditions along historic trade corridors."
+        },
+        "photo": {
+          "title": "Photo Journeys",
+          "desc": "Golden-hour departures, mountain light, and curated stops for photographers and visual storytellers."
+        }
+      }
+    },
+    "trekking": {
+      "title": "Trekking",
+      "subtitle": "On-foot routes across the Pamir, Tien Shan, and Hindu Kush",
+      "body": "We arrange guided trekking modules — from short day hikes to multi-day Pamir crossings — with local guides, permit support, and camp logistics. Trekking can be added to any Silk Trail package or booked as a standalone module.",
+      "cta": "Request a trekking quote"
+    },
+    "servicesLogistics": {
+      "title": "Services & Logistics",
+      "subtitle": "Visas, permits, transport, guides, and on-the-ground support across the Silk Road",
+      "cta": "Contact our team",
+      "items": {
+        "visa-support": {
+          "title": "Visa Support & Invitation Letters",
+          "desc": "Invitation letters and visa guidance for Central Asia, Iran, and Pakistan itineraries.",
+          "body": "We prepare invitation letters, review embassy requirements, and coordinate timing with your tour dates. Processing times vary by nationality — contact us early for Iran, Turkmenistan, and multi-entry routes."
+        },
+        "permits-gbao": {
+          "title": "Permits & Special Access (GBAO, etc.)",
+          "desc": "Pamir Highway (GBAO), border zones, and restricted-area permits for Tajikistan and beyond.",
+          "body": "Pamir and border-zone travel requires advance permits. We handle GBAO applications, military checkpoints paperwork, and special-access requests tied to your confirmed itinerary."
+        },
+        "transport-rental": {
+          "title": "Transport & Car Rental",
+          "desc": "4x4 fleets, intercity transfers, and private vehicles along overland corridors.",
+          "body": "From airport pickups to multi-week 4x4 expeditions — we source reliable vehicles and drivers matched to road conditions, season, and group size."
+        },
+        "drivers-guides": {
+          "title": "Drivers & Guides",
+          "desc": "English-speaking drivers and specialist local guides for every corridor.",
+          "body": "Our network includes Pamir Highway veterans, city historians, and nomadic-region hosts. Guides can join for a single day or the full journey."
+        },
+        "accommodation": {
+          "title": "Accommodation & Logistics",
+          "desc": "Hotels, guesthouses, yurts, and camp setups along your route.",
+          "body": "We book vetted stays and coordinate meals, water, fuel stops, and remote camp logistics so your itinerary runs smoothly off the beaten path."
+        },
+        "tailor-made": {
+          "title": "Tailor-Made Journeys",
+          "desc": "Custom dates, private groups, and bespoke Silk Road routes.",
+          "body": "Tell us your dates, countries, and travel style — we design a private itinerary with transparent pricing. Ideal for families, photographers, and small groups."
+        }
+      }
+    }
   },
   "legal": {
     "privacy": {
