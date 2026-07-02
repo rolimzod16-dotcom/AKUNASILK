@@ -88,6 +88,8 @@
         "departure": "Soonest departure"
       },
       "difficulty": { "all": "All levels" },
+      "filterByStyle": "Travel style",
+      "styleActive": "Style: {style}",
       "filterByCountry": "Silk Road countries",
       "silkRoadNote": "Only countries on historic caravan routes — UNESCO Silk Roads corridors.",
       "countryActive": "Showing tours in {country}",
@@ -220,34 +222,34 @@
       "adventurous": "Adventurous"
     },
     "items": {
-      "golden-caravan": {
-        "title": "Golden Caravan",
-        "desc": "Samarkand's blue domes, Bukhara's bazaars, and Khiva's walled city — the crown jewels of Central Asia.",
-        "highlights": ["Registan at dawn", "Silk weaving workshop", "Desert yurt dinner"]
+      "golden-cities-silk-trail-uzbekistan": {
+        "title": "Golden Cities Silk Trail — Uzbekistan",
+        "desc": "Samarkand, Bukhara, and Khiva — the golden triangle of Silk Road architecture and living craft traditions.",
+        "highlights": ["Registan at dawn", "Silk weaving workshop", "Khiva walled city"]
       },
-      "desert-echoes": {
-        "title": "Desert Echoes",
-        "desc": "Darvaza's flaming crater, ancient Merv ruins, and the endless Karakum sands under starlit skies.",
-        "highlights": ["Door to Hell at night", "UNESCO Merv", "Camel caravan trek"]
+      "caravan-desert-silk-trail-turkmenistan": {
+        "title": "Caravan Desert Silk Trail — Turkmenistan",
+        "desc": "Darvaza's flaming crater, ancient Merv, and caravan routes across the Karakum Desert.",
+        "highlights": ["Door to Hell at night", "UNESCO Merv", "Desert camp under stars"]
       },
-      "heavenly-mountains": {
-        "title": "Heavenly Mountains",
-        "desc": "Alpine lakes, eagle hunters, and felt-making traditions in the Tian Shan and Almaty highlands.",
+      "nomads-mountains-silk-trail-kyrgyzstan": {
+        "title": "Nomads & Mountains Silk Trail — Kyrgyzstan",
+        "desc": "Alpine jailoos, eagle hunters, and felt-making traditions in the Tian Shan highlands.",
         "highlights": ["Issyk-Kul lake", "Eagle hunting demo", "Nomadic horse trek"]
       },
-      "jade-gate": {
-        "title": "Jade Gate Expedition",
+      "silk-road-origins-trail-china": {
+        "title": "Silk Road Origins Trail — China",
         "desc": "From Xi'an's Terracotta Warriors to Dunhuang's Mogao Caves — trace China's Silk Road origins.",
         "highlights": ["Terracotta Army", "Mogao Caves", "Camel market in Kashgar"]
       },
-      "spice-and-silk": {
-        "title": "Spice & Silk",
-        "desc": "Georgian wine cellars, Baku's flame towers, and Caucasus mountain villages where East meets West.",
-        "highlights": ["Wine tasting in Kakheti", "Old Baku walk", "Sheki Khan Palace"]
+      "caucasus-culture-route": {
+        "title": "Caucasus Culture Route",
+        "desc": "Georgian wine cellars, Armenian monasteries, and mountain villages where East meets West.",
+        "highlights": ["Wine tasting in Kakheti", "Gergeti Trinity Church", "Sheki Khan Palace"]
       },
-      "pamir-odyssey": {
-        "title": "Pamir Odyssey",
-        "desc": "The legendary Pamir Highway — Wakhan Valley views, remote villages, and the roof of the world.",
+      "pamir-silk-trail-tajikistan-flagship": {
+        "title": "Pamir Silk Trail — Tajikistan (Flagship)",
+        "desc": "The legendary Pamir Highway by 4x4 — Wakhan Valley views, remote villages, and the roof of the world.",
         "highlights": ["Pamir Highway drive", "Wakhan Corridor", "Homestay with Pamiri families"]
       }
     }
@@ -547,12 +549,12 @@
       "retake": "Retake quiz",
       "matcherNote": "Trip matcher recommended: {tour}",
       "tours": {
-        "golden-caravan": "Golden Caravan",
-        "desert-echoes": "Desert Echoes",
-        "heavenly-mountains": "Heavenly Mountains",
-        "jade-gate": "Jade Gate Expedition",
-        "spice-and-silk": "Spice & Silk",
-        "pamir-odyssey": "Pamir Odyssey"
+        "golden-cities-silk-trail-uzbekistan": "Golden Cities Silk Trail — Uzbekistan",
+        "caravan-desert-silk-trail-turkmenistan": "Caravan Desert Silk Trail — Turkmenistan",
+        "nomads-mountains-silk-trail-kyrgyzstan": "Nomads & Mountains — Kyrgyzstan",
+        "silk-road-origins-trail-china": "Silk Road Origins Trail — China",
+        "caucasus-culture-route": "Caucasus Culture Route",
+        "pamir-silk-trail-tajikistan-flagship": "Pamir Silk Trail — Tajikistan (Flagship)"
       }
     },
     "tour": {
@@ -658,7 +660,13 @@
       "title": "Travel Styles",
       "subtitle": "How you want to experience the Silk Road — from 4x4 overland to photo-led journeys",
       "cta": "Plan your journey",
+      "viewPackages": "View all {count} packages →",
+      "noPackages": "Packages coming soon — contact us for a custom quote.",
       "styles": {
+        "trekking": {
+          "title": "Trekking",
+          "desc": "On-foot routes across the Pamir, Tien Shan, and Karakoram — guided treks with permit support and camp logistics."
+        },
         "overland": {
           "title": "Overland & 4x4",
           "desc": "High-altitude passes, remote valleys, and multi-country road expeditions with experienced drivers and support vehicles."

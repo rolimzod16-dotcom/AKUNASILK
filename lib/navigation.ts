@@ -45,11 +45,11 @@ export const mainNavigation: NavItem[] = [
     key: "travelStyles",
     href: "/travel-styles",
     children: [
-      { key: "styleOverland", href: "/travel-styles#overland" },
-      { key: "styleHorseRiding", href: "/travel-styles#horse-riding" },
-      { key: "styleTrekking", href: "/trekking" },
-      { key: "styleCulture", href: "/travel-styles#culture" },
-      { key: "stylePhoto", href: "/travel-styles#photo" },
+      { key: "styleOverland", href: "/journeys?style=overland" },
+      { key: "styleHorseRiding", href: "/journeys?style=horseRiding" },
+      { key: "styleTrekking", href: "/journeys?style=trekking" },
+      { key: "styleCulture", href: "/journeys?style=culture" },
+      { key: "stylePhoto", href: "/journeys?style=photo" },
     ],
   },
   {

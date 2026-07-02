@@ -7,6 +7,7 @@ import { Calendar, MapPin, Star } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import { countrySlugsToLabels, resolveTourCountrySlugs } from "@/lib/countries";
+import { getTravelStyleLabel } from "@/lib/travel-styles";
 import { Button } from "@/components/ui/button";
 import BookNowButton from "@/components/automation/BookNowButton";
 import { Badge } from "@/components/ui/badge";
@@ -50,6 +51,9 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-silk-indigo/50 to-transparent opacity-0 transition group-hover:opacity-100" />
             <div className="absolute left-3 top-3 flex flex-wrap gap-2">
+              <Badge className="bg-silk-indigo/90 text-silk-gold hover:bg-silk-indigo/90">
+                {getTravelStyleLabel(tour.travelStyle, locale)}
+              </Badge>
               {tour.bestseller && (
                 <Badge className="bg-silk-gold text-silk-indigo hover:bg-silk-gold">
                   {shop("bestseller")}

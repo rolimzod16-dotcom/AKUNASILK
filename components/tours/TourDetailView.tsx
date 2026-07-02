@@ -4,6 +4,7 @@ import { Check, Star, Calendar, MapPin, Users } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import { countrySlugsToLabels, resolveTourCountrySlugs } from "@/lib/countries";
+import { getTravelStyleLabel } from "@/lib/travel-styles";
 import { Button } from "@/components/ui/button";
 import TourDetailActions from "@/components/automation/TourDetailActions";
 import { Badge } from "@/components/ui/badge";
@@ -36,11 +37,16 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
     <div className="bg-silk-cream">
       <section className="silk-gradient-hero silk-pattern pt-14">
         <div className="mx-auto max-w-[980px] px-6 pt-12 text-center">
-          {tour.bestseller && (
-            <Badge className="mb-3 bg-silk-gold text-silk-indigo hover:bg-silk-gold">
-              {shop("bestseller")}
+          <div className="mb-3 flex flex-wrap items-center justify-center gap-2">
+            <Badge className="bg-silk-indigo text-silk-gold hover:bg-silk-indigo">
+              {getTravelStyleLabel(tour.travelStyle, locale)}
             </Badge>
-          )}
+            {tour.bestseller && (
+              <Badge className="bg-silk-gold text-silk-indigo hover:bg-silk-gold">
+                {shop("bestseller")}
+              </Badge>
+            )}
+          </div>
           <h1 className="silk-headline text-4xl text-silk-indigo sm:text-5xl md:text-6xl">
             {content.title}
           </h1>

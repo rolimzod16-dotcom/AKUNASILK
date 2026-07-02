@@ -15,24 +15,24 @@ type Answers = {
 };
 
 const STYLE_MAP: Record<string, string> = {
-  culture: "golden-caravan",
-  adventure: "pamir-odyssey",
-  nature: "heavenly-mountains",
-  luxury: "spice-and-silk",
+  culture: "golden-cities-silk-trail-uzbekistan",
+  adventure: "pamir-silk-trail-tajikistan-flagship",
+  nature: "nomads-mountains-silk-trail-kyrgyzstan",
+  luxury: "caucasus-culture-route",
 };
 
 const REGION_MAP: Record<string, string> = {
-  uzbekistan: "golden-caravan",
-  centralAsia: "desert-echoes",
-  pamir: "pamir-odyssey",
-  china: "jade-gate",
-  caucasus: "spice-and-silk",
+  uzbekistan: "golden-cities-silk-trail-uzbekistan",
+  centralAsia: "caravan-desert-silk-trail-turkmenistan",
+  pamir: "pamir-silk-trail-tajikistan-flagship",
+  china: "silk-road-origins-trail-china",
+  caucasus: "caucasus-culture-route",
 };
 
 const DURATION_MAP: Record<string, string> = {
-  short: "golden-caravan",
-  medium: "desert-echoes",
-  long: "pamir-odyssey",
+  short: "golden-cities-silk-trail-uzbekistan",
+  medium: "caravan-desert-silk-trail-turkmenistan",
+  long: "pamir-silk-trail-tajikistan-flagship",
 };
 
 export default function TripMatcher() {
@@ -51,7 +51,7 @@ export default function TripMatcher() {
       answers.region && REGION_MAP[answers.region],
     ].filter(Boolean) as string[];
 
-    if (votes.length === 0) return "golden-caravan";
+    if (votes.length === 0) return "golden-cities-silk-trail-uzbekistan";
     const counts = votes.reduce<Record<string, number>>((acc, slug) => {
       acc[slug] = (acc[slug] ?? 0) + 1;
       return acc;
@@ -59,7 +59,7 @@ export default function TripMatcher() {
     return Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
   }, [answers]);
 
-  const tourLabel = t(`tours.${recommendation}` as "tours.golden-caravan");
+  const tourLabel = t(`tours.${recommendation}` as "tours.golden-cities-silk-trail-uzbekistan");
 
   function select(question: (typeof questions)[number], value: string) {
     setAnswers((prev) => ({ ...prev, [question]: value }));

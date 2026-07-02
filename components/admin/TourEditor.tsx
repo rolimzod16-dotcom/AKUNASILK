@@ -17,6 +17,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import ImageUploadField from "@/components/admin/ImageUploadField";
+import { TRAVEL_STYLES, TRAVEL_STYLE_LABELS } from "@/lib/travel-styles";
 
 type TourEditorProps = {
   tour: CmsTour;
@@ -197,6 +198,25 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="space-y-2">
+            <Label>Travel style</Label>
+            <select
+              className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
+              value={form.travelStyle ?? "culture"}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  travelStyle: e.target.value as CmsTour["travelStyle"],
+                })
+              }
+            >
+              {TRAVEL_STYLES.map((style) => (
+                <option key={style} value={style}>
+                  {TRAVEL_STYLE_LABELS[style].en}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="space-y-2">
             <Label>Difficulty</Label>

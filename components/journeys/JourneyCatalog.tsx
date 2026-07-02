@@ -15,6 +15,13 @@ import {
   tourMatchesCountry,
   tourMatchesRegion,
 } from "@/lib/countries";
+import {
+  TRAVEL_STYLES,
+  getTravelStyleLabel,
+  isTravelStyle,
+  tourMatchesStyle,
+  type TravelStyle,
+} from "@/lib/travel-styles";
 
 type CatalogItem = { tour: Tour; content: TourContent };
 
@@ -32,12 +39,14 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
   const searchParams = useSearchParams();
   const countryParam = searchParams.get("country");
   const regionParam = searchParams.get("region");
+  const styleParam = searchParams.get("style");
 
   const [difficulty, setDifficulty] = useState<DifficultyFilter>("all");
   const [sort, setSort] = useState<SortKey>("recommended");
 
   const activeCountry = countryParam && isCountrySlug(countryParam) ? countryParam : null;
   const activeRegion = !activeCountry && regionParam && isRegionSlug(regionParam) ? regionParam : null;
+  const activeStyle = styleParam && isTravelStyle(styleParam) ? styleParam : null;
 
   const filtered = useMemo(() => {
     let list = [...items];
@@ -46,6 +55,10 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
       list = list.filter(({ tour }) => tourMatchesCountry(tour, activeCountry));
     } else if (activeRegion) {
       list = list.filter(({ tour }) => tourMatchesRegion(tour, activeRegion));
+    }
+
+    if (activeStyle) {
+      list = list.filter(({ tour }) => tourMatchesStyle(tour, activeStyle));
     }
 
     if (difficulty !== "all") {
@@ -68,7 +81,7 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
     });
 
     return list;
-  }, [items, difficulty, sort, activeCountry, activeRegion]);
+  }, [items, difficulty, sort, activeCountry, activeRegion, activeStyle]);
 
   const difficulties: DifficultyFilter[] = ["all", "easy", "moderate", "adventurous"];
 
@@ -76,7 +89,17 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
     ? t("countryActive", { country: getCountryLabel(activeCountry, locale) })
     : activeRegion
       ? t("regionActiveLabel", { region: t(`regions.${activeRegion}`) })
-      : null;
+      : activeStyle
+        ? t("styleActive", { style: getTravelStyleLabel(activeStyle, locale) })
+        : null;
+
+  function journeysHref(params?: { country?: string; style?: TravelStyle }) {
+    const q = new URLSearchParams();
+    if (params?.country) q.set("country", params.country);
+    if (params?.style) q.set("style", params.style);
+    const query = q.toString();
+    return query ? `/journeys?${query}` : "/journeys";
+  }
 
   return (
     <section className="pb-12">
@@ -111,6 +134,33 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
 
           <div className="mt-3">
             <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
+              {t("filterByStyle")}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {TRAVEL_STYLES.map((style) => {
+                const active = activeStyle === style;
+                return (
+                  <Link
+                    key={style}
+                    href={journeysHref({
+                      country: activeCountry ?? undefined,
+                      style: active ? undefined : style,
+                    })}
+                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
+                      active
+                        ? "bg-silk-indigo text-silk-gold"
+                        : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
+                    }`}
+                  >
+                    {getTravelStyleLabel(style, locale)}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-3">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
               {t("filterByCountry")}
             </p>
             <div className="flex flex-wrap gap-1.5">
@@ -119,7 +169,11 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
                 return (
                   <Link
                     key={slug}
-                    href={active ? "/journeys" : `/journeys?country=${slug}`}
+                    href={
+                      active
+                        ? journeysHref({ style: activeStyle ?? undefined })
+                        : journeysHref({ country: slug, style: activeStyle ?? undefined })
+                    }
                     className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
                       active
                         ? "bg-silk-indigo text-silk-gold"
@@ -169,7 +223,7 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
         {filtered.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-silk-gold/30 bg-silk-cream/50 px-6 py-12 text-center">
             <p className="text-sm text-apple-muted">{t("empty")}</p>
-            {(activeCountry || activeRegion) && (
+            {(activeCountry || activeRegion || activeStyle) && (
               <Link
                 href="/journeys"
                 className="mt-4 inline-block text-sm font-semibold text-silk-gold hover:underline"

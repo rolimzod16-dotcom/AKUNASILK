@@ -2,6 +2,7 @@ import type { CmsLocale, CmsTour, TourContent } from "./types";
 import { readCmsJson, writeCmsJson, cmsNow, newId, slugify } from "./storage";
 import { seedTours } from "./seed";
 import { syncTourCountries, type CountrySlug } from "@/lib/countries";
+import { isTravelStyle } from "@/lib/travel-styles";
 
 const FILE = "tours.json";
 
@@ -82,6 +83,7 @@ export function createEmptyTour(): CmsTour {
     countrySlugs: [],
     countries: [],
     difficulty: "easy",
+    travelStyle: "culture",
     featured: false,
     spotsLeft: 8,
     nextDeparture: new Date().toISOString().slice(0, 10),
@@ -108,6 +110,10 @@ export function normalizeTourInput(input: Partial<CmsTour> & { id?: string }): C
     countrySlugs: Array.isArray(input.countrySlugs)
       ? (input.countrySlugs as CountrySlug[])
       : existing.countrySlugs ?? [],
+    travelStyle:
+      input.travelStyle && isTravelStyle(input.travelStyle)
+        ? input.travelStyle
+        : existing.travelStyle ?? "culture",
     content: {
       en: {
         title: input.content?.en?.title ?? existing.content.en.title,

@@ -1,16 +1,79 @@
 [
   {
     "id": "tour-1",
-    "slug": "golden-caravan",
+    "slug": "silk-road-origins-trail-china",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1200&q=80",
+    "duration": 12,
+    "price": 3490,
+    "originalPrice": 3790,
+    "countrySlugs": ["china"],
+    "countries": ["China"],
+    "difficulty": "easy",
+    "travelStyle": "culture",
+    "featured": true,
+    "spotsLeft": 3,
+    "nextDeparture": "2026-09-10",
+    "rating": 4.8,
+    "reviews": 156,
+    "content": {
+      "en": {
+        "title": "Silk Road Origins Trail — China",
+        "desc": "From Xi'an's Terracotta Warriors to Dunhuang's Mogao Caves and Kashgar's bazaars — trace the eastern origins of the Silk Road.",
+        "highlights": ["Terracotta Army at dawn", "Mogao Caves UNESCO site", "Sunday livestock market in Kashgar"]
+      },
+      "ru": {
+        "title": "Шёлковый путь: истоки — Китай",
+        "desc": "От терракотовой армии Сианя до пещер Могао в Дуньхуане и базаров Кашгара — восточные истоки Великого шёлкового пути.",
+        "highlights": ["Терракотовая армия на рассвете", "Пещеры Могао (ЮНЕСКО)", "Воскресный скотный рынок в Кашгаре"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-2",
+    "slug": "nomads-mountains-silk-trail-kyrgyzstan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+    "duration": 10,
+    "price": 2180,
+    "countrySlugs": ["kyrgyzstan"],
+    "countries": ["Kyrgyzstan"],
+    "difficulty": "moderate",
+    "travelStyle": "horseRiding",
+    "featured": true,
+    "spotsLeft": 6,
+    "nextDeparture": "2026-08-18",
+    "rating": 4.9,
+    "reviews": 245,
+    "content": {
+      "en": {
+        "title": "Nomads & Mountains Silk Trail — Kyrgyzstan",
+        "desc": "Ride through alpine jailoos, meet eagle hunters, and sleep in felt yurts beneath the snow-capped Tian Shan peaks.",
+        "highlights": ["Multi-day horse trek across jailoos", "Eagle hunting demonstration", "Issyk-Kul lakeside homestay"]
+      },
+      "ru": {
+        "title": "Кочевники и горы — Кыргызстан",
+        "desc": "Конные переходы по альпийским джайлоо, встреча с беркутчиками и ночёвки в юртах у заснеженных вершин Тянь-Шаня.",
+        "highlights": ["Многодневный конный поход по джайлоо", "Демонстрация беркутничества", "Дом у озера Иссык-Куль"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-3",
+    "slug": "golden-cities-silk-trail-uzbekistan",
     "published": true,
     "image": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=1200&q=80",
-    "duration": 12,
+    "duration": 9,
     "price": 2890,
     "originalPrice": 3290,
-    "countries": [
-      "Uzbekistan"
-    ],
+    "countrySlugs": ["uzbekistan"],
+    "countries": ["Uzbekistan"],
     "difficulty": "easy",
+    "travelStyle": "culture",
     "featured": true,
     "bestseller": true,
     "spotsLeft": 4,
@@ -19,245 +82,422 @@
     "reviews": 312,
     "content": {
       "en": {
-        "title": "Golden Caravan",
-        "desc": "Samarkand's blue domes, Bukhara's bazaars, and Khiva's walled city — the crown jewels of Central Asia.",
-        "highlights": [
-          "Registan at dawn",
-          "Silk weaving workshop",
-          "Desert yurt dinner"
-        ]
+        "title": "Golden Cities Silk Trail — Uzbekistan",
+        "desc": "Samarkand's blue domes, Bukhara's living bazaars, and Khiva's walled old city — the crown jewels of Transoxiana.",
+        "highlights": ["Registan at golden hour", "Silk weaving masterclass", "Private dinner inside Khiva's walls"]
       },
       "ru": {
-        "title": "Золотой караван",
-        "desc": "Голубые купола Самарканда, базары Бухары и город-крепость Хива — жемчужины Центральной Азии.",
-        "highlights": [
-          "Регистан на рассвете",
-          "Мастерская шёлка",
-          "Ужин в юрте"
-        ]
+        "title": "Золотые города — Узбекистан",
+        "desc": "Голубые купола Самарканда, оживлённые базары Бухары и крепостной Хива — жемчужины Средней Азии.",
+        "highlights": ["Регистан в золотой час", "Мастер-класс по шёлку", "Ужин в стенах Хивы"]
       }
     },
-    "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z",
-    "countrySlugs": [
-      "uzbekistan"
-    ]
-  },
-  {
-    "id": "tour-2",
-    "slug": "desert-echoes",
-    "published": true,
-    "image": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200&q=80",
-    "duration": 10,
-    "price": 2450,
-    "countries": [
-      "Turkmenistan",
-      "Uzbekistan"
-    ],
-    "difficulty": "moderate",
-    "featured": true,
-    "spotsLeft": 6,
-    "nextDeparture": "2026-10-02",
-    "rating": 4.8,
-    "reviews": 187,
-    "content": {
-      "en": {
-        "title": "Desert Echoes",
-        "desc": "Darvaza's flaming crater, ancient Merv ruins, and the endless Karakum sands under starlit skies.",
-        "highlights": [
-          "Door to Hell at night",
-          "UNESCO Merv",
-          "Camel caravan trek"
-        ]
-      },
-      "ru": {
-        "title": "Эхо пустыни",
-        "desc": "Пылающий кратер Дарваза, древний Мерв и бескрайние пески Каракумов под звёздным небом.",
-        "highlights": [
-          "Врата ада ночью",
-          "Мерв (ЮНЕСКО)",
-          "Верблюжий караван"
-        ]
-      }
-    },
-    "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z",
-    "countrySlugs": [
-      "turkmenistan",
-      "uzbekistan"
-    ]
-  },
-  {
-    "id": "tour-3",
-    "slug": "heavenly-mountains",
-    "published": true,
-    "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
-    "duration": 8,
-    "price": 1980,
-    "originalPrice": 2190,
-    "countries": [
-      "Kyrgyzstan",
-      "Kazakhstan"
-    ],
-    "difficulty": "moderate",
-    "featured": true,
-    "spotsLeft": 8,
-    "nextDeparture": "2026-08-20",
-    "rating": 4.9,
-    "reviews": 245,
-    "content": {
-      "en": {
-        "title": "Heavenly Mountains",
-        "desc": "Alpine lakes, eagle hunters, and felt-making traditions in the Tian Shan and Almaty highlands.",
-        "highlights": [
-          "Issyk-Kul lake",
-          "Eagle hunting demo",
-          "Nomadic horse trek"
-        ]
-      },
-      "ru": {
-        "title": "Небесные горы",
-        "desc": "Альпийские озёра, беркутчики и традиции войлока в горах Тянь-Шаня и Алматы.",
-        "highlights": [
-          "Озеро Иссык-Куль",
-          "Демонстрация беркутничества",
-          "Конный поход"
-        ]
-      }
-    },
-    "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z",
-    "countrySlugs": [
-      "kyrgyzstan",
-      "kazakhstan"
-    ]
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
   },
   {
     "id": "tour-4",
-    "slug": "jade-gate",
-    "published": true,
-    "image": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1200&q=80",
-    "duration": 14,
-    "price": 3490,
-    "countries": [
-      "China"
-    ],
-    "difficulty": "easy",
-    "featured": false,
-    "spotsLeft": 3,
-    "nextDeparture": "2026-11-10",
-    "rating": 4.7,
-    "reviews": 156,
-    "content": {
-      "en": {
-        "title": "Jade Gate Expedition",
-        "desc": "From Xi'an's Terracotta Warriors to Dunhuang's Mogao Caves — trace China's Silk Road origins.",
-        "highlights": [
-          "Terracotta Army",
-          "Mogao Caves",
-          "Camel market in Kashgar"
-        ]
-      },
-      "ru": {
-        "title": "Нефритовые врата",
-        "desc": "От терракотовой армии Сианя до пещер Могао в Дуньхуане — истоки Шёлкового пути в Китае.",
-        "highlights": [
-          "Терракотовая армия",
-          "Пещеры Могао",
-          "Верблюжий рынок в Кашгаре"
-        ]
-      }
-    },
-    "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z",
-    "countrySlugs": [
-      "china"
-    ]
-  },
-  {
-    "id": "tour-5",
-    "slug": "spice-and-silk",
-    "published": true,
-    "image": "https://images.unsplash.com/photo-1565007996395-3ab4ddc7a9b0?w=1200&q=80",
-    "duration": 11,
-    "price": 2650,
-    "countries": [
-      "Georgia",
-      "Azerbaijan"
-    ],
-    "difficulty": "easy",
-    "featured": false,
-    "spotsLeft": 5,
-    "nextDeparture": "2026-09-28",
-    "rating": 4.8,
-    "reviews": 198,
-    "content": {
-      "en": {
-        "title": "Spice & Silk",
-        "desc": "Georgian wine cellars, Baku's flame towers, and Caucasus mountain villages where East meets West.",
-        "highlights": [
-          "Wine tasting in Kakheti",
-          "Old Baku walk",
-          "Sheki Khan Palace"
-        ]
-      },
-      "ru": {
-        "title": "Специи и шёлк",
-        "desc": "Грузинские винные погреба, пламенные башни Баку и горные сёла Кавказа, где Восток встречает Запад.",
-        "highlights": [
-          "Дегустация в Кахетии",
-          "Прогулка по старому Баку",
-          "Дворец хана в Шеки"
-        ]
-      }
-    },
-    "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z",
-    "countrySlugs": [
-      "georgia",
-      "azerbaijan"
-    ]
-  },
-  {
-    "id": "tour-6",
-    "slug": "pamir-odyssey",
+    "slug": "pamir-silk-trail-tajikistan-flagship",
     "published": true,
     "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80",
-    "duration": 9,
-    "price": 2280,
-    "countries": [
-      "Tajikistan"
-    ],
-    "difficulty": "adventurous",
-    "featured": false,
+    "duration": 12,
+    "price": 2980,
+    "originalPrice": 3290,
+    "countrySlugs": ["tajikistan"],
+    "countries": ["Tajikistan"],
+    "difficulty": "moderate",
+    "travelStyle": "overland",
+    "featured": true,
     "spotsLeft": 2,
     "nextDeparture": "2026-08-05",
-    "rating": 5,
+    "rating": 5.0,
     "reviews": 89,
     "content": {
       "en": {
-        "title": "Pamir Odyssey",
-        "desc": "The legendary Pamir Highway — Wakhan Valley views, remote villages, and the roof of the world.",
-        "highlights": [
-          "Pamir Highway drive",
-          "Wakhan Corridor",
-          "Homestay with Pamiri families"
-        ]
+        "title": "Pamir Silk Trail — Tajikistan (Flagship)",
+        "desc": "Our flagship Pamir 4x4 journey along the legendary Highway — Wakhan Valley panoramas, remote Pamiri villages, and the roof of the world.",
+        "highlights": ["Full Pamir Highway 4x4 traverse", "Wakhan Corridor & Afghan views", "Homestays with Pamiri families"]
       },
       "ru": {
-        "title": "Памирская одиссея",
-        "desc": "Легендарный Памирский тракт — виды Ваханской долины, отдалённые сёла и крыша мира.",
-        "highlights": [
-          "Памирский тракт",
-          "Ваханский коридор",
-          "Дом у памирской семьи"
-        ]
+        "title": "Памирский маршрут — Таджикистан (флагман)",
+        "desc": "Флагманское путешествие на 4x4 по легендарному Памирскому тракту — панорамы Ваханской долины, отдалённые сёла и крыша мира.",
+        "highlights": ["Полный проезд по Памирскому тракту на 4x4", "Ваханский коридор и виды на Афганистан", "Дома у памирских семей"]
       }
     },
-    "createdAt": "2026-06-26T10:24:11.184Z",
-    "updatedAt": "2026-06-26T10:24:11.184Z",
-    "countrySlugs": [
-      "tajikistan"
-    ]
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-5",
+    "slug": "great-steppe-silk-trail-kazakhstan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1470071459604-3b5ec3a8fe05?w=1200&q=80",
+    "duration": 9,
+    "price": 2450,
+    "countrySlugs": ["kazakhstan"],
+    "countries": ["Kazakhstan"],
+    "difficulty": "easy",
+    "travelStyle": "overland",
+    "featured": false,
+    "spotsLeft": 7,
+    "nextDeparture": "2026-09-22",
+    "rating": 4.8,
+    "reviews": 134,
+    "content": {
+      "en": {
+        "title": "Great Steppe Silk Trail — Kazakhstan",
+        "desc": "Cross the endless Kazakh steppe from Almaty's mountains to ancient Silk Road caravanserais and Charyn Canyon's red walls.",
+        "highlights": ["Charyn Canyon sunrise drive", "Turkestan mausoleum visit", "Nomadic eagle hunter camp"]
+      },
+      "ru": {
+        "title": "Великая степь — Казахстан",
+        "desc": "Пересечение бескрайней казахской степи от гор Алматы до древних караван-сараев и красных скал Чарынского каньона.",
+        "highlights": ["Рассвет в Чарынском каньоне", "Мавзолей в Туркестане", "Лагерь беркутчиков-кочевников"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-6",
+    "slug": "caravan-desert-silk-trail-turkmenistan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=1200&q=80",
+    "duration": 7,
+    "price": 1980,
+    "countrySlugs": ["turkmenistan"],
+    "countries": ["Turkmenistan"],
+    "difficulty": "moderate",
+    "travelStyle": "overland",
+    "featured": false,
+    "spotsLeft": 5,
+    "nextDeparture": "2026-10-02",
+    "rating": 4.7,
+    "reviews": 98,
+    "content": {
+      "en": {
+        "title": "Caravan Desert Silk Trail — Turkmenistan",
+        "desc": "Darvaza's flaming crater, UNESCO Merv ruins, and the endless Karakum sands where ancient caravans once crossed.",
+        "highlights": ["Door to Hell at night", "Ancient Merv archaeological site", "Desert camp under the stars"]
+      },
+      "ru": {
+        "title": "Караванная пустыня — Туркменистан",
+        "desc": "Пылающий кратер Дарваза, древний Мерв (ЮНЕСКО) и бескрайние пески Каракумов, где когда-то шли караваны.",
+        "highlights": ["Врата ада ночью", "Археологический комплекс Мерв", "Лагерь в пустыне под звёздами"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-7",
+    "slug": "karakoram-silk-trail-pakistan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1605540436567-75b30c4d7b1a?w=1200&q=80",
+    "duration": 10,
+    "price": 2680,
+    "countrySlugs": ["pakistan"],
+    "countries": ["Pakistan"],
+    "difficulty": "moderate",
+    "travelStyle": "trekking",
+    "featured": false,
+    "spotsLeft": 4,
+    "nextDeparture": "2026-09-05",
+    "rating": 4.9,
+    "reviews": 112,
+    "content": {
+      "en": {
+        "title": "Karakoram Silk Trail — Pakistan",
+        "desc": "Trek beneath K2's shadow through Hunza Valley, cross the Khunjerab Pass, and walk ancient trade routes of the Karakoram.",
+        "highlights": ["Hunza Valley village treks", "Khunjerab Pass crossing", "Baltit Fort heritage walk"]
+      },
+      "ru": {
+        "title": "Каракорумский маршрут — Пакистан",
+        "desc": "Треккинг в тени К2 через долину Хунза, переход перевала Хунджераб и древние торговые тропы Каракорума.",
+        "highlights": ["Походы по сёлам долины Хунза", "Переход перевала Хунджераб", "Прогулка к крепости Балтит"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-8",
+    "slug": "persian-silk-trail-iran",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&q=80",
+    "duration": 10,
+    "price": 2590,
+    "originalPrice": 2890,
+    "countrySlugs": ["iran"],
+    "countries": ["Iran"],
+    "difficulty": "easy",
+    "travelStyle": "culture",
+    "featured": false,
+    "spotsLeft": 6,
+    "nextDeparture": "2026-10-12",
+    "rating": 4.8,
+    "reviews": 178,
+    "content": {
+      "en": {
+        "title": "Persian Silk Trail — Iran",
+        "desc": "Isfahan's mosques, Yazd's wind towers, and Persepolis ruins — immerse yourself in Persia's living Silk Road heritage.",
+        "highlights": ["Naqsh-e Jahan Square at dusk", "Yazd Zoroastrian fire temple", "Persepolis guided exploration"]
+      },
+      "ru": {
+        "title": "Персидский шёлковый путь — Иран",
+        "desc": "Мечети Исфахана, ветряные башни Йезда и руины Персеполя — живое наследие Шёлкового пути в Персии.",
+        "highlights": ["Площадь Накш-э Джахан на закате", "Зороастрийский храм огня в Йезде", "Экскурсия по Персеполю"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-9",
+    "slug": "anatolian-silk-trail-turkey",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1585208798170-ff43fbbd3372?w=1200&q=80",
+    "duration": 10,
+    "price": 2480,
+    "countrySlugs": ["turkey"],
+    "countries": ["Turkey"],
+    "difficulty": "easy",
+    "travelStyle": "culture",
+    "featured": false,
+    "spotsLeft": 8,
+    "nextDeparture": "2026-09-28",
+    "rating": 4.8,
+    "reviews": 203,
+    "content": {
+      "en": {
+        "title": "Anatolian Silk Trail — Turkey",
+        "desc": "Cappadocia's fairy chimneys, Konya's whirling dervishes, and Istanbul's Grand Bazaar — where the Silk Road met the West.",
+        "highlights": ["Hot-air balloon over Cappadocia", "Mevlana Museum in Konya", "Spice Bazaar tasting tour"]
+      },
+      "ru": {
+        "title": "Анатолийский шёлковый путь — Турция",
+        "desc": "Сказочные дымоходы Каппадокии, кружащиеся дервиши Коньи и Гранд-базар Стамбула — где Шёлковый путь встретил Запад.",
+        "highlights": ["Воздушный шар над Каппадокией", "Музей Мевляны в Конье", "Дегустация на базаре специй"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-10",
+    "slug": "pamir-4x4-expedition",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1533474714593-90c5d585ded0?w=1200&q=80",
+    "duration": 8,
+    "price": 2280,
+    "countrySlugs": ["tajikistan"],
+    "countries": ["Tajikistan"],
+    "difficulty": "adventurous",
+    "travelStyle": "overland",
+    "featured": false,
+    "spotsLeft": 3,
+    "nextDeparture": "2026-07-20",
+    "rating": 4.9,
+    "reviews": 67,
+    "content": {
+      "en": {
+        "title": "Pamir 4x4 Expedition",
+        "desc": "A compact, high-intensity 4x4 sprint through the Pamir Highway's most dramatic passes, lakes, and border zones.",
+        "highlights": ["Murghab high-altitude camp", "Karakul Lake reflections", "GBAO permit handled for you"]
+      },
+      "ru": {
+        "title": "Памирская экспедиция 4x4",
+        "desc": "Компактная и насыщенная экспедиция на 4x4 по самым драматичным перевалам, озёрам и пограничным зонам Памира.",
+        "highlights": ["Лагерь на высоте в Мургабе", "Отражения озера Каракуль", "Оформление разрешения ГБАО"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-11",
+    "slug": "jailoo-horse-trail-kyrgyzstan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?w=1200&q=80",
+    "duration": 7,
+    "price": 1780,
+    "countrySlugs": ["kyrgyzstan"],
+    "countries": ["Kyrgyzstan"],
+    "difficulty": "moderate",
+    "travelStyle": "horseRiding",
+    "featured": false,
+    "spotsLeft": 8,
+    "nextDeparture": "2026-08-12",
+    "rating": 4.8,
+    "reviews": 142,
+    "content": {
+      "en": {
+        "title": "Jailoo Horse Trail — Kyrgyzstan",
+        "desc": "A week on horseback through summer pastures, crossing rivers and ridges with Kyrgyz nomads as your guides.",
+        "highlights": ["Daily rides between jailoo camps", "Traditional beshbarmak feast", "Felt-making workshop"]
+      },
+      "ru": {
+        "title": "Джайлоо: конный маршрут — Кыргызстан",
+        "desc": "Неделя в седле по летним пастбищам — переходы через реки и хребты в сопровождении кыргызских кочевников.",
+        "highlights": ["Ежедневные переезды между джайлоо", "Традиционный пир бешбармак", "Мастер-класс по войлоку"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-12",
+    "slug": "pamir-trekking-crossing",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1501785880828-f9571f0630af?w=1200&q=80",
+    "duration": 11,
+    "price": 2790,
+    "countrySlugs": ["tajikistan"],
+    "countries": ["Tajikistan"],
+    "difficulty": "adventurous",
+    "travelStyle": "trekking",
+    "featured": false,
+    "spotsLeft": 2,
+    "nextDeparture": "2026-07-28",
+    "rating": 5.0,
+    "reviews": 45,
+    "content": {
+      "en": {
+        "title": "Pamir Trekking Crossing",
+        "desc": "Multi-day high-altitude trekking through the Pamir range — remote passes, glacial valleys, and untouched wilderness.",
+        "highlights": ["Cross 4,000 m+ mountain passes", "Camp beside glacial lakes", "Local Pamiri trekking guides"]
+      },
+      "ru": {
+        "title": "Памирский треккинговый переход",
+        "desc": "Многодневный высокогорный треккинг по Памиру — отдалённые перевалы, ледниковые долины и нетронутая дикая природа.",
+        "highlights": ["Переходы через перевалы выше 4000 м", "Лагерь у ледниковых озёр", "Местные памирские гиды"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-13",
+    "slug": "silk-road-golden-hour-photo",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=1200&q=80",
+    "duration": 10,
+    "price": 2650,
+    "countrySlugs": ["uzbekistan", "tajikistan"],
+    "countries": ["Uzbekistan", "Tajikistan"],
+    "difficulty": "easy",
+    "travelStyle": "photo",
+    "featured": true,
+    "spotsLeft": 5,
+    "nextDeparture": "2026-09-01",
+    "rating": 4.9,
+    "reviews": 76,
+    "content": {
+      "en": {
+        "title": "Silk Road Golden Hour Photo Journey",
+        "desc": "Chase the light across Uzbekistan's madrasas and Tajikistan's Pamir vistas with a professional photography guide.",
+        "highlights": ["Registan blue-hour session", "Pamir Highway landscape shoots", "On-location editing workshops"]
+      },
+      "ru": {
+        "title": "Золотой час на Шёлковом пути — фото-путешествие",
+        "desc": "Погоня за светом среди медресе Узбекистана и панорам Памира в Таджикистане с профессиональным фотогидом.",
+        "highlights": ["Съёмка Регистана в синий час", "Пейзажи Памирского тракта", "Мастер-классы по обработке на месте"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-14",
+    "slug": "karakoram-4x4-overland",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?w=1200&q=80",
+    "duration": 12,
+    "price": 3190,
+    "countrySlugs": ["pakistan", "china"],
+    "countries": ["Pakistan", "China"],
+    "difficulty": "adventurous",
+    "travelStyle": "overland",
+    "featured": false,
+    "spotsLeft": 2,
+    "nextDeparture": "2026-10-18",
+    "rating": 4.9,
+    "reviews": 52,
+    "content": {
+      "en": {
+        "title": "Karakoram 4x4 Overland",
+        "desc": "An epic overland crossing from Pakistan's Hunza to China's Kashgar along the highest paved international road on Earth.",
+        "highlights": ["Khunjerab Pass 4x4 crossing", "Attabad Lake scenic drive", "Kashgar Old Town arrival"]
+      },
+      "ru": {
+        "title": "Каракорум: оверленд 4x4",
+        "desc": "Эпическое оверленд-путешествие из пакистанского Хунза в китайский Кашгар по самой высокогорной дороге мира.",
+        "highlights": ["Переход перевала Хунджераб на 4x4", "Живописная дорога к озеру Атабад", "Прибытие в старый город Кашгара"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-15",
+    "slug": "caucasus-culture-route",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1565007996395-3ab4ddc7a9b0?w=1200&q=80",
+    "duration": 11,
+    "price": 2380,
+    "countrySlugs": ["georgia", "armenia"],
+    "countries": ["Georgia", "Armenia"],
+    "difficulty": "easy",
+    "travelStyle": "culture",
+    "featured": false,
+    "spotsLeft": 6,
+    "nextDeparture": "2026-10-05",
+    "rating": 4.8,
+    "reviews": 164,
+    "content": {
+      "en": {
+        "title": "Caucasus Culture Route",
+        "desc": "Georgian wine cellars, Armenian monasteries, and mountain villages where Silk Road traders once rested between East and West.",
+        "highlights": ["Kakheti wine tasting", "Geghard monastery visit", "Tbilisi old town walking tour"]
+      },
+      "ru": {
+        "title": "Кавказский культурный маршрут",
+        "desc": "Грузинские винные погреба, армянские монастыри и горные сёла, где караваны отдыхали между Востоком и Западом.",
+        "highlights": ["Дегустация вин в Кахетии", "Монастырь Гегард", "Прогулка по старому Тбилиси"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "tour-16",
+    "slug": "pamir-light-photo-journey",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1200&q=80",
+    "duration": 9,
+    "price": 2140,
+    "countrySlugs": ["tajikistan"],
+    "countries": ["Tajikistan"],
+    "difficulty": "easy",
+    "travelStyle": "photo",
+    "featured": false,
+    "spotsLeft": 7,
+    "nextDeparture": "2026-08-25",
+    "rating": 4.9,
+    "reviews": 40,
+    "content": {
+      "en": {
+        "title": "Pamir Light Photo Journey",
+        "desc": "A gentle photo-focused journey through the Pamir — dramatic landscapes without strenuous trekking, perfect for all skill levels.",
+        "highlights": ["Sunrise at Karakul Lake", "Wakhan Valley portrait sessions", "Night sky astrophotography"]
+      },
+      "ru": {
+        "title": "Памир: лёгкое фото-путешествие",
+        "desc": "Спокойное фото-путешествие по Памиру — драматичные пейзажи без тяжёлого треккинга, подходит любому уровню подготовки.",
+        "highlights": ["Рассвет на озере Каракуль", "Портретные съёмки в Ваханской долине", "Астрофотография ночного неба"]
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
   }
 ]

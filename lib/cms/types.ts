@@ -1,4 +1,5 @@
 import type { CountrySlug } from "@/lib/countries";
+import type { TravelStyle } from "@/lib/travel-styles";
 
 export type CmsLocale = "en" | "ru";
 
@@ -21,6 +22,8 @@ export type CmsTour = {
   /** English display labels — kept in sync with countrySlugs */
   countries: string[];
   difficulty: "easy" | "moderate" | "adventurous";
+  /** Primary travel style — powers style filters and travel-styles page */
+  travelStyle: TravelStyle;
   featured: boolean;
   bestseller?: boolean;
   spotsLeft?: number;
