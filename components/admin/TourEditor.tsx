@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ExternalLink, Loader2, Save, Trash2 } from "lucide-react";
+import { CheckCircle2, ExternalLink, Loader2, Plus, Save, Trash2, Wand2 } from "lucide-react";
 import type { CmsTour } from "@/lib/cms/types";
+import { prepareTourForEditor } from "@/lib/cms/tour-content";
+import { createEmptyTour } from "@/lib/cms/defaults";
+import {
+  applyTourDefaults,
+  slugFromTitle,
+  tourCompletionPercent,
+  validateTour,
+} from "@/lib/cms/validate-tour";
 import {
   COUNTRY_LABELS,
   getCountriesByCorridor,
@@ -18,6 +26,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ImageUploadField from "@/components/admin/ImageUploadField";
 import TourLocaleEditor from "@/components/admin/TourLocaleEditor";
+import AdminStorageBanner, { AdminStorageOk } from "@/components/admin/AdminStorageBanner";
 import { TRAVEL_STYLES, TRAVEL_STYLE_LABELS } from "@/lib/travel-styles";
 
 type TourEditorProps = {
@@ -28,14 +37,36 @@ type TourEditorProps = {
 export default function TourEditor({ tour, isNew }: TourEditorProps) {
   const router = useRouter();
   const [form, setForm] = useState(tour);
+  const [slugTouched, setSlugTouched] = useState(!isNew && !!tour.slug);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [validationIssues, setValidationIssues] = useState<string[]>([]);
 
-  const previewSlug = form.slug || "your-tour-slug";
+  const completion = tourCompletionPercent(form);
+  const previewSlug = form.slug || slugFromTitle(form.content.en.title) || "your-tour-slug";
 
-  const save = async () => {
+  useEffect(() => {
+    if (!slugTouched && form.content.en.title) {
+      setForm((prev) => ({ ...prev, slug: slugFromTitle(prev.content.en.title) }));
+    }
+  }, [form.content.en.title, slugTouched]);
+
+  async function persist(andAnother = false) {
     setLoading(true);
     setError(null);
+    setSuccess(null);
+    setValidationIssues([]);
+
+    const prepared = applyTourDefaults(form);
+    const issues = validateTour(prepared);
+    if (issues.length > 0) {
+      setValidationIssues(issues.map((i) => i.message));
+      setLoading(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+
     try {
       const url = isNew ? "/api/admin/tours" : `/api/admin/tours/${form.id}`;
       const method = isNew ? "POST" : "PUT";
@@ -43,27 +74,84 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
         method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          ...form,
-          countrySlugs: form.countrySlugs,
+          ...prepared,
+          countrySlugs: prepared.countrySlugs,
           content: {
-            en: sanitizeLocaleContent(form.content.en),
-            ru: sanitizeLocaleContent(form.content.ru),
+            en: sanitizeLocaleContent(prepared.content.en),
+            ru: sanitizeLocaleContent(prepared.content.ru),
           },
         }),
       });
-      if (!res.ok) throw new Error("Save failed");
-      const saved = (await res.json()) as CmsTour;
-      router.push(`/admin/tours/${saved.id}`);
+      const data = (await res.json()) as CmsTour & { error?: string };
+      if (!res.ok) throw new Error(data.error ?? "Не удалось сохранить тур");
+
+      if (andAnother) {
+        setSuccess("Тур сохранён! Создаёте следующий…");
+        setForm(prepareTourForEditor(createEmptyTour()));
+        setSlugTouched(false);
+        router.refresh();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
+
+      setSuccess("Тур сохранён успешно!");
+      router.push(`/admin/tours/${data.id}`);
       router.refresh();
-    } catch {
-      setError("Could not save tour. Check title, slug, price, and duration.");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Не удалось сохранить тур");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } finally {
       setLoading(false);
     }
-  };
+  }
+
+  function loadTemplate() {
+    setForm(
+      prepareTourForEditor({
+        ...createEmptyTour(),
+        duration: 7,
+        price: 2490,
+        countrySlugs: ["tajikistan"],
+        travelStyle: "overland",
+        content: {
+          en: {
+            title: "My Silk Road Adventure",
+            desc: "A custom journey along the ancient Silk Road with local guides and boutique stays.",
+            overview: "",
+            highlights: [
+              "Scenic mountain drives",
+              "Local culture & bazaars",
+              "Small group experience",
+            ],
+            itinerary: [],
+            included: [],
+            excluded: [],
+            gallery: [],
+            faq: [],
+          },
+          ru: {
+            title: "Моё путешествие по Шёлковому пути",
+            desc: "Индивидуальный маршрут по древнему Шёлковому пути с местными гидами и бутик-отелями.",
+            overview: "",
+            highlights: [
+              "Живописные горные дороги",
+              "Местная культура и базары",
+              "Небольшая группа",
+            ],
+            itinerary: [],
+            included: [],
+            excluded: [],
+            gallery: [],
+            faq: [],
+          },
+        },
+      })
+    );
+    setSlugTouched(false);
+  }
 
   const remove = async () => {
-    if (!confirm("Delete this tour package permanently?")) return;
+    if (!confirm("Удалить этот тур навсегда?")) return;
     setLoading(true);
     await fetch(`/api/admin/tours/${form.id}`, { method: "DELETE" });
     router.push("/admin/tours");
@@ -71,65 +159,164 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+    <div className="space-y-6 pb-28">
+      <AdminStorageBanner />
+
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <h1 className="silk-headline text-3xl text-silk-indigo">
-            {isNew ? "New tour package" : "Edit tour package"}
+            {isNew ? "Новый тур" : "Редактирование тура"}
           </h1>
           <p className="mt-1 text-sm text-apple-muted">
-            Full control: every tab on the public tour page is edited here (EN + RU).
+            Заполните все поля — страница тура появится на /journeys/{previewSlug}
           </p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <div className="h-2 w-40 overflow-hidden rounded-full bg-silk-gold/20">
+              <div
+                className="h-full rounded-full bg-silk-gold transition-all"
+                style={{ width: `${completion}%` }}
+              />
+            </div>
+            <span className="text-xs text-apple-muted">Готовность: {completion}%</span>
+            <AdminStorageOk />
+          </div>
         </div>
         <div className="flex flex-wrap gap-2">
+          {isNew && (
+            <Button variant="outline" size="sm" onClick={loadTemplate} disabled={loading}>
+              <Wand2 className="size-4" />
+              Шаблон
+            </Button>
+          )}
           {!isNew && form.slug && (
             <Button variant="outline" size="sm" asChild>
-              <a href={`/journeys/${form.slug}`} target="_blank" rel="noopener noreferrer">
+              <a href={`/en/journeys/${form.slug}`} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="size-4" />
-                Preview
+                Просмотр
               </a>
             </Button>
           )}
           {!isNew && (
             <Button variant="outline" size="sm" onClick={remove} disabled={loading}>
               <Trash2 className="size-4 text-silk-terracotta" />
-              Delete
+              Удалить
             </Button>
           )}
-          <Button variant="silk" size="pill-sm" onClick={save} disabled={loading}>
-            {loading ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />}
-            Save tour
-          </Button>
         </div>
       </div>
 
-      {error && <p className="text-sm text-silk-terracotta">{error}</p>}
+      {success && (
+        <div className="flex items-center gap-2 rounded-xl border border-silk-turquoise/30 bg-silk-turquoise/10 px-4 py-3 text-sm text-silk-indigo">
+          <CheckCircle2 className="size-4 text-silk-turquoise" />
+          {success}
+        </div>
+      )}
+
+      {error && (
+        <div className="rounded-xl border border-silk-terracotta/40 bg-silk-terracotta/10 px-4 py-3 text-sm text-silk-terracotta">
+          {error}
+        </div>
+      )}
+
+      {validationIssues.length > 0 && (
+        <div className="rounded-xl border border-silk-terracotta/40 bg-silk-terracotta/10 px-4 py-3 text-sm">
+          <p className="font-semibold text-silk-indigo">Заполните обязательные поля:</p>
+          <ul className="mt-2 list-inside list-disc space-y-1 text-silk-terracotta">
+            {validationIssues.map((msg) => (
+              <li key={msg}>{msg}</li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <Card className="border-silk-gold/20">
         <CardHeader>
-          <CardTitle className="text-silk-indigo">Package & pricing</CardTitle>
+          <CardTitle className="text-silk-indigo">1. Основное</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-2">
+            <Label>Название (English) *</Label>
+            <Input
+              value={form.content.en.title}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  content: { ...form.content, en: { ...form.content.en, title: e.target.value } },
+                })
+              }
+              placeholder="Pamir Silk Trail — 12 Days"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label>Название (Русский) *</Label>
+            <Input
+              value={form.content.ru.title}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  content: { ...form.content, ru: { ...form.content.ru, title: e.target.value } },
+                })
+              }
+              placeholder="Pamir Silk Trail — 12 дней"
+            />
+          </div>
           <div className="space-y-2 sm:col-span-2">
-            <Label>Slug (URL)</Label>
+            <Label>URL (slug) *</Label>
             <Input
               value={form.slug}
-              onChange={(e) => setForm({ ...form, slug: e.target.value })}
-              placeholder="my-custom-silk-trail"
+              onChange={(e) => {
+                setSlugTouched(true);
+                setForm({ ...form, slug: e.target.value });
+              }}
+              placeholder="pamir-silk-trail-12-days"
             />
             <p className="text-xs text-apple-muted">
-              Public page: /journeys/{previewSlug}
+              Страница: /journeys/{previewSlug} — генерируется из названия EN, можно изменить
             </p>
           </div>
+          <div className="space-y-2 sm:col-span-2">
+            <Label>Краткое описание EN *</Label>
+            <Input
+              value={form.content.en.desc}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  content: { ...form.content, en: { ...form.content.en, desc: e.target.value } },
+                })
+              }
+              placeholder="Hero subtitle under the tour title"
+            />
+          </div>
+          <div className="space-y-2 sm:col-span-2">
+            <Label>Краткое описание RU *</Label>
+            <Input
+              value={form.content.ru.desc}
+              onChange={(e) =>
+                setForm({
+                  ...form,
+                  content: { ...form.content, ru: { ...form.content.ru, desc: e.target.value } },
+                })
+              }
+              placeholder="Подзаголовок под названием тура"
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card className="border-silk-gold/20">
+        <CardHeader>
+          <CardTitle className="text-silk-indigo">2. Цена и даты</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-4 sm:grid-cols-2">
           <ImageUploadField
-            label="Cover image"
+            label="Обложка"
             folder="tours"
             value={form.image}
             onChange={(image) => setForm({ ...form, image })}
-            hint="Main hero image on the tour page."
+            hint="Загрузите файл или вставьте URL. Без картинки — подставится стандартная."
           />
           <div className="space-y-2">
-            <Label>Price (USD)</Label>
+            <Label>Цена (USD) *</Label>
             <Input
               type="number"
               value={form.price}
@@ -137,7 +324,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label>Original price (optional)</Label>
+            <Label>Старая цена (необязательно)</Label>
             <Input
               type="number"
               value={form.originalPrice ?? ""}
@@ -150,15 +337,16 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label>Duration (days)</Label>
+            <Label>Длительность (дней) *</Label>
             <Input
               type="number"
+              min={1}
               value={form.duration}
               onChange={(e) => setForm({ ...form, duration: Number(e.target.value) })}
             />
           </div>
           <div className="space-y-2">
-            <Label>Next departure</Label>
+            <Label>Ближайший выезд</Label>
             <Input
               type="date"
               value={form.nextDeparture}
@@ -166,7 +354,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label>Travel style</Label>
+            <Label>Стиль путешествия</Label>
             <select
               className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
               value={form.travelStyle ?? "culture"}
@@ -185,7 +373,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             </select>
           </div>
           <div className="space-y-2">
-            <Label>Difficulty</Label>
+            <Label>Сложность</Label>
             <select
               className="h-9 w-full rounded-md border border-input bg-background px-3 text-sm"
               value={form.difficulty}
@@ -196,13 +384,13 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                 })
               }
             >
-              <option value="easy">Leisure</option>
-              <option value="moderate">Moderate</option>
-              <option value="adventurous">Adventurous</option>
+              <option value="easy">Лёгкий</option>
+              <option value="moderate">Средний</option>
+              <option value="adventurous">Приключенческий</option>
             </select>
           </div>
           <div className="space-y-2">
-            <Label>Max group size</Label>
+            <Label>Макс. группа</Label>
             <Input
               type="number"
               value={form.maxGroupSize ?? 12}
@@ -212,7 +400,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label>Spots left</Label>
+            <Label>Мест осталось</Label>
             <Input
               type="number"
               value={form.spotsLeft ?? ""}
@@ -225,7 +413,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label>Rating</Label>
+            <Label>Рейтинг</Label>
             <Input
               type="number"
               step="0.1"
@@ -234,7 +422,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label>Reviews count</Label>
+            <Label>Отзывов</Label>
             <Input
               type="number"
               value={form.reviews}
@@ -242,11 +430,11 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             />
           </div>
           <div className="space-y-4 sm:col-span-2">
-            <Label>Countries on route</Label>
+            <Label>Страны маршрута *</Label>
             {SILK_ROAD_CORRIDORS.map((corridor) => (
               <div key={corridor}>
                 <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-silk-turquoise">
-                  {getCorridorLabel(corridor, "en")}
+                  {getCorridorLabel(corridor, "ru")}
                 </p>
                 <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
                   {getCountriesByCorridor(corridor).map((slug) => {
@@ -271,7 +459,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                             setForm({ ...form, countrySlugs: next as CountrySlug[] });
                           }}
                         />
-                        {COUNTRY_LABELS[slug].en}
+                        {COUNTRY_LABELS[slug].ru}
                       </label>
                     );
                   })}
@@ -286,7 +474,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                 checked={form.published}
                 onChange={(e) => setForm({ ...form, published: e.target.checked })}
               />
-              Published on site
+              Опубликовать на сайте
             </label>
             <label className="flex items-center gap-2 text-sm">
               <input
@@ -294,7 +482,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                 checked={form.featured}
                 onChange={(e) => setForm({ ...form, featured: e.target.checked })}
               />
-              Featured
+              В избранном
             </label>
             <label className="flex items-center gap-2 text-sm">
               <input
@@ -302,7 +490,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                 checked={!!form.bestseller}
                 onChange={(e) => setForm({ ...form, bestseller: e.target.checked })}
               />
-              Bestseller
+              Бестселлер
             </label>
           </div>
         </CardContent>
@@ -310,7 +498,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
 
       <Card className="border-silk-gold/20">
         <CardHeader>
-          <CardTitle className="text-silk-indigo">Page content (matches site tabs)</CardTitle>
+          <CardTitle className="text-silk-indigo">3. Контент страницы тура</CardTitle>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="en">
@@ -337,6 +525,33 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
           </Tabs>
         </CardContent>
       </Card>
+
+      <div className="fixed inset-x-0 bottom-0 z-30 border-t border-silk-gold/25 bg-white/95 px-4 py-3 backdrop-blur-md">
+        <div className="mx-auto flex max-w-[1280px] flex-wrap items-center justify-between gap-3">
+          <p className="text-xs text-apple-muted">
+            {form.published ? "Будет виден на сайте" : "Черновик — не виден посетителям"}
+            {" · "}
+            /journeys/{previewSlug}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {isNew && (
+              <Button
+                variant="outline"
+                size="pill-sm"
+                onClick={() => void persist(true)}
+                disabled={loading}
+              >
+                {loading ? <Loader2 className="size-4 animate-spin" /> : <Plus className="size-4" />}
+                Сохранить и добавить ещё
+              </Button>
+            )}
+            <Button variant="silk" size="pill-sm" onClick={() => void persist(false)} disabled={loading}>
+              {loading ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />}
+              Сохранить тур
+            </Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Map, BookOpen, Handshake, ArrowRight } from "lucide-react";
+import { Map, BookOpen, Handshake, ArrowRight, Plus } from "lucide-react";
+import AdminStorageBanner from "@/components/admin/AdminStorageBanner";
 import { getAllTours } from "@/lib/cms/tours";
 import { getAllStories } from "@/lib/cms/stories";
 import { getAllPartners } from "@/lib/cms/partners";
@@ -39,11 +40,22 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div>
-        <h1 className="silk-headline text-3xl text-silk-indigo">Dashboard</h1>
-        <p className="mt-2 text-sm text-apple-muted">
-          Manage tours, stories, and partners. Published items use the same public site design automatically.
-        </p>
+      <AdminStorageBanner />
+
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h1 className="silk-headline text-3xl text-silk-indigo">Панель управления</h1>
+          <p className="mt-2 text-sm text-apple-muted">
+            Управляйте турами, историями и партнёрами. Опубликованные туры сразу видны на сайте.
+          </p>
+        </div>
+        <Link
+          href="/admin/tours/new"
+          className="inline-flex items-center gap-2 rounded-full bg-silk-gold px-5 py-2.5 text-sm font-bold text-silk-indigo shadow-md shadow-silk-gold/30 transition hover:opacity-90"
+        >
+          <Plus className="size-4" />
+          Добавить тур
+        </Link>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">

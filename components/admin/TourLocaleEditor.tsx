@@ -41,11 +41,11 @@ export default function TourLocaleEditor({
       <TabsList variant="line" className="mb-4 h-auto w-full flex-wrap justify-start gap-1 bg-transparent">
         {(
           [
-            ["about", "About"],
-            ["itinerary", "Itinerary"],
-            ["included", "Included"],
-            ["gallery", "Gallery"],
-            ["faq", "FAQ"],
+            ["about", locale === "ru" ? "О туре" : "About"],
+            ["itinerary", locale === "ru" ? "Маршрут" : "Itinerary"],
+            ["included", locale === "ru" ? "Включено" : "Included"],
+            ["gallery", locale === "ru" ? "Галерея" : "Gallery"],
+            ["faq", locale === "ru" ? "FAQ" : "FAQ"],
           ] as const
         ).map(([value, label]) => (
           <TabsTrigger

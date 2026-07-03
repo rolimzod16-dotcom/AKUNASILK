@@ -7,6 +7,11 @@ import {
   readBlobJson,
   writeBlobJson,
 } from "@/lib/storage/vercel-blob";
+import {
+  canUseGithubCms,
+  readGithubJson,
+  writeGithubJson,
+} from "@/lib/storage/github-cms";
 
 const CMS_DIR = path.join(process.cwd(), "data", "cms");
 const CMS_BLOB_PREFIX = "cms-data/";
@@ -40,6 +45,9 @@ export async function readCmsJson<T>(filename: string, fallback: T): Promise<T> 
   const fromBlob = await readBlobJson<T>(blobPath(filename));
   if (fromBlob !== null) return fromBlob;
 
+  const fromGithub = await readGithubJson<T>(filename);
+  if (fromGithub !== null) return fromGithub;
+
   const fromDisk = await readLocalJson<T>(filename);
   if (fromDisk !== null) return fromDisk;
 
@@ -50,27 +58,35 @@ export async function readCmsJson<T>(filename: string, fallback: T): Promise<T> 
 }
 
 export async function writeCmsJson<T>(filename: string, data: T): Promise<void> {
-  if (isVercelRuntime()) {
-    if (!canUseBlobStorage()) {
-      throw new Error(BLOB_CMS_SETUP_MESSAGE);
-    }
-    try {
-      await writeBlobJson(blobPath(filename), data);
-      return;
-    } catch {
-      throw new Error(BLOB_CMS_SETUP_MESSAGE);
-    }
-  }
+  const errors: string[] = [];
 
   if (canUseBlobStorage()) {
     try {
       await writeBlobJson(blobPath(filename), data);
-    } catch {
-      // Local dev can still save to disk when blob is misconfigured.
+      return;
+    } catch (err) {
+      errors.push(err instanceof Error ? err.message : "Blob write failed");
     }
   }
 
-  await writeLocalJson(filename, data);
+  if (canUseGithubCms()) {
+    try {
+      await writeGithubJson(filename, data);
+      return;
+    } catch (err) {
+      errors.push(err instanceof Error ? err.message : "GitHub write failed");
+    }
+  }
+
+  if (!isVercelRuntime()) {
+    await writeLocalJson(filename, data);
+    return;
+  }
+
+  const hint = canUseGithubCms()
+    ? errors.join("; ")
+    : `${BLOB_CMS_SETUP_MESSAGE} Or add GITHUB_TOKEN + GITHUB_REPO in Vercel env.`;
+  throw new Error(errors.length > 0 ? errors.join("; ") : hint);
 }
 
 export function cmsNow() {
@@ -88,4 +104,14 @@ export function slugify(value: string): string {
 
 export function newId(prefix: string) {
   return `${prefix}-${Date.now().toString(36)}`;
+}
+
+export function getCmsStorageStatus() {
+  return {
+    runtime: isVercelRuntime() ? "vercel" : "local",
+    blob: canUseBlobStorage(),
+    github: canUseGithubCms(),
+    canSave:
+      !isVercelRuntime() || canUseBlobStorage() || canUseGithubCms(),
+  };
 }

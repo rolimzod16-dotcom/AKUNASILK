@@ -1,6 +1,9 @@
 import type { CmsLocale, CmsTour, TourContent } from "./types";
 import { resolveTourContent } from "./tour-content";
+import { createEmptyTour } from "./defaults";
 import { readCmsJson, writeCmsJson, cmsNow, newId, slugify } from "./storage";
+
+export { createEmptyTour } from "./defaults";
 import { seedTours } from "./seed";
 import { syncTourCountries, type CountrySlug } from "@/lib/countries";
 import { isTravelStyle } from "@/lib/travel-styles";
@@ -88,57 +91,9 @@ export async function deleteTour(id: string): Promise<boolean> {
   return true;
 }
 
-export function createEmptyTour(): CmsTour {
-  const now = cmsNow();
-  return {
-    id: newId("tour"),
-    slug: "",
-    published: false,
-    image: "",
-    duration: 7,
-    price: 1990,
-    countrySlugs: [],
-    countries: [],
-    difficulty: "easy",
-    travelStyle: "culture",
-    featured: false,
-    spotsLeft: 8,
-    maxGroupSize: 12,
-    nextDeparture: new Date().toISOString().slice(0, 10),
-    rating: 4.8,
-    reviews: 0,
-    content: {
-      en: {
-        title: "",
-        desc: "",
-        overview: "",
-        highlights: [],
-        itinerary: [],
-        included: [],
-        excluded: [],
-        gallery: [],
-        faq: [],
-      },
-      ru: {
-        title: "",
-        desc: "",
-        overview: "",
-        highlights: [],
-        itinerary: [],
-        included: [],
-        excluded: [],
-        gallery: [],
-        faq: [],
-      },
-    },
-    createdAt: now,
-    updatedAt: now,
-  };
-}
-
 export function normalizeTourInput(input: Partial<CmsTour> & { id?: string }): CmsTour {
-  const base = input.id ? undefined : createEmptyTour();
-  const existing = base ?? createEmptyTour();
+  const base = input.id ? undefined : createEmptyTour(cmsNow());
+  const existing = base ?? createEmptyTour(cmsNow());
   const slug = slugify(input.slug || input.content?.en?.title || existing.slug || "new-tour");
   return syncTourCountries({
     ...existing,

@@ -26,10 +26,15 @@ export async function PUT(request: Request, { params }: Params) {
   const existing = await getTourById(id);
   if (!existing) return NextResponse.json({ error: "Not found" }, { status: 404 });
 
-  const body = (await request.json()) as Partial<CmsTour>;
-  const tour = normalizeTourInput({ ...existing, ...body, id });
-  const saved = await saveTour(tour);
-  return NextResponse.json(saved);
+  try {
+    const body = (await request.json()) as Partial<CmsTour>;
+    const tour = normalizeTourInput({ ...existing, ...body, id });
+    const saved = await saveTour(tour);
+    return NextResponse.json(saved);
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Could not save tour";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
 
 export async function DELETE(_request: Request, { params }: Params) {

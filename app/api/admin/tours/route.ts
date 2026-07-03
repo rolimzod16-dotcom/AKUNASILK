@@ -15,13 +15,18 @@ export async function POST(request: Request) {
   const denied = await requireAdminApi();
   if (denied) return denied;
 
-  const body = (await request.json()) as Partial<CmsTour>;
-  const now = cmsNow();
-  const tour = normalizeTourInput({
-    ...body,
-    id: newId("tour"),
-    createdAt: now,
-  });
-  const saved = await saveTour(tour);
-  return NextResponse.json(saved, { status: 201 });
+  try {
+    const body = (await request.json()) as Partial<CmsTour>;
+    const now = cmsNow();
+    const tour = normalizeTourInput({
+      ...body,
+      id: newId("tour"),
+      createdAt: now,
+    });
+    const saved = await saveTour(tour);
+    return NextResponse.json(saved, { status: 201 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Could not save tour";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
