@@ -1,6 +1,11 @@
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 import { put } from "@vercel/blob";
+import {
+  BLOB_SETUP_MESSAGE,
+  canUseBlobStorage,
+  isVercelRuntime,
+} from "@/lib/storage/vercel-blob";
 
 const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
 
@@ -20,13 +25,24 @@ export async function storeCmsImage(
 
   const filename = `${Date.now()}-${safeName(originalName)}`;
 
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
-    const blob = await put(`cms/${folder}/${filename}`, buffer, {
-      access: "public",
-      contentType,
-      addRandomSuffix: false,
-    });
-    return { url: blob.url, storage: "blob" };
+  if (canUseBlobStorage()) {
+    try {
+      const blob = await put(`cms/${folder}/${filename}`, buffer, {
+        access: "public",
+        contentType,
+        addRandomSuffix: false,
+      });
+      return { url: blob.url, storage: "blob" };
+    } catch (err) {
+      if (isVercelRuntime()) {
+        throw new Error(BLOB_SETUP_MESSAGE);
+      }
+      throw err;
+    }
+  }
+
+  if (isVercelRuntime()) {
+    throw new Error(BLOB_SETUP_MESSAGE);
   }
 
   const dir = path.join(process.cwd(), "public", "uploads", "cms", folder);

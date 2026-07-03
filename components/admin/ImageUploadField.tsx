@@ -132,7 +132,16 @@ export default function ImageUploadField({
         />
       )}
 
-      {error && <p className="text-xs text-silk-terracotta">{error}</p>}
+      {error && (
+        <p className="text-xs leading-relaxed text-silk-terracotta">
+          {error}
+          {error.includes("Blob Storage") && (
+            <span className="mt-1 block text-apple-muted">
+              Vercel Dashboard → Storage → Blob → Connect to Project → Redeploy
+            </span>
+          )}
+        </p>
+      )}
     </div>
   );
 }
