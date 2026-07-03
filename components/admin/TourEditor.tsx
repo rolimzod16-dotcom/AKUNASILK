@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Save, Trash2 } from "lucide-react";
-import type { CmsTour } from "@/lib/cms/types";
+import type { CmsTour, TourItineraryDay } from "@/lib/cms/types";
 import {
   COUNTRY_LABELS,
   getCountriesByCorridor,
@@ -33,6 +33,31 @@ function linesToArray(value: string) {
 
 function arrayToLines(value: string[]) {
   return value.join("\n");
+}
+
+function itineraryToLines(days?: TourItineraryDay[]) {
+  if (!days?.length) return "";
+  return days
+    .map((d) => `${d.day} | ${d.title} | ${d.description}`)
+    .join("\n");
+}
+
+function linesToItinerary(value: string): TourItineraryDay[] {
+  return value
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const parts = line.split("|").map((p) => p.trim());
+      if (parts.length >= 3) {
+        return {
+          day: Number(parts[0]) || 1,
+          title: parts[1],
+          description: parts.slice(2).join(" | "),
+        };
+      }
+      return { day: 1, title: line, description: "" };
+    });
 }
 
 export default function TourEditor({ tour, isNew }: TourEditorProps) {
@@ -236,6 +261,16 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             </select>
           </div>
           <div className="space-y-2">
+            <Label>Max group size</Label>
+            <Input
+              type="number"
+              value={form.maxGroupSize ?? 12}
+              onChange={(e) =>
+                setForm({ ...form, maxGroupSize: Number(e.target.value) || 12 })
+              }
+            />
+          </div>
+          <div className="space-y-2">
             <Label>Spots left</Label>
             <Input
               type="number"
@@ -316,7 +351,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
               />
             </div>
             <div className="space-y-2">
-              <Label>Description</Label>
+              <Label>Short description (hero)</Label>
               <Textarea
                 rows={3}
                 value={form.content[locale].desc}
@@ -326,6 +361,99 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                     content: {
                       ...form.content,
                       [locale]: { ...form.content[locale], desc: e.target.value },
+                    },
+                  })
+                }
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>About the trip (overview)</Label>
+              <Textarea
+                rows={4}
+                value={form.content[locale].overview ?? ""}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    content: {
+                      ...form.content,
+                      [locale]: { ...form.content[locale], overview: e.target.value },
+                    },
+                  })
+                }
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Itinerary (Day | Title | Description — one day per line)</Label>
+              <Textarea
+                rows={8}
+                placeholder="1 | Day 1: Arrival | Airport transfer and welcome dinner"
+                value={itineraryToLines(form.content[locale].itinerary)}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    content: {
+                      ...form.content,
+                      [locale]: {
+                        ...form.content[locale],
+                        itinerary: linesToItinerary(e.target.value),
+                      },
+                    },
+                  })
+                }
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Included (one per line)</Label>
+              <Textarea
+                rows={4}
+                value={arrayToLines(form.content[locale].included ?? [])}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    content: {
+                      ...form.content,
+                      [locale]: {
+                        ...form.content[locale],
+                        included: linesToArray(e.target.value),
+                      },
+                    },
+                  })
+                }
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Not included (one per line)</Label>
+              <Textarea
+                rows={3}
+                value={arrayToLines(form.content[locale].excluded ?? [])}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    content: {
+                      ...form.content,
+                      [locale]: {
+                        ...form.content[locale],
+                        excluded: linesToArray(e.target.value),
+                      },
+                    },
+                  })
+                }
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Gallery image URLs (one per line)</Label>
+              <Textarea
+                rows={3}
+                value={arrayToLines(form.content[locale].gallery ?? [])}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    content: {
+                      ...form.content,
+                      [locale]: {
+                        ...form.content[locale],
+                        gallery: linesToArray(e.target.value),
+                      },
                     },
                   })
                 }

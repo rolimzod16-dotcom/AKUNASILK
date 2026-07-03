@@ -3,10 +3,28 @@ import type { TravelStyle } from "@/lib/travel-styles";
 
 export type CmsLocale = "en" | "ru";
 
+export type TourItineraryDay = {
+  day: number;
+  title: string;
+  description: string;
+};
+
+export type TourFaqItem = {
+  question: string;
+  answer: string;
+};
+
 export type TourContent = {
   title: string;
   desc: string;
+  /** Long-form “About the trip” copy */
+  overview?: string;
   highlights: string[];
+  itinerary?: TourItineraryDay[];
+  included?: string[];
+  excluded?: string[];
+  gallery?: string[];
+  faq?: TourFaqItem[];
 };
 
 export type CmsTour = {
@@ -27,6 +45,7 @@ export type CmsTour = {
   featured: boolean;
   bestseller?: boolean;
   spotsLeft?: number;
+  maxGroupSize?: number;
   nextDeparture: string;
   rating: number;
   reviews: number;

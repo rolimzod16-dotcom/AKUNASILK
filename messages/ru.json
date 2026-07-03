@@ -216,6 +216,29 @@
     "days": "дней",
     "viewAll": "Все туры",
     "spotsLeft": "Осталось {count} мест",
+    "detail": {
+      "tabs": {
+        "about": "О туре",
+        "itinerary": "Маршрут",
+        "dates": "Даты и цены",
+        "included": "Что включено",
+        "gallery": "Галерея",
+        "faq": "FAQ"
+      },
+      "aboutLabel": "О туре",
+      "itineraryLabel": "День за днём",
+      "datesLabel": "Выезды",
+      "includedLabel": "Состав пакета",
+      "galleryLabel": "На маршруте",
+      "faqLabel": "Полезно знать",
+      "durationLabel": "Длительность",
+      "groupLabel": "Размер группы",
+      "groupValue": "До {count} гостей",
+      "priceFrom": "Цена от",
+      "datesNote": "Частные даты по запросу. Подтверждаем наличие в течение 24 часов.",
+      "includedTitle": "Включено",
+      "excludedTitle": "Не включено"
+    },
     "difficulty": {
       "easy": "Лёгкий",
       "moderate": "Средний",

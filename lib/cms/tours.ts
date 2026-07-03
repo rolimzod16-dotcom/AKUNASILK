@@ -1,10 +1,28 @@
 import type { CmsLocale, CmsTour, TourContent } from "./types";
+import { resolveTourContent } from "./tour-content";
 import { readCmsJson, writeCmsJson, cmsNow, newId, slugify } from "./storage";
 import { seedTours } from "./seed";
 import { syncTourCountries, type CountrySlug } from "@/lib/countries";
 import { isTravelStyle } from "@/lib/travel-styles";
 
 const FILE = "tours.json";
+
+function mergeLocaleContent(
+  existing: TourContent,
+  input?: Partial<TourContent>
+): TourContent {
+  return {
+    title: input?.title ?? existing.title,
+    desc: input?.desc ?? existing.desc,
+    overview: input?.overview ?? existing.overview,
+    highlights: input?.highlights ?? existing.highlights,
+    itinerary: input?.itinerary ?? existing.itinerary,
+    included: input?.included ?? existing.included,
+    excluded: input?.excluded ?? existing.excluded,
+    gallery: input?.gallery ?? existing.gallery,
+    faq: input?.faq ?? existing.faq,
+  };
+}
 
 function normalizeTours(tours: CmsTour[]): CmsTour[] {
   return tours.map(syncTourCountries);
@@ -36,8 +54,7 @@ export async function getBestseller(): Promise<CmsTour> {
 }
 
 export function getTourContent(tour: CmsTour, locale: string): TourContent {
-  const loc = (locale === "ru" ? "ru" : "en") as CmsLocale;
-  return tour.content[loc] ?? tour.content.en;
+  return resolveTourContent(tour, locale);
 }
 
 export async function getTourById(id: string): Promise<CmsTour | undefined> {
@@ -86,6 +103,7 @@ export function createEmptyTour(): CmsTour {
     travelStyle: "culture",
     featured: false,
     spotsLeft: 8,
+    maxGroupSize: 12,
     nextDeparture: new Date().toISOString().slice(0, 10),
     rating: 4.8,
     reviews: 0,
@@ -115,16 +133,8 @@ export function normalizeTourInput(input: Partial<CmsTour> & { id?: string }): C
         ? input.travelStyle
         : existing.travelStyle ?? "culture",
     content: {
-      en: {
-        title: input.content?.en?.title ?? existing.content.en.title,
-        desc: input.content?.en?.desc ?? existing.content.en.desc,
-        highlights: input.content?.en?.highlights ?? existing.content.en.highlights,
-      },
-      ru: {
-        title: input.content?.ru?.title ?? existing.content.ru.title,
-        desc: input.content?.ru?.desc ?? existing.content.ru.desc,
-        highlights: input.content?.ru?.highlights ?? existing.content.ru.highlights,
-      },
+      en: mergeLocaleContent(existing.content.en, input.content?.en),
+      ru: mergeLocaleContent(existing.content.ru, input.content?.ru),
     },
     updatedAt: cmsNow(),
     createdAt: input.createdAt ?? existing.createdAt,

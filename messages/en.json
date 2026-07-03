@@ -216,6 +216,29 @@
     "days": "days",
     "viewAll": "View All Tours",
     "spotsLeft": "{count} spots left",
+    "detail": {
+      "tabs": {
+        "about": "About the trip",
+        "itinerary": "Itinerary",
+        "dates": "Dates & prices",
+        "included": "What's included",
+        "gallery": "Gallery",
+        "faq": "FAQ"
+      },
+      "aboutLabel": "About the trip",
+      "itineraryLabel": "Day by day",
+      "datesLabel": "Departures",
+      "includedLabel": "Package details",
+      "galleryLabel": "On the route",
+      "faqLabel": "Good to know",
+      "durationLabel": "Duration",
+      "groupLabel": "Group size",
+      "groupValue": "Up to {count} guests",
+      "priceFrom": "Price from",
+      "datesNote": "Private departures on request. We confirm availability within 24 hours.",
+      "includedTitle": "Included",
+      "excludedTitle": "Not included"
+    },
     "difficulty": {
       "easy": "Leisure",
       "moderate": "Moderate",

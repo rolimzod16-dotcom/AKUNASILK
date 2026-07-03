@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Check, Star, Calendar, MapPin, Users } from "lucide-react";
+import { Star, Calendar, MapPin, Users } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import { countrySlugsToLabels, resolveTourCountrySlugs } from "@/lib/countries";
 import { getTravelStyleLabel } from "@/lib/travel-styles";
+import { resolveTourContent } from "@/lib/cms/tour-content";
 import { Button } from "@/components/ui/button";
 import TourDetailActions from "@/components/automation/TourDetailActions";
+import TourDetailTabs from "@/components/tours/TourDetailTabs";
 import { Badge } from "@/components/ui/badge";
 import SilkDivider from "@/components/shared/SilkDivider";
 
@@ -20,11 +22,9 @@ type TourDetailViewProps = {
 export default async function TourDetailView({ tour, slug, locale, content }: TourDetailViewProps) {
   const t = await getTranslations({ locale, namespace: "tours" });
   const shop = await getTranslations({ locale, namespace: "shop" });
-  const pricing = await getTranslations({ locale, namespace: "pricing" });
   const nav = await getTranslations({ locale, namespace: "nav" });
 
-  const highlights = content.highlights;
-  const included = pricing.raw("includedItems") as string[];
+  const fullContent = resolveTourContent(tour, locale);
   const monthly = Math.round(tour.price / 12);
   const departure = new Date(tour.nextDeparture).toLocaleDateString(locale, {
     weekday: "long",
@@ -79,46 +79,24 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
       </section>
 
       <section className="apple-section">
-        <div className="mx-auto grid max-w-[980px] gap-12 px-6 lg:grid-cols-[1fr_340px]">
-          <div>
-            <h2 className="silk-headline text-2xl text-silk-indigo">
-              {shop("packageIncludes")}
-            </h2>
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {included.map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm text-apple-subtle">
-                  <Check className="size-4 text-silk-gold" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+        <div className="mx-auto grid max-w-[1100px] gap-10 px-6 lg:grid-cols-[1fr_320px] lg:gap-12">
+          <TourDetailTabs
+            tour={tour}
+            content={fullContent}
+            departure={departure}
+            locale={locale}
+          />
 
-            <h2 className="silk-headline mt-12 text-2xl text-silk-indigo">
-              {shop("highlights")}
-            </h2>
-            <ul className="mt-6 space-y-3">
-              {highlights.map((h) => (
-                <li
-                  key={h}
-                  className="flex items-center gap-3 rounded-xl border border-silk-gold/15 bg-white px-4 py-3 text-sm text-silk-indigo"
-                >
-                  <span className="size-2 rounded-full bg-silk-gold" />
-                  {h}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="lg:sticky lg:top-20 lg:self-start">
+          <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-3xl border border-silk-gold/25 bg-white p-6 shadow-xl shadow-silk-gold/10">
               <div className="flex items-baseline gap-2">
                 {tour.originalPrice && (
                   <span className="text-lg text-apple-muted line-through">
-                    ${tour.originalPrice.toLocaleString()}
+                    ${tour.originalPrice.toLocaleString(locale)}
                   </span>
                 )}
                 <span className="silk-headline text-4xl text-gradient-silk">
-                  ${tour.price.toLocaleString()}
+                  ${tour.price.toLocaleString(locale)}
                 </span>
               </div>
               <p className="mt-1 text-sm text-apple-muted">
@@ -151,11 +129,7 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
                 </div>
               </div>
 
-              <TourDetailActions
-                slug={slug}
-                price={tour.price}
-                spotsLeft={tour.spotsLeft}
-              />
+              <TourDetailActions slug={slug} price={tour.price} spotsLeft={tour.spotsLeft} />
             </div>
           </div>
         </div>
