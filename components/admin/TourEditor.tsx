@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Loader2, Save, Trash2 } from "lucide-react";
-import type { CmsTour, TourItineraryDay } from "@/lib/cms/types";
+import { ExternalLink, Loader2, Save, Trash2 } from "lucide-react";
+import type { CmsTour } from "@/lib/cms/types";
 import {
   COUNTRY_LABELS,
   getCountriesByCorridor,
@@ -13,10 +13,11 @@ import {
 } from "@/lib/countries";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ImageUploadField from "@/components/admin/ImageUploadField";
+import TourLocaleEditor from "@/components/admin/TourLocaleEditor";
 import { TRAVEL_STYLES, TRAVEL_STYLE_LABELS } from "@/lib/travel-styles";
 
 type TourEditorProps = {
@@ -24,47 +25,13 @@ type TourEditorProps = {
   isNew?: boolean;
 };
 
-function linesToArray(value: string) {
-  return value
-    .split("\n")
-    .map((l) => l.trim())
-    .filter(Boolean);
-}
-
-function arrayToLines(value: string[]) {
-  return value.join("\n");
-}
-
-function itineraryToLines(days?: TourItineraryDay[]) {
-  if (!days?.length) return "";
-  return days
-    .map((d) => `${d.day} | ${d.title} | ${d.description}`)
-    .join("\n");
-}
-
-function linesToItinerary(value: string): TourItineraryDay[] {
-  return value
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean)
-    .map((line) => {
-      const parts = line.split("|").map((p) => p.trim());
-      if (parts.length >= 3) {
-        return {
-          day: Number(parts[0]) || 1,
-          title: parts[1],
-          description: parts.slice(2).join(" | "),
-        };
-      }
-      return { day: 1, title: line, description: "" };
-    });
-}
-
 export default function TourEditor({ tour, isNew }: TourEditorProps) {
   const router = useRouter();
   const [form, setForm] = useState(tour);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const previewSlug = form.slug || "your-tour-slug";
 
   const save = async () => {
     setLoading(true);
@@ -78,6 +45,10 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
         body: JSON.stringify({
           ...form,
           countrySlugs: form.countrySlugs,
+          content: {
+            en: sanitizeLocaleContent(form.content.en),
+            ru: sanitizeLocaleContent(form.content.ru),
+          },
         }),
       });
       if (!res.ok) throw new Error("Save failed");
@@ -85,7 +56,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
       router.push(`/admin/tours/${saved.id}`);
       router.refresh();
     } catch {
-      setError("Could not save tour. Check all required fields.");
+      setError("Could not save tour. Check title, slug, price, and duration.");
     } finally {
       setLoading(false);
     }
@@ -104,13 +75,21 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="silk-headline text-3xl text-silk-indigo">
-            {isNew ? "New Tour Package" : "Edit Tour Package"}
+            {isNew ? "New tour package" : "Edit tour package"}
           </h1>
           <p className="mt-1 text-sm text-apple-muted">
-            Published tours appear on the site with the same card & detail design.
+            Full control: every tab on the public tour page is edited here (EN + RU).
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          {!isNew && form.slug && (
+            <Button variant="outline" size="sm" asChild>
+              <a href={`/journeys/${form.slug}`} target="_blank" rel="noopener noreferrer">
+                <ExternalLink className="size-4" />
+                Preview
+              </a>
+            </Button>
+          )}
           {!isNew && (
             <Button variant="outline" size="sm" onClick={remove} disabled={loading}>
               <Trash2 className="size-4 text-silk-terracotta" />
@@ -119,7 +98,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
           )}
           <Button variant="silk" size="pill-sm" onClick={save} disabled={loading}>
             {loading ? <Loader2 className="size-4 animate-spin" /> : <Save className="size-4" />}
-            Save
+            Save tour
           </Button>
         </div>
       </div>
@@ -128,7 +107,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
 
       <Card className="border-silk-gold/20">
         <CardHeader>
-          <CardTitle className="text-silk-indigo">Package details</CardTitle>
+          <CardTitle className="text-silk-indigo">Package & pricing</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2">
           <div className="space-y-2 sm:col-span-2">
@@ -136,15 +115,18 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             <Input
               value={form.slug}
               onChange={(e) => setForm({ ...form, slug: e.target.value })}
-              placeholder="golden-caravan"
+              placeholder="my-custom-silk-trail"
             />
+            <p className="text-xs text-apple-muted">
+              Public page: /journeys/{previewSlug}
+            </p>
           </div>
           <ImageUploadField
             label="Cover image"
             folder="tours"
             value={form.image}
             onChange={(image) => setForm({ ...form, image })}
-            hint="Upload a photo — we compress it automatically so the site stays fast."
+            hint="Main hero image on the tour page."
           />
           <div className="space-y-2">
             <Label>Price (USD)</Label>
@@ -182,47 +164,6 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
               value={form.nextDeparture}
               onChange={(e) => setForm({ ...form, nextDeparture: e.target.value })}
             />
-          </div>
-          <div className="space-y-4 sm:col-span-2">
-            <Label>Silk Road countries on route</Label>
-            <p className="text-xs text-apple-muted">
-              Only countries historically on the Silk Road. Powers destination filters — add cities in tour descriptions separately.
-            </p>
-            {SILK_ROAD_CORRIDORS.map((corridor) => (
-              <div key={corridor}>
-                <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-silk-turquoise">
-                  {getCorridorLabel(corridor, "en")}
-                </p>
-                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-                  {getCountriesByCorridor(corridor).map((slug) => {
-                    const checked = form.countrySlugs?.includes(slug) ?? false;
-                    return (
-                      <label
-                        key={slug}
-                        className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm transition ${
-                          checked
-                            ? "border-silk-gold bg-silk-gold/10 text-silk-indigo"
-                            : "border-silk-gold/20 hover:border-silk-gold/40"
-                        }`}
-                      >
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={() => {
-                            const current = form.countrySlugs ?? [];
-                            const next = checked
-                              ? current.filter((s) => s !== slug)
-                              : [...current, slug];
-                            setForm({ ...form, countrySlugs: next as CountrySlug[] });
-                          }}
-                        />
-                        {COUNTRY_LABELS[slug].en}
-                      </label>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
           </div>
           <div className="space-y-2">
             <Label>Travel style</Label>
@@ -300,6 +241,44 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
               onChange={(e) => setForm({ ...form, reviews: Number(e.target.value) })}
             />
           </div>
+          <div className="space-y-4 sm:col-span-2">
+            <Label>Countries on route</Label>
+            {SILK_ROAD_CORRIDORS.map((corridor) => (
+              <div key={corridor}>
+                <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-silk-turquoise">
+                  {getCorridorLabel(corridor, "en")}
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                  {getCountriesByCorridor(corridor).map((slug) => {
+                    const checked = form.countrySlugs?.includes(slug) ?? false;
+                    return (
+                      <label
+                        key={slug}
+                        className={`flex cursor-pointer items-center gap-2 rounded-lg border px-3 py-2 text-sm transition ${
+                          checked
+                            ? "border-silk-gold bg-silk-gold/10 text-silk-indigo"
+                            : "border-silk-gold/20 hover:border-silk-gold/40"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => {
+                            const current = form.countrySlugs ?? [];
+                            const next = checked
+                              ? current.filter((s) => s !== slug)
+                              : [...current, slug];
+                            setForm({ ...form, countrySlugs: next as CountrySlug[] });
+                          }}
+                        />
+                        {COUNTRY_LABELS[slug].en}
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
           <div className="flex flex-wrap gap-4 sm:col-span-2">
             <label className="flex items-center gap-2 text-sm">
               <input
@@ -329,158 +308,44 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
         </CardContent>
       </Card>
 
-      {(["en", "ru"] as const).map((locale) => (
-        <Card key={locale} className="border-silk-gold/20">
-          <CardHeader>
-            <CardTitle className="text-silk-indigo uppercase">{locale} content</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label>Title</Label>
-              <Input
-                value={form.content[locale].title}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    content: {
-                      ...form.content,
-                      [locale]: { ...form.content[locale], title: e.target.value },
-                    },
-                  })
-                }
+      <Card className="border-silk-gold/20">
+        <CardHeader>
+          <CardTitle className="text-silk-indigo">Page content (matches site tabs)</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Tabs defaultValue="en">
+            <TabsList className="mb-6">
+              <TabsTrigger value="en">English</TabsTrigger>
+              <TabsTrigger value="ru">Русский</TabsTrigger>
+            </TabsList>
+            <TabsContent value="en">
+              <TourLocaleEditor
+                locale="en"
+                tour={form}
+                content={form.content.en}
+                onChange={(en) => setForm({ ...form, content: { ...form.content, en } })}
               />
-            </div>
-            <div className="space-y-2">
-              <Label>Short description (hero)</Label>
-              <Textarea
-                rows={3}
-                value={form.content[locale].desc}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    content: {
-                      ...form.content,
-                      [locale]: { ...form.content[locale], desc: e.target.value },
-                    },
-                  })
-                }
+            </TabsContent>
+            <TabsContent value="ru">
+              <TourLocaleEditor
+                locale="ru"
+                tour={form}
+                content={form.content.ru}
+                onChange={(ru) => setForm({ ...form, content: { ...form.content, ru } })}
               />
-            </div>
-            <div className="space-y-2">
-              <Label>About the trip (overview)</Label>
-              <Textarea
-                rows={4}
-                value={form.content[locale].overview ?? ""}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    content: {
-                      ...form.content,
-                      [locale]: { ...form.content[locale], overview: e.target.value },
-                    },
-                  })
-                }
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Itinerary (Day | Title | Description — one day per line)</Label>
-              <Textarea
-                rows={8}
-                placeholder="1 | Day 1: Arrival | Airport transfer and welcome dinner"
-                value={itineraryToLines(form.content[locale].itinerary)}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    content: {
-                      ...form.content,
-                      [locale]: {
-                        ...form.content[locale],
-                        itinerary: linesToItinerary(e.target.value),
-                      },
-                    },
-                  })
-                }
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Included (one per line)</Label>
-              <Textarea
-                rows={4}
-                value={arrayToLines(form.content[locale].included ?? [])}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    content: {
-                      ...form.content,
-                      [locale]: {
-                        ...form.content[locale],
-                        included: linesToArray(e.target.value),
-                      },
-                    },
-                  })
-                }
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Not included (one per line)</Label>
-              <Textarea
-                rows={3}
-                value={arrayToLines(form.content[locale].excluded ?? [])}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    content: {
-                      ...form.content,
-                      [locale]: {
-                        ...form.content[locale],
-                        excluded: linesToArray(e.target.value),
-                      },
-                    },
-                  })
-                }
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Gallery image URLs (one per line)</Label>
-              <Textarea
-                rows={3}
-                value={arrayToLines(form.content[locale].gallery ?? [])}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    content: {
-                      ...form.content,
-                      [locale]: {
-                        ...form.content[locale],
-                        gallery: linesToArray(e.target.value),
-                      },
-                    },
-                  })
-                }
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Highlights (one per line)</Label>
-              <Textarea
-                rows={4}
-                value={arrayToLines(form.content[locale].highlights)}
-                onChange={(e) =>
-                  setForm({
-                    ...form,
-                    content: {
-                      ...form.content,
-                      [locale]: {
-                        ...form.content[locale],
-                        highlights: linesToArray(e.target.value),
-                      },
-                    },
-                  })
-                }
-              />
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
     </div>
   );
+}
+
+function sanitizeLocaleContent(content: CmsTour["content"]["en"]) {
+  return {
+    ...content,
+    gallery: (content.gallery ?? []).filter(Boolean),
+    faq: (content.faq ?? []).filter((item) => item.question.trim() || item.answer.trim()),
+    itinerary: (content.itinerary ?? []).filter((day) => day.title.trim() || day.description.trim()),
+  };
 }

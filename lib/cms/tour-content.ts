@@ -226,3 +226,41 @@ export function resolveTourContent(tour: CmsTour, locale: string): Required<Tour
     faq: raw.faq && raw.faq.length > 0 ? raw.faq : loc === "ru" ? DEFAULT_FAQ_RU : DEFAULT_FAQ_EN,
   };
 }
+
+function hasCustomList<T>(value?: T[]): value is T[] {
+  return Array.isArray(value) && value.length > 0;
+}
+
+/** Fills empty CMS fields with what visitors see (for editing in admin). */
+export function prepareTourForEditor(tour: CmsTour): CmsTour {
+  const enResolved = resolveTourContent(tour, "en");
+  const ruResolved = resolveTourContent(tour, "ru");
+
+  const merge = (loc: CmsLocale, resolved: Required<TourContent>): TourContent => {
+    const raw = tour.content[loc] ?? tour.content.en;
+    return {
+      title: raw.title,
+      desc: raw.desc,
+      overview: raw.overview?.trim() ? raw.overview : resolved.overview,
+      highlights: hasCustomList(raw.highlights) ? raw.highlights : resolved.highlights,
+      itinerary: hasCustomList(raw.itinerary) ? raw.itinerary : resolved.itinerary,
+      included: hasCustomList(raw.included) ? raw.included : resolved.included,
+      excluded: hasCustomList(raw.excluded) ? raw.excluded : resolved.excluded,
+      gallery: hasCustomList(raw.gallery) ? raw.gallery : resolved.gallery,
+      faq: hasCustomList(raw.faq) ? raw.faq : resolved.faq,
+    };
+  };
+
+  return {
+    ...tour,
+    maxGroupSize: tour.maxGroupSize ?? 12,
+    content: {
+      en: merge("en", enResolved),
+      ru: merge("ru", ruResolved),
+    },
+  };
+}
+
+export function buildItinerarySkeleton(tour: CmsTour, locale: CmsLocale): TourItineraryDay[] {
+  return buildGenericItinerary(tour, locale);
+}
