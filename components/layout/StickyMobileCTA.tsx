@@ -21,8 +21,8 @@ export default function StickyMobileCTA() {
           variant="silk"
           size="pill-sm"
           className="flex-1 text-xs font-semibold"
-          prefill={{ source: "header" }}
-          label={nav("getQuote")}
+          prefill={{ source: "header", tourSlug: "any" }}
+          label={nav("planYourJourney")}
         />
       </div>
     </div>

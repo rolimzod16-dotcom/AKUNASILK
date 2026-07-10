@@ -15,6 +15,13 @@ import {
   tourMatchesRegion,
   type CountrySlug,
 } from "@/lib/countries";
+import {
+  TRAVEL_STYLES,
+  getTravelStyleLabel,
+  isTravelStyle,
+  tourMatchesStyle,
+  type TravelStyle,
+} from "@/lib/travel-styles";
 
 /** Active GST destinations with products (TZ: hide empty countries) */
 const ACTIVE_COUNTRY_FILTERS: CountrySlug[] = [
@@ -28,13 +35,6 @@ const ACTIVE_COUNTRY_FILTERS: CountrySlug[] = [
   "iran",
   "turkey",
 ];
-import {
-  TRAVEL_STYLES,
-  getTravelStyleLabel,
-  isTravelStyle,
-  tourMatchesStyle,
-  type TravelStyle,
-} from "@/lib/travel-styles";
 
 type CatalogItem = { tour: Tour; content: TourContent };
 
@@ -43,7 +43,15 @@ type JourneyCatalogProps = {
 };
 
 type DifficultyFilter = "all" | Tour["difficulty"];
+type DurationFilter = "all" | "short" | "medium" | "long";
 type SortKey = "recommended" | "price-asc" | "price-desc" | "duration" | "departure";
+
+function matchesDuration(days: number, filter: DurationFilter) {
+  if (filter === "all") return true;
+  if (filter === "short") return days <= 8;
+  if (filter === "medium") return days >= 9 && days <= 12;
+  return days >= 13;
+}
 
 export default function JourneyCatalog({ items }: JourneyCatalogProps) {
   const t = useTranslations("traveler.catalog");
@@ -55,11 +63,22 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
   const styleParam = searchParams.get("style");
 
   const [difficulty, setDifficulty] = useState<DifficultyFilter>("all");
+  const [duration, setDuration] = useState<DurationFilter>("all");
+  const [month, setMonth] = useState<string>("all");
   const [sort, setSort] = useState<SortKey>("recommended");
 
   const activeCountry = countryParam && isCountrySlug(countryParam) ? countryParam : null;
-  const activeRegion = !activeCountry && regionParam && isRegionSlug(regionParam) ? regionParam : null;
+  const activeRegion =
+    !activeCountry && regionParam && isRegionSlug(regionParam) ? regionParam : null;
   const activeStyle = styleParam && isTravelStyle(styleParam) ? styleParam : null;
+
+  const availableMonths = useMemo(() => {
+    const set = new Set<string>();
+    for (const { tour } of items) {
+      if (tour.nextDeparture?.length >= 7) set.add(tour.nextDeparture.slice(0, 7));
+    }
+    return Array.from(set).sort();
+  }, [items]);
 
   const filtered = useMemo(() => {
     let list = [...items];
@@ -78,6 +97,14 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
       list = list.filter(({ tour }) => tour.difficulty === difficulty);
     }
 
+    if (duration !== "all") {
+      list = list.filter(({ tour }) => matchesDuration(tour.duration, duration));
+    }
+
+    if (month !== "all") {
+      list = list.filter(({ tour }) => tour.nextDeparture?.startsWith(month));
+    }
+
     list.sort((a, b) => {
       switch (sort) {
         case "price-asc":
@@ -94,9 +121,10 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
     });
 
     return list;
-  }, [items, difficulty, sort, activeCountry, activeRegion, activeStyle]);
+  }, [items, difficulty, duration, month, sort, activeCountry, activeRegion, activeStyle]);
 
   const difficulties: DifficultyFilter[] = ["all", "easy", "moderate", "adventurous"];
+  const durations: DurationFilter[] = ["all", "short", "medium", "long"];
 
   const filterLabel = activeCountry
     ? t("countryActive", { country: getCountryLabel(activeCountry, locale) })
@@ -112,6 +140,12 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
     if (params?.style) q.set("style", params.style);
     const query = q.toString();
     return query ? `/journeys?${query}` : "/journeys";
+  }
+
+  function monthLabel(ym: string) {
+    const [y, m] = ym.split("-").map(Number);
+    const d = new Date(y, (m || 1) - 1, 1);
+    return d.toLocaleDateString(locale, { month: "long", year: "numeric" });
   }
 
   return (
@@ -147,6 +181,89 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
 
           <div className="mt-3">
             <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
+              {t("filterByCountry")}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {ACTIVE_COUNTRY_FILTERS.map((slug) => {
+                const active = activeCountry === slug;
+                return (
+                  <Link
+                    key={slug}
+                    href={
+                      active
+                        ? journeysHref({ style: activeStyle ?? undefined })
+                        : journeysHref({ country: slug, style: activeStyle ?? undefined })
+                    }
+                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
+                      active
+                        ? "bg-silk-indigo text-silk-gold"
+                        : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
+                    }`}
+                  >
+                    {getCountryLabel(slug, locale)}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-3">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
+              {t("filterByMonth")}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              <button
+                type="button"
+                onClick={() => setMonth("all")}
+                className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
+                  month === "all"
+                    ? "bg-silk-indigo text-silk-gold"
+                    : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
+                }`}
+              >
+                {t("monthAll")}
+              </button>
+              {availableMonths.map((ym) => (
+                <button
+                  key={ym}
+                  type="button"
+                  onClick={() => setMonth(ym)}
+                  className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
+                    month === ym
+                      ? "bg-silk-indigo text-silk-gold"
+                      : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
+                  }`}
+                >
+                  {monthLabel(ym)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-3">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
+              {t("filterByDuration")}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {durations.map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  onClick={() => setDuration(d)}
+                  className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
+                    duration === d
+                      ? "bg-silk-indigo text-silk-gold"
+                      : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
+                  }`}
+                >
+                  {t(`duration.${d}`)}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-3">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
               {t("filterByStyle")}
             </p>
             <div className="flex flex-wrap gap-1.5">
@@ -174,47 +291,24 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
 
           <div className="mt-3">
             <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
-              {t("filterByCountry")}
+              {t("filterByDifficulty")}
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {ACTIVE_COUNTRY_FILTERS.map((slug) => {
-                const active = activeCountry === slug;
-                return (
-                  <Link
-                    key={slug}
-                    href={
-                      active
-                        ? journeysHref({ style: activeStyle ?? undefined })
-                        : journeysHref({ country: slug, style: activeStyle ?? undefined })
-                    }
-                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
-                      active
-                        ? "bg-silk-indigo text-silk-gold"
-                        : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
-                    }`}
-                  >
-                    {getCountryLabel(slug, locale)}
-                  </Link>
-                );
-              })}
+              {difficulties.map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  onClick={() => setDifficulty(d)}
+                  className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
+                    difficulty === d
+                      ? "bg-silk-indigo text-silk-gold"
+                      : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
+                  }`}
+                >
+                  {d === "all" ? t("difficulty.all") : toursT(`difficulty.${d}`)}
+                </button>
+              ))}
             </div>
-          </div>
-
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            {difficulties.map((d) => (
-              <button
-                key={d}
-                type="button"
-                onClick={() => setDifficulty(d)}
-                className={`rounded-full px-3 py-1.5 text-xs font-semibold transition ${
-                  difficulty === d
-                    ? "bg-silk-indigo text-silk-gold"
-                    : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
-                }`}
-              >
-                {d === "all" ? t("difficulty.all") : toursT(`difficulty.${d}`)}
-              </button>
-            ))}
           </div>
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -236,10 +330,15 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
         {filtered.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-silk-gold/30 bg-silk-cream/50 px-6 py-12 text-center">
             <p className="text-sm text-apple-muted">{t("empty")}</p>
-            {(activeCountry || activeRegion || activeStyle) && (
+            {(activeCountry || activeRegion || activeStyle || month !== "all" || duration !== "all") && (
               <Link
                 href="/journeys"
                 className="mt-4 inline-block text-sm font-semibold text-silk-gold hover:underline"
+                onClick={() => {
+                  setMonth("all");
+                  setDuration("all");
+                  setDifficulty("all");
+                }}
               >
                 {t("clearFilter")}
               </Link>

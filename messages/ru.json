@@ -91,7 +91,7 @@
       "hint": "Быстрые фильтры по странам, регионам и коридорам."
     },
     "catalog": {
-      "filterTitle": "Подберите тур",
+      "filterTitle": "Find your trip",
       "results": "Найдено туров: {count}",
       "sort": "Сортировка",
       "sortOptions": {
@@ -107,7 +107,7 @@
       "filterByStyle": "Стиль путешествия",
       "styleActive": "Стиль: {style}",
       "filterByCountry": "Страны Шёлкового пути",
-      "silkRoadNote": "Только страны на исторических караванных маршрутах — коридоры ЮНЕСКО.",
+      "silkRoadNote": "Filters: Destination · Departure Month · Duration · Travel Style · Difficulty · Sort. Only active GST destinations.",
       "countryActive": "Туры: {country}",
       "regionActive": "Фильтр региона",
       "regionActiveLabel": "Регион: {region}",
@@ -121,7 +121,17 @@
         "caucasus": "Кавказ",
         "anatolia": "Анатолия"
       },
-      "empty": "Нет туров по этим фильтрам. Попробуйте другую страну или смотрите все туры."
+      "empty": "Нет туров по этим фильтрам. Попробуйте другую страну или смотрите все туры.",
+      "filterByMonth": "Departure month",
+      "filterByDuration": "Duration",
+      "filterByDifficulty": "Difficulty",
+      "monthAll": "Any month",
+      "duration": {
+        "all": "Any duration",
+        "short": "5-8 days",
+        "medium": "9-12 days",
+        "long": "13+ days"
+      }
     },
     "help": {
       "whatsapp": "Написать в WhatsApp",
@@ -270,9 +280,17 @@
       "groupLabel": "Размер группы",
       "groupValue": "До {count} гостей",
       "priceFrom": "Цена от",
-      "datesNote": "Частные даты по запросу. Подтверждаем наличие в течение 24 часов.",
+      "datesNote": "Private departures on request. We confirm availability before any payment is required.",
       "includedTitle": "Включено",
-      "excludedTitle": "Не включено"
+      "excludedTitle": "Не включено",
+      "tableDeparture": "Departure",
+      "tableStatus": "Status",
+      "tablePlaces": "Availability",
+      "tableSingle": "Single supplement",
+      "tablePrice": "Price / person",
+      "bookDeparture": "Book This Departure",
+      "includedNote": "Inclusions can differ by country and season — final list is confirmed with your itinerary before payment.",
+      "policyLinks": "Full policies:"
     },
     "difficulty": {
       "easy": "Лёгкий",
@@ -334,7 +352,8 @@
           "Дом у памирской семьи"
         ]
       }
-    }
+    },
+    "groupUpTo": "Up to {count}"
   },
   "timeline": {
     "title": "2000 лет Шёлкового пути",
@@ -395,11 +414,11 @@
   },
   "partners": {
     "title": "Наши партнёры",
-    "subtitle": "Проверенные эксперты на каждом коридоре Шёлкового пути",
+    "subtitle": "Vetted local operators and hospitality partners — listed with permission only",
     "intro": "Каждый пакет GREATSILKTRAILS реализуется через отобранные отели, DMC и культурные организации — не анонимных посредников. Это команды, которые встречают в аэропорту, открывают закрытые памятники и готовят ужин в пустыне.",
     "viewAll": "Все партнёры",
     "visitWebsite": "Сайт партнёра",
-    "pageIntro": "Мы работаем только с партнёрами, которые разделяют наши стандарты безопасности, аутентичности и честного отношения к местным сообществам. Ниже — сеть, стоящая за вашим путешествием.",
+    "pageIntro": "We work with vetted local operators, hotels, and ground partners. Named logos appear only when GST has confirmed permission to list them. For current ground teams on a specific tour, ask in your enquiry.",
     "stats": "{count} партнёров в Центральной Азии, Китае и на Кавказе",
     "becomeTitle": "Стать партнёром",
     "becomeDesc": "Отели, DMC, гиды и культурные организации на Шёлковом пути — если вы разделяете наши ценности, мы будем рады сотрудничеству.",
@@ -451,7 +470,8 @@
         "name": "Silk Road Expeditions",
         "desc": "Специалисты в Сиане для «Нефритовых врат» — терракотовая армия, пещеры Могао и формальности на границе с Китаем."
       }
-    }
+    },
+    "empty": "Partner logos are shown only after written approval. Contact us to discuss partnership or to learn which local operators deliver a specific route."
   },
   "cta": {
     "title": "Ready to Travel the Silk Road?",
@@ -461,7 +481,7 @@
   },
   "about": {
     "title": "Наша история",
-    "subtitle": "Рождены из страсти к неизведанным дорогам",
+    "subtitle": "A curated Silk Road platform — not a single operator in every country",
     "mission": "GREATSILKTRAILS — curated Silk Road platform. Мы проектируем маршруты с trusted local operators, guides, homestays и logistics partners. Operational responsibility подтверждается по каждому туру до оплаты.",
     "values": {
       "authentic": {
@@ -642,7 +662,20 @@
       "fieldTravelers": "Путешественников",
       "fieldDate": "Желаемая дата",
       "fieldNotes": "Примечания",
-      "fieldSource": "Источник"
+      "fieldSource": "Источник",
+      "plannerHint": "General planner: no fixed tour selected. Tell us countries, dates, group size, and comfort.",
+      "fieldCountries": "Countries / regions",
+      "fieldComfort": "Comfort level",
+      "fieldBudget": "Budget range (optional)",
+      "fieldInterests": "Interests",
+      "countriesPlaceholder": "e.g. Tajikistan, Uzbekistan",
+      "budgetPlaceholder": "e.g. \\,000-3,000 per person",
+      "interestsPlaceholder": "culture, trekking, photo, overland…",
+      "comfortExplorer": "Explorer (group)",
+      "comfortSignature": "Signature",
+      "comfortPrivate": "Private / bespoke",
+      "titleReserve": "Reserve Your Spot",
+      "titlePlan": "Plan Your Journey"
     },
     "concierge": {
       "title": "Silk Консьерж",
@@ -821,7 +854,12 @@
         "spice-and-silk": "Специи и шёлк",
         "pamir-odyssey": "Памирская одиссея",
         "bespoke": "Индивидуальный тур"
-      }
+      },
+      "countries": "Countries of interest",
+      "comfort": "Comfort level",
+      "groupSize": "Group size",
+      "dates": "Preferred dates",
+      "planMode": "Plan Your Journey fields"
     },
     "info": {
       "email": "hello@greatsilktrails.com",
@@ -850,7 +888,7 @@
     },
     "journeys": {
       "title": "Туры по Шёлковому пути",
-      "subtitle": "Compare fixed-price packages — filter by destination, travel style, difficulty, and departure"
+      "subtitle": "Compare fixed-price packages — filter by destination, departure month, duration, travel style, and difficulty"
     },
     "destinations": {
       "title": "Направления",
@@ -858,7 +896,7 @@
     },
     "experiences": {
       "title": "Впечатления",
-      "subtitle": "Моменты, запечатлённые на Шёлковом пути"
+      "subtitle": "Visual inspiration — each image links to a Story, Destination, or Tour"
     },
     "heritage": {
       "title": "Наследие",
@@ -1202,7 +1240,9 @@
         "title": "Площадь Регистан",
         "location": "Самарканд · Узбекистан"
       }
-    }
+    },
+    "watchStory": "Watch Story",
+    "exploreRoute": "Explore Route"
   },
   "silkRoad": {
     "title": "11 000 км. Один легендарный маршрут.",
@@ -1279,6 +1319,9 @@
         "country": "Турция",
         "tag": "Западная точка — где встречаются континенты"
       }
-    }
+    },
+    "viewTours": "View tours",
+    "viewDestination": "Explore destination",
+    "editorialNote": "Historical corridor illustration for orientation. Present-day GST tours operate on selected modern routes only — not every map point is a bookable product."
   }
 }

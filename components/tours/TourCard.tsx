@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
-import { Calendar, MapPin, Star } from "lucide-react";
+import { Calendar, MapPin, Users } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import { countrySlugsToLabels, resolveTourCountrySlugs } from "@/lib/countries";
@@ -64,19 +64,18 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
 
         <CardHeader className="gap-2 px-5 pt-5 pb-0">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1 text-xs text-apple-muted">
-              <Star className="size-3.5 fill-silk-gold text-silk-gold" />
-              <span className="font-medium text-silk-indigo">{tour.rating}</span>
-              <span>({tour.reviews})</span>
-            </div>
-            <span className="text-xs text-silk-turquoise">{departure}</span>
+            <span className="text-xs text-silk-turquoise">{shop("nextDeparture")}: {departure}</span>
+            <span className="flex items-center gap-1 text-xs text-apple-muted">
+              <Users className="size-3.5" />
+              {t("groupUpTo", { count: tour.maxGroupSize ?? 12 })}
+            </span>
           </div>
           <Link href={`/journeys/${tour.slug}`}>
             <h3 className="silk-headline text-xl text-silk-indigo transition group-hover:text-silk-gold">
               {content.title}
             </h3>
           </Link>
-          <div className="flex items-center gap-3 text-xs text-apple-muted">
+          <div className="flex flex-wrap items-center gap-3 text-xs text-apple-muted">
             <span className="flex items-center gap-1">
               <Calendar className="size-3.5" />
               {tour.duration} {t("days")}
@@ -129,6 +128,7 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
               prefill={{
                 tourSlug: tour.slug,
                 preferredDate: tour.nextDeparture,
+                price: tour.price,
                 source: "card",
               }}
               label={shop("reserveSpot")}

@@ -10,7 +10,18 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+
+const CITY_LINKS: Record<string, { destination?: string; journeys?: string }> = {
+  xian: { destination: "china", journeys: "silk-road-origins-trail-china" },
+  dunhuang: { destination: "china", journeys: "silk-road-origins-trail-china" },
+  samarkand: { destination: "uzbekistan", journeys: "golden-cities-silk-trail-uzbekistan" },
+  bukhara: { destination: "uzbekistan", journeys: "golden-cities-silk-trail-uzbekistan" },
+  merv: { destination: "turkmenistan", journeys: "caravan-desert-silk-trail-turkmenistan" },
+  tehran: { destination: "iran", journeys: "persian-silk-trail-iran" },
+  istanbul: { destination: "turkey", journeys: "anatolian-silk-trail-turkey" },
+};
 
 const routeOrder = [
   "xian",
@@ -234,9 +245,31 @@ export default function SilkRoadMap() {
                   {t(`cities.${focusCity}.name`)}
                 </p>
               </div>
-              <p className="mt-2 text-xs leading-relaxed text-apple-subtle sm:mt-0 sm:border-l sm:border-silk-gold/20 sm:pl-6">
-                {t(`cities.${focusCity}.tag`)}
-              </p>
+              <div className="mt-2 sm:mt-0 sm:border-l sm:border-silk-gold/20 sm:pl-6">
+                <p className="text-xs leading-relaxed text-apple-subtle">
+                  {t(`cities.${focusCity}.tag`)}
+                </p>
+                {CITY_LINKS[focusCity] && (
+                  <div className="mt-2 flex flex-wrap justify-center gap-3 sm:justify-start">
+                    {CITY_LINKS[focusCity].destination && (
+                      <Link
+                        href={`/destinations/${CITY_LINKS[focusCity].destination}`}
+                        className="text-xs font-semibold text-silk-gold hover:underline"
+                      >
+                        {t("viewDestination")}
+                      </Link>
+                    )}
+                    {CITY_LINKS[focusCity].journeys && (
+                      <Link
+                        href={`/journeys/${CITY_LINKS[focusCity].journeys}`}
+                        className="text-xs font-semibold text-silk-turquoise hover:underline"
+                      >
+                        {t("viewTours")}
+                      </Link>
+                    )}
+                  </div>
+                )}
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
@@ -273,6 +306,7 @@ export default function SilkRoadMap() {
             ))}
           </div>
           <p className="mt-5 text-[11px] leading-relaxed text-apple-muted">{t("mapSubtitle")}</p>
+          <p className="mt-2 text-[11px] leading-relaxed text-apple-muted">{t("editorialNote")}</p>
         </div>
       </div>
     </figure>

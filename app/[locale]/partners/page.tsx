@@ -81,7 +81,15 @@ export default async function PartnersPage({
         </div>
       </section>
 
-      {categorySections}
+      {categorySections.length > 0 ? (
+        categorySections
+      ) : (
+        <section className="pb-16">
+          <div className="mx-auto max-w-[680px] px-6 text-center">
+            <p className="text-sm leading-relaxed text-apple-muted">{t("empty")}</p>
+          </div>
+        </section>
+      )}
 
       <section className="silk-pattern-dark apple-section">
         <div className="mx-auto max-w-[680px] px-6 text-center">

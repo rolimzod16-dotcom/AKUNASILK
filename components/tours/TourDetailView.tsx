@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { Star, Calendar, MapPin, Users } from "lucide-react";
+import { Calendar, MapPin, Users } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import { countrySlugsToLabels, resolveTourCountrySlugs } from "@/lib/countries";
@@ -53,13 +53,10 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
           <p className="apple-subhead mx-auto max-w-2xl text-xl text-apple-muted">
             {content.desc}
           </p>
-          <div className="mt-4 flex items-center justify-center gap-1 text-sm">
-            <Star className="size-4 fill-silk-gold text-silk-gold" />
-            <span className="font-semibold text-silk-indigo">{tour.rating}</span>
-            <span className="text-apple-muted">
-              · {tour.reviews} {shop("reviews")}
-            </span>
-          </div>
+          <p className="mt-4 text-sm text-apple-muted">
+            {tour.duration} {t("days")} · {shop("perPerson")} · $
+            {tour.price.toLocaleString(locale)}
+          </p>
         </div>
 
         <div className="relative mx-auto mt-10 max-w-[1100px] px-6 pb-12">

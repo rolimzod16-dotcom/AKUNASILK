@@ -29,6 +29,18 @@ export default function PartnersSectionClient({ items }: PartnersSectionClientPr
           </p>
         </ScrollReveal>
 
+        {items.length === 0 ? (
+          <ScrollReveal delay={0.1}>
+            <p className="mx-auto mt-10 max-w-xl text-center text-sm text-apple-muted">
+              {t("empty")}
+            </p>
+            <div className="mt-6 text-center">
+              <Button variant="silkOutline" size="pill-sm" asChild>
+                <Link href="/contact">{t("becomeCta")}</Link>
+              </Button>
+            </div>
+          </ScrollReveal>
+        ) : (
         <div className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:gap-6">
           {items.map(({ partner, content }, i) => (
             <ScrollReveal key={partner.id} delay={i * 0.05}>
@@ -47,15 +59,18 @@ export default function PartnersSectionClient({ items }: PartnersSectionClientPr
             </ScrollReveal>
           ))}
         </div>
+        )}
 
-        <ScrollReveal delay={0.2} className="mt-10 text-center">
-          <Button variant="silkOutline" size="pill" asChild>
-            <Link href="/partners">
-              {t("viewAll")}
-              <ArrowRight className="size-4" />
-            </Link>
-          </Button>
-        </ScrollReveal>
+        {items.length > 0 && (
+          <ScrollReveal delay={0.2} className="mt-10 text-center">
+            <Button variant="silkOutline" size="pill" asChild>
+              <Link href="/partners">
+                {t("viewAll")}
+                <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          </ScrollReveal>
+        )}
       </div>
     </section>
   );

@@ -3,8 +3,9 @@
 import { useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Play, Pause } from "lucide-react";
+import { Play, Pause, ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeading from "@/components/shared/SectionHeading";
 import { showcaseVideos } from "@/lib/data/videos";
@@ -13,6 +14,13 @@ import { cn } from "@/lib/utils";
 const EASE = [0.22, 1, 0.36, 1] as const;
 const HOVER_MS = 420;
 
+/** Map showcase cards to real routes / destinations (TZ: no fake video-only CTAs) */
+const CARD_LINKS: Record<string, { href: string; kind: "story" | "route" }> = {
+  desert: { href: "/journeys/caravan-desert-silk-trail-turkmenistan", kind: "route" },
+  mountains: { href: "/journeys/pamir-silk-trail-tajikistan-flagship", kind: "route" },
+  cities: { href: "/journeys/golden-cities-silk-trail-uzbekistan", kind: "route" },
+};
+
 type VideoCardProps = {
   src: string;
   poster: string;
@@ -20,6 +28,8 @@ type VideoCardProps = {
   location: string;
   index: number;
   kind?: "video" | "image";
+  href: string;
+  ctaLabel: string;
 };
 
 function VideoCard({
@@ -29,24 +39,23 @@ function VideoCard({
   location,
   index,
   kind = "video",
+  href,
+  ctaLabel,
 }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(kind === "video");
 
   const toggle = () => {
-    if (kind === "video") {
-      const video = videoRef.current;
-      if (!video) return;
-      if (video.paused) {
-        video.play().catch(() => undefined);
-        setPlaying(true);
-      } else {
-        video.pause();
-        setPlaying(false);
-      }
-      return;
+    if (kind !== "video") return;
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().catch(() => undefined);
+      setPlaying(true);
+    } else {
+      video.pause();
+      setPlaying(false);
     }
-    setPlaying((p) => !p);
   };
 
   return (
@@ -54,13 +63,8 @@ function VideoCard({
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{
-        duration: 0.55,
-        delay: index * 0.15,
-        ease: EASE,
-      }}
-      className="group cursor-pointer will-change-transform"
-      data-playing={playing ? "true" : "false"}
+      transition={{ duration: 0.55, delay: index * 0.15, ease: EASE }}
+      className="group will-change-transform"
     >
       <div
         className={cn(
@@ -75,14 +79,12 @@ function VideoCard({
         )}
         style={{ transitionDuration: `${HOVER_MS}ms` }}
       >
-        {/* Media — identical zoom for video & image */}
         <div className="absolute inset-0 overflow-hidden">
           <div
             className={cn(
               "h-full w-full origin-center",
               "transition-transform duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
-              "group-hover:scale-[1.1]",
-              playing && kind === "image" && "scale-[1.06]"
+              "group-hover:scale-[1.1]"
             )}
             style={{ transitionDuration: `${HOVER_MS}ms` }}
           >
@@ -115,44 +117,37 @@ function VideoCard({
 
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-silk-indigo/90 via-silk-indigo/20 to-transparent" />
 
-        {/* Play button — every card */}
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            toggle();
-          }}
-          className={cn(
-            "absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-full",
-            "bg-silk-gold/90 text-silk-indigo shadow-lg shadow-silk-gold/40",
-            "transition-[transform,background-color,box-shadow] duration-[420ms]",
-            "ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
-            "group-hover:scale-110 group-hover:bg-silk-gold group-hover:shadow-xl group-hover:shadow-silk-gold/50",
-            "active:scale-95"
-          )}
-          style={{ transitionDuration: `${HOVER_MS}ms` }}
-          aria-label={playing ? "Pause" : "Play"}
-        >
-          {playing ? (
-            <Pause className="size-4" />
-          ) : (
-            <Play className="size-4 ml-0.5" />
-          )}
-        </button>
+        {kind === "video" && (
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              toggle();
+            }}
+            className={cn(
+              "absolute right-4 top-4 z-10 flex size-10 items-center justify-center rounded-full",
+              "bg-silk-gold/90 text-silk-indigo shadow-lg shadow-silk-gold/40",
+              "transition-[transform,background-color,box-shadow] duration-[420ms]",
+              "group-hover:scale-110 group-hover:bg-silk-gold"
+            )}
+            aria-label={playing ? "Pause" : "Play"}
+          >
+            {playing ? <Pause className="size-4" /> : <Play className="size-4 ml-0.5" />}
+          </button>
+        )}
 
-        {/* Text — lifts on hover, identical on all cards */}
-        <div
-          className={cn(
-            "absolute inset-x-0 bottom-0 z-10 p-5",
-            "transition-transform duration-[420ms] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform",
-            "group-hover:-translate-y-2"
-          )}
-          style={{ transitionDuration: `${HOVER_MS}ms` }}
-        >
+        <div className="absolute inset-x-0 bottom-0 z-10 p-5">
           <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-silk-gold">
             {location}
           </p>
           <p className="silk-headline mt-1 text-xl text-white">{title}</p>
+          <Link
+            href={href}
+            className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-silk-gold transition hover:text-white"
+          >
+            {ctaLabel}
+            <ArrowRight className="size-3.5" />
+          </Link>
         </div>
       </div>
     </motion.div>
@@ -171,17 +166,27 @@ export default function VideoShowcase() {
         </ScrollReveal>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {showcaseVideos.map((video, i) => (
-            <VideoCard
-              key={video.id}
-              src={video.src}
-              poster={video.poster}
-              title={t(`clips.${video.titleKey}.title`)}
-              location={t(`clips.${video.locationKey}.location`)}
-              index={i}
-              kind={video.kind}
-            />
-          ))}
+          {showcaseVideos.map((video, i) => {
+            const link = CARD_LINKS[video.titleKey] ?? {
+              href: "/journeys",
+              kind: "route" as const,
+            };
+            return (
+              <VideoCard
+                key={video.id}
+                src={video.src}
+                poster={video.poster}
+                title={t(`clips.${video.titleKey}.title`)}
+                location={t(`clips.${video.locationKey}.location`)}
+                index={i}
+                kind={video.kind}
+                href={link.href}
+                ctaLabel={
+                  link.kind === "story" ? t("watchStory") : t("exploreRoute")
+                }
+              />
+            );
+          })}
         </div>
       </div>
     </section>

@@ -28,6 +28,7 @@ export default function TourDetailActions({
         prefill={{
           tourSlug: slug,
           preferredDate: nextDeparture,
+          price,
           source: "card",
         }}
         label={auto("reserveNow")}
@@ -39,6 +40,7 @@ export default function TourDetailActions({
         prefill={{
           tourSlug: slug,
           preferredDate: nextDeparture,
+          price,
           source: "card",
           notes: shop("askExpert"),
         }}

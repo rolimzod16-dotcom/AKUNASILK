@@ -55,11 +55,18 @@ export default function BookingWizard() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [notes, setNotes] = useState("");
+  const [countries, setCountries] = useState("");
+  const [comfort, setComfort] = useState("signature");
+  const [budget, setBudget] = useState("");
+  const [interests, setInterests] = useState("");
 
   const selectedTour = useMemo(
     () => tours.find((tour) => tour.slug === tourSlug),
     [tours, tourSlug]
   );
+
+  const isPlanner = tourSlug === "any" || tourSlug === "bespoke";
+  const displayPrice = prefill.price ?? selectedTour?.price;
 
   useEffect(() => {
     if (!open) return;
@@ -73,6 +80,10 @@ export default function BookingWizard() {
     setEmail(prefill.email ?? "");
     setPhone(prefill.phone ?? "");
     setNotes(prefill.notes ?? "");
+    setCountries(prefill.countries ?? "");
+    setComfort(prefill.comfort ?? "signature");
+    setBudget(prefill.budget ?? "");
+    setInterests(prefill.interests ?? "");
   }, [open, prefill]);
 
   useEffect(() => {
@@ -100,10 +111,16 @@ export default function BookingWizard() {
     const message = [
       t("messageHeader"),
       `${t("fieldTour")}: ${tourTitle}`,
+      displayPrice != null ? `Price (shown): $${displayPrice}` : null,
       `${t("fieldTravelers")}: ${travelers}`,
       preferredDate ? `${t("fieldDate")}: ${preferredDate}` : null,
+      countries.trim() ? `${t("fieldCountries")}: ${countries.trim()}` : null,
+      isPlanner ? `${t("fieldComfort")}: ${comfort}` : null,
+      budget.trim() ? `${t("fieldBudget")}: ${budget.trim()}` : null,
+      interests.trim() ? `${t("fieldInterests")}: ${interests.trim()}` : null,
       notes.trim() ? `${t("fieldNotes")}: ${notes.trim()}` : null,
       prefill.source ? `${t("fieldSource")}: ${prefill.source}` : null,
+      "Note: availability will be confirmed before any payment is required.",
     ]
       .filter(Boolean)
       .join("\n");
@@ -214,12 +231,15 @@ export default function BookingWizard() {
                   <p className="mt-1 text-apple-muted">
                     {selectedTour.duration} {t("days")} · ${selectedTour.price.toLocaleString()}
                   </p>
-                  {selectedTour.spotsLeft != null && selectedTour.spotsLeft <= 6 && (
-                    <p className="mt-2 text-xs font-semibold text-silk-terracotta">
-                      {t("scarcity", { count: selectedTour.spotsLeft })}
+                  {preferredDate && (
+                    <p className="mt-1 text-xs text-apple-muted">
+                      {t("preferredDate")}: {preferredDate}
                     </p>
                   )}
                 </div>
+              )}
+              {isPlanner && (
+                <p className="text-xs text-apple-muted">{t("plannerHint")}</p>
               )}
               <div className="flex items-start gap-2 rounded-xl border border-silk-turquoise/30 bg-silk-turquoise/5 p-3 text-xs text-apple-subtle">
                 <Shield className="mt-0.5 size-4 shrink-0 text-silk-turquoise" />
@@ -265,6 +285,50 @@ export default function BookingWizard() {
                 />
                 <p className="text-[11px] text-apple-muted">{t("dateFlexible")}</p>
               </div>
+              {isPlanner && (
+                <>
+                  <div className="space-y-2">
+                    <Label>{t("fieldCountries")}</Label>
+                    <Input
+                      value={countries}
+                      onChange={(e) => setCountries(e.target.value)}
+                      placeholder={t("countriesPlaceholder")}
+                      className="bg-background"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>{t("fieldComfort")}</Label>
+                    <Select value={comfort} onValueChange={setComfort}>
+                      <SelectTrigger className="w-full bg-background">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="explorer">{t("comfortExplorer")}</SelectItem>
+                        <SelectItem value="signature">{t("comfortSignature")}</SelectItem>
+                        <SelectItem value="private">{t("comfortPrivate")}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label>{t("fieldBudget")}</Label>
+                    <Input
+                      value={budget}
+                      onChange={(e) => setBudget(e.target.value)}
+                      placeholder={t("budgetPlaceholder")}
+                      className="bg-background"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label>{t("fieldInterests")}</Label>
+                    <Input
+                      value={interests}
+                      onChange={(e) => setInterests(e.target.value)}
+                      placeholder={t("interestsPlaceholder")}
+                      className="bg-background"
+                    />
+                  </div>
+                </>
+              )}
               <p className="rounded-xl bg-silk-indigo/5 px-3 py-2 text-xs text-silk-indigo">
                 {t("urgencyLine")}
               </p>

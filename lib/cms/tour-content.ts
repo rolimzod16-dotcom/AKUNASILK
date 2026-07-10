@@ -40,22 +40,27 @@ const DEFAULT_FAQ_EN: TourFaqItem[] = [
   {
     question: "Is this tour suitable for beginners?",
     answer:
-      "Most of our packages are designed for curious travelers with average fitness. Adventurous routes (Pamir, trekking) require comfort at altitude and long driving days.",
+      "Most packages suit average fitness. Adventurous routes (Pamir, trekking) need comfort at altitude and long driving days. We confirm suitability during enquiry.",
   },
   {
     question: "Do you help with visas and permits?",
     answer:
-      "Yes. We provide invitation letters, GBAO permit support for Tajikistan, and step-by-step guidance for every country on your route.",
+      "We provide visa support (invitation letters where applicable and document guidance). We do not guarantee visa approval. GBAO and border permits are arranged when legally available for your dates.",
   },
   {
     question: "What is the group size?",
     answer:
-      "Small groups up to 12 guests on scheduled departures. Private departures available on request.",
+      "Small groups up to the size shown on the tour page (often 8–12). Private departures available on request via Plan a Private Journey.",
   },
   {
-    question: "Can I customize the itinerary?",
+    question: "What is the cancellation policy?",
     answer:
-      "Absolutely. Contact us before booking — we can adjust hotels, add rest days, or combine countries.",
+      "More than 60 days before departure: full refund of amounts paid minus a $150 administrative fee per person. 30–60 days: 50% refund. Less than 30 days: no refund, with credit toward a future departure within 12 months (subject to availability). See Cancellation Policy for full terms.",
+  },
+  {
+    question: "When do I pay?",
+    answer:
+      "We confirm availability before any payment is required. After confirmation, a deposit is requested; balance is due as stated in your written confirmation. The website does not take one-click online payment.",
   },
 ];
 
@@ -63,22 +68,27 @@ const DEFAULT_FAQ_RU: TourFaqItem[] = [
   {
     question: "Подходит ли тур новичкам?",
     answer:
-      "Большинство маршрутов рассчитаны на обычную физическую форму. Экстремальные направления (Памир, треккинг) требуют переносимости высоты и длинных переездов.",
+      "Большинство маршрутов — обычная физическая форма. Памир и треккинг требуют переносимости высоты. Подтверждаем при enquiry.",
   },
   {
     question: "Помогаете с визами и разрешениями?",
     answer:
-      "Да. Оформляем приглашения, разрешение ГБАО для Таджикистана и консультируем по визам всех стран маршрута.",
+      "Да: visa support (приглашения где применимо, чек-листы). Не гарантируем одобрение визы. ГБАО и border permits — только если доступны на ваши даты.",
   },
   {
     question: "Какой размер группы?",
     answer:
-      "Небольшие группы до 12 человек на групповых датах. Частные выезды — по запросу.",
+      "Малые группы до размера на странице тура (часто 8–12). Private departures — через Plan a Private Journey.",
   },
   {
-    question: "Можно изменить маршрут?",
+    question: "Какая политика отмены?",
     answer:
-      "Да. Напишите до бронирования — подстроим отели, добавим дни отдыха или объединим страны.",
+      "За 60+ дней: полный возврат минус $150 admin fee с человека. 30–60 дней: 50%. Менее 30 дней: без возврата, кредит на другой выезд в течение 12 месяцев (при availability). См. Cancellation Policy.",
+  },
+  {
+    question: "Когда платить?",
+    answer:
+      "Сначала подтверждаем availability, затем депозит. Баланс — по письменному подтверждению. На сайте нет one-click online payment.",
   },
 ];
 

@@ -12,6 +12,7 @@ import {
   type CountrySlug,
 } from "@/lib/countries";
 import { getPublishedTours, getTourContent } from "@/lib/data/tours";
+import { getTravelStyleLabel, type TravelStyle } from "@/lib/travel-styles";
 
 /** Active GST destinations with real products / landings */
 const ACTIVE_COUNTRIES: CountrySlug[] = [
@@ -152,6 +153,12 @@ export default async function CountryLandingPage({
     content: getTourContent(tour, locale),
   }));
 
+  const styles = Array.from(
+    new Set(tours.map((tour) => tour.travelStyle).filter(Boolean))
+  ) as TravelStyle[];
+
+  const signatureRoutes = items.slice(0, 4);
+
   return (
     <>
       <PageHero title={name} subtitle={dest(`${country}.desc`)} />
@@ -180,6 +187,39 @@ export default async function CountryLandingPage({
             <h2 className="silk-headline text-xl text-silk-indigo">{t("visaNotes")}</h2>
             <p className="mt-2 text-sm leading-relaxed text-apple-muted">{notes.visa}</p>
           </div>
+          {styles.length > 0 && (
+            <div>
+              <h2 className="silk-headline text-xl text-silk-indigo">{t("styles")}</h2>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {styles.map((style) => (
+                  <Link
+                    key={style}
+                    href={`/journeys?country=${country}&style=${style}`}
+                    className="rounded-full border border-silk-gold/30 bg-white px-3 py-1.5 text-xs font-semibold text-silk-indigo hover:border-silk-gold"
+                  >
+                    {getTravelStyleLabel(style, locale)}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+          {signatureRoutes.length > 0 && (
+            <div>
+              <h2 className="silk-headline text-xl text-silk-indigo">{t("signatureRoutes")}</h2>
+              <ul className="mt-3 space-y-2">
+                {signatureRoutes.map(({ tour, content }) => (
+                  <li key={tour.id}>
+                    <Link
+                      href={`/journeys/${tour.slug}`}
+                      className="text-sm font-semibold text-silk-gold hover:underline"
+                    >
+                      {content.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           <div className="flex flex-wrap gap-3">
             <Button variant="silk" size="pill" asChild>

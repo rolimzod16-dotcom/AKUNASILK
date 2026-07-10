@@ -2,11 +2,11 @@
   {
     "id": "partner-1",
     "slug": "registan-palace",
-    "published": true,
+    "published": false,
     "category": "hotel",
     "country": "Uzbekistan",
     "initials": "RP",
-    "featured": true,
+    "featured": false,
     "content": {
       "en": {
         "name": "Registan Palace Hotel",
@@ -23,11 +23,11 @@
   {
     "id": "partner-2",
     "slug": "asia-adventures",
-    "published": true,
+    "published": false,
     "category": "dmc",
     "country": "Uzbekistan",
     "initials": "AA",
-    "featured": true,
+    "featured": false,
     "content": {
       "en": {
         "name": "Asia Adventures DMC",
@@ -44,11 +44,11 @@
   {
     "id": "partner-3",
     "slug": "pamiri-homestays",
-    "published": true,
+    "published": false,
     "category": "hospitality",
     "country": "Tajikistan",
     "initials": "PH",
-    "featured": true,
+    "featured": false,
     "content": {
       "en": {
         "name": "Pamiri Homestay Network",
@@ -65,11 +65,11 @@
   {
     "id": "partner-4",
     "slug": "turkish-airlines",
-    "published": true,
+    "published": false,
     "category": "transport",
     "country": "Turkey",
     "initials": "TK",
-    "featured": true,
+    "featured": false,
     "website": "https://www.turkishairlines.com",
     "content": {
       "en": {
@@ -87,11 +87,11 @@
   {
     "id": "partner-5",
     "slug": "caravan-serai",
-    "published": true,
+    "published": false,
     "category": "hotel",
     "country": "Uzbekistan",
     "initials": "CS",
-    "featured": true,
+    "featured": false,
     "content": {
       "en": {
         "name": "Caravan Serai Group",
@@ -108,11 +108,11 @@
   {
     "id": "partner-6",
     "slug": "nomad-trails",
-    "published": true,
+    "published": false,
     "category": "dmc",
     "country": "Kyrgyzstan",
     "initials": "NT",
-    "featured": true,
+    "featured": false,
     "content": {
       "en": {
         "name": "Nomad Trails Kyrgyzstan",
@@ -129,7 +129,7 @@
   {
     "id": "partner-7",
     "slug": "uzbekistan-tourism",
-    "published": true,
+    "published": false,
     "category": "cultural",
     "country": "Uzbekistan",
     "initials": "UT",
@@ -150,7 +150,7 @@
   {
     "id": "partner-8",
     "slug": "silk-road-xian",
-    "published": true,
+    "published": false,
     "category": "dmc",
     "country": "China",
     "initials": "SX",

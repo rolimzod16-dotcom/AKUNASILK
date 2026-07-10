@@ -107,7 +107,7 @@
       "filterByStyle": "Travel style",
       "styleActive": "Style: {style}",
       "filterByCountry": "Silk Road countries",
-      "silkRoadNote": "Only countries on historic caravan routes — UNESCO Silk Roads corridors.",
+      "silkRoadNote": "Filters: Destination · Departure Month · Duration · Travel Style · Difficulty · Sort. Only active GST destinations.",
       "countryActive": "Showing tours in {country}",
       "regionActive": "Region filter on",
       "regionActiveLabel": "Region: {region}",
@@ -121,7 +121,17 @@
         "caucasus": "Caucasus",
         "anatolia": "Anatolia"
       },
-      "empty": "No tours match these filters. Try another country or browse all tours."
+      "empty": "No tours match these filters. Try another country or browse all tours.",
+      "filterByMonth": "Departure month",
+      "filterByDuration": "Duration",
+      "filterByDifficulty": "Difficulty",
+      "monthAll": "Any month",
+      "duration": {
+        "all": "Any duration",
+        "short": "5-8 days",
+        "medium": "9-12 days",
+        "long": "13+ days"
+      }
     },
     "help": {
       "whatsapp": "Chat on WhatsApp",
@@ -270,9 +280,17 @@
       "groupLabel": "Group size",
       "groupValue": "Up to {count} guests",
       "priceFrom": "Price from",
-      "datesNote": "Private departures on request. We confirm availability within 24 hours.",
+      "datesNote": "Private departures on request. We confirm availability before any payment is required.",
       "includedTitle": "Included",
-      "excludedTitle": "Not included"
+      "excludedTitle": "Not included",
+      "tableDeparture": "Departure",
+      "tableStatus": "Status",
+      "tablePlaces": "Availability",
+      "tableSingle": "Single supplement",
+      "tablePrice": "Price / person",
+      "bookDeparture": "Book This Departure",
+      "includedNote": "Inclusions can differ by country and season — final list is confirmed with your itinerary before payment.",
+      "policyLinks": "Full policies:"
     },
     "difficulty": {
       "easy": "Leisure",
@@ -334,7 +352,8 @@
           "Homestay with Pamiri families"
         ]
       }
-    }
+    },
+    "groupUpTo": "Up to {count}"
   },
   "timeline": {
     "title": "2,000 Years of the Silk Road",
@@ -395,11 +414,11 @@
   },
   "partners": {
     "title": "Our Partners",
-    "subtitle": "Local experts we trust on every Silk Road corridor",
+    "subtitle": "Vetted local operators and hospitality partners — listed with permission only",
     "intro": "Every GREATSILKTRAILS package is delivered through vetted hotels, DMCs, and cultural institutions — not anonymous third parties. These are the teams that greet you at the airport, unlock closed monuments, and cook dinner in the desert.",
     "viewAll": "Meet all partners",
     "visitWebsite": "Visit website",
-    "pageIntro": "We work exclusively with partners who share our standards for safety, authenticity, and fair treatment of local communities. Below is the network behind your journey.",
+    "pageIntro": "We work with vetted local operators, hotels, and ground partners. Named logos appear only when GST has confirmed permission to list them. For current ground teams on a specific tour, ask in your enquiry.",
     "stats": "{count} partners across Central Asia, China, and the Caucasus",
     "becomeTitle": "Become a partner",
     "becomeDesc": "Hotels, DMCs, guides, and cultural institutions along the Silk Road — if you share our values, we would love to hear from you.",
@@ -451,7 +470,8 @@
         "name": "Silk Road Expeditions",
         "desc": "Xi'an-based specialists for Jade Gate departures — Terracotta Army, Mogao Caves logistics, and China border formalities."
       }
-    }
+    },
+    "empty": "Partner logos are shown only after written approval. Contact us to discuss partnership or to learn which local operators deliver a specific route."
   },
   "cta": {
     "title": "Ready to Travel the Silk Road?",
@@ -461,8 +481,8 @@
   },
   "about": {
     "title": "Our Story",
-    "subtitle": "Born from a passion for the road less traveled",
-    "mission": "GREATSILKTRAILS is a curated Silk Road platform. We design journeys with trusted local operators, guides, homestays, and logistics partners across historic caravan corridors. Operational responsibility is confirmed per tour before you pay.",
+    "subtitle": "A curated Silk Road platform — not a single operator in every country",
+    "mission": "GREATSILKTRAILS is a curated Silk Road platform and umbrella brand. We design fixed-price and private journeys with trusted local operators, English-speaking guides, homestays, and logistics partners. We are not a single operator in every country — operational responsibility for each Tour is confirmed in writing before you pay.",
     "values": {
       "authentic": {
         "title": "Authenticity",
@@ -642,7 +662,20 @@
       "fieldTravelers": "Travelers",
       "fieldDate": "Preferred date",
       "fieldNotes": "Notes",
-      "fieldSource": "Source"
+      "fieldSource": "Source",
+      "plannerHint": "General planner: no fixed tour selected. Tell us countries, dates, group size, and comfort.",
+      "fieldCountries": "Countries / regions",
+      "fieldComfort": "Comfort level",
+      "fieldBudget": "Budget range (optional)",
+      "fieldInterests": "Interests",
+      "countriesPlaceholder": "e.g. Tajikistan, Uzbekistan",
+      "budgetPlaceholder": "e.g. \\,000-3,000 per person",
+      "interestsPlaceholder": "culture, trekking, photo, overland…",
+      "comfortExplorer": "Explorer (group)",
+      "comfortSignature": "Signature",
+      "comfortPrivate": "Private / bespoke",
+      "titleReserve": "Reserve Your Spot",
+      "titlePlan": "Plan Your Journey"
     },
     "concierge": {
       "title": "Silk Concierge",
@@ -821,7 +854,12 @@
         "spice-and-silk": "Spice & Silk",
         "pamir-odyssey": "Pamir Odyssey",
         "bespoke": "Bespoke Private Tour"
-      }
+      },
+      "countries": "Countries of interest",
+      "comfort": "Comfort level",
+      "groupSize": "Group size",
+      "dates": "Preferred dates",
+      "planMode": "Plan Your Journey fields"
     },
     "info": {
       "email": "hello@greatsilktrails.com",
@@ -850,7 +888,7 @@
     },
     "journeys": {
       "title": "Silk Road Tours",
-      "subtitle": "Compare fixed-price packages — filter by destination, travel style, difficulty, and departure"
+      "subtitle": "Compare fixed-price packages — filter by destination, departure month, duration, travel style, and difficulty"
     },
     "destinations": {
       "title": "Destinations",
@@ -858,7 +896,7 @@
     },
     "experiences": {
       "title": "Experiences",
-      "subtitle": "Moments captured along the Silk Road"
+      "subtitle": "Visual inspiration — each image links to a Story, Destination, or Tour"
     },
     "heritage": {
       "title": "Heritage",
@@ -1202,7 +1240,9 @@
         "title": "Registan Square",
         "location": "Samarkand · Uzbekistan"
       }
-    }
+    },
+    "watchStory": "Watch Story",
+    "exploreRoute": "Explore Route"
   },
   "silkRoad": {
     "title": "7,000 miles. One legendary route.",
@@ -1279,6 +1319,9 @@
         "country": "Turkey",
         "tag": "Western terminus — where continents meet"
       }
-    }
+    },
+    "viewTours": "View tours",
+    "viewDestination": "Explore destination",
+    "editorialNote": "Historical corridor illustration for orientation. Present-day GST tours operate on selected modern routes only — not every map point is a bookable product."
   }
 }

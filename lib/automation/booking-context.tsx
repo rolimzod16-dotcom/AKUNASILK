@@ -13,10 +13,16 @@ export type BookingPrefill = {
   tourSlug?: string;
   travelers?: number;
   preferredDate?: string;
+  price?: number;
   name?: string;
   email?: string;
   phone?: string;
   notes?: string;
+  /** Planner fields for Plan Your Journey / private trips */
+  countries?: string;
+  comfort?: string;
+  budget?: string;
+  interests?: string;
   source?: "wizard" | "concierge" | "matcher" | "card" | "hero" | "header" | "info-page" | "travel-styles";
 };
 
