@@ -106,11 +106,8 @@ export default function SilkConcierge() {
         });
         return t("tourWhen", { tour: activeTour.title, date });
       }
-      if (topic === "group" && activeTour.spotsLeft != null) {
-        return t("tourSpots", {
-          tour: activeTour.title,
-          count: activeTour.spotsLeft,
-        });
+      if (topic === "group" && activeTour) {
+        return t("tourSpots", { tour: activeTour.title, count: activeTour.maxGroupSize ?? 12 });
       }
     }
     return t(`answers.${topic}`);

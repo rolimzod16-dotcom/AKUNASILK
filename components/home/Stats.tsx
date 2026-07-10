@@ -1,59 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 
+/** Only verifiable operational facts — no invented traveler counts or ratings (TZ §1). */
 const stats = [
-  { value: 4200, suffix: "+", key: "travelers" },
-  { value: 28, suffix: "", key: "tours" },
-  { value: 14, suffix: "", key: "countries" },
-  { value: 14, suffix: "", key: "years" },
+  { value: "16+", key: "tours" },
+  { value: "9", key: "countries" },
+  { value: "5", key: "styles" },
+  { value: "24/7", key: "support" },
 ] as const;
-
-function Counter({ target, suffix }: { target: number; suffix: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  const started = useRef(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started.current) {
-          started.current = true;
-          const duration = 2000;
-          const start = performance.now();
-
-          const tick = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 4);
-            setCount(Math.floor(eased * target));
-            if (progress < 1) requestAnimationFrame(tick);
-          };
-
-          requestAnimationFrame(tick);
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [target]);
-
-  return (
-    <span
-      ref={ref}
-      className="apple-headline text-5xl text-apple-black sm:text-6xl md:text-7xl"
-    >
-      {count.toLocaleString()}
-      {suffix}
-    </span>
-  );
-}
 
 export default function Stats() {
   const t = useTranslations("stats");
@@ -63,7 +19,9 @@ export default function Stats() {
       <div className="mx-auto grid max-w-[980px] grid-cols-2 gap-12 px-6 md:grid-cols-4">
         {stats.map((stat, i) => (
           <ScrollReveal key={stat.key} delay={i * 0.08} className="text-center">
-            <Counter target={stat.value} suffix={stat.suffix} />
+            <span className="apple-headline text-5xl text-apple-black sm:text-6xl md:text-7xl">
+              {stat.value}
+            </span>
             <p className="mt-2 text-sm text-apple-muted">{t(stat.key)}</p>
           </ScrollReveal>
         ))}

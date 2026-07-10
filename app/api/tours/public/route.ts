@@ -16,14 +16,13 @@ export async function GET(request: Request) {
       originalPrice: tour.originalPrice,
       duration: tour.duration,
       spotsLeft: tour.spotsLeft,
+      maxGroupSize: tour.maxGroupSize ?? 12,
       nextDeparture: tour.nextDeparture,
       difficulty: tour.difficulty,
       countries: tour.countries,
       countrySlugs: resolveTourCountrySlugs(tour),
       bestseller: tour.bestseller,
       image: tour.image,
-      rating: tour.rating,
-      reviews: tour.reviews,
     };
   });
 

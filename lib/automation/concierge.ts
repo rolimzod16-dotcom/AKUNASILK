@@ -38,6 +38,7 @@ export type PublicTour = {
   price: number;
   duration: number;
   spotsLeft?: number;
+  maxGroupSize?: number;
   nextDeparture: string;
   difficulty: string;
   countries: string[];
@@ -50,7 +51,7 @@ export function tourAnswerForTopic(tour: PublicTour, topic: ConciergeTopic): str
     case "when":
       return `tourWhen:${tour.nextDeparture}`;
     case "group":
-      return tour.spotsLeft != null ? `tourSpots:${tour.spotsLeft}` : null;
+      return `tourSpots:${tour.maxGroupSize ?? 12}`;
     default:
       return null;
   }

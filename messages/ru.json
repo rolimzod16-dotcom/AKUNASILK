@@ -227,10 +227,12 @@
     }
   },
   "stats": {
-    "travelers": "Довольных путешественников",
-    "tours": "Маршрутов",
-    "countries": "Стран",
-    "years": "Лет опыта"
+    "travelers": "Путешественники",
+    "tours": "Маршруты",
+    "countries": "Активные направления",
+    "years": "Опыт",
+    "styles": "Стили",
+    "support": "Поддержка"
   },
   "features": {
     "title": "Почему мы",
@@ -393,24 +395,25 @@
   },
   "testimonials": {
     "title": "Guest feedback",
-    "subtitle": "Отзывы путешественников о наших маршрутах.",
+    "subtitle": "Illustrative guest notes for inspiration — replace with verified reviews before public launch.",
     "items": {
       "1": {
-        "text": "Стоять на площади Регистан на рассвете — как пройти через портал. GREATSILKTRAILS сделали каждый момент лёгким.",
-        "author": "Елена М.",
-        "location": "Москва"
+        "text": "Standing in Registan at sunrise felt like stepping through a portal. Logistics were clear and the pace worked.",
+        "author": "Guest, Europe",
+        "location": "Golden Cities route"
       },
       "2": {
-        "text": "Тур по Памирскому тракту изменил моё представление о путешествиях. Дико, сурово и абсолютно великолепно.",
-        "author": "Джеймс К.",
-        "location": "Лондон"
+        "text": "The Pamir Highway days were raw and magnificent. Guides explained altitude and stops without pressure.",
+        "author": "Guest, UK",
+        "location": "Pamir Silk Trail"
       },
       "3": {
-        "text": "Семейная поездка по Узбекистану была волшебной. Дети до сих пор вспоминают ужин в юрте.",
-        "author": "Сара и Том",
-        "location": "Берлин"
+        "text": "Family-friendly pace through Uzbekistan. Kids still talk about the desert evening.",
+        "author": "Guest family",
+        "location": "Central Asia"
       }
-    }
+    },
+    "badge": "Guest note"
   },
   "partners": {
     "title": "Наши партнёры",
@@ -708,17 +711,17 @@
       },
       "tourPrice": "{tour} — ${price} за человека, всё включено. Нажмите «Забронировать» — резерв на 24 часа.",
       "tourWhen": "Ближайший выезд {tour}: {date}. Гибкие даты? Подберём лучшее окно.",
-      "tourSpots": "Group size is limited on {tour}. Ask us for current availability on your preferred dates."
+      "tourSpots": "{tour} runs in small groups (up to {count} guests). Ask us for current availability on your preferred dates."
     },
     "social": {
       "events": {
-        "e1": "Traveler from London enquired about Golden Cities · recently",
-        "e2": "Traveler from Milan asked about Pamir Silk Trail · recently",
-        "e3": "Traveler from Tokyo exploring Jade Gate options · recently",
-        "e4": "Traveler from Sydney reviewing Desert Echoes · recently",
-        "e5": "Traveler from Berlin comparing mountain routes · recently",
-        "e6": "English-speaking support available Mon-Sat",
-        "e7": "Fixed-price packages · private journeys on request",
+        "e1": "",
+        "e2": "",
+        "e3": "",
+        "e4": "",
+        "e5": "",
+        "e6": "English-speaking support available Mon–Sat, 9:00–19:00 (GMT+5)",
+        "e7": "Fixed-price packages and private journeys · enquiry-based confirmation",
         "e8": "Flexible cancellation · availability confirmed before payment"
       }
     },
@@ -1053,8 +1056,8 @@
         {
           "title": "Operator and contact",
           "paragraphs": [
-            "GREATSILKTRAILS operates as a curated travel platform for Silk Road journeys. For privacy requests contact hello@greatsilktrails.com.",
-            "Registered legal entity details for a specific booking are provided in the written confirmation before payment."
+            "Operator brand: GREATSILKTRAILS (curated Silk Road platform). Privacy and booking requests: hello@greatsilktrails.com. Phone: +998 71 200 45 67.",
+            "Registered legal entity name, country of registration, company number, and governing law for each booking are stated on the written confirmation and invoice issued before any deposit is due. Until that confirmation, website enquiries do not form a paid contract."
           ]
         },
         {
@@ -1086,8 +1089,8 @@
         {
           "title": "Legal entity and applicable law",
           "paragraphs": [
-            "Bookings are confirmed in writing after availability is checked. Contracting party and applicable law are stated in the confirmation before deposit.",
-            "Submitting an enquiry does not create a paid contract."
+            "Contracting party: the legal entity named on your booking confirmation (issued after availability check). Country of registration and applicable law appear on that confirmation and on the invoice before deposit.",
+            "GREATSILKTRAILS acts as a curated platform coordinating local operators, guides, and logistics partners. Operational responsibility for each Tour is assigned in the confirmation documents. Submitting a website form is an enquiry only."
           ]
         },
         {

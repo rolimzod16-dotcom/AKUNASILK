@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Star } from "lucide-react";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeading from "@/components/shared/SectionHeading";
 
@@ -21,11 +20,9 @@ export default function Testimonials() {
           {keys.map((key, i) => (
             <ScrollReveal key={key} delay={i * 0.08}>
               <div className="h-full rounded-2xl border border-silk-gold/20 bg-white p-6 shadow-sm transition duration-500 hover:border-silk-gold/40 hover:shadow-lg hover:shadow-silk-gold/10">
-                <div className="flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, j) => (
-                    <Star key={j} className="size-3.5 fill-silk-gold text-silk-gold" />
-                  ))}
-                </div>
+                <p className="text-[10px] font-bold uppercase tracking-wider text-silk-gold">
+                  {t("badge")}
+                </p>
                 <p className="mt-4 text-sm leading-relaxed text-apple-subtle">
                   &ldquo;{t(`items.${key}.text`)}&rdquo;
                 </p>

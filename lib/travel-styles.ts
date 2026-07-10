@@ -23,7 +23,7 @@ export const TRAVEL_STYLE_LABELS: Record<TravelStyle, { en: string; ru: string }
   horseRiding: { en: "Horse Riding", ru: "Верховая езда" },
   trekking: { en: "Trekking", ru: "Треккинг" },
   culture: { en: "Culture & Cities", ru: "Культура и города" },
-  photo: { en: "Photo Journey", ru: "Фото-путешествие" },
+  photo: { en: "Photo Journeys", ru: "Фото-путешествия" },
 };
 
 export function getTravelStyleLabel(style: TravelStyle, locale = "en"): string {
