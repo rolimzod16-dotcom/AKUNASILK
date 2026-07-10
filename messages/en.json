@@ -1,12 +1,12 @@
 {
   "meta": {
-    "title": "GREATSILKTRAILS — Buy Silk Road Tour Packages",
-    "description": "Book all-inclusive Silk Road tour packages. Fixed prices, instant inquiry, departures year-round. Uzbekistan, Kyrgyzstan, China & more."
+    "title": "GREATSILKTRAILS — Silk Road Journeys",
+    "description": "Fixed-price small-group and private Silk Road journeys. Inquiry-based confirmation, visa support, and English-speaking guides across Central Asia and beyond."
   },
   "nav": {
     "home": "Home",
     "silkTrails": "Silk Trails",
-    "destination": "Destination",
+    "destination": "Destinations",
     "travelStyles": "Travel Styles",
     "servicesLogistics": "Services & Logistics",
     "aboutGst": "About GST",
@@ -53,19 +53,32 @@
     "portfolio": "Experiences",
     "blog": "Stories",
     "faq": "FAQ",
-    "book": "Buy a Tour",
+    "book": "Plan Your Journey",
     "planYourJourney": "Plan Your Journey",
-    "getQuote": "Get a Quote"
+    "getQuote": "Plan Your Journey",
+    "silkRoadMain": "The Silk Road"
   },
   "traveler": {
     "trust": {
-      "cancel": { "title": "Free cancellation", "desc": "Full refund up to 60 days before departure" },
-      "support": { "title": "24/7 trip support", "desc": "English-speaking team before & during your trip" },
-      "guides": { "title": "Local expert guides", "desc": "Historians & nomadic hosts on every route" },
-      "secure": { "title": "Secure booking", "desc": "Clear pricing · No hidden fees at checkout" }
+      "cancel": {
+        "title": "Flexible cancellation",
+        "desc": "Full refund minus $150 admin fee when cancelled 60+ days before departure"
+      },
+      "support": {
+        "title": "24/7 trip support",
+        "desc": "English-speaking team before and during your trip"
+      },
+      "guides": {
+        "title": "Local expert guides",
+        "desc": "English-speaking guides and local partners on every route"
+      },
+      "secure": {
+        "title": "Clear pricing",
+        "desc": "Fixed package prices. Availability confirmed before payment"
+      }
     },
     "finder": {
-      "title": "Where do you want to go?",
+      "title": "Choose a region or route",
       "viewAll": "Browse all tours",
       "regions": {
         "uzbekistan": "Uzbekistan",
@@ -74,7 +87,8 @@
         "china": "China Silk Road",
         "persia": "Persia",
         "caucasus": "Caucasus"
-      }
+      },
+      "hint": "Quick filters for countries, regions, and corridors."
     },
     "catalog": {
       "filterTitle": "Find your trip",
@@ -87,7 +101,9 @@
         "duration": "Shortest first",
         "departure": "Soonest departure"
       },
-      "difficulty": { "all": "All levels" },
+      "difficulty": {
+        "all": "All levels"
+      },
       "filterByStyle": "Travel style",
       "styleActive": "Style: {style}",
       "filterByCountry": "Silk Road countries",
@@ -113,52 +129,71 @@
     }
   },
   "hero": {
-    "badge": "Small groups · English guides · All-inclusive",
+    "badge": "Small groups · English-speaking guides · Fixed-price packages",
     "title": "Silk Road tours, made simple.",
-    "subtitle": "Fixed prices in USD. Hotels, transfers, visas support & most meals included — book with confidence from abroad.",
+    "subtitle": "Fixed prices in USD. Hotels, transfers, visa support and most meals included — plan with confidence from abroad.",
     "priceFrom": "From ${price}",
-    "cta": "Browse tours",
+    "cta": "Browse Tours",
     "ctaSecondary": "See bestseller",
     "bestseller": "Bestseller",
-    "spotsUrgent": "Only {count} spots left on next departure",
-    "trust": "Free cancellation up to 60 days · Secure booking · 4,200+ travelers"
+    "spotsUrgent": "Next departure details on the tour page",
+    "trust": "Flexible cancellation · Clear pricing · Availability confirmed before payment"
   },
   "shop": {
     "title": "Choose your package",
     "subtitle": "All tours include guide, hotels, transfers & most meals. Pay once — travel worry-free.",
     "bestseller": "Bestseller",
-    "buy": "Get quote",
-    "buyNow": "Get a quote",
-    "getQuote": "Get quote",
-    "viewTrip": "View trip",
+    "buy": "Reserve Your Spot",
+    "buyNow": "Reserve Your Spot",
+    "getQuote": "Reserve Your Spot",
+    "viewTrip": "View Tour",
     "perPerson": "per person",
-    "buyPackage": "Shop Tour Packages",
+    "buyPackage": "Browse Tours",
     "details": "Details",
     "departure": "Departs",
     "nextDeparture": "Next departure",
-    "orMonthly": "or ~${price}/mo with installments",
+    "orMonthly": "",
     "reviews": "reviews",
     "mostPopular": "Most Popular",
-    "pricingTitle": "Pick your tier",
-    "pricingSubtitle": "Same destinations. Different comfort levels.",
+    "pricingTitle": "How would you like to travel?",
+    "pricingSubtitle": "Group packages, signature routes, or a private journey — choose your approach.",
     "packageIncludes": "Every package includes",
     "highlights": "Trip highlights",
     "askExpert": "Ask an expert",
     "available": "Spots available",
-    "guaranteeShort": "60-day free cancellation · Best price guarantee",
-    "compareHint": "Not sure which package? Compare all routes.",
+    "guaranteeShort": "Flexible cancellation · Availability confirmed before payment",
+    "compareHint": "Related options: compare routes, explore destinations, or plan private dates.",
     "includes": {
       "title": "All-inclusive. No surprises.",
       "subtitle": "Every GREATSILKTRAILS package ships with everything below — no hidden fees at checkout.",
       "items": {
-        "guide": { "title": "Expert Guide", "desc": "Local historian, full trip" },
-        "hotel": { "title": "Hotels", "desc": "Boutique & heritage stays" },
-        "transfer": { "title": "Transfers", "desc": "Airport pickup & all transport" },
-        "meals": { "title": "Meals", "desc": "Breakfast + most dinners" },
-        "tickets": { "title": "Entrance Fees", "desc": "Museums, sites, activities" },
-        "support": { "title": "24/7 Support", "desc": "On-trip assistance always" }
+        "guide": {
+          "title": "Expert Guide",
+          "desc": "Local historian, full trip"
+        },
+        "hotel": {
+          "title": "Hotels",
+          "desc": "Boutique & heritage stays"
+        },
+        "transfer": {
+          "title": "Transfers",
+          "desc": "Airport pickup & all transport"
+        },
+        "meals": {
+          "title": "Meals",
+          "desc": "Breakfast + most dinners"
+        },
+        "tickets": {
+          "title": "Entrance Fees",
+          "desc": "Museums, sites, activities"
+        },
+        "support": {
+          "title": "24/7 Support",
+          "desc": "On-trip assistance always"
+        }
       }
-    }
+    },
+    "reserveSpot": "Reserve Your Spot"
   },
   "scrollStory": {
     "title": "Every mile. A masterpiece.",
@@ -248,32 +283,56 @@
       "golden-cities-silk-trail-uzbekistan": {
         "title": "Golden Cities Silk Trail — Uzbekistan",
         "desc": "Samarkand, Bukhara, and Khiva — the golden triangle of Silk Road architecture and living craft traditions.",
-        "highlights": ["Registan at dawn", "Silk weaving workshop", "Khiva walled city"]
+        "highlights": [
+          "Registan at dawn",
+          "Silk weaving workshop",
+          "Khiva walled city"
+        ]
       },
       "caravan-desert-silk-trail-turkmenistan": {
         "title": "Caravan Desert Silk Trail — Turkmenistan",
         "desc": "Darvaza's flaming crater, ancient Merv, and caravan routes across the Karakum Desert.",
-        "highlights": ["Door to Hell at night", "UNESCO Merv", "Desert camp under stars"]
+        "highlights": [
+          "Door to Hell at night",
+          "UNESCO Merv",
+          "Desert camp under stars"
+        ]
       },
       "nomads-mountains-silk-trail-kyrgyzstan": {
         "title": "Nomads & Mountains Silk Trail — Kyrgyzstan",
         "desc": "Alpine jailoos, eagle hunters, and felt-making traditions in the Tian Shan highlands.",
-        "highlights": ["Issyk-Kul lake", "Eagle hunting demo", "Nomadic horse trek"]
+        "highlights": [
+          "Issyk-Kul lake",
+          "Eagle hunting demo",
+          "Nomadic horse trek"
+        ]
       },
       "silk-road-origins-trail-china": {
         "title": "Silk Road Origins Trail — China",
         "desc": "From Xi'an's Terracotta Warriors to Dunhuang's Mogao Caves — trace China's Silk Road origins.",
-        "highlights": ["Terracotta Army", "Mogao Caves", "Camel market in Kashgar"]
+        "highlights": [
+          "Terracotta Army",
+          "Mogao Caves",
+          "Camel market in Kashgar"
+        ]
       },
       "caucasus-culture-route": {
         "title": "Caucasus Culture Route",
         "desc": "Georgian wine cellars, Armenian monasteries, and mountain villages where East meets West.",
-        "highlights": ["Wine tasting in Kakheti", "Gergeti Trinity Church", "Sheki Khan Palace"]
+        "highlights": [
+          "Wine tasting in Kakheti",
+          "Gergeti Trinity Church",
+          "Sheki Khan Palace"
+        ]
       },
       "pamir-silk-trail-tajikistan-flagship": {
         "title": "Pamir Silk Trail — Tajikistan (Flagship)",
         "desc": "The legendary Pamir Highway by 4x4 — Wakhan Valley views, remote villages, and the roof of the world.",
-        "highlights": ["Pamir Highway drive", "Wakhan Corridor", "Homestay with Pamiri families"]
+        "highlights": [
+          "Pamir Highway drive",
+          "Wakhan Corridor",
+          "Homestay with Pamiri families"
+        ]
       }
     }
   },
@@ -281,21 +340,57 @@
     "title": "2,000 Years of the Silk Road",
     "subtitle": "Follow the thread of history as you travel",
     "events": {
-      "130bce": { "year": "130 BCE", "title": "Zhang Qian Opens the West", "desc": "Han dynasty envoy discovers the western routes, igniting centuries of trade." },
-      "1stc": { "year": "1st Century", "title": "Rome Meets the East", "desc": "Roman nobles drape themselves in Chinese silk — a luxury worth its weight in gold." },
-      "7thc": { "year": "7th Century", "title": "Golden Age of Samarkand", "desc": "Under the Sogdians, Samarkand becomes the crossroads of the world." },
-      "13thc": { "year": "13th Century", "title": "Marco Polo's Caravan", "desc": "The Venetian merchant documents wonders from Kashgar to Khanbaliq." },
-      "2013": { "year": "2013", "title": "Silk Road Revival", "desc": "UNESCO and nations unite to preserve and celebrate this living heritage." },
-      "today": { "year": "Today", "title": "Your Journey Begins", "desc": "The road awaits — not as history, but as an experience you'll carry forever." }
+      "130bce": {
+        "year": "130 BCE",
+        "title": "Zhang Qian Opens the West",
+        "desc": "Han dynasty envoy discovers the western routes, igniting centuries of trade."
+      },
+      "1stc": {
+        "year": "1st Century",
+        "title": "Rome Meets the East",
+        "desc": "Roman nobles drape themselves in Chinese silk — a luxury worth its weight in gold."
+      },
+      "7thc": {
+        "year": "7th Century",
+        "title": "Golden Age of Samarkand",
+        "desc": "Under the Sogdians, Samarkand becomes the crossroads of the world."
+      },
+      "13thc": {
+        "year": "13th Century",
+        "title": "Marco Polo's Caravan",
+        "desc": "The Venetian merchant documents wonders from Kashgar to Khanbaliq."
+      },
+      "2013": {
+        "year": "2013",
+        "title": "Silk Road Revival",
+        "desc": "UNESCO and nations unite to preserve and celebrate this living heritage."
+      },
+      "today": {
+        "year": "Today",
+        "title": "Your Journey Begins",
+        "desc": "The road awaits — not as history, but as an experience you'll carry forever."
+      }
     }
   },
   "testimonials": {
-    "title": "4.9 out of 5",
-    "subtitle": "Trusted by 4,200+ travelers who booked with us.",
+    "title": "Guest feedback",
+    "subtitle": "Stories from travelers who joined our Silk Road journeys.",
     "items": {
-      "1": { "text": "Standing in Registan Square at sunrise felt like stepping through a portal. GREATSILKTRAILS made every moment effortless.", "author": "Elena M.", "location": "Moscow" },
-      "2": { "text": "The Pamir Highway tour changed how I see travel. Remote, raw, and absolutely magnificent.", "author": "James K.", "location": "London" },
-      "3": { "text": "Our family trip through Uzbekistan was magical. The kids still talk about the desert yurt dinner.", "author": "Sarah & Tom", "location": "Berlin" }
+      "1": {
+        "text": "Standing in Registan Square at sunrise felt like stepping through a portal. GREATSILKTRAILS made every moment effortless.",
+        "author": "Elena M.",
+        "location": "Moscow"
+      },
+      "2": {
+        "text": "The Pamir Highway tour changed how I see travel. Remote, raw, and absolutely magnificent.",
+        "author": "James K.",
+        "location": "London"
+      },
+      "3": {
+        "text": "Our family trip through Uzbekistan was magical. The kids still talk about the desert yurt dinner.",
+        "author": "Sarah & Tom",
+        "location": "Berlin"
+      }
     }
   },
   "partners": {
@@ -359,26 +454,47 @@
     }
   },
   "cta": {
-    "title": "Book your package today.",
-    "subtitle": "Select a tour, send an inquiry — we confirm your spot within 24 hours.",
-    "button": "Buy a Tour Package",
-    "guarantee": "60-day money-back guarantee · Secure payment · Visa support included"
+    "title": "Ready to Travel the Silk Road?",
+    "subtitle": "Browse fixed-price tours or plan a private journey — we confirm availability before any payment is required.",
+    "button": "Plan Your Journey",
+    "guarantee": "Flexible cancellation · Visa support · English-speaking support team"
   },
   "about": {
     "title": "Our Story",
     "subtitle": "Born from a passion for the road less traveled",
-    "mission": "GREATSILKTRAILS was founded in 2012 by explorers who believed the Silk Road deserved more than bus tours and checklist sightseeing. We design journeys that honor history while embracing modern comfort.",
+    "mission": "GREATSILKTRAILS is a curated Silk Road platform. We design journeys with trusted local operators, guides, homestays, and logistics partners across historic caravan corridors. Operational responsibility is confirmed per tour before you pay.",
     "values": {
-      "authentic": { "title": "Authenticity", "desc": "Real encounters with real people — artisans, nomads, scholars." },
-      "sustainable": { "title": "Sustainability", "desc": "We support local communities and minimize our footprint." },
-      "excellence": { "title": "Excellence", "desc": "Every detail curated, every moment considered." }
+      "authentic": {
+        "title": "Authenticity",
+        "desc": "Real encounters with real people — artisans, nomads, scholars."
+      },
+      "sustainable": {
+        "title": "Sustainability",
+        "desc": "We support local communities and minimize our footprint."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "desc": "Every detail curated, every moment considered."
+      }
     },
     "team": {
-      "title": "Meet the Caravan Leaders",
+      "title": "How we work",
       "members": {
-        "1": { "name": "Aziz Karimov", "role": "Founder & Lead Guide", "bio": "20 years guiding across Central Asia. PhD in Silk Road history." },
-        "2": { "name": "Mei Lin", "role": "China Route Specialist", "bio": "Former archaeologist at Dunhuang Research Institute." },
-        "3": { "name": "Nino Beridze", "role": "Caucasus Director", "desc": "Georgian hospitality expert and certified sommelier." }
+        "1": {
+          "name": "Curated network",
+          "role": "Local operators and guides",
+          "bio": "Each route is delivered with vetted ground partners who know the corridor day to day."
+        },
+        "2": {
+          "name": "Trip design",
+          "role": "Route specialists",
+          "bio": "We shape fixed-price packages and private itineraries around real logistics, permits, and seasons."
+        },
+        "3": {
+          "name": "Traveler support",
+          "role": "Enquiry and on-trip help",
+          "bio": "English-speaking support before departure and during travel via our partner network."
+        }
       }
     }
   },
@@ -386,12 +502,52 @@
     "title": "Transparent Pricing",
     "subtitle": "Premium experiences with no hidden fees",
     "included": "What's Included",
-    "includedItems": ["Expert local guides", "Boutique accommodations", "Private transfers", "Most meals", "Entrance fees", "24/7 support"],
+    "includedItems": [
+      "Expert local guides",
+      "Boutique accommodations",
+      "Private transfers",
+      "Most meals",
+      "Entrance fees",
+      "24/7 support"
+    ],
     "tiers": {
-      "explorer": { "name": "Explorer", "price": "from $1,980", "desc": "8–10 day journeys, small groups up to 12", "features": ["Group tours", "Standard hotels", "Shared transfers"] },
-      "signature": { "name": "Signature", "price": "from $2,650", "desc": "11–14 day premium routes, groups up to 8", "features": ["Smaller groups", "Heritage hotels", "Private guide", "Cultural workshops"], "popular": true },
-      "bespoke": { "name": "Bespoke", "price": "Custom quote", "desc": "Fully private, any duration, your dream itinerary", "features": ["Private car & guide", "Luxury lodges", "Helicopter options", "Personal concierge"] }
-    }
+      "explorer": {
+        "name": "Explorer",
+        "price": "from $1,980",
+        "desc": "8–10 day journeys, small groups up to 12",
+        "features": [
+          "Group tours",
+          "Standard hotels",
+          "Shared transfers"
+        ]
+      },
+      "signature": {
+        "name": "Signature",
+        "price": "from $2,650",
+        "desc": "11–14 day premium routes, groups up to 8",
+        "features": [
+          "Smaller groups",
+          "Heritage hotels",
+          "Private guide",
+          "Cultural workshops"
+        ],
+        "popular": true
+      },
+      "bespoke": {
+        "name": "Bespoke",
+        "price": "Custom quote",
+        "desc": "Fully private, any duration, your dream itinerary",
+        "features": [
+          "Private car & guide",
+          "Luxury lodges",
+          "Helicopter options",
+          "Personal concierge"
+        ]
+      }
+    },
+    "ctaGroup": "Explore Group Tours",
+    "ctaSignature": "Explore Signature Tours",
+    "ctaPrivate": "Plan a Private Journey"
   },
   "portfolio": {
     "title": "Journey Gallery",
@@ -443,12 +599,12 @@
     }
   },
   "automation": {
-    "heroBook": "Reserve in 60 sec",
+    "heroBook": "Plan Your Journey",
     "wizard": {
-      "title": "Reserve your spot",
+      "title": "Plan your journey",
       "subtitle": "3 quick steps · 24-hour courtesy hold · no payment now",
       "step": "Step {current} of {total}",
-      "holdBadge": "24h hold",
+      "holdBadge": "24h Hold",
       "step1Hint": "Pick the route that matches your dream trip — or let us recommend one.",
       "step2Hint": "Tell us who's traveling. Dates are flexible — we'll align with the best departure.",
       "step3Hint": "Almost done. We'll email your itinerary options within 24 hours.",
@@ -456,13 +612,13 @@
       "tourAny": "Help me choose",
       "tourBespoke": "Bespoke private tour",
       "days": "days",
-      "scarcity": "Only {count} spots left — popular dates fill fast",
-      "trustLine": "Free cancellation up to 60 days · English support · secure inquiry",
+      "scarcity": "Limited group size on this departure",
+      "trustLine": "Flexible cancellation · English-speaking support · availability confirmed before payment",
       "travelers": "Number of travelers",
       "travelerCount": "{count, plural, one {# traveler} other {# travelers}}",
       "preferredDate": "Preferred departure (optional)",
       "dateFlexible": "Flexible dates? Leave blank — we'll suggest the best windows.",
-      "urgencyLine": "Most travelers confirm within 24 hours of receiving their itinerary.",
+      "urgencyLine": "Most travelers hear back within 24 hours of submitting an enquiry.",
       "name": "Full name",
       "email": "Email",
       "phone": "Phone / WhatsApp",
@@ -471,17 +627,17 @@
       "privacyNote": "We only use your details to prepare your trip proposal.",
       "continue": "Continue",
       "back": "Back",
-      "reserve": "Reserve my spot",
+      "reserve": "Submit enquiry",
       "error": "Could not submit. Try again or use the chat assistant.",
-      "successTitle": "You're on the list!",
-      "successSubtitle": "Your 24-hour courtesy hold is active",
-      "successBody": "Check your inbox — we sent a confirmation with your reference number.",
+      "successTitle": "Enquiry received",
+      "successSubtitle": "Availability will be confirmed before any payment is required",
+      "successBody": "Check your inbox for a confirmation with your reference number. A specialist will review availability and reply with next steps.",
       "reference": "Reference: {id}",
       "next1": "Specialist reviews availability (usually same day)",
-      "next2": "You receive itinerary + deposit link by email",
-      "next3": "Pay deposit to lock your departure date",
+      "next2": "You receive itinerary options and confirmation terms by email",
+      "next3": "Deposit is requested only after availability is confirmed",
       "done": "Continue browsing",
-      "messageHeader": "Automated booking request",
+      "messageHeader": "Journey enquiry / hold request",
       "fieldTour": "Tour",
       "fieldTravelers": "Travelers",
       "fieldDate": "Preferred date",
@@ -494,9 +650,9 @@
       "fab": "Ask anything",
       "placeholder": "Visa, price, cancellation…",
       "welcome": "Hi! I'm your Silk Road travel assistant. Ask about visas, prices, what's included — or tap a quick topic below.",
-      "welcomeTour": "You're viewing {tour}. I can answer questions about this trip and help you reserve in under a minute.",
-      "bookCta": "Reserve this trip now",
-      "holdNote": "24-hour hold · no payment required now",
+      "welcomeTour": "You are viewing {tour}. Ask about this trip or reserve a 24h hold — payment is only requested after availability is confirmed.",
+      "bookCta": "Reserve this trip",
+      "holdNote": "24-hour hold · availability confirmed before payment",
       "quick": {
         "visa": "Visa help",
         "price": "Tour price",
@@ -508,10 +664,10 @@
       "answers": {
         "visa": "We handle visa support and invitation letters for Uzbekistan, Turkmenistan, Tajikistan, and China. Send us your passport scan after booking — typical processing is 5–10 business days.",
         "price": "All prices on the site are per person in USD, all-inclusive (hotels, guide, transfers, most meals). No hidden fees at checkout.",
-        "cancel": "Full refund up to 60 days before departure. 50% refund 30–60 days out. Free rebooking within 12 months if plans change.",
+        "cancel": "More than 60 days before departure: full refund of amounts paid minus a $150 administrative fee per person. 30-60 days: 50% refund. Less than 30 days: no refund, but credit toward a future departure within 12 months (subject to availability).",
         "included": "Every package includes boutique hotels, expert guide, airport transfers, entrance fees, breakfast + most dinners, and 24/7 on-trip support.",
         "solo": "About 40% of our travelers come solo. We assign a roommate on request or arrange a single supplement — you're never alone in the group.",
-        "payment": "Reserve with a 30% deposit after we confirm availability. Balance due 45 days before departure. Installment plans available on request.",
+        "payment": "After we confirm availability, we request a deposit to secure your place. Balance is due before departure as stated in your confirmation. We do not take one-click online payment on the website.",
         "group": "Small groups: Explorer tours up to 12 guests, Signature up to 8. Bespoke tours are fully private.",
         "when": "Departures run year-round. Next dates are shown on each tour page — we can also arrange private departures for 4+ travelers.",
         "safety": "We work only with licensed local partners. Comprehensive travel insurance is strongly recommended — we can suggest trusted providers.",
@@ -519,23 +675,23 @@
       },
       "tourPrice": "{tour} is ${price} per person, all-inclusive. Tap Reserve to hold your spot for 24 hours.",
       "tourWhen": "Next departure for {tour}: {date}. Flexible? We'll find the best window for you.",
-      "tourSpots": "Only {count} spots left on the next {tour} departure — these dates sell out quickly."
+      "tourSpots": "Group size is limited on {tour}. Ask us for current availability on your preferred dates."
     },
     "social": {
       "events": {
-        "e1": "Sarah from London reserved Golden Caravan · 3 min ago",
-        "e2": "Marco from Milan booked Pamir Odyssey · 12 min ago",
-        "e3": "Yuki from Tokyo inquired Jade Gate · 8 min ago",
-        "e4": "Emma from Sydney reserved Desert Echoes · 22 min ago",
-        "e5": "Hans from Berlin booked Heavenly Mountains · 5 min ago",
-        "e6": "42 travelers viewing tours right now",
-        "e7": "Next Golden Caravan departure: 4 spots left",
-        "e8": "Free cancellation · 4,200+ happy travelers"
+        "e1": "Traveler from London enquired about Golden Cities · recently",
+        "e2": "Traveler from Milan asked about Pamir Silk Trail · recently",
+        "e3": "Traveler from Tokyo exploring Jade Gate options · recently",
+        "e4": "Traveler from Sydney reviewing Desert Echoes · recently",
+        "e5": "Traveler from Berlin comparing mountain routes · recently",
+        "e6": "English-speaking support available Mon-Sat",
+        "e7": "Fixed-price packages · private journeys on request",
+        "e8": "Flexible cancellation · availability confirmed before payment"
       }
     },
     "matcher": {
       "title": "Find your perfect Silk Road trip",
-      "subtitle": "60-second quiz · instant recommendation · one-click reserve",
+      "subtitle": "Short quiz · tailored route idea · enquiry hold",
       "step": "Question {current} of {total}",
       "questions": {
         "style": {
@@ -567,8 +723,8 @@
         }
       },
       "resultTitle": "Your match",
-      "resultBody": "Based on your answers, this route fits you best. Reserve now — we'll hold your spot for 24 hours.",
-      "bookMatch": "Reserve this trip",
+      "resultBody": "Based on your answers, this route fits you best. Reserve Your Spot — we hold enquiry priority for 24 hours while we confirm availability.",
+      "bookMatch": "Reserve Your Spot",
       "retake": "Retake quiz",
       "matcherNote": "Trip matcher recommended: {tour}",
       "tours": {
@@ -581,18 +737,34 @@
       }
     },
     "tour": {
-      "reserveNow": "Reserve now — 24h hold",
-      "scarcity": "🔥 Only {count} spots on next departure",
-      "priceLock": "Price locked at ${price} when you reserve today"
+      "reserveNow": "Reserve Your Spot — 24h Hold",
+      "scarcity": "Limited group size on next departure",
+      "priceLock": "Price shown is valid at the time of enquiry; final confirmation follows availability.",
+      "confirmBeforePay": "We confirm availability before any payment is required."
     },
     "tourFaq": {
       "title": "Quick answers",
       "items": {
-        "visa": { "q": "Visa support?", "a": "Full invitation letters & step-by-step guidance included." },
-        "cancel": { "q": "Can I cancel?", "a": "Free refund up to 60 days before departure." },
-        "group": { "q": "Group size?", "a": "Small groups up to 12 — never crowded bus tours." },
-        "solo": { "q": "Solo-friendly?", "a": "40% of guests travel solo. Roommate matching available." },
-        "payment": { "q": "When do I pay?", "a": "30% deposit after confirmation. Balance 45 days before trip." }
+        "visa": {
+          "q": "Visa support?",
+          "a": "Full invitation letters & step-by-step guidance included."
+        },
+        "cancel": {
+          "q": "Can I cancel?",
+          "a": "Full refund minus a $150 administrative fee when cancelled more than 60 days before departure. See Cancellation Policy for the full schedule."
+        },
+        "group": {
+          "q": "Group size?",
+          "a": "Small groups up to 12 — never crowded bus tours."
+        },
+        "solo": {
+          "q": "Solo-friendly?",
+          "a": "40% of guests travel solo. Roommate matching available."
+        },
+        "payment": {
+          "q": "When do I pay?",
+          "a": "Deposit after availability confirmation. Balance due as stated in your booking confirmation — not one-click online checkout."
+        }
       }
     }
   },
@@ -600,24 +772,42 @@
     "title": "Frequently Asked Questions",
     "subtitle": "Everything you need before you depart",
     "items": {
-      "visa": { "q": "Do I need a visa?", "a": "Requirements vary by country. We provide full visa support and invitation letters for Uzbekistan, Turkmenistan, Tajikistan, and China." },
-      "group": { "q": "What is the group size?", "a": "Explorer tours: up to 12 guests. Signature tours: up to 8. Bespoke tours are fully private." },
-      "fitness": { "q": "How physically demanding are the tours?", "a": "Most tours are leisurely to moderate. Pamir Odyssey is adventurous — we recommend good fitness and altitude tolerance." },
-      "cancel": { "q": "What is your cancellation policy?", "a": "Full refund up to 60 days before departure. 50% refund 30–60 days. Flexible rebooking within 12 months." },
-      "insurance": { "q": "Is travel insurance included?", "a": "We strongly recommend comprehensive travel insurance. We can recommend trusted providers." },
-      "solo": { "q": "Can I travel solo?", "a": "Absolutely! About 40% of our travelers come solo. We'll match you with like-minded companions." }
+      "visa": {
+        "q": "Do I need a visa?",
+        "a": "Requirements vary by country. We provide full visa support and invitation letters for Uzbekistan, Turkmenistan, Tajikistan, and China."
+      },
+      "group": {
+        "q": "What is the group size?",
+        "a": "Explorer tours: up to 12 guests. Signature tours: up to 8. Bespoke tours are fully private."
+      },
+      "fitness": {
+        "q": "How physically demanding are the tours?",
+        "a": "Most tours are leisurely to moderate. Pamir Odyssey is adventurous — we recommend good fitness and altitude tolerance."
+      },
+      "cancel": {
+        "q": "What is your cancellation policy?",
+        "a": "More than 60 days before departure: full refund of amounts paid minus a $150 administrative fee per person. 30-60 days: 50% refund. Less than 30 days: no refund, but credit toward a future departure within 12 months (subject to availability). See our Cancellation Policy for details."
+      },
+      "insurance": {
+        "q": "Is travel insurance included?",
+        "a": "We strongly recommend comprehensive travel insurance. We can recommend trusted providers."
+      },
+      "solo": {
+        "q": "Can I travel solo?",
+        "a": "Absolutely! About 40% of our travelers come solo. We'll match you with like-minded companions."
+      }
     }
   },
   "contact": {
-    "title": "Book Your Package",
-    "subtitle": "Select a tour package — we confirm your spot within 24 hours",
+    "title": "Contact and Plan Your Journey",
+    "subtitle": "General enquiries or a private itinerary — we reply with availability before any payment is required",
     "form": {
       "name": "Your Name",
       "email": "Email Address",
       "phone": "Phone (optional)",
-      "tour": "Interested Tour",
-      "message": "Tell us about your dream trip",
-      "submit": "Book This Package",
+      "tour": "Interested tour (optional)",
+      "message": "Countries, dates, group size, comfort level, notes",
+      "submit": "Send enquiry",
       "submitting": "Sending inquiry…",
       "success": "Thank you! We'll be in touch soon.",
       "successDetail": "Your inquiry reference: {id}. Save it for your records.",
@@ -641,7 +831,7 @@
     }
   },
   "footer": {
-    "tagline": "All-inclusive Silk Road tour packages. Book online.",
+    "tagline": "Fixed-price small-group and private Silk Road journeys.",
     "rights": "© 2026 GREATSILKTRAILS. All rights reserved.",
     "newsletter": "Join the Caravan",
     "newsletterDesc": "Monthly inspiration from the Silk Road.",
@@ -654,31 +844,64 @@
     "cancellation": "Cancellation Policy"
   },
   "pages": {
-    "tours": { "title": "Journeys", "subtitle": "6 all-inclusive Silk Road packages — compare prices and book online" },
-    "journeys": { "title": "Silk Road Tours", "subtitle": "Compare all-inclusive packages — filter by region, difficulty, and departure date" },
+    "tours": {
+      "title": "Journeys",
+      "subtitle": "Fixed-price Silk Road packages — compare routes and reserve a spot for confirmation"
+    },
+    "journeys": {
+      "title": "Silk Road Tours",
+      "subtitle": "Compare fixed-price packages — filter by destination, travel style, difficulty, and departure"
+    },
     "destinations": {
       "title": "Destinations",
-      "subtitle": "14 Silk Road countries — historic caravan corridors from China to Anatolia"
+      "subtitle": "Active Silk Road destinations with GST tours and landings — from China to Anatolia"
     },
-    "experiences": { "title": "Experiences", "subtitle": "Moments captured along the Silk Road" },
+    "experiences": {
+      "title": "Experiences",
+      "subtitle": "Moments captured along the Silk Road"
+    },
     "heritage": {
       "title": "Heritage",
       "subtitle": "Two millennia of trade, culture, and wonder — the legacy you travel through"
     },
-    "stories": { "title": "Stories", "subtitle": "Traveler tales and road notes from the trail" },
-    "about": { "title": "About Us" },
-    "pricing": { "title": "Pricing" },
-    "portfolio": { "title": "Experiences" },
-    "blog": { "title": "Stories" },
-    "faq": { "title": "FAQ" },
-    "contact": { "title": "Contact" },
+    "stories": {
+      "title": "Stories",
+      "subtitle": "Traveler tales and road notes from the trail"
+    },
+    "about": {
+      "title": "About Us"
+    },
+    "pricing": {
+      "title": "Pricing"
+    },
+    "portfolio": {
+      "title": "Experiences"
+    },
+    "blog": {
+      "title": "Stories"
+    },
+    "faq": {
+      "title": "FAQ"
+    },
+    "contact": {
+      "title": "Contact"
+    },
     "partners": {
       "title": "Our Partners",
       "subtitle": "Trusted hotels, DMCs, and local experts along every corridor we travel"
     },
-    "privacy": { "title": "Privacy Policy", "subtitle": "How we collect, use, and protect your information" },
-    "terms": { "title": "Terms of Service", "subtitle": "Booking conditions for GREATSILKTRAILS tour packages" },
-    "cancellation": { "title": "Cancellation Policy", "subtitle": "Refunds, rebooking, and departure changes" },
+    "privacy": {
+      "title": "Privacy Policy",
+      "subtitle": "How we collect, use, and protect your information"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "subtitle": "Booking conditions for GREATSILKTRAILS tour packages"
+    },
+    "cancellation": {
+      "title": "Cancellation Policy",
+      "subtitle": "Refunds, rebooking, and departure changes"
+    },
     "travelStyles": {
       "title": "Travel Styles",
       "subtitle": "How you want to experience the Silk Road — from 4x4 overland to photo-led journeys",
@@ -706,56 +929,96 @@
           "title": "Photo Journeys",
           "desc": "Golden-hour departures, mountain light, and curated stops for photographers and visual storytellers."
         }
-      }
+      },
+      "viewFeatured": "Featured packages",
+      "viewAllStyle": "View all packages"
     },
     "trekking": {
       "title": "Trekking",
       "subtitle": "On-foot routes across the Pamir, Tien Shan, and Hindu Kush",
       "body": "We arrange guided trekking modules — from short day hikes to multi-day Pamir crossings — with local guides, permit support, and camp logistics. Trekking can be added to any Silk Trail package or booked as a standalone module.",
-      "cta": "Request a trekking quote"
+      "cta": "Plan a trekking journey"
     },
     "servicesLogistics": {
       "title": "Services & Logistics",
       "subtitle": "Visas, permits, transport, guides, and on-the-ground support across the Silk Road",
-      "cta": "Contact our team",
+      "cta": "Plan Your Journey",
       "items": {
         "visa-support": {
           "title": "Visa Support & Invitation Letters",
           "desc": "Invitation letters and visa guidance for Central Asia, Iran, and Pakistan itineraries.",
-          "body": "We prepare invitation letters, review embassy requirements, and coordinate timing with your tour dates. Processing times vary by nationality — contact us early for Iran, Turkmenistan, and multi-entry routes."
+          "body": "What we do: invitation letters where applicable, document checklists, embassy timing guidance, and coordination with your tour dates. What we cannot do: guarantee visa approval — embassies decide independently. GST does not promise visa outcomes. Process: 1) Share nationality and route 2) We confirm eligibility and documents 3) Invitation/letter preparation where available 4) You submit to the embassy or e-visa portal. Timing: typically 5-15+ business days depending on nationality and country. Start early for Iran, Turkmenistan, and multi-entry routes. Fees: service fees are quoted per case; government visa fees are separate. CTA: Plan Your Journey or contact a specialist with passport nationality and intended dates."
         },
         "permits-gbao": {
           "title": "Permits & Special Access (GBAO, etc.)",
           "desc": "Pamir Highway (GBAO), border zones, and restricted-area permits for Tajikistan and beyond.",
-          "body": "Pamir and border-zone travel requires advance permits. We handle GBAO applications, military checkpoints paperwork, and special-access requests tied to your confirmed itinerary."
+          "body": "Permit types we commonly arrange: GBAO (Pamir / Badakhshan), selected border-zone permissions, and special access tied to a confirmed itinerary. Documents: passport scan, photo, travel dates, route outline, and local partner requirements. Lead times: often 1-3+ weeks; border and military rules change — we only use current partner terms. Restrictions: some areas (including Sarez and certain border zones) may be closed or limited. We do not offer access that is not legally available at the time of travel. CTA: Plan Your Journey with intended dates and route; we confirm what can be arranged before payment."
         },
         "transport-rental": {
           "title": "Transport & Car Rental",
           "desc": "4x4 fleets, intercity transfers, and private vehicles along overland corridors.",
-          "body": "From airport pickups to multi-week 4x4 expeditions — we source reliable vehicles and drivers matched to road conditions, season, and group size."
+          "body": "Vehicle categories: city sedans, intercity vans, and 4x4 expedition vehicles for high passes and remote corridors. Seats and luggage: sized to group count and road type — Pamir and Karakoram need robust 4x4 with space for gear. Driver included: most packages include driver; self-drive is rare and only where legally and practically suitable. Route suitability: Pamir Luxe Drive and similar overland modules use vehicles matched to altitude, season, and border crossings. CTA: request a transport plan with dates, route, and group size — or Plan Your Journey for a full private itinerary."
         },
         "drivers-guides": {
           "title": "Drivers & Guides",
           "desc": "English-speaking drivers and specialist local guides for every corridor.",
-          "body": "Our network includes Pamir Highway veterans, city historians, and nomadic-region hosts. Guides can join for a single day or the full journey."
+          "body": "Languages: English-speaking guides and drivers are standard on GST packages where stated; other languages on request when available — we do not promise languages we cannot staff. Guide vs driver-guide: city historians and mountain specialists differ from long-distance drivers; some days combine both. Route expertise: Pamir Highway veterans, oasis-city guides, and nomadic-region hosts in our partner network. Pricing: day rates or full-trip inclusion depending on package; private upgrades quoted on enquiry. CTA: Contact Specialist or Plan Your Journey with preferred language and route."
         },
         "accommodation": {
           "title": "Accommodation & Logistics",
           "desc": "Hotels, guesthouses, yurts, and camp setups along your route.",
-          "body": "We book vetted stays and coordinate meals, water, fuel stops, and remote camp logistics so your itinerary runs smoothly off the beaten path."
+          "body": "Levels we arrange: boutique/heritage hotels in cities; guesthouses and family homestays in valleys; yurts and simple camps on mountain or desert legs. What can be arranged: rooming (double/twin/single), meals coordination, remote camp logistics (water, fuel stops), and country-specific stay styles. Examples: Uzbekistan heritage hotels; Kyrgyz jailoo camps; Pamiri homestays; desert camps on Karakum modules. Scope: exact hotel names are confirmed with availability closer to departure; standards match the package tier you select. CTA: Plan Your Journey with comfort level (explorer / signature / private)."
         },
         "tailor-made": {
           "title": "Tailor-Made Journeys",
           "desc": "Custom dates, private groups, and bespoke Silk Road routes.",
-          "body": "Tell us your dates, countries, and travel style — we design a private itinerary with transparent pricing. Ideal for families, photographers, and small groups."
+          "body": "Plan a Private Journey with GST: share countries, preferred dates, group size, comfort level, budget range, and interests (culture, trekking, photo, overland). Process: 1) Enquiry 2) Route outline and estimate 3) Availability check with partners 4) Confirmation terms 5) Deposit only after availability is confirmed. Ideal for: families, photographers, small private groups, and flexible dates outside fixed departures. CTA: use Plan Your Journey — no fixed tour needs to be selected first."
         }
-      }
+      },
+      "contactSpecialist": "Contact Specialist",
+      "learnMore": "Learn More"
+    },
+    "silkTrails": {
+      "title": "The Silk Road",
+      "subtitle": "Xian-Istanbul corridor — nine flagship trails and side routes across living caravan countries",
+      "intro": "GREATSILKTRAILS presents the historic Silk Road as a curated travel platform: fixed-price flagship trails, overland side routes (Pamir, Wakhan, Fann, Bartang, Sarez, Karakoram), and private journeys. Map points link to destinations and tours. Historical corridor notes are editorial and distinct from present-day operations.",
+      "flagshipsTitle": "Nine flagship trails",
+      "branchesTitle": "Side routes and branches",
+      "branches": {
+        "pamir": "Pamir Highway",
+        "wakhan": "Wakhan Corridor",
+        "fann": "Fann Mountains",
+        "bartang": "Bartang Valley",
+        "sarez": "Sarez region",
+        "karakoram": "Karakoram"
+      },
+      "ctaTours": "Browse Tours",
+      "ctaPlan": "Plan Your Journey"
+    },
+    "countryLanding": {
+      "viewTours": "View Tours",
+      "planJourney": "Plan a Journey to {country}",
+      "overview": "Overview",
+      "whyGo": "Why go",
+      "bestSeason": "Best season",
+      "signatureRoutes": "Signature routes",
+      "availableTours": "Available tours",
+      "styles": "Travel styles",
+      "practical": "Practical notes",
+      "visaNotes": "Visa and entry notes"
     }
   },
   "legal": {
     "privacy": {
       "lastUpdated": "Last updated: June 2026",
       "sections": [
+        {
+          "title": "Operator and contact",
+          "paragraphs": [
+            "GREATSILKTRAILS operates as a curated travel platform for Silk Road journeys. For privacy requests contact hello@greatsilktrails.com. Applicable operational partners and governing law for each booking are confirmed in your written confirmation before payment.",
+            "If you need the registered legal entity name and country of registration for a specific booking, request them with your enquiry — details are provided in the confirmation documents for that tour."
+          ]
+        },
         {
           "title": "Information We Collect",
           "paragraphs": [
@@ -782,6 +1045,13 @@
     "terms": {
       "lastUpdated": "Last updated: June 2026",
       "sections": [
+        {
+          "title": "Legal entity and applicable law",
+          "paragraphs": [
+            "Bookings are confirmed in writing after availability is checked. The contracting party, country of registration, and applicable law for your tour are stated in the booking confirmation and invoice before any deposit is due.",
+            "Submitting an enquiry or website form does not create a paid contract. Online display of prices is informational; final confirmation follows partner availability."
+          ]
+        },
         {
           "title": "Booking & Confirmation",
           "paragraphs": [
@@ -811,7 +1081,7 @@
         {
           "title": "Standard Refund Schedule",
           "paragraphs": [
-            "More than 60 days before departure: full refund of amounts paid minus a $150 administrative fee per person.",
+            "More than 60 days before departure: full refund of amounts paid minus a $150 administrative fee per person. This is the same rule referenced across the website (Home, FAQ, Tour pages).",
             "30–60 days before departure: 50% refund of the tour price.",
             "Less than 30 days before departure: no refund, but credit toward a future departure within 12 months (subject to availability)."
           ]
@@ -834,21 +1104,63 @@
     }
   },
   "destinations": {
-    "china": { "name": "China", "desc": "Eastern terminus of the Silk Road — where silk caravans began their westward journey." },
-    "kazakhstan": { "name": "Kazakhstan", "desc": "Northern Silk Road corridor through the Tian Shan — gateway between China and Central Asia." },
-    "kyrgyzstan": { "name": "Kyrgyzstan", "desc": "Mountain passes and nomadic routes linking the Fergana Valley to China." },
-    "uzbekistan": { "name": "Uzbekistan", "desc": "Heart of Transoxiana — UNESCO Silk Roads hub where east–west caravan routes converged." },
-    "turkmenistan": { "name": "Turkmenistan", "desc": "Zarafshan–Karakum corridor — a core UNESCO Silk Road segment across the Karakum." },
-    "tajikistan": { "name": "Tajikistan", "desc": "Pamir branch of the Silk Road — high-altitude routes between Central Asia and China." },
-    "afghanistan": { "name": "Afghanistan", "desc": "Southern Silk Road crossroads — the Hindu Kush linked Persia to the Indian subcontinent." },
-    "iran": { "name": "Iran", "desc": "Persian corridor — for centuries the main westward artery for silk, spices, and ideas." },
-    "pakistan": { "name": "Pakistan", "desc": "Karakoram branch — the southern route over the world's highest passes." },
-    "india": { "name": "India", "desc": "Southern Silk Road terminus — spices, gems, and Buddhism flowed north along caravan trails." },
-    "georgia": { "name": "Georgia", "desc": "Caucasus transit corridor — bridge between the Caspian and Black Sea trade networks." },
-    "armenia": { "name": "Armenia", "desc": "Ancient crossroads of Persian and Anatolian caravan routes through the Caucasus." },
-    "azerbaijan": { "name": "Azerbaijan", "desc": "Caspian Sea corridor — linking Central Asian silk to Caucasus and beyond." },
-    "turkey": { "name": "Turkey", "desc": "Western gateway of the Silk Road — Anatolian routes carried goods toward the Mediterranean." },
-    "bookCta": "View tours",
+    "china": {
+      "name": "China",
+      "desc": "Eastern terminus of the Silk Road — where silk caravans began their westward journey."
+    },
+    "kazakhstan": {
+      "name": "Kazakhstan",
+      "desc": "Northern Silk Road corridor through the Tian Shan — gateway between China and Central Asia."
+    },
+    "kyrgyzstan": {
+      "name": "Kyrgyzstan",
+      "desc": "Mountain passes and nomadic routes linking the Fergana Valley to China."
+    },
+    "uzbekistan": {
+      "name": "Uzbekistan",
+      "desc": "Heart of Transoxiana — UNESCO Silk Roads hub where east–west caravan routes converged."
+    },
+    "turkmenistan": {
+      "name": "Turkmenistan",
+      "desc": "Zarafshan–Karakum corridor — a core UNESCO Silk Road segment across the Karakum."
+    },
+    "tajikistan": {
+      "name": "Tajikistan",
+      "desc": "Pamir branch of the Silk Road — high-altitude routes between Central Asia and China."
+    },
+    "afghanistan": {
+      "name": "Afghanistan",
+      "desc": "Southern Silk Road crossroads — the Hindu Kush linked Persia to the Indian subcontinent."
+    },
+    "iran": {
+      "name": "Iran",
+      "desc": "Persian corridor — for centuries the main westward artery for silk, spices, and ideas."
+    },
+    "pakistan": {
+      "name": "Pakistan",
+      "desc": "Karakoram branch — the southern route over the world's highest passes."
+    },
+    "india": {
+      "name": "India",
+      "desc": "Southern Silk Road terminus — spices, gems, and Buddhism flowed north along caravan trails."
+    },
+    "georgia": {
+      "name": "Georgia",
+      "desc": "Caucasus transit corridor — bridge between the Caspian and Black Sea trade networks."
+    },
+    "armenia": {
+      "name": "Armenia",
+      "desc": "Ancient crossroads of Persian and Anatolian caravan routes through the Caucasus."
+    },
+    "azerbaijan": {
+      "name": "Azerbaijan",
+      "desc": "Caspian Sea corridor — linking Central Asian silk to Caucasus and beyond."
+    },
+    "turkey": {
+      "name": "Turkey",
+      "desc": "Western gateway of the Silk Road — Anatolian routes carried goods toward the Mediterranean."
+    },
+    "bookCta": "View destination",
     "filterAll": "All countries",
     "stats": "{countries} Silk Road countries · {corridors} corridors",
     "results": "{count, plural, one {# country} other {# countries}}",
@@ -865,7 +1177,7 @@
   },
   "heritage": {
     "intro": "The Silk Road wasn't a single path — it was a network connecting empires, ideas, and treasures for over 2,000 years. Every GREATSILKTRAILS package follows in the footsteps of merchants, scholars, and explorers who shaped the world.",
-    "cta": "Book a journey through history"
+    "cta": "Browse Silk Road journeys"
   },
   "video": {
     "title": "See the Silk Road in motion",
@@ -878,9 +1190,18 @@
       "pamir": "Pamir · Mountain Pass"
     },
     "clips": {
-      "desert": { "title": "Camel Caravan", "location": "Gobi Desert · China" },
-      "mountains": { "title": "Desert Trails", "location": "Karakum · Turkmenistan" },
-      "cities": { "title": "Registan Square", "location": "Samarkand · Uzbekistan" }
+      "desert": {
+        "title": "Camel Caravan",
+        "location": "Gobi Desert · China"
+      },
+      "mountains": {
+        "title": "Desert Trails",
+        "location": "Karakum · Turkmenistan"
+      },
+      "cities": {
+        "title": "Registan Square",
+        "location": "Samarkand · Uzbekistan"
+      }
     }
   },
   "silkRoad": {
@@ -909,13 +1230,55 @@
       "serica": "Serica"
     },
     "cities": {
-      "xian": { "name": "Xi'an", "historical": "Chang'an", "era": "Han capital", "country": "China", "tag": "Eastern terminus — Terracotta Army & ancient capital" },
-      "dunhuang": { "name": "Dunhuang", "historical": "Shazhou", "era": "Garrison oasis", "country": "China", "tag": "Mogao Caves & edge of the Gobi Desert" },
-      "samarkand": { "name": "Samarkand", "historical": "Marakanda", "era": "Sogdian hub", "country": "Uzbekistan", "tag": "Registan Square — jewel of the Silk Road" },
-      "bukhara": { "name": "Bukhara", "historical": "Bukhoro", "era": "Scholarly city", "country": "Uzbekistan", "tag": "Living museum of medieval architecture" },
-      "merv": { "name": "Merv", "historical": "Antiochia Margiana", "era": "Parthian oasis", "country": "Turkmenistan", "tag": "Ancient oasis at the crossroads of empires" },
-      "tehran": { "name": "Tehran", "historical": "Rhages", "era": "Persian gateway", "country": "Iran", "tag": "Persian heritage & gateway to the west" },
-      "istanbul": { "name": "Istanbul", "historical": "Constantinople", "era": "Byzantine capital", "country": "Turkey", "tag": "Western terminus — where continents meet" }
+      "xian": {
+        "name": "Xi'an",
+        "historical": "Chang'an",
+        "era": "Han capital",
+        "country": "China",
+        "tag": "Eastern terminus — Terracotta Army & ancient capital"
+      },
+      "dunhuang": {
+        "name": "Dunhuang",
+        "historical": "Shazhou",
+        "era": "Garrison oasis",
+        "country": "China",
+        "tag": "Mogao Caves & edge of the Gobi Desert"
+      },
+      "samarkand": {
+        "name": "Samarkand",
+        "historical": "Marakanda",
+        "era": "Sogdian hub",
+        "country": "Uzbekistan",
+        "tag": "Registan Square — jewel of the Silk Road"
+      },
+      "bukhara": {
+        "name": "Bukhara",
+        "historical": "Bukhoro",
+        "era": "Scholarly city",
+        "country": "Uzbekistan",
+        "tag": "Living museum of medieval architecture"
+      },
+      "merv": {
+        "name": "Merv",
+        "historical": "Antiochia Margiana",
+        "era": "Parthian oasis",
+        "country": "Turkmenistan",
+        "tag": "Ancient oasis at the crossroads of empires"
+      },
+      "tehran": {
+        "name": "Tehran",
+        "historical": "Rhages",
+        "era": "Persian gateway",
+        "country": "Iran",
+        "tag": "Persian heritage & gateway to the west"
+      },
+      "istanbul": {
+        "name": "Istanbul",
+        "historical": "Constantinople",
+        "era": "Byzantine capital",
+        "country": "Turkey",
+        "tag": "Western terminus — where continents meet"
+      }
     }
   }
 }

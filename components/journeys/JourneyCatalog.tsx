@@ -8,13 +8,26 @@ import { SlidersHorizontal, X } from "lucide-react";
 import TourCard from "@/components/tours/TourCard";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import {
-  COUNTRY_SLUGS,
   getCountryLabel,
   isCountrySlug,
   isRegionSlug,
   tourMatchesCountry,
   tourMatchesRegion,
+  type CountrySlug,
 } from "@/lib/countries";
+
+/** Active GST destinations with products (TZ: hide empty countries) */
+const ACTIVE_COUNTRY_FILTERS: CountrySlug[] = [
+  "tajikistan",
+  "kyrgyzstan",
+  "uzbekistan",
+  "kazakhstan",
+  "china",
+  "pakistan",
+  "turkmenistan",
+  "iran",
+  "turkey",
+];
 import {
   TRAVEL_STYLES,
   getTravelStyleLabel,
@@ -164,7 +177,7 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
               {t("filterByCountry")}
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {COUNTRY_SLUGS.map((slug) => {
+              {ACTIVE_COUNTRY_FILTERS.map((slug) => {
                 const active = activeCountry === slug;
                 return (
                   <Link

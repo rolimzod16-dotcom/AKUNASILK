@@ -37,13 +37,16 @@ export default async function ServiceDetailPage({
   if (!isServiceSlug(slug)) notFound();
 
   const t = await getTranslations({ locale, namespace: "pages.servicesLogistics" });
+  const isTailor = slug === "tailor-made";
 
   return (
     <InfoPage
       title={t(`items.${slug}.title`)}
-      subtitle={t("subtitle")}
+      subtitle={t(`items.${slug}.desc`)}
       body={t(`items.${slug}.body`)}
-      cta={t("cta")}
+      cta={isTailor ? t("cta") : t("cta")}
+      secondaryCta={t("contactSpecialist")}
+      secondaryHref="/contact"
     />
   );
 }

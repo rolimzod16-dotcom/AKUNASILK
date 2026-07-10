@@ -7,13 +7,15 @@ export type NavItem =
   | { type: "link"; key: string; href: string }
   | { type: "dropdown"; key: string; href?: string; children: NavChild[] };
 
-/** Mirrors https://greatsilktrails.com/ main menu */
+/** Main menu — aligned with GST final TZ after full site audit */
 export const mainNavigation: NavItem[] = [
   { type: "link", key: "home", href: "/" },
   {
     type: "dropdown",
     key: "silkTrails",
+    href: "/silk-trails",
     children: [
+      { key: "silkRoadMain", href: "/silk-trails" },
       { key: "tourChina", href: "/journeys/silk-road-origins-trail-china" },
       { key: "tourKyrgyzstan", href: "/journeys/nomads-mountains-silk-trail-kyrgyzstan" },
       { key: "tourUzbekistan", href: "/journeys/golden-cities-silk-trail-uzbekistan" },
@@ -27,17 +29,18 @@ export const mainNavigation: NavItem[] = [
   },
   {
     type: "dropdown",
-    key: "destination",
+    key: "destinations",
+    href: "/destinations",
     children: [
-      { key: "destTajikistan", href: "/journeys?country=tajikistan" },
-      { key: "destKyrgyzstan", href: "/journeys?country=kyrgyzstan" },
-      { key: "destUzbekistan", href: "/journeys?country=uzbekistan" },
-      { key: "destKazakhstan", href: "/journeys?country=kazakhstan" },
-      { key: "destChina", href: "/journeys?country=china" },
-      { key: "destPakistan", href: "/journeys?country=pakistan" },
-      { key: "destTurkmenistan", href: "/journeys?country=turkmenistan" },
-      { key: "destIran", href: "/journeys?country=iran" },
-      { key: "destTurkey", href: "/journeys?country=turkey" },
+      { key: "destTajikistan", href: "/destinations/tajikistan" },
+      { key: "destKyrgyzstan", href: "/destinations/kyrgyzstan" },
+      { key: "destUzbekistan", href: "/destinations/uzbekistan" },
+      { key: "destKazakhstan", href: "/destinations/kazakhstan" },
+      { key: "destChina", href: "/destinations/china" },
+      { key: "destPakistan", href: "/destinations/pakistan" },
+      { key: "destTurkmenistan", href: "/destinations/turkmenistan" },
+      { key: "destIran", href: "/destinations/iran" },
+      { key: "destTurkey", href: "/destinations/turkey" },
     ],
   },
   {
@@ -65,5 +68,16 @@ export const mainNavigation: NavItem[] = [
       { key: "serviceTailorMade", href: "/services/tailor-made" },
     ],
   },
-  { type: "link", key: "aboutGst", href: "/about" },
+  {
+    type: "dropdown",
+    key: "aboutGst",
+    href: "/about",
+    children: [
+      { key: "about", href: "/about" },
+      { key: "partners", href: "/partners" },
+      { key: "heritage", href: "/heritage" },
+      { key: "experiences", href: "/experiences" },
+      { key: "contact", href: "/contact" },
+    ],
+  },
 ];

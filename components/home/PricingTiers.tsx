@@ -6,15 +6,21 @@ import { Link } from "@/i18n/routing";
 import ScrollReveal from "@/components/shared/ScrollReveal";
 import SectionHeading from "@/components/shared/SectionHeading";
 import { Button } from "@/components/ui/button";
+import BookNowButton from "@/components/automation/BookNowButton";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 const tiers = ["explorer", "signature", "bespoke"] as const;
 
+const tierCta: Record<(typeof tiers)[number], "group" | "signature" | "private"> = {
+  explorer: "group",
+  signature: "signature",
+  bespoke: "private",
+};
+
 export default function PricingTiers() {
   const t = useTranslations("pricing");
   const shop = useTranslations("shop");
-  const nav = useTranslations("nav");
 
   return (
     <section className="apple-section silk-pattern-dark">
@@ -31,6 +37,7 @@ export default function PricingTiers() {
           {tiers.map((tier, i) => {
             const popular = tier === "signature";
             const features = t.raw(`tiers.${tier}.features`) as string[];
+            const ctaKind = tierCta[tier];
 
             return (
               <ScrollReveal key={tier} delay={i * 0.08} scale>
@@ -64,14 +71,32 @@ export default function PricingTiers() {
                       </li>
                     ))}
                   </ul>
-                  <Button
-                    variant={popular ? "silk" : "silkOutline"}
-                    size="pill"
-                    className="mt-6 w-full"
-                    asChild
-                  >
-                    <Link href="/contact">{nav("book")}</Link>
-                  </Button>
+                  {ctaKind === "private" ? (
+                    <BookNowButton
+                      variant={popular ? "silk" : "silkOutline"}
+                      size="pill"
+                      className="mt-6 w-full"
+                      prefill={{ source: "hero", tourSlug: "bespoke" }}
+                      label={t("ctaPrivate")}
+                    />
+                  ) : (
+                    <Button
+                      variant={popular ? "silk" : "silkOutline"}
+                      size="pill"
+                      className="mt-6 w-full"
+                      asChild
+                    >
+                      <Link
+                        href={
+                          ctaKind === "group"
+                            ? "/journeys?style=culture"
+                            : "/journeys"
+                        }
+                      >
+                        {ctaKind === "group" ? t("ctaGroup") : t("ctaSignature")}
+                      </Link>
+                    </Button>
+                  )}
                 </div>
               </ScrollReveal>
             );

@@ -83,7 +83,7 @@ export default function DestinationsCatalog({ items }: DestinationsCatalogProps)
           {filtered.map(({ slug, corridor: itemCorridor, image }) => (
             <Link
               key={slug}
-              href={`/journeys?country=${slug}`}
+              href={`/destinations/${slug}`}
               className="group flex flex-col overflow-hidden rounded-2xl border border-silk-gold/20 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-silk-gold/45 hover:shadow-lg hover:shadow-silk-gold/15"
             >
               <div className="relative aspect-[5/3] overflow-hidden">

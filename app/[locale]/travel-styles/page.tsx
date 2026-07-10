@@ -67,11 +67,21 @@ export default async function TravelStylesPage({
                 </div>
 
                 {styleTours.length > 0 ? (
-                  <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {styleTours.map(({ tour, content }, i) => (
-                      <TourCard key={tour.id} tour={tour} content={content} index={i} />
-                    ))}
-                  </div>
+                  <>
+                    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                      {styleTours.slice(0, 3).map(({ tour, content }, i) => (
+                        <TourCard key={tour.id} tour={tour} content={content} index={i} />
+                      ))}
+                    </div>
+                    {styleTours.length > 3 && (
+                      <Link
+                        href={`/journeys?style=${key}`}
+                        className="mt-4 inline-block text-sm font-semibold text-silk-gold hover:underline"
+                      >
+                        {t("viewAllStyle")} ({styleTours.length}) →
+                      </Link>
+                    )}
+                  </>
                 ) : (
                   <p className="mt-4 text-sm text-apple-muted">{t("noPackages")}</p>
                 )}

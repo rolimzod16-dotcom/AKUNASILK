@@ -25,7 +25,6 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
   const nav = await getTranslations({ locale, namespace: "nav" });
 
   const fullContent = resolveTourContent(tour, locale);
-  const monthly = Math.round(tour.price / 12);
   const departure = new Date(tour.nextDeparture).toLocaleDateString(locale, {
     weekday: "long",
     month: "long",
@@ -99,9 +98,7 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
                   ${tour.price.toLocaleString(locale)}
                 </span>
               </div>
-              <p className="mt-1 text-sm text-apple-muted">
-                {shop("orMonthly", { price: monthly })}
-              </p>
+              <p className="mt-1 text-sm text-apple-muted">{shop("perPerson")}</p>
 
               <div className="mt-6 space-y-3 border-t border-silk-gold/20 pt-6 text-sm">
                 <div className="flex items-center gap-3 text-apple-subtle">
@@ -121,15 +118,16 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
                 <div className="flex items-center gap-3 text-apple-subtle">
                   <Users className="size-4 text-silk-turquoise" />
                   <span>
-                    {t(`difficulty.${tour.difficulty}`)} ·{" "}
-                    {tour.spotsLeft
-                      ? t("spotsLeft", { count: tour.spotsLeft })
-                      : shop("available")}
+                    {t(`difficulty.${tour.difficulty}`)} · {shop("available")}
                   </span>
                 </div>
               </div>
 
-              <TourDetailActions slug={slug} price={tour.price} spotsLeft={tour.spotsLeft} />
+              <TourDetailActions
+                slug={slug}
+                price={tour.price}
+                nextDeparture={tour.nextDeparture}
+              />
             </div>
           </div>
         </div>
@@ -138,9 +136,17 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
       <section className="border-t border-silk-gold/20 bg-silk-sand/50 py-12 silk-pattern">
         <div className="mx-auto max-w-[980px] px-6 text-center">
           <p className="text-sm text-apple-muted">{shop("compareHint")}</p>
-          <Button variant="link" className="mt-2" asChild>
-            <Link href="/journeys">{nav("journeys")} ›</Link>
-          </Button>
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
+            <Button variant="link" className="mt-0" asChild>
+              <Link href="/journeys">{nav("journeys")} ›</Link>
+            </Button>
+            <Button variant="link" className="mt-0" asChild>
+              <Link href="/destinations">{nav("destinations")} ›</Link>
+            </Button>
+            <Button variant="link" className="mt-0" asChild>
+              <Link href="/services/tailor-made">{nav("planYourJourney")} ›</Link>
+            </Button>
+          </div>
         </div>
       </section>
     </div>

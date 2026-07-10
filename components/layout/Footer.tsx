@@ -2,13 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import BookNowButton from "@/components/automation/BookNowButton";
 import SilkDivider from "@/components/shared/SilkDivider";
 
 const exploreLinks = [
   { key: "journeys", href: "/journeys" },
+  { key: "silkTrails", href: "/silk-trails" },
   { key: "destinations", href: "/destinations" },
-  { key: "faq", href: "/faq" },
-  { key: "stories", href: "/stories" },
+  { key: "travelStyles", href: "/travel-styles" },
 ] as const;
 
 const companyLinks = [
@@ -59,6 +60,14 @@ export default function Footer() {
                 WhatsApp
               </a>
             </div>
+            <div className="mt-4">
+              <BookNowButton
+                variant="silk"
+                size="pill-sm"
+                prefill={{ source: "header", tourSlug: "any" }}
+                label={nav("planYourJourney")}
+              />
+            </div>
           </div>
 
           <div>
@@ -76,6 +85,14 @@ export default function Footer() {
                   </Link>
                 </li>
               ))}
+              <li>
+                <BookNowButton
+                  variant="link"
+                  className="h-auto p-0 text-sm text-white/60 hover:text-silk-gold"
+                  prefill={{ source: "header", tourSlug: "any" }}
+                  label={nav("planYourJourney")}
+                />
+              </li>
             </ul>
           </div>
 

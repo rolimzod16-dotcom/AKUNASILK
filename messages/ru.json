@@ -1,15 +1,15 @@
 {
   "meta": {
-    "title": "GREATSILKTRAILS — Купить турпакеты по Шёлковому пути",
-    "description": "Бронируйте турпакеты по Шёлковому пути. Фиксированные цены, всё включено. Узбекистан, Кыргызстан, Китай и другие."
+    "title": "GREATSILKTRAILS — Silk Road Journeys",
+    "description": "Fixed-price small-group and private Silk Road journeys. Inquiry-based confirmation, visa support, English-speaking guides."
   },
   "nav": {
     "home": "Главная",
     "silkTrails": "Silk Trails",
-    "destination": "Направления",
+    "destination": "Destinations",
     "travelStyles": "Стили путешествий",
     "servicesLogistics": "Сервис и логистика",
-    "aboutGst": "О GST",
+    "aboutGst": "About GST",
     "viewAll": "Смотреть все",
     "tourChina": "Silk Road Origins Trail — Китай",
     "tourKyrgyzstan": "Nomads & Mountains — Кыргызстан",
@@ -40,7 +40,7 @@
     "serviceDrivers": "Водители и гиды",
     "serviceAccommodation": "Проживание и логистика",
     "serviceTailorMade": "Индивидуальные маршруты",
-    "destinations": "Направления",
+    "destinations": "Destinations",
     "journeys": "Туры",
     "experiences": "Впечатления",
     "heritage": "Наследие",
@@ -53,20 +53,33 @@
     "portfolio": "Впечатления",
     "blog": "Истории",
     "faq": "FAQ",
-    "book": "Купить тур",
-    "planYourJourney": "Спланировать путешествие",
-    "getQuote": "Получить расчёт"
+    "book": "Plan Your Journey",
+    "planYourJourney": "Plan Your Journey",
+    "getQuote": "Plan Your Journey",
+    "silkRoadMain": "The Silk Road"
   },
   "traveler": {
     "trust": {
-      "cancel": { "title": "Бесплатная отмена", "desc": "Полный возврат за 60+ дней до отъезда" },
-      "support": { "title": "Поддержка 24/7", "desc": "Команда на английском до и во время поездки" },
-      "guides": { "title": "Местные гиды", "desc": "Историки и кочевые хозяева на каждом маршруте" },
-      "secure": { "title": "Безопасное бронирование", "desc": "Прозрачные цены · без скрытых платежей" }
+      "cancel": {
+        "title": "Гибкая отмена",
+        "desc": "Полный возврат минус $150 admin fee при отмене за 60+ дней до выезда"
+      },
+      "support": {
+        "title": "Поддержка 24/7",
+        "desc": "English-speaking team до и во время поездки"
+      },
+      "guides": {
+        "title": "Местные эксперты",
+        "desc": "English-speaking guides и локальные партнёры на маршруте"
+      },
+      "secure": {
+        "title": "Прозрачные цены",
+        "desc": "Фиксированные пакеты. Availability confirmed before payment"
+      }
     },
     "finder": {
-      "title": "Куда хотите поехать?",
-      "viewAll": "Все туры",
+      "title": "Choose a region or route",
+      "viewAll": "Browse all tours",
       "regions": {
         "uzbekistan": "Узбекистан",
         "centralAsia": "Центральная Азия",
@@ -74,7 +87,8 @@
         "china": "Китай",
         "persia": "Персия",
         "caucasus": "Кавказ"
-      }
+      },
+      "hint": "Быстрые фильтры по странам, регионам и коридорам."
     },
     "catalog": {
       "filterTitle": "Подберите тур",
@@ -87,7 +101,9 @@
         "duration": "Короткие сначала",
         "departure": "Ближайший выезд"
       },
-      "difficulty": { "all": "Любой уровень" },
+      "difficulty": {
+        "all": "Любой уровень"
+      },
       "filterByStyle": "Стиль путешествия",
       "styleActive": "Стиль: {style}",
       "filterByCountry": "Страны Шёлкового пути",
@@ -113,52 +129,71 @@
     }
   },
   "hero": {
-    "badge": "Малые группы · Гиды на EN · Всё включено",
+    "badge": "Small groups · English-speaking guides · Fixed-price packages",
     "title": "Туры по Шёлковому пути — просто.",
-    "subtitle": "Фиксированные цены в USD. Отели, трансферы, визовая поддержка и питание — бронируйте из любой страны.",
+    "subtitle": "Фиксированные цены в USD. Отели, трансферы, visa support и питание — планируйте поездку из любой страны.",
     "priceFrom": "От ${price}",
-    "cta": "Смотреть туры",
-    "ctaSecondary": "Смотреть хит продаж",
+    "cta": "Browse Tours",
+    "ctaSecondary": "See bestseller",
     "bestseller": "Хит продаж",
-    "spotsUrgent": "Осталось {count} мест на ближайший выезд",
-    "trust": "Бесплатная отмена за 60 дней · Безопасное бронирование · 4 200+ путешественников"
+    "spotsUrgent": "Детали ближайшего выезда — на странице тура",
+    "trust": "Flexible cancellation · Clear pricing · Availability confirmed before payment"
   },
   "shop": {
     "title": "Выберите пакет",
     "subtitle": "Все туры включают гида, отели, трансферы и большинство питания. Один платёж — без забот.",
     "bestseller": "Хит продаж",
-    "buy": "Расчёт",
-    "buyNow": "Получить расчёт",
-    "getQuote": "Расчёт",
-    "viewTrip": "О туре",
+    "buy": "Reserve Your Spot",
+    "buyNow": "Reserve Your Spot",
+    "getQuote": "Reserve Your Spot",
+    "viewTrip": "View Tour",
     "perPerson": "за человека",
-    "buyPackage": "Выбрать турпакет",
+    "buyPackage": "Browse Tours",
     "details": "Подробнее",
     "departure": "Выезд",
     "nextDeparture": "Ближайший выезд",
-    "orMonthly": "или ~${price}/мес в рассрочку",
+    "orMonthly": "",
     "reviews": "отзывов",
     "mostPopular": "Популярный",
-    "pricingTitle": "Выберите уровень",
-    "pricingSubtitle": "Те же маршруты. Разный уровень комфорта.",
+    "pricingTitle": "How would you like to travel?",
+    "pricingSubtitle": "Group packages, signature routes, or a private journey.",
     "packageIncludes": "В каждый пакет входит",
     "highlights": "Главное в поездке",
     "askExpert": "Спросить эксперта",
     "available": "Есть места",
-    "guaranteeShort": "Отмена за 60 дней · Гарантия лучшей цены",
-    "compareHint": "Не знаете, какой пакет выбрать? Сравните все маршруты.",
+    "guaranteeShort": "Flexible cancellation · Availability confirmed before payment",
+    "compareHint": "Related options: compare routes, explore destinations, or plan private dates.",
     "includes": {
       "title": "Всё включено. Без сюрпризов.",
       "subtitle": "Каждый пакет GREATSILKTRAILS включает всё ниже — без скрытых платежей.",
       "items": {
-        "guide": { "title": "Гид-эксперт", "desc": "Местный историк на весь тур" },
-        "hotel": { "title": "Отели", "desc": "Бутик и отели-наследие" },
-        "transfer": { "title": "Трансферы", "desc": "Встреча в аэропорту и весь транспорт" },
-        "meals": { "title": "Питание", "desc": "Завтраки + большинство ужинов" },
-        "tickets": { "title": "Билеты", "desc": "Музеи, объекты, активности" },
-        "support": { "title": "Поддержка 24/7", "desc": "Помощь в поездке всегда" }
+        "guide": {
+          "title": "Гид-эксперт",
+          "desc": "Местный историк на весь тур"
+        },
+        "hotel": {
+          "title": "Отели",
+          "desc": "Бутик и отели-наследие"
+        },
+        "transfer": {
+          "title": "Трансферы",
+          "desc": "Встреча в аэропорту и весь транспорт"
+        },
+        "meals": {
+          "title": "Питание",
+          "desc": "Завтраки + большинство ужинов"
+        },
+        "tickets": {
+          "title": "Билеты",
+          "desc": "Музеи, объекты, активности"
+        },
+        "support": {
+          "title": "Поддержка 24/7",
+          "desc": "Помощь в поездке всегда"
+        }
       }
-    }
+    },
+    "reserveSpot": "Reserve Your Spot"
   },
   "scrollStory": {
     "title": "Каждая миля — шедевр.",
@@ -248,32 +283,56 @@
       "golden-cities-silk-trail-uzbekistan": {
         "title": "Golden Cities Silk Trail — Узбекистан",
         "desc": "Самарканд, Бухара и Хива — золотой треугольник архитектуры Шёлкового пути.",
-        "highlights": ["Регистан на рассвете", "Мастерская шёлка", "Город-крепость Хива"]
+        "highlights": [
+          "Регистан на рассвете",
+          "Мастерская шёлка",
+          "Город-крепость Хива"
+        ]
       },
       "caravan-desert-silk-trail-turkmenistan": {
         "title": "Caravan Desert Silk Trail — Туркменистан",
         "desc": "Кратер Дарваза, древний Мерв и караванные тропы через пустыню Каракум.",
-        "highlights": ["Врата ада ночью", "Мерв (ЮНЕСКО)", "Лагерь под звёздами"]
+        "highlights": [
+          "Врата ада ночью",
+          "Мерв (ЮНЕСКО)",
+          "Лагерь под звёздами"
+        ]
       },
       "nomads-mountains-silk-trail-kyrgyzstan": {
         "title": "Nomads & Mountains — Кыргызстан",
         "desc": "Альпийские джайлоо, беркутчики и традиции войлока в горах Тянь-Шаня.",
-        "highlights": ["Озеро Иссык-Куль", "Демонстрация беркутничества", "Конный поход"]
+        "highlights": [
+          "Озеро Иссык-Куль",
+          "Демонстрация беркутничества",
+          "Конный поход"
+        ]
       },
       "silk-road-origins-trail-china": {
         "title": "Silk Road Origins Trail — Китай",
         "desc": "От терракотовой армии Сианя до пещер Могао — истоки Шёлкового пути в Китае.",
-        "highlights": ["Терракотовая армия", "Пещеры Могао", "Верблюжий рынок в Кашгаре"]
+        "highlights": [
+          "Терракотовая армия",
+          "Пещеры Могао",
+          "Верблюжий рынок в Кашгаре"
+        ]
       },
       "caucasus-culture-route": {
         "title": "Caucasus Culture Route",
         "desc": "Грузинские винные погреба, армянские монастыри и горные сёла Кавказа.",
-        "highlights": ["Дегустация в Кахетии", "Церковь Гергети", "Дворец хана в Шеки"]
+        "highlights": [
+          "Дегустация в Кахетии",
+          "Церковь Гергети",
+          "Дворец хана в Шеки"
+        ]
       },
       "pamir-silk-trail-tajikistan-flagship": {
         "title": "Pamir Silk Trail — Таджикистан (флагман)",
         "desc": "Легендарный Памирский тракт на 4x4 — Вахан, отдалённые сёла и крыша мира.",
-        "highlights": ["Памирский тракт", "Ваханский коридор", "Дом у памирской семьи"]
+        "highlights": [
+          "Памирский тракт",
+          "Ваханский коридор",
+          "Дом у памирской семьи"
+        ]
       }
     }
   },
@@ -281,21 +340,57 @@
     "title": "2000 лет Шёлкового пути",
     "subtitle": "Следуйте нити истории в путешествии",
     "events": {
-      "130bce": { "year": "130 до н.э.", "title": "Чжан Цянь открывает Запад", "desc": "Посланник династии Хань открывает западные маршруты, зажигая века торговли." },
-      "1stc": { "year": "I век", "title": "Рим встречает Восток", "desc": "Римские аристократы облачаются в китайский шёлк — роскошь, стоящая веса в золоте." },
-      "7thc": { "year": "VII век", "title": "Золотой век Самарканда", "desc": "При согдийцах Самарканд становится перекрёстком мира." },
-      "13thc": { "year": "XIII век", "title": "Караван Марко Поло", "desc": "Венецианский купец описывает чудеса от Кашгара до Ханбалыка." },
-      "2013": { "year": "2013", "title": "Возрождение Шёлкового пути", "desc": "ЮНЕСКО и страны объединяются для сохранения этого живого наследия." },
-      "today": { "year": "Сегодня", "title": "Ваше путешествие начинается", "desc": "Дорога ждёт — не как история, а как опыт, который вы унесёте навсегда." }
+      "130bce": {
+        "year": "130 до н.э.",
+        "title": "Чжан Цянь открывает Запад",
+        "desc": "Посланник династии Хань открывает западные маршруты, зажигая века торговли."
+      },
+      "1stc": {
+        "year": "I век",
+        "title": "Рим встречает Восток",
+        "desc": "Римские аристократы облачаются в китайский шёлк — роскошь, стоящая веса в золоте."
+      },
+      "7thc": {
+        "year": "VII век",
+        "title": "Золотой век Самарканда",
+        "desc": "При согдийцах Самарканд становится перекрёстком мира."
+      },
+      "13thc": {
+        "year": "XIII век",
+        "title": "Караван Марко Поло",
+        "desc": "Венецианский купец описывает чудеса от Кашгара до Ханбалыка."
+      },
+      "2013": {
+        "year": "2013",
+        "title": "Возрождение Шёлкового пути",
+        "desc": "ЮНЕСКО и страны объединяются для сохранения этого живого наследия."
+      },
+      "today": {
+        "year": "Сегодня",
+        "title": "Ваше путешествие начинается",
+        "desc": "Дорога ждёт — не как история, а как опыт, который вы унесёте навсегда."
+      }
     }
   },
   "testimonials": {
-    "title": "4.9 из 5",
-    "subtitle": "Нам доверяют 4 200+ путешественников.",
+    "title": "Guest feedback",
+    "subtitle": "Отзывы путешественников о наших маршрутах.",
     "items": {
-      "1": { "text": "Стоять на площади Регистан на рассвете — как пройти через портал. GREATSILKTRAILS сделали каждый момент лёгким.", "author": "Елена М.", "location": "Москва" },
-      "2": { "text": "Тур по Памирскому тракту изменил моё представление о путешествиях. Дико, сурово и абсолютно великолепно.", "author": "Джеймс К.", "location": "Лондон" },
-      "3": { "text": "Семейная поездка по Узбекистану была волшебной. Дети до сих пор вспоминают ужин в юрте.", "author": "Сара и Том", "location": "Берлин" }
+      "1": {
+        "text": "Стоять на площади Регистан на рассвете — как пройти через портал. GREATSILKTRAILS сделали каждый момент лёгким.",
+        "author": "Елена М.",
+        "location": "Москва"
+      },
+      "2": {
+        "text": "Тур по Памирскому тракту изменил моё представление о путешествиях. Дико, сурово и абсолютно великолепно.",
+        "author": "Джеймс К.",
+        "location": "Лондон"
+      },
+      "3": {
+        "text": "Семейная поездка по Узбекистану была волшебной. Дети до сих пор вспоминают ужин в юрте.",
+        "author": "Сара и Том",
+        "location": "Берлин"
+      }
     }
   },
   "partners": {
@@ -359,26 +454,47 @@
     }
   },
   "cta": {
-    "title": "Забронируйте пакет сегодня.",
-    "subtitle": "Выберите тур, отправьте заявку — подтвердим место в течение 24 часов.",
-    "button": "Купить турпакет",
-    "guarantee": "Возврат за 60 дней · Безопасная оплата · Визовая поддержка"
+    "title": "Ready to Travel the Silk Road?",
+    "subtitle": "Browse fixed-price tours or plan a private journey — we confirm availability before any payment is required.",
+    "button": "Plan Your Journey",
+    "guarantee": "Flexible cancellation · Visa support · English-speaking support team"
   },
   "about": {
     "title": "Наша история",
     "subtitle": "Рождены из страсти к неизведанным дорогам",
-    "mission": "GREATSILKTRAILS основана в 2012 году путешественниками, которые верили: Шёлковый путь заслуживает большего, чем автобусные туры. Мы создаём путешествия, чтящие историю и современный комфорт.",
+    "mission": "GREATSILKTRAILS — curated Silk Road platform. Мы проектируем маршруты с trusted local operators, guides, homestays и logistics partners. Operational responsibility подтверждается по каждому туру до оплаты.",
     "values": {
-      "authentic": { "title": "Аутентичность", "desc": "Настоящие встречи с настоящими людьми — ремесленниками, кочевниками, учёными." },
-      "sustainable": { "title": "Устойчивость", "desc": "Поддерживаем местные сообщества и минимизируем след." },
-      "excellence": { "title": "Превосходство", "desc": "Каждая деталь продумана, каждый момент учтён." }
+      "authentic": {
+        "title": "Аутентичность",
+        "desc": "Настоящие встречи с настоящими людьми — ремесленниками, кочевниками, учёными."
+      },
+      "sustainable": {
+        "title": "Устойчивость",
+        "desc": "Поддерживаем местные сообщества и минимизируем след."
+      },
+      "excellence": {
+        "title": "Превосходство",
+        "desc": "Каждая деталь продумана, каждый момент учтён."
+      }
     },
     "team": {
-      "title": "Лидеры каравана",
+      "title": "How we work",
       "members": {
-        "1": { "name": "Азиз Каримов", "role": "Основатель и главный гид", "bio": "20 лет гида в Центральной Азии. Кандидат исторических наук по Шёлковому пути." },
-        "2": { "name": "Мэй Лин", "role": "Специалист по Китаю", "bio": "Бывший археолог Института исследований Дуньхуана." },
-        "3": { "name": "Нино Беридзе", "role": "Директор по Кавказу", "desc": "Эксперт грузинского гостеприимства и сертифицированный сомелье." }
+        "1": {
+          "name": "Curated network",
+          "role": "Local operators and guides",
+          "bio": "Каждый маршрут с vetted ground partners, которые знают коридор."
+        },
+        "2": {
+          "name": "Trip design",
+          "role": "Route specialists",
+          "bio": "Fixed-price packages и private itineraries вокруг реальной логистики и сезонов."
+        },
+        "3": {
+          "name": "Traveler support",
+          "role": "Enquiry and on-trip help",
+          "bio": "English-speaking support до выезда и во время поездки."
+        }
       }
     }
   },
@@ -386,12 +502,52 @@
     "title": "Прозрачные цены",
     "subtitle": "Премиальный опыт без скрытых платежей",
     "included": "Что включено",
-    "includedItems": ["Опытные местные гиды", "Бутик-отели", "Частные трансферы", "Большинство питания", "Входные билеты", "Поддержка 24/7"],
+    "includedItems": [
+      "Опытные местные гиды",
+      "Бутик-отели",
+      "Частные трансферы",
+      "Большинство питания",
+      "Входные билеты",
+      "Поддержка 24/7"
+    ],
     "tiers": {
-      "explorer": { "name": "Исследователь", "price": "от $1 980", "desc": "8–10 дней, группы до 12 человек", "features": ["Групповые туры", "Стандартные отели", "Общие трансферы"] },
-      "signature": { "name": "Фирменный", "price": "от $2 650", "desc": "11–14 дней, группы до 8 человек", "features": ["Малые группы", "Отели-наследие", "Личный гид", "Культурные мастер-классы"], "popular": true },
-      "bespoke": { "name": "Индивидуальный", "price": "По запросу", "desc": "Полностью приватный тур любой длительности", "features": ["Личный авто и гид", "Люкс-лоджи", "Вертолётные опции", "Персональный консьерж"] }
-    }
+      "explorer": {
+        "name": "Исследователь",
+        "price": "от $1 980",
+        "desc": "8–10 дней, группы до 12 человек",
+        "features": [
+          "Групповые туры",
+          "Стандартные отели",
+          "Общие трансферы"
+        ]
+      },
+      "signature": {
+        "name": "Фирменный",
+        "price": "от $2 650",
+        "desc": "11–14 дней, группы до 8 человек",
+        "features": [
+          "Малые группы",
+          "Отели-наследие",
+          "Личный гид",
+          "Культурные мастер-классы"
+        ],
+        "popular": true
+      },
+      "bespoke": {
+        "name": "Индивидуальный",
+        "price": "По запросу",
+        "desc": "Полностью приватный тур любой длительности",
+        "features": [
+          "Личный авто и гид",
+          "Люкс-лоджи",
+          "Вертолётные опции",
+          "Персональный консьерж"
+        ]
+      }
+    },
+    "ctaGroup": "Explore Group Tours",
+    "ctaSignature": "Explore Signature Tours",
+    "ctaPrivate": "Plan a Private Journey"
   },
   "portfolio": {
     "title": "Галерея путешествий",
@@ -443,12 +599,12 @@
     }
   },
   "automation": {
-    "heroBook": "Забронировать за 60 сек",
+    "heroBook": "Plan Your Journey",
     "wizard": {
-      "title": "Забронируйте место",
-      "subtitle": "3 шага · резерв 24 ч · оплата не нужна сейчас",
+      "title": "Plan your journey",
+      "subtitle": "3 quick steps · 24-hour courtesy hold · no payment now",
       "step": "Шаг {current} из {total}",
-      "holdBadge": "Резерв 24 ч",
+      "holdBadge": "24h Hold",
       "step1Hint": "Выберите маршрут мечты — или доверьте подбор нам.",
       "step2Hint": "Укажите состав группы. Даты гибкие — подберём лучший выезд.",
       "step3Hint": "Почти готово. Варианты программы пришлём на email в течение 24 часов.",
@@ -456,13 +612,13 @@
       "tourAny": "Помогите выбрать",
       "tourBespoke": "Индивидуальный тур",
       "days": "дн.",
-      "scarcity": "Осталось {count} мест — популярные даты быстро заполняются",
-      "trustLine": "Бесплатная отмена за 60 дней · поддержка на EN · безопасная заявка",
+      "scarcity": "Limited group size on this departure",
+      "trustLine": "Flexible cancellation · English-speaking support · availability confirmed before payment",
       "travelers": "Количество путешественников",
       "travelerCount": "{count, plural, one {# человек} few {# человека} many {# человек} other {# человек}}",
       "preferredDate": "Желаемая дата (необязательно)",
       "dateFlexible": "Гибкие даты? Оставьте пустым — предложим лучшие окна.",
-      "urgencyLine": "Большинство путешественников подтверждают поездку в течение 24 часов после получения программы.",
+      "urgencyLine": "Most travelers hear back within 24 hours of submitting an enquiry.",
       "name": "Полное имя",
       "email": "Email",
       "phone": "Телефон / WhatsApp",
@@ -471,17 +627,17 @@
       "privacyNote": "Данные используем только для подготовки предложения.",
       "continue": "Далее",
       "back": "Назад",
-      "reserve": "Забронировать место",
+      "reserve": "Submit enquiry",
       "error": "Не удалось отправить. Попробуйте снова или напишите в чат.",
-      "successTitle": "Вы в списке!",
-      "successSubtitle": "Резерв на 24 часа активирован",
-      "successBody": "Проверьте почту — мы отправили подтверждение с номером заявки.",
+      "successTitle": "Enquiry received",
+      "successSubtitle": "Availability will be confirmed before any payment is required",
+      "successBody": "Проверьте inbox — reference number внутри. Специалист проверит availability и напишет next steps.",
       "reference": "Номер: {id}",
-      "next1": "Менеджер проверяет наличие (обычно в тот же день)",
-      "next2": "Вы получите программу и ссылку на депозит",
-      "next3": "Оплатите депозит — дата выезда закрепится",
+      "next1": "Specialist reviews availability (usually same day)",
+      "next2": "You receive itinerary options and confirmation terms by email",
+      "next3": "Deposit is requested only after availability is confirmed",
       "done": "Продолжить просмотр",
-      "messageHeader": "Автоматическая заявка на бронирование",
+      "messageHeader": "Journey enquiry / hold request",
       "fieldTour": "Тур",
       "fieldTravelers": "Путешественников",
       "fieldDate": "Желаемая дата",
@@ -494,9 +650,9 @@
       "fab": "Спросить",
       "placeholder": "Виза, цена, отмена…",
       "welcome": "Здравствуйте! Я помощник по турам Шёлкового пути. Спросите о визах, ценах, включениях — или выберите тему ниже.",
-      "welcomeTour": "Вы смотрите {tour}. Отвечу по этому туру и помогу забронировать за минуту.",
-      "bookCta": "Забронировать этот тур",
-      "holdNote": "Резерв 24 ч · оплата не нужна сейчас",
+      "welcomeTour": "You are viewing {tour}. Ask about this trip or reserve a 24h hold — payment is only requested after availability is confirmed.",
+      "bookCta": "Reserve this trip",
+      "holdNote": "24-hour hold · availability confirmed before payment",
       "quick": {
         "visa": "Виза",
         "price": "Цена тура",
@@ -508,10 +664,10 @@
       "answers": {
         "visa": "Визовая поддержка и приглашения для Узбекистана, Туркменистана, Таджикистана и Китая. После бронирования пришлите скан паспорта — обычно 5–10 рабочих дней.",
         "price": "Все цены на сайте — за человека в USD, всё включено (отели, гид, трансферы, большинство питания). Без скрытых платежей.",
-        "cancel": "Полный возврат за 60+ дней до выезда. 50% — за 30–60 дней. Бесплатное перебронирование в течение 12 месяцев.",
+        "cancel": "More than 60 days before departure: full refund of amounts paid minus a $150 administrative fee per person. 30-60 days: 50% refund. Less than 30 days: no refund, but credit toward a future departure within 12 months (subject to availability).",
         "included": "В каждый пакет входят бутик-отели, гид, трансферы, входные билеты, завтраки и большинство ужинов, поддержка 24/7.",
         "solo": "Около 40% путешественников едут одни. Подберём соседа по номеру или доплату за одноместный — в группе вы не одиноки.",
-        "payment": "30% депозит после подтверждения наличия. Остаток — за 45 дней до выезда. Рассрочка по запросу.",
+        "payment": "After we confirm availability, we request a deposit to secure your place. Balance is due before departure as stated in your confirmation. We do not take one-click online payment on the website.",
         "group": "Малые группы: до 12 человек на Explorer, до 8 на Signature. Индивидуальные туры — полностью приватные.",
         "when": "Выезды круглый год. Ближайшие даты на странице тура — для 4+ человек возможен частный выезд.",
         "safety": "Работаем только с лицензированными партнёрами. Рекомендуем страховку — подскажем проверенных провайдеров.",
@@ -519,23 +675,23 @@
       },
       "tourPrice": "{tour} — ${price} за человека, всё включено. Нажмите «Забронировать» — резерв на 24 часа.",
       "tourWhen": "Ближайший выезд {tour}: {date}. Гибкие даты? Подберём лучшее окно.",
-      "tourSpots": "На ближайший выезд {tour} осталось {count} мест — даты быстро заканчиваются."
+      "tourSpots": "Group size is limited on {tour}. Ask us for current availability on your preferred dates."
     },
     "social": {
       "events": {
-        "e1": "Sarah из Лондона забронировала Golden Caravan · 3 мин назад",
-        "e2": "Marco из Милана забронировал Pamir Odyssey · 12 мин назад",
-        "e3": "Yuki из Токио интересуется Jade Gate · 8 мин назад",
-        "e4": "Emma из Сиднея забронировала Desert Echoes · 22 мин назад",
-        "e5": "Hans из Берлина забронировал Heavenly Mountains · 5 мин назад",
-        "e6": "42 путешественника смотрят туры прямо сейчас",
-        "e7": "На ближайший Golden Caravan осталось 4 места",
-        "e8": "Бесплатная отмена · 4 200+ довольных путешественников"
+        "e1": "Traveler from London enquired about Golden Cities · recently",
+        "e2": "Traveler from Milan asked about Pamir Silk Trail · recently",
+        "e3": "Traveler from Tokyo exploring Jade Gate options · recently",
+        "e4": "Traveler from Sydney reviewing Desert Echoes · recently",
+        "e5": "Traveler from Berlin comparing mountain routes · recently",
+        "e6": "English-speaking support available Mon-Sat",
+        "e7": "Fixed-price packages · private journeys on request",
+        "e8": "Flexible cancellation · availability confirmed before payment"
       }
     },
     "matcher": {
       "title": "Найдите идеальный тур",
-      "subtitle": "Квиз 60 сек · рекомендация · бронь в один клик",
+      "subtitle": "Short quiz · tailored route idea · enquiry hold",
       "step": "Вопрос {current} из {total}",
       "questions": {
         "style": {
@@ -567,8 +723,8 @@
         }
       },
       "resultTitle": "Ваш тур",
-      "resultBody": "По вашим ответам этот маршрут подходит лучше всего. Забронируйте — резерв на 24 часа.",
-      "bookMatch": "Забронировать",
+      "resultBody": "Based on your answers, this route fits you best. Reserve Your Spot — we hold enquiry priority for 24 hours while we confirm availability.",
+      "bookMatch": "Reserve Your Spot",
       "retake": "Пройти снова",
       "matcherNote": "Квиз рекомендовал: {tour}",
       "tours": {
@@ -581,18 +737,34 @@
       }
     },
     "tour": {
-      "reserveNow": "Забронировать — резерв 24 ч",
-      "scarcity": "🔥 Осталось {count} мест на ближайший выезд",
-      "priceLock": "Цена ${price} фиксируется при бронировании сегодня"
+      "reserveNow": "Reserve Your Spot — 24h Hold",
+      "scarcity": "Limited group size on next departure",
+      "priceLock": "Price shown is valid at the time of enquiry; final confirmation follows availability.",
+      "confirmBeforePay": "We confirm availability before any payment is required."
     },
     "tourFaq": {
       "title": "Быстрые ответы",
       "items": {
-        "visa": { "q": "Визовая поддержка?", "a": "Приглашения и пошаговая помощь включены." },
-        "cancel": { "q": "Можно отменить?", "a": "Полный возврат за 60+ дней до выезда." },
-        "group": { "q": "Размер группы?", "a": "До 12 человек — не переполненные автобусы." },
-        "solo": { "q": "Подходит для соло?", "a": "40% гостей едут одни. Подбор соседа по номеру." },
-        "payment": { "q": "Когда платить?", "a": "30% депозит после подтверждения. Остаток за 45 дней." }
+        "visa": {
+          "q": "Визовая поддержка?",
+          "a": "Приглашения и пошаговая помощь включены."
+        },
+        "cancel": {
+          "q": "Можно отменить?",
+          "a": "Full refund minus a $150 administrative fee when cancelled more than 60 days before departure. See Cancellation Policy for the full schedule."
+        },
+        "group": {
+          "q": "Размер группы?",
+          "a": "До 12 человек — не переполненные автобусы."
+        },
+        "solo": {
+          "q": "Подходит для соло?",
+          "a": "40% гостей едут одни. Подбор соседа по номеру."
+        },
+        "payment": {
+          "q": "Когда платить?",
+          "a": "Deposit after availability confirmation. Balance due as stated in your booking confirmation — not one-click online checkout."
+        }
       }
     }
   },
@@ -600,24 +772,42 @@
     "title": "Частые вопросы",
     "subtitle": "Всё, что нужно знать перед отъездом",
     "items": {
-      "visa": { "q": "Нужна ли виза?", "a": "Требования зависят от страны. Мы обеспечиваем полную визовую поддержку и приглашения для Узбекистана, Туркменистана, Таджикистана и Китая." },
-      "group": { "q": "Какой размер группы?", "a": "Туры «Исследователь»: до 12 гостей. «Фирменный»: до 8. Индивидуальные туры — полностью приватные." },
-      "fitness": { "q": "Насколько физически сложны туры?", "a": "Большинство туров — лёгкие или средние. Памирская одиссея — экстремальная, нужна хорошая форма и переносимость высоты." },
-      "cancel": { "q": "Какова политика отмены?", "a": "Полный возврат за 60+ дней до отъезда. 50% — за 30–60 дней. Гибкое перебронирование в течение 12 месяцев." },
-      "insurance": { "q": "Включена ли страховка?", "a": "Настоятельно рекомендуем комплексную страховку. Можем порекомендовать проверенных партнёров." },
-      "solo": { "q": "Можно ли ехать одному?", "a": "Конечно! Около 40% наших путешественников едут соло. Подберём единомышленников." }
+      "visa": {
+        "q": "Нужна ли виза?",
+        "a": "Требования зависят от страны. Мы обеспечиваем полную визовую поддержку и приглашения для Узбекистана, Туркменистана, Таджикистана и Китая."
+      },
+      "group": {
+        "q": "Какой размер группы?",
+        "a": "Туры «Исследователь»: до 12 гостей. «Фирменный»: до 8. Индивидуальные туры — полностью приватные."
+      },
+      "fitness": {
+        "q": "Насколько физически сложны туры?",
+        "a": "Большинство туров — лёгкие или средние. Памирская одиссея — экстремальная, нужна хорошая форма и переносимость высоты."
+      },
+      "cancel": {
+        "q": "Какова политика отмены?",
+        "a": "More than 60 days before departure: full refund of amounts paid minus a $150 administrative fee per person. 30-60 days: 50% refund. Less than 30 days: no refund, but credit toward a future departure within 12 months (subject to availability). See our Cancellation Policy for details."
+      },
+      "insurance": {
+        "q": "Включена ли страховка?",
+        "a": "Настоятельно рекомендуем комплексную страховку. Можем порекомендовать проверенных партнёров."
+      },
+      "solo": {
+        "q": "Можно ли ехать одному?",
+        "a": "Конечно! Около 40% наших путешественников едут соло. Подберём единомышленников."
+      }
     }
   },
   "contact": {
-    "title": "Забронируйте пакет",
-    "subtitle": "Выберите турпакет — подтвердим место в течение 24 часов",
+    "title": "Contact and Plan Your Journey",
+    "subtitle": "General enquiries or a private itinerary — we reply with availability before any payment is required",
     "form": {
       "name": "Ваше имя",
       "email": "Email",
       "phone": "Телефон (необязательно)",
-      "tour": "Интересующий тур",
-      "message": "Расскажите о поездке мечты",
-      "submit": "Забронировать пакет",
+      "tour": "Interested tour (optional)",
+      "message": "Countries, dates, group size, comfort level, notes",
+      "submit": "Send enquiry",
       "submitting": "Отправка…",
       "success": "Спасибо! Мы скоро свяжемся с вами.",
       "successDetail": "Номер заявки: {id}. Сохраните его для связи с нами.",
@@ -641,7 +831,7 @@
     }
   },
   "footer": {
-    "tagline": "Турпакеты по Шёлковому пути «всё включено». Бронируйте онлайн.",
+    "tagline": "Fixed-price small-group and private Silk Road journeys.",
     "rights": "© 2026 GREATSILKTRAILS. Все права защищены.",
     "newsletter": "Присоединиться к каравану",
     "newsletterDesc": "Ежемесячное вдохновение с Шёлкового пути.",
@@ -654,31 +844,64 @@
     "cancellation": "Политика отмены"
   },
   "pages": {
-    "tours": { "title": "Путешествия", "subtitle": "6 пакетов «всё включено» — сравните цены и забронируйте онлайн" },
-    "journeys": { "title": "Туры по Шёлковому пути", "subtitle": "Сравните пакеты «всё включено» — фильтр по региону, сложности и дате выезда" },
+    "tours": {
+      "title": "Путешествия",
+      "subtitle": "Fixed-price Silk Road packages — compare routes and reserve a spot for confirmation"
+    },
+    "journeys": {
+      "title": "Туры по Шёлковому пути",
+      "subtitle": "Compare fixed-price packages — filter by destination, travel style, difficulty, and departure"
+    },
     "destinations": {
       "title": "Направления",
       "subtitle": "14 стран Шёлкового пути — исторические караванные коридоры от Китая до Анатолии"
     },
-    "experiences": { "title": "Впечатления", "subtitle": "Моменты, запечатлённые на Шёлковом пути" },
+    "experiences": {
+      "title": "Впечатления",
+      "subtitle": "Моменты, запечатлённые на Шёлковом пути"
+    },
     "heritage": {
       "title": "Наследие",
       "subtitle": "Две тысячи лет торговли, культуры и чудес — наследие, через которое вы путешествуете"
     },
-    "stories": { "title": "Истории", "subtitle": "Рассказы путешественников и заметки с тропы" },
-    "about": { "title": "О нас" },
-    "pricing": { "title": "Цены" },
-    "portfolio": { "title": "Впечатления" },
-    "blog": { "title": "Истории" },
-    "faq": { "title": "FAQ" },
-    "contact": { "title": "Контакты" },
+    "stories": {
+      "title": "Истории",
+      "subtitle": "Рассказы путешественников и заметки с тропы"
+    },
+    "about": {
+      "title": "О нас"
+    },
+    "pricing": {
+      "title": "Цены"
+    },
+    "portfolio": {
+      "title": "Впечатления"
+    },
+    "blog": {
+      "title": "Истории"
+    },
+    "faq": {
+      "title": "FAQ"
+    },
+    "contact": {
+      "title": "Контакты"
+    },
     "partners": {
       "title": "Наши партнёры",
       "subtitle": "Проверенные отели, DMC и местные эксперты на каждом маршруте"
     },
-    "privacy": { "title": "Политика конфиденциальности", "subtitle": "Как мы собираем, используем и защищаем ваши данные" },
-    "terms": { "title": "Условия использования", "subtitle": "Условия бронирования турпакетов GREATSILKTRAILS" },
-    "cancellation": { "title": "Политика отмены", "subtitle": "Возвраты, перебронирование и изменения дат" },
+    "privacy": {
+      "title": "Политика конфиденциальности",
+      "subtitle": "Как мы собираем, используем и защищаем ваши данные"
+    },
+    "terms": {
+      "title": "Условия использования",
+      "subtitle": "Условия бронирования турпакетов GREATSILKTRAILS"
+    },
+    "cancellation": {
+      "title": "Политика отмены",
+      "subtitle": "Возвраты, перебронирование и изменения дат"
+    },
     "travelStyles": {
       "title": "Стили путешествий",
       "subtitle": "Как вы хотите пройти Шёлковый путь — от оверленда на 4x4 до фото-маршрутов",
@@ -706,56 +929,96 @@
           "title": "Фото-путешествия",
           "desc": "Выезды на рассвете, горный свет и остановки для фотографов и визуальных рассказчиков."
         }
-      }
+      },
+      "viewFeatured": "Featured packages",
+      "viewAllStyle": "View all packages"
     },
     "trekking": {
       "title": "Треккинг",
       "subtitle": "Пешие маршруты по Памиру, Тянь-Шаню и Гиндукушу",
       "body": "Организуем треккинг — от однодневных выходов до многодневных переходов по Памиру — с местными гидами, разрешениями и лагерной логистикой. Треккинг можно добавить к любому Silk Trail или заказать отдельным модулем.",
-      "cta": "Запросить расчёт на треккинг"
+      "cta": "Plan a trekking journey"
     },
     "servicesLogistics": {
       "title": "Сервис и логистика",
       "subtitle": "Визы, разрешения, транспорт, гиды и поддержка на маршруте",
-      "cta": "Связаться с командой",
+      "cta": "Plan Your Journey",
       "items": {
         "visa-support": {
-          "title": "Визовая поддержка и приглашения",
-          "desc": "Приглашения и консультации по визам для Центральной Азии, Ирана и Пакистана.",
-          "body": "Готовим приглашения, проверяем требования посольств и синхронизируем сроки с датами тура. Сроки зависят от гражданства — для Ирана, Туркменистана и мульти-въездов свяжитесь заранее."
+          "title": "Visa Support & Invitation Letters",
+          "desc": "Invitation letters and visa guidance for Central Asia, Iran, and Pakistan itineraries.",
+          "body": "What we do: invitation letters where applicable, document checklists, embassy timing guidance, and coordination with your tour dates. What we cannot do: guarantee visa approval — embassies decide independently. GST does not promise visa outcomes. Process: 1) Share nationality and route 2) We confirm eligibility and documents 3) Invitation/letter preparation where available 4) You submit to the embassy or e-visa portal. Timing: typically 5-15+ business days depending on nationality and country. Start early for Iran, Turkmenistan, and multi-entry routes. Fees: service fees are quoted per case; government visa fees are separate. CTA: Plan Your Journey or contact a specialist with passport nationality and intended dates."
         },
         "permits-gbao": {
-          "title": "Разрешения и спецдоступ (ГБАО и др.)",
-          "desc": "Памирский тракт (ГБАО), приграничные зоны и спецразрешения для Таджикистана.",
-          "body": "По Памиру и приграничным зонам нужны разрешения заранее. Оформляем ГБАО, документы для КПП и спецдоступ под подтверждённый маршрут."
+          "title": "Permits & Special Access (GBAO, etc.)",
+          "desc": "Pamir Highway (GBAO), border zones, and restricted-area permits for Tajikistan and beyond.",
+          "body": "Permit types we commonly arrange: GBAO (Pamir / Badakhshan), selected border-zone permissions, and special access tied to a confirmed itinerary. Documents: passport scan, photo, travel dates, route outline, and local partner requirements. Lead times: often 1-3+ weeks; border and military rules change — we only use current partner terms. Restrictions: some areas (including Sarez and certain border zones) may be closed or limited. We do not offer access that is not legally available at the time of travel. CTA: Plan Your Journey with intended dates and route; we confirm what can be arranged before payment."
         },
         "transport-rental": {
-          "title": "Транспорт и аренда авто",
-          "desc": "Парк 4x4, трансферы между городами и частные машины на оверленд-маршрутах.",
-          "body": "От встречи в аэропорту до многонедельных экспедиций на 4x4 — подбираем надёжный транспорт и водителей под сезон, дороги и размер группы."
+          "title": "Transport & Car Rental",
+          "desc": "4x4 fleets, intercity transfers, and private vehicles along overland corridors.",
+          "body": "Vehicle categories: city sedans, intercity vans, and 4x4 expedition vehicles for high passes and remote corridors. Seats and luggage: sized to group count and road type — Pamir and Karakoram need robust 4x4 with space for gear. Driver included: most packages include driver; self-drive is rare and only where legally and practically suitable. Route suitability: Pamir Luxe Drive and similar overland modules use vehicles matched to altitude, season, and border crossings. CTA: request a transport plan with dates, route, and group size — or Plan Your Journey for a full private itinerary."
         },
         "drivers-guides": {
-          "title": "Водители и гиды",
-          "desc": "Англоязычные водители и местные гиды на каждом коридоре.",
-          "body": "В сети — ветераны Памирского тракта, городские историки и хозяева в кочевых регионах. Гид может присоединиться на день или на весь маршрут."
+          "title": "Drivers & Guides",
+          "desc": "English-speaking drivers and specialist local guides for every corridor.",
+          "body": "Languages: English-speaking guides and drivers are standard on GST packages where stated; other languages on request when available — we do not promise languages we cannot staff. Guide vs driver-guide: city historians and mountain specialists differ from long-distance drivers; some days combine both. Route expertise: Pamir Highway veterans, oasis-city guides, and nomadic-region hosts in our partner network. Pricing: day rates or full-trip inclusion depending on package; private upgrades quoted on enquiry. CTA: Contact Specialist or Plan Your Journey with preferred language and route."
         },
         "accommodation": {
-          "title": "Проживание и логистика",
-          "desc": "Отели, гостевые дома, юрты и лагеря на маршруте.",
-          "body": "Бронируем проверенное жильё и координируем питание, воду, заправки и лагерную логистику вдали от цивилизации."
+          "title": "Accommodation & Logistics",
+          "desc": "Hotels, guesthouses, yurts, and camp setups along your route.",
+          "body": "Levels we arrange: boutique/heritage hotels in cities; guesthouses and family homestays in valleys; yurts and simple camps on mountain or desert legs. What can be arranged: rooming (double/twin/single), meals coordination, remote camp logistics (water, fuel stops), and country-specific stay styles. Examples: Uzbekistan heritage hotels; Kyrgyz jailoo camps; Pamiri homestays; desert camps on Karakum modules. Scope: exact hotel names are confirmed with availability closer to departure; standards match the package tier you select. CTA: Plan Your Journey with comfort level (explorer / signature / private)."
         },
         "tailor-made": {
-          "title": "Индивидуальные маршруты",
-          "desc": "Свои даты, частные группы и маршруты под заказ.",
-          "body": "Напишите даты, страны и стиль — соберём частный маршрут с прозрачной ценой. Для семей, фотографов и небольших групп."
+          "title": "Tailor-Made Journeys",
+          "desc": "Custom dates, private groups, and bespoke Silk Road routes.",
+          "body": "Plan a Private Journey with GST: share countries, preferred dates, group size, comfort level, budget range, and interests (culture, trekking, photo, overland). Process: 1) Enquiry 2) Route outline and estimate 3) Availability check with partners 4) Confirmation terms 5) Deposit only after availability is confirmed. Ideal for: families, photographers, small private groups, and flexible dates outside fixed departures. CTA: use Plan Your Journey — no fixed tour needs to be selected first."
         }
-      }
+      },
+      "contactSpecialist": "Contact Specialist",
+      "learnMore": "Learn More"
+    },
+    "silkTrails": {
+      "title": "The Silk Road",
+      "subtitle": "Xian-Istanbul corridor — nine flagship trails and side routes",
+      "intro": "GREATSILKTRAILS presents the historic Silk Road as a curated travel platform: fixed-price flagship trails, overland side routes (Pamir, Wakhan, Fann, Bartang, Sarez, Karakoram), and private journeys.",
+      "flagshipsTitle": "Nine flagship trails",
+      "branchesTitle": "Side routes and branches",
+      "branches": {
+        "pamir": "Pamir Highway",
+        "wakhan": "Wakhan Corridor",
+        "fann": "Fann Mountains",
+        "bartang": "Bartang Valley",
+        "sarez": "Sarez region",
+        "karakoram": "Karakoram"
+      },
+      "ctaTours": "Browse Tours",
+      "ctaPlan": "Plan Your Journey"
+    },
+    "countryLanding": {
+      "viewTours": "View Tours",
+      "planJourney": "Plan a Journey to {country}",
+      "overview": "Overview",
+      "whyGo": "Why go",
+      "bestSeason": "Best season",
+      "signatureRoutes": "Signature routes",
+      "availableTours": "Available tours",
+      "styles": "Travel styles",
+      "practical": "Practical notes",
+      "visaNotes": "Visa and entry notes"
     }
   },
   "legal": {
     "privacy": {
       "lastUpdated": "Обновлено: июнь 2026",
       "sections": [
+        {
+          "title": "Operator and contact",
+          "paragraphs": [
+            "GREATSILKTRAILS operates as a curated travel platform for Silk Road journeys. For privacy requests contact hello@greatsilktrails.com.",
+            "Registered legal entity details for a specific booking are provided in the written confirmation before payment."
+          ]
+        },
         {
           "title": "Какие данные мы собираем",
           "paragraphs": [
@@ -782,6 +1045,13 @@
     "terms": {
       "lastUpdated": "Обновлено: июнь 2026",
       "sections": [
+        {
+          "title": "Legal entity and applicable law",
+          "paragraphs": [
+            "Bookings are confirmed in writing after availability is checked. Contracting party and applicable law are stated in the confirmation before deposit.",
+            "Submitting an enquiry does not create a paid contract."
+          ]
+        },
         {
           "title": "Бронирование и подтверждение",
           "paragraphs": [
@@ -811,7 +1081,7 @@
         {
           "title": "График возвратов",
           "paragraphs": [
-            "Более 60 дней до отъезда: полный возврат минус административный сбор $150 с человека.",
+            "More than 60 days before departure: full refund of amounts paid minus a $150 administrative fee per person. This is the same rule referenced across the website (Home, FAQ, Tour pages).",
             "30–60 дней: возврат 50% стоимости тура.",
             "Менее 30 дней: возврат не предусмотрен; кредит на другую дату в течение 12 месяцев при наличии мест."
           ]
@@ -834,20 +1104,62 @@
     }
   },
   "destinations": {
-    "china": { "name": "Китай", "desc": "Восточный край Шёлкового пути — откуда шёлковые караваны отправлялись на запад." },
-    "kazakhstan": { "name": "Казахстан", "desc": "Северный коридор через Тянь-Шань — ворота между Китаем и Центральной Азией." },
-    "kyrgyzstan": { "name": "Кыргызстан", "desc": "Горные перевалы и кочевые маршруты, связывавшие Фергану с Китаем." },
-    "uzbekistan": { "name": "Узбекистан", "desc": "Сердце Мавераннахра — объект ЮНЕСКО, где сходились восточные и западные караваны." },
-    "turkmenistan": { "name": "Туркменистан", "desc": "Коридор Зеравшан–Каракум — ключевой участок Шёлкового пути ЮНЕСКО через Каракумы." },
-    "tajikistan": { "name": "Таджикистан", "desc": "Памирское ответвление Шёлкового пути — высокогорные маршруты между ЦА и Китаем." },
-    "afghanistan": { "name": "Афганистан", "desc": "Южный перекрёсток пути — Гиндукуш связывал Персию с Индийским субконтинентом." },
-    "iran": { "name": "Иран", "desc": "Персидский коридор — главная западная артерия шёлка, специй и идей." },
-    "pakistan": { "name": "Пакистан", "desc": "Каракорумское ответвление — южный маршрут через самые высокие перевалы." },
-    "india": { "name": "Индия", "desc": "Южный край пути — специи, камни и буддизм шли на север по караванным тропам." },
-    "georgia": { "name": "Грузия", "desc": "Транскавказский коридор — мост между каспийской и черноморской торговлей." },
-    "armenia": { "name": "Армения", "desc": "Древний перекрёсток персидских и анатолийских караванных маршрутов." },
-    "azerbaijan": { "name": "Азербайджан", "desc": "Каспийский коридор — связь центральноазиатского шёлка с Кавказом." },
-    "turkey": { "name": "Турция", "desc": "Западные ворота Шёлкового пути — анатолийские маршруты к Средиземноморью." },
+    "china": {
+      "name": "Китай",
+      "desc": "Восточный край Шёлкового пути — откуда шёлковые караваны отправлялись на запад."
+    },
+    "kazakhstan": {
+      "name": "Казахстан",
+      "desc": "Северный коридор через Тянь-Шань — ворота между Китаем и Центральной Азией."
+    },
+    "kyrgyzstan": {
+      "name": "Кыргызстан",
+      "desc": "Горные перевалы и кочевые маршруты, связывавшие Фергану с Китаем."
+    },
+    "uzbekistan": {
+      "name": "Узбекистан",
+      "desc": "Сердце Мавераннахра — объект ЮНЕСКО, где сходились восточные и западные караваны."
+    },
+    "turkmenistan": {
+      "name": "Туркменистан",
+      "desc": "Коридор Зеравшан–Каракум — ключевой участок Шёлкового пути ЮНЕСКО через Каракумы."
+    },
+    "tajikistan": {
+      "name": "Таджикистан",
+      "desc": "Памирское ответвление Шёлкового пути — высокогорные маршруты между ЦА и Китаем."
+    },
+    "afghanistan": {
+      "name": "Афганистан",
+      "desc": "Южный перекрёсток пути — Гиндукуш связывал Персию с Индийским субконтинентом."
+    },
+    "iran": {
+      "name": "Иран",
+      "desc": "Персидский коридор — главная западная артерия шёлка, специй и идей."
+    },
+    "pakistan": {
+      "name": "Пакистан",
+      "desc": "Каракорумское ответвление — южный маршрут через самые высокие перевалы."
+    },
+    "india": {
+      "name": "Индия",
+      "desc": "Южный край пути — специи, камни и буддизм шли на север по караванным тропам."
+    },
+    "georgia": {
+      "name": "Грузия",
+      "desc": "Транскавказский коридор — мост между каспийской и черноморской торговлей."
+    },
+    "armenia": {
+      "name": "Армения",
+      "desc": "Древний перекрёсток персидских и анатолийских караванных маршрутов."
+    },
+    "azerbaijan": {
+      "name": "Азербайджан",
+      "desc": "Каспийский коридор — связь центральноазиатского шёлка с Кавказом."
+    },
+    "turkey": {
+      "name": "Турция",
+      "desc": "Западные ворота Шёлкового пути — анатолийские маршруты к Средиземноморью."
+    },
     "bookCta": "Смотреть туры",
     "filterAll": "Все страны",
     "stats": "{countries} стран Шёлкового пути · {corridors} коридоров",
@@ -865,7 +1177,7 @@
   },
   "heritage": {
     "intro": "Шёлковый путь — не одна дорога, а сеть маршрутов, связывавшая империи, идеи и сокровища более 2000 лет. Каждый пакет GREATSILKTRAILS — по следам купцов, учёных и путешественников, изменивших мир.",
-    "cta": "Забронировать путешествие сквозь историю"
+    "cta": "Browse Silk Road journeys"
   },
   "video": {
     "title": "Шёлковый путь в движении",
@@ -878,9 +1190,18 @@
       "pamir": "Памир · Горный перевал"
     },
     "clips": {
-      "desert": { "title": "Караван верблюдов", "location": "Пустыня Гоби · Китай" },
-      "mountains": { "title": "Пустынные тропы", "location": "Каракумы · Туркменистан" },
-      "cities": { "title": "Площадь Регистан", "location": "Самарканд · Узбекистан" }
+      "desert": {
+        "title": "Караван верблюдов",
+        "location": "Пустыня Гоби · Китай"
+      },
+      "mountains": {
+        "title": "Пустынные тропы",
+        "location": "Каракумы · Туркменистан"
+      },
+      "cities": {
+        "title": "Площадь Регистан",
+        "location": "Самарканд · Узбекистан"
+      }
     }
   },
   "silkRoad": {
@@ -909,13 +1230,55 @@
       "serica": "Серика"
     },
     "cities": {
-      "xian": { "name": "Сиань", "historical": "Чанъань", "era": "Столица Хань", "country": "Китай", "tag": "Восточная точка — терракотовая армия и древняя столица" },
-      "dunhuang": { "name": "Дуньхуан", "historical": "Шачжоу", "era": "Пограничный оазис", "country": "Китай", "tag": "Пещеры Могао и край пустыни Гоби" },
-      "samarkand": { "name": "Самарканд", "historical": "Мараканда", "era": "Согдийский центр", "country": "Узбекистан", "tag": "Регистан — жемчужина Шёлкового пути" },
-      "bukhara": { "name": "Бухара", "historical": "Бухоро", "era": "Город учёных", "country": "Узбекистан", "tag": "Живой музей средневековой архитектуры" },
-      "merv": { "name": "Мерв", "historical": "Антиохия Маргиана", "era": "Парфянский оазис", "country": "Туркменистан", "tag": "Древний оазис на перекрёстке империй" },
-      "tehran": { "name": "Тегеран", "historical": "Рей", "era": "Врата Персии", "country": "Иран", "tag": "Персидское наследие и врата на Запад" },
-      "istanbul": { "name": "Стамбул", "historical": "Константинополь", "era": "Столица Византии", "country": "Турция", "tag": "Западная точка — где встречаются континенты" }
+      "xian": {
+        "name": "Сиань",
+        "historical": "Чанъань",
+        "era": "Столица Хань",
+        "country": "Китай",
+        "tag": "Восточная точка — терракотовая армия и древняя столица"
+      },
+      "dunhuang": {
+        "name": "Дуньхуан",
+        "historical": "Шачжоу",
+        "era": "Пограничный оазис",
+        "country": "Китай",
+        "tag": "Пещеры Могао и край пустыни Гоби"
+      },
+      "samarkand": {
+        "name": "Самарканд",
+        "historical": "Мараканда",
+        "era": "Согдийский центр",
+        "country": "Узбекистан",
+        "tag": "Регистан — жемчужина Шёлкового пути"
+      },
+      "bukhara": {
+        "name": "Бухара",
+        "historical": "Бухоро",
+        "era": "Город учёных",
+        "country": "Узбекистан",
+        "tag": "Живой музей средневековой архитектуры"
+      },
+      "merv": {
+        "name": "Мерв",
+        "historical": "Антиохия Маргиана",
+        "era": "Парфянский оазис",
+        "country": "Туркменистан",
+        "tag": "Древний оазис на перекрёстке империй"
+      },
+      "tehran": {
+        "name": "Тегеран",
+        "historical": "Рей",
+        "era": "Врата Персии",
+        "country": "Иран",
+        "tag": "Персидское наследие и врата на Запад"
+      },
+      "istanbul": {
+        "name": "Стамбул",
+        "historical": "Константинополь",
+        "era": "Столица Византии",
+        "country": "Турция",
+        "tag": "Западная точка — где встречаются континенты"
+      }
     }
   }
 }

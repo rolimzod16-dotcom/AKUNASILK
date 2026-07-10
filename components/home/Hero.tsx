@@ -101,7 +101,8 @@ export default function Hero({ tour, tourTitle }: HeroProps) {
               {tourTitle} · ${tour.price.toLocaleString()}
             </p>
             <p className="mt-1 text-sm text-silk-sand/90">
-              {t("spotsUrgent", { count: tour.spotsLeft ?? 4 })}
+              {t("priceFrom", { price: tour.price.toLocaleString() })} · {tour.duration}{" "}
+              days
             </p>
           </div>
           <motion.div

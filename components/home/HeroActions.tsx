@@ -11,29 +11,29 @@ type HeroActionsProps = {
 
 export default function HeroActions({ bestsellerSlug }: HeroActionsProps) {
   const t = useTranslations("hero");
-  const auto = useTranslations("automation");
+  const nav = useTranslations("nav");
 
   return (
     <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-      <BookNowButton
+      <Button
         variant="silk"
         size="pill"
         className="silk-glow-pulse"
-        prefill={{ tourSlug: bestsellerSlug, source: "hero" }}
-        label={auto("heroBook")}
-      />
-      <Button
-        variant="silkOutline"
-        size="pill"
-        className="border-silk-gold/60 bg-white/10 text-white backdrop-blur-sm hover:bg-silk-gold/20 hover:text-white"
         asChild
       >
         <Link href="/journeys">{t("cta")}</Link>
       </Button>
-      <Button
+      <BookNowButton
         variant="silkOutline"
         size="pill"
         className="border-silk-gold/60 bg-white/10 text-white backdrop-blur-sm hover:bg-silk-gold/20 hover:text-white"
+        prefill={{ source: "hero", tourSlug: "any" }}
+        label={nav("planYourJourney")}
+      />
+      <Button
+        variant="link"
+        size="pill"
+        className="text-silk-gold hover:text-silk-gold-light"
         asChild
       >
         <Link href={`/journeys/${bestsellerSlug}`}>

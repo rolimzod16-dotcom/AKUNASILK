@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
 import BookNowButton from "@/components/automation/BookNowButton";
 import ScrollReveal from "@/components/shared/ScrollReveal";
@@ -11,6 +12,8 @@ import { ctaVideo } from "@/lib/data/videos";
 
 export default function CTA() {
   const t = useTranslations("cta");
+  const nav = useTranslations("nav");
+  const hero = useTranslations("hero");
 
   return (
     <section className="apple-section relative overflow-hidden">
@@ -36,12 +39,15 @@ export default function CTA() {
               {t("subtitle")}
             </p>
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+              <Button variant="silk" size="pill" className="silk-glow-pulse" asChild>
+                <Link href="/journeys">{hero("cta")}</Link>
+              </Button>
               <BookNowButton
-                variant="silk"
+                variant="silkOutline"
                 size="pill"
-                className="silk-glow-pulse"
-                prefill={{ source: "hero" }}
-                label={t("button")}
+                className="border-silk-gold/50 bg-white/10 text-white hover:bg-silk-gold/20 hover:text-white"
+                prefill={{ source: "hero", tourSlug: "any" }}
+                label={nav("planYourJourney")}
               />
               <Button
                 variant="link"

@@ -29,6 +29,7 @@ export default function TripFinder() {
         <Search className="size-4 text-silk-gold" />
         <p className="text-sm font-semibold">{t("title")}</p>
       </div>
+      <p className="mt-1 text-left text-[11px] text-apple-muted">{t("hint")}</p>
       <div className="mt-3 flex flex-wrap gap-2">
         {regions.map(({ key, href }) => (
           <Link

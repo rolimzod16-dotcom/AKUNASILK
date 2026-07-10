@@ -4,7 +4,6 @@ import DestinationsCatalog, {
   type DestinationItem,
 } from "@/components/destinations/DestinationsCatalog";
 import {
-  COUNTRY_SLUGS,
   SILK_ROAD_COUNTRIES,
   type CountrySlug,
 } from "@/lib/countries";
@@ -44,7 +43,20 @@ export default async function DestinationsPage({
   const { locale } = await params;
   const pages = await getTranslations({ locale, namespace: "pages.destinations" });
 
-  const items: DestinationItem[] = COUNTRY_SLUGS.map((slug) => ({
+  /** Active GST destinations with products / landings (TZ: no empty countries) */
+  const ACTIVE: CountrySlug[] = [
+    "tajikistan",
+    "kyrgyzstan",
+    "uzbekistan",
+    "kazakhstan",
+    "china",
+    "pakistan",
+    "turkmenistan",
+    "iran",
+    "turkey",
+  ];
+
+  const items: DestinationItem[] = ACTIVE.map((slug) => ({
     slug,
     corridor: SILK_ROAD_COUNTRIES[slug].corridor,
     image: DESTINATION_IMAGES[slug],

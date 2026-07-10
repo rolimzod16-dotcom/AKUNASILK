@@ -24,7 +24,6 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
   const shop = useTranslations("shop");
   const locale = useLocale();
 
-  const monthly = Math.round(tour.price / 12);
   const departure = new Date(tour.nextDeparture).toLocaleDateString(locale, {
     month: "short",
     day: "numeric",
@@ -57,11 +56,6 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
               {tour.bestseller && (
                 <Badge className="bg-silk-gold text-silk-indigo hover:bg-silk-gold">
                   {shop("bestseller")}
-                </Badge>
-              )}
-              {tour.spotsLeft && tour.spotsLeft <= 4 && (
-                <Badge className="bg-silk-terracotta text-white hover:bg-silk-terracotta">
-                  {t("spotsLeft", { count: tour.spotsLeft })}
                 </Badge>
               )}
             </div>
@@ -122,9 +116,7 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
                 ${tour.price.toLocaleString()}
               </span>
             </div>
-            <p className="text-xs text-apple-muted">
-              {shop("perPerson")} · {shop("orMonthly", { price: monthly })}
-            </p>
+            <p className="text-xs text-apple-muted">{shop("perPerson")}</p>
           </div>
           <div className="flex w-full gap-2 sm:w-auto">
             <Button variant="silkOutline" size="pill-sm" className="flex-1 sm:flex-none" asChild>
@@ -134,8 +126,12 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
               variant="silk"
               size="pill-sm"
               className="flex-1 sm:flex-none"
-              prefill={{ tourSlug: tour.slug, source: "card" }}
-              label={shop("getQuote")}
+              prefill={{
+                tourSlug: tour.slug,
+                preferredDate: tour.nextDeparture,
+                source: "card",
+              }}
+              label={shop("reserveSpot")}
             />
           </div>
         </CardFooter>

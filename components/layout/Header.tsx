@@ -93,8 +93,8 @@ export default function Header() {
             variant="silk"
             size="pill-sm"
             className="hidden font-semibold shadow-md sm:inline-flex"
-            prefill={{ source: "header" }}
-            label={t("getQuote")}
+            prefill={{ source: "header", tourSlug: "any" }}
+            label={t("planYourJourney")}
           />
 
           <Sheet>
@@ -122,8 +122,8 @@ export default function Header() {
                   variant="silk"
                   size="pill"
                   className="w-full"
-                  prefill={{ source: "header" }}
-                  label={t("getQuote")}
+                  prefill={{ source: "header", tourSlug: "any" }}
+                  label={t("planYourJourney")}
                 />
                 <a
                   href="https://wa.me/998712004567"
