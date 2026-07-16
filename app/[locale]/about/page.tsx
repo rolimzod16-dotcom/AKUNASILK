@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
@@ -8,11 +10,18 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
-}) {
+}): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.about" });
-  return { title: `${t("title")} | GREATSILKTRAILS` };
+  const a = await getTranslations({ locale, namespace: "about" });
+  return buildPageMetadata({
+    locale,
+    path: "/about",
+    title: t("title"),
+    description: a("subtitle"),
+  });
 }
+
 
 const valueKeys = ["authentic", "sustainable", "excellence"] as const;
 const memberKeys = ["1", "2", "3"] as const;

@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/shared/PageHero";
 import FAQAccordion from "@/components/faq/FAQAccordion";
@@ -6,11 +8,18 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
-}) {
+}): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.faq" });
-  return { title: `${t("title")} | GREATSILKTRAILS` };
+  const f = await getTranslations({ locale, namespace: "faq" });
+  return buildPageMetadata({
+    locale,
+    path: "/faq",
+    title: t("title"),
+    description: f("subtitle"),
+  });
 }
+
 
 export default async function FAQPage({
   params,

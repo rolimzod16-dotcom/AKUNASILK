@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { appendFile, mkdir } from "fs/promises";
 import path from "path";
 import { getPublishedTours, getTourContent } from "@/lib/cms/tours";
+import { notifyTelegramInquiry } from "@/lib/notify/telegram";
 
 async function getValidTourSlugs(): Promise<Set<string>> {
   const tours = await getPublishedTours();
@@ -191,10 +192,19 @@ export async function POST(request: Request) {
 
     const inquiryId = `GST-${Date.now().toString(36).toUpperCase()}`;
     await saveInquiry(payload, inquiryId);
-    await sendOperatorEmail(payload, inquiryId);
+
+    // Operator alerts: Telegram bot + optional Resend email (non-blocking failures)
+    const [telegramOk, emailOk] = await Promise.all([
+      notifyTelegramInquiry({ inquiryId, ...payload }),
+      sendOperatorEmail(payload, inquiryId),
+    ]);
     await sendClientConfirmation(payload, inquiryId);
 
-    return NextResponse.json({ ok: true, inquiryId });
+    return NextResponse.json({
+      ok: true,
+      inquiryId,
+      notified: { telegram: telegramOk, email: emailOk },
+    });
   } catch {
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }

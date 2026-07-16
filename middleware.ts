@@ -23,5 +23,8 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
+  // Skip API, static assets, sitemap & robots (served by app/sitemap.ts & app/robots.ts)
+  matcher: [
+    "/((?!api|_next|_vercel|sitemap\\.xml|robots\\.txt|.*\\..*).*)",
+  ],
 };

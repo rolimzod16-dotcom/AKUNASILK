@@ -1,17 +1,24 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/shared/PageHero";
 import JourneyCatalog from "@/components/journeys/JourneyCatalog";
 import { getPublishedTours, getTourContent } from "@/lib/data/tours";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
-}) {
+}): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.journeys" });
-  return { title: `${t("title")} | GREATSILKTRAILS` };
+  return buildPageMetadata({
+    locale,
+    path: "/journeys",
+    title: t("title"),
+    description: t("subtitle"),
+  });
 }
 
 function CatalogFallback() {

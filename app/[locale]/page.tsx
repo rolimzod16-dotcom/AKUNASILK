@@ -1,4 +1,5 @@
-import { getLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { getLocale, getTranslations } from "next-intl/server";
 import Hero from "@/components/home/Hero";
 import TrustBar from "@/components/layout/TrustBar";
 import SocialProofTicker from "@/components/automation/SocialProofTicker";
@@ -12,6 +13,22 @@ import PricingTiers from "@/components/home/PricingTiers";
 import PartnersSection from "@/components/home/PartnersSection";
 import Testimonials from "@/components/home/Testimonials";
 import CTA from "@/components/home/CTA";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "meta" });
+  return buildPageMetadata({
+    locale,
+    path: "/",
+    title: t("title"),
+    description: t("description"),
+  });
+}
 
 export default async function HomePage() {
   const locale = await getLocale();

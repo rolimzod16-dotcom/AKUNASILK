@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/shared/PageHero";
 import DestinationsCatalog, {
@@ -29,11 +31,17 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
-}) {
+}): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.destinations" });
-  return { title: `${t("title")} | GREATSILKTRAILS` };
+  return buildPageMetadata({
+    locale,
+    path: "/destinations",
+    title: t("title"),
+    description: t("subtitle"),
+  });
 }
+
 
 export default async function DestinationsPage({
   params,

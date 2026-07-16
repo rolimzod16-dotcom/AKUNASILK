@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import { Mail, Phone, Clock, MessageCircle } from "lucide-react";
@@ -11,11 +13,18 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string }>;
-}) {
+}): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.contact" });
-  return { title: `${t("title")} | GREATSILKTRAILS` };
+  const c = await getTranslations({ locale, namespace: "contact" });
+  return buildPageMetadata({
+    locale,
+    path: "/contact",
+    title: t("title"),
+    description: c("subtitle"),
+  });
 }
+
 
 function ContactFormFallback() {
   return (
