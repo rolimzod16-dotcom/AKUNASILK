@@ -1,6 +1,9 @@
 /**
  * Telegram notify for booking / plan enquiries.
- * Set TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID (or TELEGRAM_CHAT_IDS comma-separated).
+ * Env:
+ *   TELEGRAM_BOT_TOKEN
+ *   TELEGRAM_CHAT_IDS=id1,id2   (preferred)
+ *   or TELEGRAM_CHAT_ID=id
  */
 
 export type InquiryNotifyPayload = {
@@ -9,10 +12,12 @@ export type InquiryNotifyPayload = {
   email: string;
   phone?: string;
   tour: string;
+  tourTitle?: string;
   message: string;
   locale?: string;
   travelers?: number;
   preferredDate?: string;
+  price?: number;
   source?: string;
 };
 
@@ -39,35 +44,60 @@ function escapeHtml(text: string): string {
     .replace(/>/g, "&gt;");
 }
 
+function isBookingSource(source?: string, tour?: string): boolean {
+  const s = (source || "").toLowerCase();
+  if (["card", "wizard", "matcher", "concierge"].includes(s)) return true;
+  if (tour && tour !== "any" && tour !== "bespoke") {
+    if (s === "card" || s.includes("reserve") || s.includes("book")) return true;
+  }
+  return Boolean(tour && tour !== "any" && tour !== "bespoke" && s !== "header" && s !== "info-page" && s !== "plan-journey");
+}
+
 function formatMessage(payload: InquiryNotifyPayload): string {
+  const booking = isBookingSource(payload.source, payload.tour);
+  const headline = booking
+    ? "🛎 <b>GREATSILKTRAILS — Reserve / booking hold</b>"
+    : "📩 <b>GREATSILKTRAILS — Plan Your Journey enquiry</b>";
+
+  const tourLabel = payload.tourTitle
+    ? `${payload.tourTitle} (${payload.tour})`
+    : payload.tour;
+
   const lines = [
-    "🛎 <b>GREATSILKTRAILS — new enquiry</b>",
+    headline,
     "",
     `<b>ID:</b> <code>${escapeHtml(payload.inquiryId)}</code>`,
     `<b>Name:</b> ${escapeHtml(payload.name)}`,
     `<b>Email:</b> ${escapeHtml(payload.email)}`,
-    `<b>Phone:</b> ${escapeHtml(payload.phone || "—")}`,
-    `<b>Tour / intent:</b> ${escapeHtml(payload.tour)}`,
+    `<b>Phone / WhatsApp:</b> ${escapeHtml(payload.phone || "—")}`,
+    `<b>Tour:</b> ${escapeHtml(tourLabel)}`,
+    payload.price != null ? `<b>Price shown:</b> $${payload.price}` : null,
     `<b>Travelers:</b> ${payload.travelers ?? "—"}`,
     `<b>Preferred date:</b> ${escapeHtml(payload.preferredDate || "—")}`,
     `<b>Source:</b> ${escapeHtml(payload.source || "form")}`,
     `<b>Locale:</b> ${escapeHtml(payload.locale || "en")}`,
     "",
-    "<b>Message:</b>",
-    escapeHtml(payload.message.slice(0, 3500)),
+    "<b>Message / notes:</b>",
+    escapeHtml((payload.message || "—").slice(0, 3500)),
     "",
-    "<i>Status: enquiry / 24h hold — not paid yet. Confirm availability before requesting deposit.</i>",
-  ];
+    booking
+      ? "<i>Status: 24h hold request — confirm availability before any deposit.</i>"
+      : "<i>Status: general / private trip planner — no tour locked yet.</i>",
+  ].filter((line): line is string => line != null);
+
   return lines.join("\n");
 }
 
-/** Fire-and-forget safe: returns true if at least one chat got the message. */
+/** Returns true if at least one chat received the message. */
 export async function notifyTelegramInquiry(
   payload: InquiryNotifyPayload
 ): Promise<boolean> {
   const token = process.env.TELEGRAM_BOT_TOKEN?.trim();
   const ids = chatIds();
-  if (!token || ids.length === 0) return false;
+  if (!token || ids.length === 0) {
+    console.warn("[telegram] not configured — skip notify");
+    return false;
+  }
 
   const text = formatMessage(payload);
   let anyOk = false;
@@ -88,8 +118,9 @@ export async function notifyTelegramInquiry(
             }),
           }
         );
-        if (res.ok) anyOk = true;
-        else {
+        if (res.ok) {
+          anyOk = true;
+        } else {
           const body = await res.text().catch(() => "");
           console.error("[telegram] send failed", chatId, res.status, body);
         }

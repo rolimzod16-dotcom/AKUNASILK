@@ -18,6 +18,7 @@ type ContactPayload = {
   locale?: string;
   travelers?: number;
   preferredDate?: string;
+  price?: number;
   source?: string;
   sendClientConfirmation?: boolean;
 };
@@ -174,18 +175,36 @@ export async function POST(request: Request) {
 
     const validSlugs = await getValidTourSlugs();
     const tour = validSlugs.has(body.tour) ? body.tour : "any";
+    const locale = body.locale === "ru" ? "ru" : "en";
+    const published = await getPublishedTours();
+    const tourRecord = published.find((t) => t.slug === tour);
+    const tourTitle =
+      tour === "any"
+        ? locale === "ru"
+          ? "Тур на выбор / Plan Your Journey"
+          : "Help me choose / Plan Your Journey"
+        : tour === "bespoke"
+          ? locale === "ru"
+            ? "Индивидуальный / private trip"
+            : "Bespoke private tour"
+          : tourRecord
+            ? getTourContent(tourRecord, locale).title
+            : tour;
+
     const payload: ContactPayload = {
       name: body.name.trim(),
       email: body.email.trim(),
       phone: body.phone?.trim(),
       tour,
       message: body.message.trim(),
-      locale: body.locale,
+      locale,
       travelers:
         typeof body.travelers === "number" && body.travelers >= 1 && body.travelers <= 12
           ? body.travelers
           : undefined,
       preferredDate: body.preferredDate?.trim(),
+      price:
+        typeof body.price === "number" && body.price > 0 ? body.price : tourRecord?.price,
       source: body.source?.trim(),
       sendClientConfirmation: body.sendClientConfirmation,
     };
@@ -195,7 +214,11 @@ export async function POST(request: Request) {
 
     // Operator alerts: Telegram bot + optional Resend email (non-blocking failures)
     const [telegramOk, emailOk] = await Promise.all([
-      notifyTelegramInquiry({ inquiryId, ...payload }),
+      notifyTelegramInquiry({
+        inquiryId,
+        ...payload,
+        tourTitle,
+      }),
       sendOperatorEmail(payload, inquiryId),
     ]);
     await sendClientConfirmation(payload, inquiryId);

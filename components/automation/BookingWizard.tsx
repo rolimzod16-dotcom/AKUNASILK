@@ -138,6 +138,7 @@ export default function BookingWizard() {
           locale,
           travelers,
           preferredDate: preferredDate || undefined,
+          price: displayPrice,
           source: prefill.source ?? "wizard",
           sendClientConfirmation: true,
         }),
