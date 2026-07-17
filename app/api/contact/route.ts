@@ -4,6 +4,9 @@ import path from "path";
 import { getPublishedTours, getTourContent } from "@/lib/cms/tours";
 import { notifyTelegramInquiry } from "@/lib/notify/telegram";
 
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 async function getValidTourSlugs(): Promise<Set<string>> {
   const tours = await getPublishedTours();
   return new Set(["any", "bespoke", ...tours.map((t) => t.slug)]);
@@ -26,43 +29,49 @@ type ContactPayload = {
 async function sendOperatorEmail(payload: ContactPayload, inquiryId: string) {
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.CONTACT_TO_EMAIL ?? "hello@greatsilktrails.com";
-  const from = process.env.CONTACT_FROM_EMAIL ?? "GREATSILKTRAILS <onboarding@resend.dev>";
+  const from =
+    process.env.CONTACT_FROM_EMAIL ?? "GREATSILKTRAILS <onboarding@resend.dev>";
 
   if (!apiKey) return false;
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: [to],
-      reply_to: payload.email,
-      subject: `[Booking ${inquiryId}] ${payload.tour} — ${payload.name}`,
-      text: [
-        `Inquiry ID: ${inquiryId}`,
-        `Name: ${payload.name}`,
-        `Email: ${payload.email}`,
-        `Phone: ${payload.phone || "—"}`,
-        `Tour: ${payload.tour}`,
-        `Travelers: ${payload.travelers ?? "—"}`,
-        `Preferred date: ${payload.preferredDate || "—"}`,
-        `Source: ${payload.source || "contact-form"}`,
-        `Locale: ${payload.locale || "en"}`,
-        "",
-        payload.message,
-      ].join("\n"),
-    }),
-  });
-
-  return res.ok;
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        reply_to: payload.email,
+        subject: `[Booking ${inquiryId}] ${payload.tour} — ${payload.name}`,
+        text: [
+          `Inquiry ID: ${inquiryId}`,
+          `Name: ${payload.name}`,
+          `Email: ${payload.email}`,
+          `Phone: ${payload.phone || "—"}`,
+          `Tour: ${payload.tour}`,
+          `Travelers: ${payload.travelers ?? "—"}`,
+          `Preferred date: ${payload.preferredDate || "—"}`,
+          `Source: ${payload.source || "contact-form"}`,
+          `Locale: ${payload.locale || "en"}`,
+          "",
+          payload.message,
+        ].join("\n"),
+      }),
+    });
+    return res.ok;
+  } catch (err) {
+    console.error("[contact] operator email failed", err);
+    return false;
+  }
 }
 
 async function sendClientConfirmation(payload: ContactPayload, inquiryId: string) {
   const apiKey = process.env.RESEND_API_KEY;
-  const from = process.env.CONTACT_FROM_EMAIL ?? "GREATSILKTRAILS <onboarding@resend.dev>";
+  const from =
+    process.env.CONTACT_FROM_EMAIL ?? "GREATSILKTRAILS <onboarding@resend.dev>";
   const supportEmail = process.env.CONTACT_TO_EMAIL ?? "hello@greatsilktrails.com";
 
   if (!apiKey || !payload.sendClientConfirmation) return false;
@@ -131,34 +140,51 @@ async function sendClientConfirmation(payload: ContactPayload, inquiryId: string
         .filter(Boolean)
         .join("\n");
 
-  const res = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      from,
-      to: [payload.email],
-      reply_to: supportEmail,
-      subject,
-      text,
-    }),
-  });
-
-  return res.ok;
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [payload.email],
+        reply_to: supportEmail,
+        subject,
+        text,
+      }),
+    });
+    return res.ok;
+  } catch (err) {
+    console.error("[contact] client email failed", err);
+    return false;
+  }
 }
 
+/**
+ * Best-effort local log. On Vercel the app filesystem is read-only —
+ * never throw; Telegram/email must still run.
+ */
 async function saveInquiry(payload: ContactPayload, inquiryId: string) {
-  const dir = path.join(process.cwd(), "data");
-  await mkdir(dir, { recursive: true });
-  const file = path.join(dir, "inquiries.jsonl");
-  const line = JSON.stringify({
-    id: inquiryId,
-    ...payload,
-    createdAt: new Date().toISOString(),
-  });
-  await appendFile(file, line + "\n", "utf8");
+  try {
+    const base =
+      process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME
+        ? path.join("/tmp", "gst-inquiries")
+        : path.join(process.cwd(), "data");
+    await mkdir(base, { recursive: true });
+    const file = path.join(base, "inquiries.jsonl");
+    const line = JSON.stringify({
+      id: inquiryId,
+      ...payload,
+      createdAt: new Date().toISOString(),
+    });
+    await appendFile(file, line + "\n", "utf8");
+    return true;
+  } catch (err) {
+    console.warn("[contact] saveInquiry skipped (non-fatal)", err);
+    return false;
+  }
 }
 
 export async function POST(request: Request) {
@@ -204,15 +230,18 @@ export async function POST(request: Request) {
           : undefined,
       preferredDate: body.preferredDate?.trim(),
       price:
-        typeof body.price === "number" && body.price > 0 ? body.price : tourRecord?.price,
+        typeof body.price === "number" && body.price > 0
+          ? body.price
+          : tourRecord?.price,
       source: body.source?.trim(),
       sendClientConfirmation: body.sendClientConfirmation,
     };
 
     const inquiryId = `GST-${Date.now().toString(36).toUpperCase()}`;
+
+    // Never block notifications on local file write
     await saveInquiry(payload, inquiryId);
 
-    // Operator alerts: Telegram bot + optional Resend email (non-blocking failures)
     const [telegramOk, emailOk] = await Promise.all([
       notifyTelegramInquiry({
         inquiryId,
@@ -221,14 +250,29 @@ export async function POST(request: Request) {
       }),
       sendOperatorEmail(payload, inquiryId),
     ]);
-    await sendClientConfirmation(payload, inquiryId);
+
+    // Client email is optional; ignore failures
+    void sendClientConfirmation(payload, inquiryId);
+
+    if (!telegramOk) {
+      console.error(
+        "[contact] telegram notify failed — check TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_IDS on Vercel"
+      );
+    }
 
     return NextResponse.json({
       ok: true,
       inquiryId,
       notified: { telegram: telegramOk, email: emailOk },
     });
-  } catch {
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  } catch (err) {
+    console.error("[contact] POST failed", err);
+    return NextResponse.json(
+      {
+        error: "Server error",
+        detail: err instanceof Error ? err.message : "unknown",
+      },
+      { status: 500 }
+    );
   }
 }
