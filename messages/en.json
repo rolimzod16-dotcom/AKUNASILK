@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "GREATSILKTRAILS — Silk Road Journeys",
-    "description": "Fixed-price small-group and private Silk Road journeys. Inquiry-based confirmation, visa support, and English-speaking guides across Central Asia and beyond."
+    "title": "Silk Road Tours & Central Asia Tours | GREATSILKTRAILS",
+    "description": "Book fixed-price Silk Road tours and Central Asia tours—from Uzbekistan cities to the Tajikistan Pamir Highway. Small groups, English-speaking guides, visa support. Plan or reserve with confirmation before payment."
   },
   "nav": {
     "home": "Home",
@@ -78,17 +78,17 @@
       }
     },
     "finder": {
-      "title": "Choose a region or route",
-      "viewAll": "Browse all tours",
+      "title": "Where do you want your Silk Road tour?",
+      "viewAll": "Browse all Silk Road tours",
       "regions": {
-        "uzbekistan": "Uzbekistan",
-        "centralAsia": "Central Asia",
-        "pamir": "Pamir & Hindu Kush",
-        "china": "China Silk Road",
+        "uzbekistan": "Uzbekistan tours",
+        "centralAsia": "Central Asia tours",
+        "pamir": "Tajikistan & Pamir",
+        "china": "China Silk Road tours",
         "persia": "Persia",
         "caucasus": "Caucasus"
       },
-      "hint": "Quick filters for countries, regions, and corridors."
+      "hint": "Jump into Uzbekistan, Central Asia, Pamir / Tajikistan corridors, China Silk Road, and more."
     },
     "catalog": {
       "filterTitle": "Find your trip",
@@ -139,19 +139,21 @@
     }
   },
   "hero": {
-    "badge": "Small groups · English-speaking guides · Fixed-price packages",
-    "title": "Silk Road tours, made simple.",
-    "subtitle": "Fixed prices in USD. Hotels, transfers, visa support and most meals included — plan with confidence from abroad.",
+    "badge": "Fixed-price Silk Road tours · Small groups · English-speaking guides",
+    "title": "Silk Road tours across Central Asia",
+    "subtitle": "From Uzbekistan's golden cities to Tajikistan's Pamir Highway—fixed prices in USD, visa support, and clear confirmation before any payment.",
     "priceFrom": "From ${price}",
-    "cta": "Browse Tours",
-    "ctaSecondary": "See bestseller",
+    "cta": "Browse Silk Road tours",
+    "ctaSecondary": "See top Uzbekistan tour",
     "bestseller": "Bestseller",
     "spotsUrgent": "Next departure details on the tour page",
-    "trust": "Flexible cancellation · Clear pricing · Availability confirmed before payment"
+    "trust": "Flexible cancellation · Clear pricing · Availability confirmed before payment",
+    "imageAlt": "{title} — featured Silk Road tour",
+    "premiumBadge": "Silk Road tour · Premium"
   },
   "shop": {
-    "title": "Choose your package",
-    "subtitle": "All tours include guide, hotels, transfers & most meals. Pay once — travel worry-free.",
+    "title": "Featured Silk Road tours",
+    "subtitle": "Fixed-price packages for classic Silk Road travel—hotels, guides, transfers, and most meals included.",
     "bestseller": "Bestseller",
     "buy": "Reserve Your Spot",
     "buyNow": "Reserve Your Spot",
@@ -165,8 +167,8 @@
     "orMonthly": "",
     "reviews": "reviews",
     "mostPopular": "Most Popular",
-    "pricingTitle": "How would you like to travel?",
-    "pricingSubtitle": "Group packages, signature routes, or a private journey — choose your approach.",
+    "pricingTitle": "Group, signature and private Silk Road tours",
+    "pricingSubtitle": "Choose how you want to travel the Silk Road—shared departures or a private itinerary.",
     "packageIncludes": "Every package includes",
     "highlights": "Trip highlights",
     "askExpert": "Ask an expert",
@@ -174,8 +176,8 @@
     "guaranteeShort": "Flexible cancellation · Availability confirmed before payment",
     "compareHint": "Related options: compare routes, explore destinations, or plan private dates.",
     "includes": {
-      "title": "All-inclusive. No surprises.",
-      "subtitle": "Every GREATSILKTRAILS package ships with everything below — no hidden fees at checkout.",
+      "title": "What's included on every Silk Road tour",
+      "subtitle": "Transparent inclusions so you can compare Silk Road tours without hidden add-ons.",
       "items": {
         "guide": {
           "title": "Expert Guide",
@@ -477,8 +479,8 @@
     "empty": "Partner logos are shown only after written approval. Contact us to discuss partnership or to learn which local operators deliver a specific route."
   },
   "cta": {
-    "title": "Ready to Travel the Silk Road?",
-    "subtitle": "Browse fixed-price tours or plan a private journey — we confirm availability before any payment is required.",
+    "title": "Ready for Silk Road travel?",
+    "subtitle": "Browse Silk Road tours, plan a private Central Asia itinerary, or message us on WhatsApp.",
     "button": "Plan Your Journey",
     "guarantee": "Flexible cancellation · Visa support · English-speaking support team"
   },
@@ -568,8 +570,8 @@
         ]
       }
     },
-    "ctaGroup": "Explore Group Tours",
-    "ctaSignature": "Explore Signature Tours",
+    "ctaGroup": "Explore group Silk Road tours",
+    "ctaSignature": "Explore signature Silk Road tours",
     "ctaPrivate": "Plan a Private Journey"
   },
   "portfolio": {
@@ -726,8 +728,8 @@
       }
     },
     "matcher": {
-      "title": "Find your perfect Silk Road trip",
-      "subtitle": "Short quiz · tailored route idea · enquiry hold",
+      "title": "Match your Central Asia tour",
+      "subtitle": "Answer three questions to find a Silk Road or Central Asia tour that fits your pace.",
       "step": "Question {current} of {total}",
       "questions": {
         "style": {
@@ -1221,8 +1223,8 @@
     "cta": "Browse Silk Road journeys"
   },
   "video": {
-    "title": "See the Silk Road in motion",
-    "subtitle": "Desert caravans, golden dunes, ancient cities — experience what awaits on your journey.",
+    "title": "Silk Road travel on the trail",
+    "subtitle": "Short films and routes that show how a Silk Road tour feels before you book.",
     "heroScenes": {
       "caravan": "Gobi Desert · Camel Caravan",
       "desert": "Silk Road · Desert Crossing",
@@ -1233,24 +1235,27 @@
     "clips": {
       "desert": {
         "title": "Camel Caravan",
-        "location": "Gobi Desert · China"
+        "location": "Gobi Desert · China",
+        "alt": "Camel caravan on a Silk Road tour, Gobi Desert"
       },
       "mountains": {
         "title": "Desert Trails",
-        "location": "Karakum · Turkmenistan"
+        "location": "Karakum · Turkmenistan",
+        "alt": "Desert trails on a Silk Road tour, Karakum"
       },
       "cities": {
         "title": "Registan Square",
-        "location": "Samarkand · Uzbekistan"
+        "location": "Samarkand · Uzbekistan",
+        "alt": "Registan Square, Uzbekistan Silk Road tour"
       }
     },
     "watchStory": "Watch Story",
     "exploreRoute": "Explore Route"
   },
   "silkRoad": {
-    "title": "7,000 miles. One legendary route.",
-    "subtitle": "From Xi'an to Istanbul — trace the path merchants traveled for millennia.",
-    "desc": "Every GREATSILKTRAILS package follows authentic Silk Road corridors through living cities, desert crossings, and mountain passes.",
+    "title": "The Great Silk Road, mapped for modern travel",
+    "subtitle": "Explore the historic corridor and jump into live Uzbekistan, Tajikistan, and multi-country Central Asia itineraries.",
+    "desc": "GREATSILKTRAILS curates fixed-price Great Silk Road tours and private Silk Road travel with local partners—historic context on the map, real departures on each tour page.",
     "mapTitle": "The Silk Road",
     "mapEra": "Trade routes c. 200 BCE — 1500 CE",
     "mapSubtitle": "From Chang'an, capital of Han China, to Constantinople — approx. 7,000 miles of caravan trails",
@@ -1323,7 +1328,7 @@
         "tag": "Western terminus — where continents meet"
       }
     },
-    "viewTours": "View tours",
+    "viewTours": "View Silk Road tours",
     "viewDestination": "Explore destination",
     "editorialNote": "Historical corridor illustration for orientation. Present-day GST tours operate on selected modern routes only — not every map point is a bookable product."
   }

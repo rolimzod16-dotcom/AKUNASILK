@@ -86,7 +86,7 @@ export default function Hero({ tour, tourTitle }: HeroProps) {
         <div className="silk-frame silk-glow-pulse relative aspect-[16/9] overflow-hidden rounded-3xl">
           <Image
             src={tour.image}
-            alt="Bestseller tour"
+            alt={t("imageAlt", { title: tourTitle })}
             fill
             priority
             className="animate-ken-burns object-cover"
@@ -111,7 +111,7 @@ export default function Hero({ tour, tourTitle }: HeroProps) {
             transition={{ delay: 0.8, duration: 0.6 }}
             className="absolute right-4 top-4 rounded-full border border-silk-gold/50 bg-silk-indigo/70 px-3 py-1 text-xs font-bold text-silk-gold backdrop-blur-md"
           >
-            Silk Road · Premium
+            {t("premiumBadge")}
           </motion.div>
         </div>
       </ScrollScale>

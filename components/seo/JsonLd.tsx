@@ -12,10 +12,19 @@ export default function JsonLd({ locale, description }: JsonLdProps) {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
     name: SITE_NAME,
+    alternateName: "GREATSILKTRAILS Silk Road Tours",
     url: site,
     description,
     email: "hello@greatsilktrails.com",
     telephone: "+998712004567",
+    knowsAbout: [
+      "Silk Road tours",
+      "Silk Road travel",
+      "Central Asia tours",
+      "Uzbekistan tours",
+      "Tajikistan tours",
+      "Great Silk Road",
+    ],
     areaServed: [
       "Central Asia",
       "China",
@@ -28,16 +37,16 @@ export default function JsonLd({ locale, description }: JsonLdProps) {
       "Turkey",
       "Turkmenistan",
     ],
-    sameAs: [
-      "https://wa.me/998712004567",
-    ],
+    sameAs: ["https://wa.me/998712004567"],
   };
 
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: SITE_NAME,
+    alternateName: "GREATSILKTRAILS Silk Road Tours",
     url: site,
+    description,
     inLanguage: [locale === "ru" ? "ru" : "en", "en", "ru"],
     potentialAction: {
       "@type": "SearchAction",

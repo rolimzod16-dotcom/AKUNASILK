@@ -43,7 +43,7 @@ export default function TourCard({ tour, content, index = 0 }: TourCardProps) {
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
               src={tour.image}
-              alt={content.title}
+              alt={`${content.title} Silk Road tour`}
               fill
               className="object-cover transition duration-700 group-hover:scale-110"
               sizes="(max-width: 768px) 100vw, 400px"

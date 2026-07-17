@@ -25,6 +25,7 @@ type VideoCardProps = {
   src: string;
   poster: string;
   title: string;
+  alt?: string;
   location: string;
   index: number;
   kind?: "video" | "image";
@@ -36,6 +37,7 @@ function VideoCard({
   src,
   poster,
   title,
+  alt,
   location,
   index,
   kind = "video",
@@ -91,7 +93,7 @@ function VideoCard({
             {kind === "image" ? (
               <Image
                 src={src}
-                alt={title}
+                alt={alt ?? title}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 400px"
@@ -171,12 +173,17 @@ export default function VideoShowcase() {
               href: "/journeys",
               kind: "route" as const,
             };
+            const clipTitle = t(`clips.${video.titleKey}.title`);
+            const clipAlt = t.has(`clips.${video.titleKey}.alt`)
+              ? t(`clips.${video.titleKey}.alt`)
+              : clipTitle;
             return (
               <VideoCard
                 key={video.id}
                 src={video.src}
                 poster={video.poster}
-                title={t(`clips.${video.titleKey}.title`)}
+                title={clipTitle}
+                alt={clipAlt}
                 location={t(`clips.${video.locationKey}.location`)}
                 index={i}
                 kind={video.kind}
