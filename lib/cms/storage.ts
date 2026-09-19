@@ -1,5 +1,10 @@
 import { readFile, writeFile, mkdir } from "fs/promises";
 import path from "path";
+import { canUseSupabase } from "@/lib/supabase/admin";
+import {
+  readSupabaseJson,
+  writeSupabaseJson,
+} from "@/lib/storage/supabase-cms";
 import {
   BLOB_CMS_SETUP_MESSAGE,
   canUseBlobStorage,
@@ -42,6 +47,9 @@ async function writeLocalJson<T>(filename: string, data: T): Promise<void> {
 }
 
 export async function readCmsJson<T>(filename: string, fallback: T): Promise<T> {
+  const fromSupabase = await readSupabaseJson<T>(filename);
+  if (fromSupabase !== null) return fromSupabase;
+
   const fromBlob = await readBlobJson<T>(blobPath(filename));
   if (fromBlob !== null) return fromBlob;
 
@@ -59,6 +67,15 @@ export async function readCmsJson<T>(filename: string, fallback: T): Promise<T> 
 
 export async function writeCmsJson<T>(filename: string, data: T): Promise<void> {
   const errors: string[] = [];
+
+  if (canUseSupabase()) {
+    try {
+      await writeSupabaseJson(filename, data);
+      return;
+    } catch (err) {
+      errors.push(err instanceof Error ? err.message : "Supabase write failed");
+    }
+  }
 
   if (canUseBlobStorage()) {
     try {
@@ -83,10 +100,10 @@ export async function writeCmsJson<T>(filename: string, data: T): Promise<void> 
     return;
   }
 
-  const hint = canUseGithubCms()
+  const hint = errors.length
     ? errors.join("; ")
-    : `${BLOB_CMS_SETUP_MESSAGE} Or add GITHUB_TOKEN + GITHUB_REPO in Vercel env.`;
-  throw new Error(errors.length > 0 ? errors.join("; ") : hint);
+    : "Add Supabase (preferred) or Vercel Blob, then redeploy.";
+  throw new Error(hint || BLOB_CMS_SETUP_MESSAGE);
 }
 
 export function cmsNow() {
@@ -109,9 +126,13 @@ export function newId(prefix: string) {
 export function getCmsStorageStatus() {
   return {
     runtime: isVercelRuntime() ? "vercel" : "local",
+    supabase: canUseSupabase(),
     blob: canUseBlobStorage(),
     github: canUseGithubCms(),
     canSave:
-      !isVercelRuntime() || canUseBlobStorage() || canUseGithubCms(),
+      !isVercelRuntime() ||
+      canUseSupabase() ||
+      canUseBlobStorage() ||
+      canUseGithubCms(),
   };
 }

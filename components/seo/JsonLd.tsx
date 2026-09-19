@@ -3,40 +3,29 @@ import { getSiteUrl, SITE_NAME } from "@/lib/seo/site";
 type JsonLdProps = {
   locale: string;
   description: string;
+  email?: string;
+  telephone?: string;
 };
 
-export default function JsonLd({ locale, description }: JsonLdProps) {
+export default function JsonLd({ locale, description, email, telephone }: JsonLdProps) {
   const site = getSiteUrl();
 
   const organization = {
     "@context": "https://schema.org",
     "@type": "TravelAgency",
     name: SITE_NAME,
-    alternateName: "GREATSILKTRAILS Silk Road Tours",
+    alternateName: "GREAT SILK TRAILS",
     url: site,
     description,
-    email: "hello@greatsilktrails.com",
-    telephone: "+998712004567",
+    email: email || "hello@greatsilktrails.com",
+    telephone: telephone || "+998712004567",
     knowsAbout: [
       "Silk Road tours",
-      "Silk Road travel",
-      "Central Asia tours",
-      "Uzbekistan tours",
       "Tajikistan tours",
-      "Great Silk Road",
+      "Pamir Highway",
+      "Central Asia tours",
     ],
-    areaServed: [
-      "Central Asia",
-      "China",
-      "Tajikistan",
-      "Uzbekistan",
-      "Kyrgyzstan",
-      "Kazakhstan",
-      "Pakistan",
-      "Iran",
-      "Turkey",
-      "Turkmenistan",
-    ],
+    areaServed: ["Tajikistan", "Uzbekistan", "Kyrgyzstan", "Kazakhstan", "Central Asia"],
     sameAs: ["https://wa.me/998712004567"],
   };
 
@@ -47,7 +36,7 @@ export default function JsonLd({ locale, description }: JsonLdProps) {
     alternateName: "GREATSILKTRAILS Silk Road Tours",
     url: site,
     description,
-    inLanguage: [locale === "ru" ? "ru" : "en", "en", "ru"],
+    inLanguage: ["en"],
     potentialAction: {
       "@type": "SearchAction",
       target: {

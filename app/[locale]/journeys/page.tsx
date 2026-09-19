@@ -3,7 +3,9 @@ import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/shared/PageHero";
 import JourneyCatalog from "@/components/journeys/JourneyCatalog";
-import { getPublishedTours, getTourContent } from "@/lib/data/tours";
+import { getCatalogTours, getTourContent, tourShowsPrice } from "@/lib/data/tours";
+import { getSiteSettings } from "@/lib/cms/settings";
+import { getPublishedDestinations, publicCountrySlugsFrom } from "@/lib/cms/destinations";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 
 export async function generateMetadata({
@@ -16,8 +18,9 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     path: "/journeys",
-    title: t("title"),
-    description: t("subtitle"),
+    title: "Silk Road & Central Asia Tours | Great Silk Trails",
+    description:
+      "Explore private and small-group tours across Tajikistan and Central Asia. Filter journeys by destination, style, duration and difficulty.",
   });
 }
 
@@ -36,17 +39,22 @@ export default async function JourneysPage({
 }) {
   const { locale } = await params;
   const pages = await getTranslations({ locale, namespace: "pages.journeys" });
-  const tours = await getPublishedTours();
+  const [tours, settings, destinations] = await Promise.all([
+    getCatalogTours(),
+    getSiteSettings(),
+    getPublishedDestinations(),
+  ]);
   const items = tours.map((tour) => ({
     tour,
     content: getTourContent(tour, locale),
+    showPrice: tourShowsPrice(tour, settings.showPrices),
   }));
 
   return (
     <>
       <PageHero title={pages("title")} subtitle={pages("subtitle")} compact />
       <Suspense fallback={<CatalogFallback />}>
-        <JourneyCatalog items={items} />
+        <JourneyCatalog items={items} countries={publicCountrySlugsFrom(destinations)} />
       </Suspense>
     </>
   );

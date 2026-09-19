@@ -56,8 +56,8 @@ function isBookingSource(source?: string, tour?: string): boolean {
 function formatMessage(payload: InquiryNotifyPayload): string {
   const booking = isBookingSource(payload.source, payload.tour);
   const headline = booking
-    ? "🛎 <b>GREATSILKTRAILS — Reserve / booking hold</b>"
-    : "📩 <b>GREATSILKTRAILS — Plan Your Journey enquiry</b>";
+    ? "🛎 <b>GREAT SILK TRAILS — journey request</b>"
+    : "📩 <b>GREAT SILK TRAILS — Plan My Journey enquiry</b>";
 
   const tourLabel = payload.tourTitle
     ? `${payload.tourTitle} (${payload.tour})`
@@ -81,7 +81,7 @@ function formatMessage(payload: InquiryNotifyPayload): string {
     escapeHtml((payload.message || "—").slice(0, 3500)),
     "",
     booking
-      ? "<i>Status: 24h hold request — confirm availability before any deposit.</i>"
+      ? "<i>Status: journey request — confirm availability before any payment.</i>"
       : "<i>Status: general / private trip planner — no tour locked yet.</i>",
   ].filter((line): line is string => line != null);
 

@@ -3,7 +3,7 @@ import { requireAdminApi } from "@/lib/auth/api-admin";
 import { storeCmsImage } from "@/lib/upload/store";
 
 const MAX_BYTES = 3 * 1024 * 1024;
-const FOLDERS = new Set(["tours", "stories", "general"]);
+const FOLDERS = new Set(["tours", "stories", "general", "destinations", "reviews"]);
 
 export async function POST(request: Request) {
   const denied = await requireAdminApi();

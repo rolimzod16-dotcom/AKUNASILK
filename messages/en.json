@@ -1,15 +1,19 @@
 {
   "meta": {
-    "title": "Silk Road Tours & Central Asia Tours | GREATSILKTRAILS",
-    "description": "Book fixed-price Silk Road tours and Central Asia tours—from Uzbekistan cities to the Tajikistan Pamir Highway. Small groups, English-speaking guides, visa support. Plan or reserve with confirmation before payment."
+    "title": "Silk Road Tours & Central Asia Journeys | Great Silk Trails",
+    "description": "Private and small-group Silk Road tours across Tajikistan and Central Asia, designed with local guides, drivers and trusted hosts."
   },
   "nav": {
     "home": "Home",
     "silkTrails": "Silk Trails",
     "destination": "Destinations",
     "travelStyles": "Travel Styles",
-    "servicesLogistics": "Services & Logistics",
-    "aboutGst": "About GST",
+    "travelServices": "Travel Services",
+    "servicesLogistics": "Travel Services",
+    "aboutGst": "About Us",
+    "planMyJourney": "Plan My Journey",
+    "destCentralAsia": "Central Asia",
+    "styleMotorcycle": "Motorcycle",
     "viewAll": "View all",
     "tourChina": "Silk Road Origins Trail — China",
     "tourKyrgyzstan": "Nomads & Mountains Silk Trail — Kyrgyzstan",
@@ -41,11 +45,11 @@
     "serviceAccommodation": "Accommodation & Logistics",
     "serviceTailorMade": "Tailor-Made Journeys",
     "destinations": "Destinations",
-    "journeys": "Tours",
+    "journeys": "Journeys",
     "experiences": "Experiences",
     "heritage": "Heritage",
     "stories": "Stories",
-    "about": "About",
+    "about": "About Us",
     "partners": "Partners",
     "contact": "Contact",
     "tours": "Journeys",
@@ -53,9 +57,9 @@
     "portfolio": "Experiences",
     "blog": "Stories",
     "faq": "FAQ",
-    "book": "Plan Your Journey",
-    "planYourJourney": "Plan Your Journey",
-    "getQuote": "Plan Your Journey",
+    "book": "Plan My Journey",
+    "planYourJourney": "Plan My Journey",
+    "getQuote": "Plan My Journey",
     "silkRoadMain": "The Silk Road"
   },
   "traveler": {
@@ -121,15 +125,15 @@
         "caucasus": "Caucasus",
         "anatolia": "Anatolia"
       },
-      "empty": "No tours match these filters. Try another country or browse all tours.",
+      "empty": "No journeys match these filters. Clear filters or ask us to design a private trip.",
       "filterByMonth": "Departure month",
       "filterByDuration": "Duration",
       "filterByDifficulty": "Difficulty",
       "monthAll": "Any month",
       "duration": {
         "all": "Any duration",
-        "short": "5-8 days",
-        "medium": "9-12 days",
+        "short": "1–7 days",
+        "medium": "8–12 days",
         "long": "13+ days"
       }
     },
@@ -139,12 +143,12 @@
     }
   },
   "hero": {
-    "badge": "Fixed-price Silk Road tours · Small groups · English-speaking guides",
-    "title": "Silk Road tours across Central Asia",
-    "subtitle": "From Uzbekistan's golden cities to Tajikistan's Pamir Highway—fixed prices in USD, visa support, and clear confirmation before any payment.",
-    "priceFrom": "From ${price}",
-    "cta": "Browse Silk Road tours",
-    "ctaSecondary": "See top Uzbekistan tour",
+    "badge": "Local Silk Road experts",
+    "title": "Travel the Silk Roads with local experts",
+    "subtitle": "Private and small-group journeys across Tajikistan and Central Asia, designed with trusted local guides, drivers and hosts.",
+    "priceFrom": "Request a quote",
+    "cta": "Explore Journeys",
+    "ctaSecondary": "Plan a Private Trip",
     "bestseller": "Bestseller",
     "spotsUrgent": "Next departure details on the tour page",
     "trust": "Flexible cancellation · Clear pricing · Availability confirmed before payment",
@@ -155,10 +159,12 @@
     "title": "Featured Silk Road tours",
     "subtitle": "Fixed-price packages for classic Silk Road travel—hotels, guides, transfers, and most meals included.",
     "bestseller": "Bestseller",
-    "buy": "Reserve Your Spot",
-    "buyNow": "Reserve Your Spot",
-    "getQuote": "Reserve Your Spot",
-    "viewTrip": "View Tour",
+    "buy": "Request Availability",
+    "buyNow": "Request Availability",
+    "getQuote": "Request a quote",
+    "requestQuote": "Request a quote",
+    "privateDeparture": "Private departure on request",
+    "viewTrip": "View Journey",
     "perPerson": "per person",
     "buyPackage": "Browse Tours",
     "details": "Details",
@@ -205,7 +211,7 @@
         }
       }
     },
-    "reserveSpot": "Reserve Your Spot"
+    "reserveSpot": "Request Availability"
   },
   "scrollStory": {
     "title": "Every mile. A masterpiece.",
@@ -235,6 +241,50 @@
     "years": "Years of Expertise",
     "styles": "Travel styles",
     "support": "Trip support"
+  },
+  "home": {
+    "destinations": {
+      "title": "Where we travel",
+      "subtitle": "Four countries we know well, plus multi-country Silk Road journeys."
+    },
+    "featured": {
+      "eyebrow": "Featured Journeys",
+      "title": "Journeys shaped by the Silk Road",
+      "subtitle": "A small selection of routes we know personally and operate with trusted local teams.",
+      "viewAll": "View All Journeys"
+    },
+    "why": {
+      "title": "Why Great Silk Trails",
+      "items": {
+        "rooted": {
+          "title": "Rooted in Tajikistan",
+          "desc": "Local knowledge of the Pamirs, mountain roads, permits and communities."
+        },
+        "ground": {
+          "title": "Designed by people on the ground",
+          "desc": "Routes are checked with local drivers, guides and hosts before publication."
+        },
+        "private": {
+          "title": "Private and small-group travel",
+          "desc": "Flexible journeys with clear group sizes, vehicles and support."
+        },
+        "team": {
+          "title": "One team from planning to return",
+          "desc": "Practical assistance before departure and accountable local coordination on the road."
+        }
+      }
+    },
+    "services": {
+      "title": "Need part of the journey, not a full tour?",
+      "subtitle": "Arrange transport, guides, visa support, permits or a tailor-made route with one local team.",
+      "cta": "Explore Travel Services"
+    },
+    "cta": {
+      "title": "Ready to plan your Silk Road journey?",
+      "subtitle": "Tell us where you want to go, how you like to travel and when you are considering. We will reply with the next practical step.",
+      "plan": "Plan My Journey",
+      "whatsapp": "WhatsApp Us"
+    }
   },
   "features": {
     "title": "Why Travel With Us",
@@ -297,9 +347,9 @@
       "policyLinks": "Full policies:"
     },
     "difficulty": {
-      "easy": "Leisure",
+      "easy": "Easy",
       "moderate": "Moderate",
-      "adventurous": "Adventurous"
+      "adventurous": "Challenging"
     },
     "items": {
       "golden-cities-silk-trail-uzbekistan": {
@@ -485,9 +535,9 @@
     "guarantee": "Flexible cancellation · Visa support · English-speaking support team"
   },
   "about": {
-    "title": "Our Story",
-    "subtitle": "A curated Silk Road platform — not a single operator in every country",
-    "mission": "GREATSILKTRAILS is a curated Silk Road platform and umbrella brand. We design fixed-price and private journeys with trusted local operators, English-speaking guides, homestays, and logistics partners. We are not a single operator in every country — operational responsibility for each Tour is confirmed in writing before you pay.",
+    "title": "How we operate",
+    "subtitle": "A Silk Road travel company rooted in Tajikistan",
+    "mission": "Great Silk Trails designs and coordinates journeys from Tajikistan across Central Asia. We operate directly in Tajikistan and work with regional partners in neighbouring countries. Each itinerary is checked with local drivers, guides and hosts before we publish it.",
     "values": {
       "authentic": {
         "title": "Authenticity",
@@ -874,8 +924,8 @@
     }
   },
   "footer": {
-    "tagline": "Fixed-price small-group and private Silk Road journeys.",
-    "rights": "© 2026 GREATSILKTRAILS. All rights reserved.",
+    "tagline": "Private and small-group journeys across Tajikistan and Central Asia, designed with local guides, drivers and hosts.",
+    "rights": "© 2026 Great Silk Trails. All rights reserved.",
     "newsletter": "Join the Caravan",
     "newsletterDesc": "Monthly inspiration from the Silk Road.",
     "subscribe": "Subscribe",
@@ -892,8 +942,8 @@
       "subtitle": "Fixed-price Silk Road packages — compare routes and reserve a spot for confirmation"
     },
     "journeys": {
-      "title": "Silk Road Tours",
-      "subtitle": "Compare fixed-price packages — filter by destination, departure month, duration, travel style, and difficulty"
+      "title": "Silk Road and Central Asia journeys",
+      "subtitle": "Explore private and small-group journeys across Tajikistan and Central Asia. Filter by destination, travel style, duration and difficulty."
     },
     "destinations": {
       "title": "Destinations",
@@ -969,8 +1019,12 @@
           "desc": "Caravanserai cities, bazaars, UNESCO medinas, and living craft traditions along historic trade corridors."
         },
         "photo": {
-          "title": "Photo Journeys",
+          "title": "Photography",
           "desc": "Golden-hour departures, mountain light, and curated stops for photographers and visual storytellers."
+        },
+        "motorcycle": {
+          "title": "Motorcycle",
+          "desc": "Motorcycle journeys on the Pamir Highway, planned with local road knowledge and support."
         }
       },
       "viewFeatured": "Featured packages",

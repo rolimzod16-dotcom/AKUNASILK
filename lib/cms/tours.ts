@@ -7,6 +7,8 @@ export { createEmptyTour } from "./defaults";
 import { seedTours } from "./seed";
 import { syncTourCountries, type CountrySlug } from "@/lib/countries";
 import { isTravelStyle } from "@/lib/travel-styles";
+import { FEATURED_JOURNEY_SLUGS, PUBLIC_COUNTRY_SLUGS } from "@/lib/site";
+import { getPublishedDestinations, publicCountrySlugsFrom } from "@/lib/cms/destinations";
 
 const FILE = "tours.json";
 
@@ -38,7 +40,37 @@ export async function getAllTours(): Promise<CmsTour[]> {
 
 export async function getPublishedTours(): Promise<CmsTour[]> {
   const tours = await getAllTours();
-  return tours.filter((t) => t.published);
+  return tours.filter(
+    (t) => t.published && (!t.status || t.status === "published")
+  );
+}
+
+export async function getCatalogTours(): Promise<CmsTour[]> {
+  const [tours, destinations] = await Promise.all([
+    getPublishedTours(),
+    getPublishedDestinations().catch(() => []),
+  ]);
+  const allowed =
+    publicCountrySlugsFrom(destinations).length > 0
+      ? publicCountrySlugsFrom(destinations)
+      : [...PUBLIC_COUNTRY_SLUGS];
+  return tours.filter((tour) =>
+    (tour.countrySlugs ?? []).some((slug) => allowed.includes(slug))
+  );
+}
+
+export async function getFeaturedJourneys(): Promise<CmsTour[]> {
+  const tours = await getCatalogTours();
+  const featured = tours.filter((tour) => tour.featured).slice(0, 3);
+  if (featured.length > 0) return featured;
+  const bySlug = new Map(tours.map((tour) => [tour.slug, tour]));
+  return FEATURED_JOURNEY_SLUGS.map((slug) => bySlug.get(slug)).filter(
+    (tour): tour is CmsTour => Boolean(tour)
+  ).slice(0, 3);
+}
+
+export function tourShowsPrice(tour: CmsTour, allowPrices: boolean): boolean {
+  return Boolean(allowPrices && tour.showPrice && tour.price > 0);
 }
 
 export async function getTourBySlug(slug: string): Promise<CmsTour | undefined> {

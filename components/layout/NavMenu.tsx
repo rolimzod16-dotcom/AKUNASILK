@@ -21,17 +21,24 @@ function isDropdownActive(pathname: string, item: Extract<NavItem, { type: "drop
 type NavMenuProps = {
   variant?: "desktop" | "mobile";
   onNavigate?: () => void;
+  light?: boolean;
+  items?: NavItem[];
 };
 
-export default function NavMenu({ variant = "desktop", onNavigate }: NavMenuProps) {
+export default function NavMenu({ variant = "desktop", onNavigate, light, items }: NavMenuProps) {
   const t = useTranslations("nav");
   const pathname = usePathname();
   const [openKey, setOpenKey] = useState<string | null>(null);
+  const navigation = items ?? mainNavigation;
+
+  function childLabel(child: { key: string; label?: string }) {
+    return child.label || t(child.key);
+  }
 
   if (variant === "mobile") {
     return (
       <nav className="flex flex-col gap-1">
-        {mainNavigation.map((item) => {
+        {navigation.map((item) => {
           if (item.type === "link") {
             return (
               <Link
@@ -89,7 +96,7 @@ export default function NavMenu({ variant = "desktop", onNavigate }: NavMenuProp
                           : "text-apple-muted"
                       )}
                     >
-                      {t(child.key)}
+                      {childLabel(child)}
                     </Link>
                   ))}
                 </div>
@@ -103,7 +110,7 @@ export default function NavMenu({ variant = "desktop", onNavigate }: NavMenuProp
 
   return (
     <nav className="hidden items-center gap-0.5 lg:flex">
-      {mainNavigation.map((item) => {
+      {navigation.map((item) => {
         if (item.type === "link") {
           const active = isActive(pathname, item.href);
           return (
@@ -113,8 +120,12 @@ export default function NavMenu({ variant = "desktop", onNavigate }: NavMenuProp
               className={cn(
                 "rounded-lg px-2.5 py-2 text-[11px] font-bold uppercase tracking-wide transition-colors xl:px-3 xl:text-xs",
                 active
-                  ? "bg-silk-gold/15 text-silk-indigo"
-                  : "text-apple-subtle hover:bg-silk-cream hover:text-silk-indigo"
+                  ? light
+                    ? "bg-white/15 text-white"
+                    : "bg-silk-gold/15 text-silk-indigo"
+                  : light
+                    ? "text-white/85 hover:bg-white/10 hover:text-white"
+                    : "text-apple-subtle hover:bg-silk-cream hover:text-silk-indigo"
               )}
             >
               {t(item.key)}
@@ -130,8 +141,12 @@ export default function NavMenu({ variant = "desktop", onNavigate }: NavMenuProp
               className={cn(
                 "flex cursor-default items-center gap-0.5 rounded-lg px-2.5 py-2 text-[11px] font-bold uppercase tracking-wide transition-colors xl:px-3 xl:text-xs",
                 active
-                  ? "bg-silk-gold/15 text-silk-indigo"
-                  : "text-apple-subtle group-hover:bg-silk-cream group-hover:text-silk-indigo"
+                  ? light
+                    ? "bg-white/15 text-white"
+                    : "bg-silk-gold/15 text-silk-indigo"
+                  : light
+                    ? "text-white/85 group-hover:bg-white/10 group-hover:text-white"
+                    : "text-apple-subtle group-hover:bg-silk-cream group-hover:text-silk-indigo"
               )}
             >
               {item.href ? (
@@ -157,7 +172,7 @@ export default function NavMenu({ variant = "desktop", onNavigate }: NavMenuProp
                         : "text-apple-subtle"
                     )}
                   >
-                    {t(child.key)}
+                    {childLabel(child)}
                   </Link>
                 ))}
               </div>

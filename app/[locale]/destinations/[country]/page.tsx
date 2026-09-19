@@ -5,26 +5,28 @@ import PageHero from "@/components/shared/PageHero";
 import TourCard from "@/components/tours/TourCard";
 import BookNowButton from "@/components/automation/BookNowButton";
 import { Button } from "@/components/ui/button";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import {
   getCountryLabel,
   isCountrySlug,
   tourMatchesCountry,
   type CountrySlug,
 } from "@/lib/countries";
-import { getPublishedTours, getTourContent } from "@/lib/data/tours";
+import { getCatalogTours, getTourContent, tourShowsPrice } from "@/lib/data/tours";
 import { getTravelStyleLabel, type TravelStyle } from "@/lib/travel-styles";
+import {
+  getAllDestinations,
+  getDestinationContent,
+  getPublishedDestinationBySlug,
+} from "@/lib/cms/destinations";
+import { getSiteSettings } from "@/lib/cms/settings";
 
 /** Active GST destinations with real products / landings */
 const ACTIVE_COUNTRIES: CountrySlug[] = [
   "tajikistan",
-  "kyrgyzstan",
   "uzbekistan",
+  "kyrgyzstan",
   "kazakhstan",
-  "china",
-  "pakistan",
-  "turkmenistan",
-  "iran",
-  "turkey",
 ];
 
 const COUNTRY_NOTES: Record<
@@ -118,7 +120,8 @@ const COUNTRY_NOTES: Record<
 };
 
 export async function generateStaticParams() {
-  return ACTIVE_COUNTRIES.map((country) => ({ country }));
+  const destinations = await getAllDestinations();
+  return destinations.map((item) => ({ country: item.slug }));
 }
 
 export async function generateMetadata({
@@ -127,9 +130,26 @@ export async function generateMetadata({
   params: Promise<{ locale: string; country: string }>;
 }) {
   const { locale, country } = await params;
-  if (!isCountrySlug(country)) return { title: "GREATSILKTRAILS" };
+  const cms = await getPublishedDestinationBySlug(country);
+  if (cms) {
+    const content = getDestinationContent(cms, locale);
+    return buildPageMetadata({
+      locale,
+      path: `/destinations/${country}`,
+      title: content.seoTitle || `${content.name} tours | Great Silk Trails`,
+      description: content.seoDescription || content.intro || content.line,
+    });
+  }
+  if (!isCountrySlug(country) || !ACTIVE_COUNTRIES.includes(country)) {
+    return { title: "Great Silk Trails" };
+  }
   const name = getCountryLabel(country, locale);
-  return { title: `${name} | Destinations | GREATSILKTRAILS` };
+  return buildPageMetadata({
+    locale,
+    path: `/destinations/${country}`,
+    title: `${name} tours | Great Silk Trails`,
+    description: `Travel ${name} with local teams who understand the roads, permits and communities.`,
+  });
 }
 
 export default async function CountryLandingPage({
@@ -138,19 +158,27 @@ export default async function CountryLandingPage({
   params: Promise<{ locale: string; country: string }>;
 }) {
   const { locale, country } = await params;
-  if (!isCountrySlug(country) || !ACTIVE_COUNTRIES.includes(country)) notFound();
+  const cms = await getPublishedDestinationBySlug(country);
+  if (!cms && (!isCountrySlug(country) || !ACTIVE_COUNTRIES.includes(country))) notFound();
 
   const t = await getTranslations({ locale, namespace: "pages.countryLanding" });
   const dest = await getTranslations({ locale, namespace: "destinations" });
-  const name = getCountryLabel(country, locale);
-  const notes = COUNTRY_NOTES[country];
+  const cmsContent = cms ? getDestinationContent(cms, locale) : null;
+  const name =
+    cmsContent?.name ||
+    (isCountrySlug(country) ? getCountryLabel(country, locale) : country);
+  const notes = isCountrySlug(country) ? COUNTRY_NOTES[country] : undefined;
+  const settings = await getSiteSettings();
 
-  const tours = (await getPublishedTours()).filter((tour) =>
-    tourMatchesCountry(tour, country)
+  const tours = (await getCatalogTours()).filter((tour) =>
+    isCountrySlug(country)
+      ? tourMatchesCountry(tour, country)
+      : (tour.countrySlugs as string[] | undefined)?.includes(country)
   );
   const items = tours.map((tour) => ({
     tour,
     content: getTourContent(tour, locale),
+    showPrice: tourShowsPrice(tour, settings.showPrices),
   }));
 
   const styles = Array.from(
@@ -161,31 +189,42 @@ export default async function CountryLandingPage({
 
   return (
     <>
-      <PageHero title={name} subtitle={dest(`${country}.desc`)} />
+      <PageHero
+        title={cmsContent?.name || name}
+        subtitle={cmsContent?.intro || cmsContent?.line || notes?.why || name}
+      />
 
       <section className="apple-section">
         <div className="mx-auto max-w-[900px] space-y-8 px-6">
           <div>
             <h2 className="silk-headline text-xl text-silk-indigo">{t("overview")}</h2>
             <p className="mt-2 text-sm leading-relaxed text-apple-muted">
-              {dest(`${country}.desc`)}
+              {cmsContent?.intro || notes?.why || ""}
             </p>
           </div>
           <div>
             <h2 className="silk-headline text-xl text-silk-indigo">{t("whyGo")}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-apple-muted">{notes.why}</p>
+            <p className="mt-2 text-sm leading-relaxed text-apple-muted">
+              {cmsContent?.why || notes?.why || ""}
+            </p>
           </div>
           <div>
             <h2 className="silk-headline text-xl text-silk-indigo">{t("bestSeason")}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-apple-muted">{notes.season}</p>
+            <p className="mt-2 text-sm leading-relaxed text-apple-muted">
+              {cmsContent?.season || notes?.season || cms?.bestTime || ""}
+            </p>
           </div>
           <div>
             <h2 className="silk-headline text-xl text-silk-indigo">{t("practical")}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-apple-muted">{notes.practical}</p>
+            <p className="mt-2 text-sm leading-relaxed text-apple-muted">
+              {cmsContent?.practical || notes?.practical || ""}
+            </p>
           </div>
           <div>
             <h2 className="silk-headline text-xl text-silk-indigo">{t("visaNotes")}</h2>
-            <p className="mt-2 text-sm leading-relaxed text-apple-muted">{notes.visa}</p>
+            <p className="mt-2 text-sm leading-relaxed text-apple-muted">
+              {cmsContent?.visa || notes?.visa || ""}
+            </p>
           </div>
           {styles.length > 0 && (
             <div>
@@ -244,8 +283,14 @@ export default async function CountryLandingPage({
           <h2 className="silk-headline text-2xl text-silk-indigo">{t("availableTours")}</h2>
           {items.length > 0 ? (
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {items.map(({ tour, content }, i) => (
-                <TourCard key={tour.id} tour={tour} content={content} index={i} />
+              {items.map(({ tour, content, showPrice }, i) => (
+                <TourCard
+                  key={tour.id}
+                  tour={tour}
+                  content={content}
+                  index={i}
+                  showPrice={showPrice}
+                />
               ))}
             </div>
           ) : (

@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getPublishedTours } from "@/lib/cms/tours";
+import { getCatalogTours } from "@/lib/cms/tours";
 import { getPublishedStories } from "@/lib/cms/stories";
 import {
   ACTIVE_DESTINATIONS,
@@ -67,7 +67,7 @@ async function returnsHttp200(url: string): Promise<boolean> {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [tours, stories] = await Promise.all([
-    getPublishedTours().catch(() => []),
+    getCatalogTours().catch(() => []),
     getPublishedStories().catch(() => []),
   ]);
 
@@ -83,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority:
           path === "/"
             ? 1
-            : path === "/journeys" || path === "/silk-trails"
+            : path === "/journeys" || path === "/destinations"
               ? 0.9
               : path === "/contact"
                 ? 0.85

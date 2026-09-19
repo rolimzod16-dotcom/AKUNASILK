@@ -1,0 +1,176 @@
+[
+  {
+    "id": "dest-tajikistan",
+    "slug": "tajikistan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80",
+    "showOnHome": true,
+    "homeOrder": 1,
+    "bestTime": "Late May–September",
+    "content": {
+      "en": {
+        "name": "Tajikistan",
+        "line": "Pamirs, Wakhan and the Fann Mountains",
+        "intro": "Travel the Pamir Highway, Wakhan Valley and Fann Mountains with local teams who understand the roads, permits, altitude and communities of Tajikistan.",
+        "why": "Pamir Highway, Wakhan views, and high-altitude village hospitality.",
+        "season": "Best overland windows: late May–September for high passes.",
+        "practical": "Altitude, long driving days, and GBAO permit planning are central to itinerary design.",
+        "visa": "Entry rules vary by nationality. GST provides visa support — no visa guarantee.",
+        "seoTitle": "Tajikistan Tours & Pamir Highway Journeys | GST",
+        "seoDescription": "Travel the Pamir Highway, Wakhan Valley and Fann Mountains with local teams experienced in Tajikistan's roads, permits and altitude."
+      },
+      "ru": {
+        "name": "Таджикистан",
+        "line": "Памир, Вахан и Фанские горы",
+        "intro": "Памирский тракт, Вахан и Фанские горы с местной командой.",
+        "why": "",
+        "season": "",
+        "practical": "",
+        "visa": ""
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "dest-uzbekistan",
+    "slug": "uzbekistan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=1200&q=80",
+    "showOnHome": true,
+    "homeOrder": 2,
+    "bestTime": "April–June and September–October",
+    "content": {
+      "en": {
+        "name": "Uzbekistan",
+        "line": "Silk Road cities and living craft traditions",
+        "intro": "Silk Road cities and living craft traditions",
+        "why": "",
+        "season": "",
+        "practical": "",
+        "visa": "",
+        "seoTitle": "",
+        "seoDescription": ""
+      },
+      "ru": {
+        "name": "Uzbekistan",
+        "line": "Silk Road cities and living craft traditions",
+        "intro": "Silk Road cities and living craft traditions",
+        "why": "",
+        "season": "",
+        "practical": "",
+        "visa": "",
+        "seoTitle": "",
+        "seoDescription": ""
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "dest-kyrgyzstan",
+    "slug": "kyrgyzstan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80",
+    "showOnHome": true,
+    "homeOrder": 3,
+    "bestTime": "June–September",
+    "content": {
+      "en": {
+        "name": "Kyrgyzstan",
+        "line": "Mountain roads, nomad culture and highland lakes",
+        "intro": "Mountain roads, nomad culture and highland lakes",
+        "why": "",
+        "season": "",
+        "practical": "",
+        "visa": "",
+        "seoTitle": "",
+        "seoDescription": ""
+      },
+      "ru": {
+        "name": "Kyrgyzstan",
+        "line": "Mountain roads, nomad culture and highland lakes",
+        "intro": "Mountain roads, nomad culture and highland lakes",
+        "why": "",
+        "season": "",
+        "practical": "",
+        "visa": "",
+        "seoTitle": "",
+        "seoDescription": ""
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "dest-kazakhstan",
+    "slug": "kazakhstan",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1470071459604-3b5ec3a8fe05?w=1200&q=80",
+    "showOnHome": true,
+    "homeOrder": 4,
+    "bestTime": "May–September",
+    "content": {
+      "en": {
+        "name": "Kazakhstan",
+        "line": "Steppe landscapes, canyons and modern cities",
+        "intro": "Steppe landscapes, canyons and modern cities",
+        "why": "",
+        "season": "",
+        "practical": "",
+        "visa": "",
+        "seoTitle": "",
+        "seoDescription": ""
+      },
+      "ru": {
+        "name": "Kazakhstan",
+        "line": "Steppe landscapes, canyons and modern cities",
+        "intro": "Steppe landscapes, canyons and modern cities",
+        "why": "",
+        "season": "",
+        "practical": "",
+        "visa": "",
+        "seoTitle": "",
+        "seoDescription": ""
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z"
+  },
+  {
+    "id": "dest-central-asia",
+    "slug": "central-asia",
+    "published": true,
+    "image": "https://images.unsplash.com/photo-1501785880828-f9571f0630af?w=1600&q=80",
+    "showOnHome": true,
+    "homeOrder": 5,
+    "bestTime": "May–October",
+    "content": {
+      "en": {
+        "name": "Central Asia",
+        "line": "One journey across several Silk Road countries",
+        "intro": "One journey across several Silk Road countries",
+        "why": "",
+        "season": "",
+        "practical": "",
+        "visa": "",
+        "seoTitle": "",
+        "seoDescription": ""
+      },
+      "ru": {
+        "name": "Central Asia",
+        "line": "One journey across several Silk Road countries",
+        "intro": "One journey across several Silk Road countries",
+        "why": "",
+        "season": "",
+        "practical": "",
+        "visa": "",
+        "seoTitle": "",
+        "seoDescription": ""
+      }
+    },
+    "createdAt": "2026-07-01T12:00:00.000Z",
+    "updatedAt": "2026-07-01T12:00:00.000Z",
+    "wide": true
+  }
+]

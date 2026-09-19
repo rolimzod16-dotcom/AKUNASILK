@@ -1,6 +1,8 @@
 import { mkdir, writeFile } from "fs/promises";
 import path from "path";
 import { put } from "@vercel/blob";
+import { canUseSupabase } from "@/lib/supabase/admin";
+import { uploadSupabaseImage } from "@/lib/storage/supabase-images";
 import {
   BLOB_SETUP_MESSAGE,
   canUseBlobStorage,
@@ -18,12 +20,17 @@ export async function storeCmsImage(
   folder: string,
   contentType: string,
   originalName: string
-): Promise<{ url: string; storage: "blob" | "local" }> {
+): Promise<{ url: string; storage: "supabase" | "blob" | "local" }> {
   if (!ALLOWED_TYPES.has(contentType)) {
     throw new Error("Unsupported image type");
   }
 
   const filename = `${Date.now()}-${safeName(originalName)}`;
+
+  if (canUseSupabase()) {
+    const url = await uploadSupabaseImage(buffer, folder, filename, contentType);
+    return { url, storage: "supabase" };
+  }
 
   if (canUseBlobStorage()) {
     try {

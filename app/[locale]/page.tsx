@@ -1,18 +1,12 @@
 import type { Metadata } from "next";
-import { getLocale, getTranslations } from "next-intl/server";
+import { getTranslations } from "next-intl/server";
 import Hero from "@/components/home/Hero";
-import TrustBar from "@/components/layout/TrustBar";
-import SocialProofTicker from "@/components/automation/SocialProofTicker";
-import TripMatcher from "@/components/automation/TripMatcher";
-import { getBestseller, getTourContent } from "@/lib/data/tours";
-import VideoShowcase from "@/components/home/VideoShowcase";
-import SilkRoadSection from "@/components/home/SilkRoadSection";
-import TourShowcase from "@/components/home/TourShowcase";
-import PackageIncludes from "@/components/home/PackageIncludes";
-import PricingTiers from "@/components/home/PricingTiers";
-import PartnersSection from "@/components/home/PartnersSection";
-import Testimonials from "@/components/home/Testimonials";
-import CTA from "@/components/home/CTA";
+import HomeDestinations from "@/components/home/HomeDestinations";
+import HomeFeatured from "@/components/home/HomeFeatured";
+import HomeWhy from "@/components/home/HomeWhy";
+import HomeServices from "@/components/home/HomeServices";
+import HomeCta from "@/components/home/HomeCta";
+import HomeReviews from "@/components/home/HomeReviews";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 
 export async function generateMetadata({
@@ -21,34 +15,32 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "meta" });
   return buildPageMetadata({
     locale,
     path: "/",
-    title: t("title"),
-    description: t("description"),
+    title: "Silk Road Tours & Central Asia Journeys | Great Silk Trails",
+    description:
+      "Private and small-group Silk Road tours across Tajikistan and Central Asia, designed with local guides, drivers and trusted hosts.",
   });
 }
 
-export default async function HomePage() {
-  const locale = await getLocale();
-  const bestseller = await getBestseller();
-  const bestsellerContent = getTourContent(bestseller, locale);
+export default async function HomePage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  await getTranslations({ locale, namespace: "hero" });
 
   return (
     <>
-      <Hero tour={bestseller} tourTitle={bestsellerContent.title} />
-      <TrustBar />
-      <SocialProofTicker />
-      <VideoShowcase />
-      <SilkRoadSection />
-      <TourShowcase />
-      <TripMatcher />
-      <PackageIncludes />
-      <PricingTiers />
-      <PartnersSection />
-      <Testimonials />
-      <CTA />
+      <Hero />
+      <HomeDestinations locale={locale} />
+      <HomeFeatured locale={locale} />
+      <HomeWhy />
+      <HomeServices />
+      <HomeReviews />
+      <HomeCta />
     </>
   );
 }

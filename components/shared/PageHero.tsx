@@ -20,6 +20,7 @@ export default function PageHero({ title, subtitle, compact }: PageHeroProps) {
           title={title}
           subtitle={subtitle}
           size={compact ? "default" : "large"}
+          as="h1"
         />
       </div>
     </section>

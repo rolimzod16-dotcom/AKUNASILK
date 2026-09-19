@@ -316,12 +316,20 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             hint="Загрузите файл или вставьте URL. Без картинки — подставится стандартная."
           />
           <div className="space-y-2">
-            <Label>Цена (USD) *</Label>
+            <Label>Цена (USD)</Label>
             <Input
               type="number"
               value={form.price}
               onChange={(e) => setForm({ ...form, price: Number(e.target.value) })}
             />
+            <label className="flex items-center gap-2 text-xs text-apple-muted">
+              <input
+                type="checkbox"
+                checked={!!form.showPrice}
+                onChange={(e) => setForm({ ...form, showPrice: e.target.checked })}
+              />
+              Показывать цену на сайте (ещё нужно включить цены в Настройках)
+            </label>
           </div>
           <div className="space-y-2">
             <Label>Старая цена (необязательно)</Label>
@@ -422,11 +430,18 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             />
           </div>
           <div className="space-y-2">
-            <Label>Отзывов</Label>
+            <Label>SEO title</Label>
             <Input
-              type="number"
-              value={form.reviews}
-              onChange={(e) => setForm({ ...form, reviews: Number(e.target.value) })}
+              value={form.seoTitle ?? ""}
+              onChange={(e) => setForm({ ...form, seoTitle: e.target.value })}
+              placeholder="Если пусто — берётся название тура"
+            />
+          </div>
+          <div className="space-y-2 sm:col-span-2">
+            <Label>SEO description</Label>
+            <Input
+              value={form.seoDescription ?? ""}
+              onChange={(e) => setForm({ ...form, seoDescription: e.target.value })}
             />
           </div>
           <div className="space-y-4 sm:col-span-2">
@@ -469,10 +484,36 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
           </div>
           <div className="flex flex-wrap gap-4 sm:col-span-2">
             <label className="flex items-center gap-2 text-sm">
+              Статус
+              <select
+                className="h-9 rounded-lg border border-silk-gold/30 bg-white px-2 text-sm"
+                value={form.status ?? (form.published ? "published" : "draft")}
+                onChange={(e) => {
+                  const status = e.target.value as CmsTour["status"];
+                  setForm({
+                    ...form,
+                    status,
+                    published: status === "published",
+                  });
+                }}
+              >
+                <option value="draft">Draft</option>
+                <option value="review">Review</option>
+                <option value="published">Published</option>
+                <option value="archived">Archived</option>
+              </select>
+            </label>
+            <label className="flex items-center gap-2 text-sm">
               <input
                 type="checkbox"
                 checked={form.published}
-                onChange={(e) => setForm({ ...form, published: e.target.checked })}
+                onChange={(e) =>
+                  setForm({
+                    ...form,
+                    published: e.target.checked,
+                    status: e.target.checked ? "published" : "draft",
+                  })
+                }
               />
               Опубликовать на сайте
             </label>

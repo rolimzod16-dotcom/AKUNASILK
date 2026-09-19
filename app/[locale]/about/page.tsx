@@ -12,19 +12,23 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "pages.about" });
-  const a = await getTranslations({ locale, namespace: "about" });
   return buildPageMetadata({
     locale,
     path: "/about",
-    title: t("title"),
-    description: a("subtitle"),
+    title: "About Great Silk Trails | Local Central Asia Experts",
+    description:
+      "Meet the people behind Great Silk Trails and learn how we design and coordinate journeys in Tajikistan and across Central Asia.",
   });
 }
 
 
 const valueKeys = ["authentic", "sustainable", "excellence"] as const;
 const memberKeys = ["1", "2", "3"] as const;
+const founder = {
+  name: "Sultonsho Guliev",
+  role: "Founder",
+  bio: "Founder of Great Silk Trails. Local operating experience in Tajikistan, with a focus on the Pamirs, mountain roads, permits and community-based travel.",
+};
 
 export default async function AboutPage({
   params,
@@ -37,7 +41,10 @@ export default async function AboutPage({
 
   return (
     <>
-      <PageHero title={pages("title")} subtitle={t("subtitle")} />
+      <PageHero
+        title="A Silk Road travel company rooted in Tajikistan"
+        subtitle="Great Silk Trails designs and coordinates journeys from Tajikistan across Central Asia, combining local operating experience with trusted regional partners."
+      />
 
       <section className="apple-section">
         <div className="mx-auto max-w-[980px] px-6">
@@ -56,6 +63,12 @@ export default async function AboutPage({
             <AnimateIn delay={0.1}>
               <h2 className="silk-headline text-3xl text-silk-indigo">{t("title")}</h2>
               <p className="mt-4 text-base leading-relaxed text-apple-muted">{t("mission")}</p>
+              <div className="mt-8 rounded-2xl border border-silk-gold/20 bg-white p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-silk-gold">Founder</p>
+                <h3 className="silk-headline mt-1 text-xl text-silk-indigo">{founder.name}</h3>
+                <p className="text-sm text-silk-gold">{founder.role}</p>
+                <p className="mt-2 text-sm text-apple-muted">{founder.bio}</p>
+              </div>
             </AnimateIn>
           </div>
 

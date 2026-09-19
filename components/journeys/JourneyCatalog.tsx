@@ -23,23 +23,18 @@ import {
   type TravelStyle,
 } from "@/lib/travel-styles";
 
-/** Active GST destinations with products (TZ: hide empty countries) */
-const ACTIVE_COUNTRY_FILTERS: CountrySlug[] = [
+const FALLBACK_COUNTRIES: CountrySlug[] = [
   "tajikistan",
-  "kyrgyzstan",
   "uzbekistan",
+  "kyrgyzstan",
   "kazakhstan",
-  "china",
-  "pakistan",
-  "turkmenistan",
-  "iran",
-  "turkey",
 ];
 
-type CatalogItem = { tour: Tour; content: TourContent };
+type CatalogItem = { tour: Tour; content: TourContent; showPrice?: boolean };
 
 type JourneyCatalogProps = {
   items: CatalogItem[];
+  countries?: string[];
 };
 
 type DifficultyFilter = "all" | Tour["difficulty"];
@@ -48,12 +43,13 @@ type SortKey = "recommended" | "price-asc" | "price-desc" | "duration" | "depart
 
 function matchesDuration(days: number, filter: DurationFilter) {
   if (filter === "all") return true;
-  if (filter === "short") return days <= 8;
-  if (filter === "medium") return days >= 9 && days <= 12;
+  if (filter === "short") return days <= 7;
+  if (filter === "medium") return days >= 8 && days <= 12;
   return days >= 13;
 }
 
-export default function JourneyCatalog({ items }: JourneyCatalogProps) {
+export default function JourneyCatalog({ items, countries }: JourneyCatalogProps) {
+  const countryFilters = (countries?.length ? countries : FALLBACK_COUNTRIES) as string[];
   const t = useTranslations("traveler.catalog");
   const toursT = useTranslations("tours");
   const locale = useLocale();
@@ -67,7 +63,7 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
   const [month, setMonth] = useState<string>("all");
   const [sort, setSort] = useState<SortKey>("recommended");
 
-  const activeCountry = countryParam && isCountrySlug(countryParam) ? countryParam : null;
+  const activeCountry = countryParam || null;
   const activeRegion =
     !activeCountry && regionParam && isRegionSlug(regionParam) ? regionParam : null;
   const activeStyle = styleParam && isTravelStyle(styleParam) ? styleParam : null;
@@ -84,7 +80,11 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
     let list = [...items];
 
     if (activeCountry) {
-      list = list.filter(({ tour }) => tourMatchesCountry(tour, activeCountry));
+      list = list.filter(({ tour }) =>
+        isCountrySlug(activeCountry)
+          ? tourMatchesCountry(tour, activeCountry)
+          : (tour.countrySlugs as string[] | undefined)?.includes(activeCountry)
+      );
     } else if (activeRegion) {
       list = list.filter(({ tour }) => tourMatchesRegion(tour, activeRegion));
     }
@@ -127,7 +127,11 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
   const durations: DurationFilter[] = ["all", "short", "medium", "long"];
 
   const filterLabel = activeCountry
-    ? t("countryActive", { country: getCountryLabel(activeCountry, locale) })
+    ? t("countryActive", {
+        country: isCountrySlug(activeCountry)
+          ? getCountryLabel(activeCountry, locale)
+          : activeCountry,
+      })
     : activeRegion
       ? t("regionActiveLabel", { region: t(`regions.${activeRegion}`) })
       : activeStyle
@@ -184,7 +188,7 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
               {t("filterByCountry")}
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {ACTIVE_COUNTRY_FILTERS.map((slug) => {
+              {countryFilters.map((slug) => {
                 const active = activeCountry === slug;
                 return (
                   <Link
@@ -200,7 +204,7 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
                         : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
                     }`}
                   >
-                    {getCountryLabel(slug, locale)}
+                    {isCountrySlug(slug) ? getCountryLabel(slug, locale) : slug}
                   </Link>
                 );
               })}
@@ -330,10 +334,10 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
         {filtered.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-silk-gold/30 bg-silk-cream/50 px-6 py-12 text-center">
             <p className="text-sm text-apple-muted">{t("empty")}</p>
-            {(activeCountry || activeRegion || activeStyle || month !== "all" || duration !== "all") && (
+            <div className="mt-4 flex flex-wrap justify-center gap-3">
               <Link
                 href="/journeys"
-                className="mt-4 inline-block text-sm font-semibold text-silk-gold hover:underline"
+                className="text-sm font-semibold text-silk-gold hover:underline"
                 onClick={() => {
                   setMonth("all");
                   setDuration("all");
@@ -342,12 +346,15 @@ export default function JourneyCatalog({ items }: JourneyCatalogProps) {
               >
                 {t("clearFilter")}
               </Link>
-            )}
+              <Link href="/plan-my-journey" className="text-sm font-semibold text-silk-indigo hover:underline">
+                Ask us to design a private trip
+              </Link>
+            </div>
           </div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filtered.map(({ tour, content }, i) => (
-              <TourCard key={tour.id} tour={tour} content={content} index={i} />
+            {filtered.map(({ tour, content, showPrice }, i) => (
+              <TourCard key={tour.id} tour={tour} content={content} index={i} showPrice={showPrice} />
             ))}
           </div>
         )}

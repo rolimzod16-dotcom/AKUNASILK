@@ -1,24 +1,18 @@
 "use client";
 
-import { useTranslations } from "next-intl";
 import BookNowButton from "@/components/automation/BookNowButton";
-import TourInlineFAQ from "@/components/automation/TourInlineFAQ";
 
 type TourDetailActionsProps = {
   slug: string;
-  price: number;
+  price?: number;
   spotsLeft?: number;
   nextDeparture?: string;
 };
 
 export default function TourDetailActions({
   slug,
-  price,
   nextDeparture,
 }: TourDetailActionsProps) {
-  const shop = useTranslations("shop");
-  const auto = useTranslations("automation.tour");
-
   return (
     <>
       <BookNowButton
@@ -28,10 +22,9 @@ export default function TourDetailActions({
         prefill={{
           tourSlug: slug,
           preferredDate: nextDeparture,
-          price,
-          source: "card",
+          source: "tour",
         }}
-        label={auto("reserveNow")}
+        label="Request Availability"
       />
       <BookNowButton
         variant="silkOutline"
@@ -39,23 +32,21 @@ export default function TourDetailActions({
         className="mt-3 w-full"
         prefill={{
           tourSlug: slug,
-          preferredDate: nextDeparture,
-          price,
-          source: "card",
-          notes: shop("askExpert"),
+          source: "tour",
+          notes: "Private departure",
         }}
-        label={shop("askExpert")}
+        label="Plan a Private Departure"
       />
-      <p className="mt-3 text-center text-[11px] leading-relaxed text-apple-muted">
-        {auto("confirmBeforePay")}
-      </p>
-      <p className="mt-2 text-center text-[11px] text-apple-muted">
-        {auto("priceLock", { price: price.toLocaleString() })}
-      </p>
-      <p className="mt-2 text-center text-[11px] text-apple-muted">
-        {shop("guaranteeShort")}
-      </p>
-      <TourInlineFAQ />
+      <BookNowButton
+        variant="link"
+        className="mt-2 w-full text-sm"
+        prefill={{
+          tourSlug: slug,
+          source: "tour",
+          notes: "Question about this journey",
+        }}
+        label="Ask a Question"
+      />
     </>
   );
 }

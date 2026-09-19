@@ -23,9 +23,16 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  if (!isServiceSlug(slug)) return { title: "GREATSILKTRAILS" };
+  if (!isServiceSlug(slug)) return { title: "Great Silk Trails" };
   const t = await getTranslations({ locale, namespace: "pages.servicesLogistics" });
-  return { title: `${t(`items.${slug}.title`)} | GREATSILKTRAILS` };
+  if (slug === "transport-rental") {
+    return {
+      title: "4x4 Rental with Driver in Tajikistan | GST",
+      description:
+        "Request a suitable 4x4 and experienced local driver for the Pamir Highway, Wakhan Valley and routes across Tajikistan.",
+    };
+  }
+  return { title: `${t(`items.${slug}.title`)} | Great Silk Trails` };
 }
 
 export default async function ServiceDetailPage({
@@ -37,14 +44,22 @@ export default async function ServiceDetailPage({
   if (!isServiceSlug(slug)) notFound();
 
   const t = await getTranslations({ locale, namespace: "pages.servicesLogistics" });
-  const isTailor = slug === "tailor-made";
+  const title =
+    slug === "transport-rental"
+      ? "4x4 rental with driver in Tajikistan"
+      : t(`items.${slug}.title`);
+  const subtitle =
+    slug === "transport-rental"
+      ? "Arrange a suitable vehicle and experienced local driver for the Pamir Highway, Wakhan Valley and routes across Tajikistan."
+      : t(`items.${slug}.desc`);
 
   return (
     <InfoPage
-      title={t(`items.${slug}.title`)}
-      subtitle={t(`items.${slug}.desc`)}
+      title={title}
+      subtitle={subtitle}
       body={t(`items.${slug}.body`)}
-      cta={isTailor ? t("cta") : t("cta")}
+      cta={slug === "transport-rental" ? "Request Transport" : "Request this service"}
+      serviceSlug={slug}
       secondaryCta={t("contactSpecialist")}
       secondaryHref="/contact"
     />

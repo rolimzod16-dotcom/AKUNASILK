@@ -9,6 +9,10 @@ import {
   Handshake,
   LogOut,
   ExternalLink,
+  Settings,
+  MessageSquareQuote,
+  Globe2,
+  Inbox,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -19,10 +23,14 @@ const nav: {
   icon: typeof LayoutDashboard;
   exact?: boolean;
 }[] = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { href: "/admin/tours", label: "Tour Packages", icon: Map },
-  { href: "/admin/stories", label: "Stories", icon: BookOpen },
-  { href: "/admin/partners", label: "Partners", icon: Handshake },
+  { href: "/admin", label: "Панель", icon: LayoutDashboard, exact: true },
+  { href: "/admin/tours", label: "Туры", icon: Map },
+  { href: "/admin/destinations", label: "Направления", icon: Globe2 },
+  { href: "/admin/reviews", label: "Отзывы", icon: MessageSquareQuote },
+  { href: "/admin/inquiries", label: "Заявки", icon: Inbox },
+  { href: "/admin/stories", label: "Истории", icon: BookOpen },
+  { href: "/admin/partners", label: "Партнёры", icon: Handshake },
+  { href: "/admin/settings", label: "Настройки", icon: Settings },
 ];
 
 export default function AdminShell({ children }: { children: React.ReactNode }) {

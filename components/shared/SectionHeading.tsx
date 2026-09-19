@@ -7,6 +7,7 @@ type SectionHeadingProps = {
   dark?: boolean;
   size?: "default" | "large";
   className?: string;
+  as?: "h1" | "h2";
 };
 
 export default function SectionHeading({
@@ -15,11 +16,13 @@ export default function SectionHeading({
   dark = false,
   size = "default",
   className,
+  as = "h2",
 }: SectionHeadingProps) {
+  const HeadingTag = as;
   return (
     <div className={cn("text-center", className)}>
       <SilkDivider className="mb-5" light={dark} />
-      <h2
+      <HeadingTag
         className={cn(
           "silk-headline",
           size === "large"
@@ -29,7 +32,7 @@ export default function SectionHeading({
         )}
       >
         {title}
-      </h2>
+      </HeadingTag>
       {subtitle && (
         <p
           className={cn(

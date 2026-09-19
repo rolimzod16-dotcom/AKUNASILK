@@ -5,6 +5,7 @@ import { AlertTriangle, CheckCircle2 } from "lucide-react";
 
 type StorageStatus = {
   canSave: boolean;
+  supabase?: boolean;
   blob: boolean;
   github: boolean;
   runtime: string;
@@ -43,7 +44,8 @@ export default function AdminStorageBanner() {
             ))}
           </ul>
           <p className="mt-2 text-xs text-apple-muted">
-            Blob: {status.blob ? "✓" : "✗"} · GitHub: {status.github ? "✓" : "✗"}
+            Supabase: {status.supabase ? "✓" : "✗"} · Blob: {status.blob ? "✓" : "✗"} · GitHub:{" "}
+            {status.github ? "✓" : "✗"}
           </p>
         </div>
       </div>

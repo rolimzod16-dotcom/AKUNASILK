@@ -10,6 +10,8 @@ import AutomationShell from "@/components/automation/AutomationShell";
 import StickyMobileCTA from "@/components/layout/StickyMobileCTA";
 import JsonLd from "@/components/seo/JsonLd";
 import { getSiteUrl, SITE_NAME } from "@/lib/seo/site";
+import { getSiteSettings, whatsappHref } from "@/lib/cms/settings";
+import { getPublishedDestinations, getDestinationContent } from "@/lib/cms/destinations";
 import "../globals.css";
 
 const inter = Inter({
@@ -96,7 +98,7 @@ export async function generateMetadata({
       images: [ogImage],
     },
     other: {
-      "geo.region": "UZ",
+      "geo.region": "TJ",
     },
     robots: {
       index: true,
@@ -130,23 +132,37 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as "en" | "ru")) {
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
     notFound();
   }
 
   const messages = await getMessages();
   const t = await getTranslations({ locale, namespace: "meta" });
+  const [settings, destinations] = await Promise.all([
+    getSiteSettings(),
+    getPublishedDestinations(),
+  ]);
+  const destNav = destinations.map((item) => ({
+    key: item.slug,
+    href: `/destinations/${item.slug}`,
+    label: getDestinationContent(item, locale).name || item.slug,
+  }));
 
   return (
     <html lang={locale} className={`${inter.variable} ${cormorant.variable}`}>
       <body className="min-h-screen bg-silk-cream font-sans antialiased [--font-sans:var(--font-inter)]">
-        <JsonLd locale={locale} description={t("description")} />
+        <JsonLd
+          locale={locale}
+          description={t("description")}
+          email={settings.contact.email}
+          telephone={settings.contact.phoneTel}
+        />
         <NextIntlClientProvider messages={messages}>
           <AutomationShell>
-            <Header />
+            <Header destinations={destNav} />
             <main className="pb-24 lg:pb-0">{children}</main>
-            <Footer />
-            <StickyMobileCTA />
+            <Footer settings={settings} destinations={destNav} />
+            <StickyMobileCTA whatsappUrl={whatsappHref(settings)} />
           </AutomationShell>
         </NextIntlClientProvider>
       </body>

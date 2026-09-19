@@ -1,5 +1,3 @@
-import { routing } from "@/i18n/routing";
-
 /** Canonical production origin — override with NEXT_PUBLIC_SITE_URL on Vercel. */
 export function getSiteUrl(): string {
   const fromEnv =
@@ -31,30 +29,28 @@ export function localeAbsoluteUrl(locale: string, path = "/"): string {
   return absoluteUrl(localePath(locale, path));
 }
 
-export const SITE_NAME = "GREATSILKTRAILS";
-export const LOCALES = routing.locales;
-export const DEFAULT_LOCALE = routing.defaultLocale;
+export const SITE_NAME = "Great Silk Trails";
+export const LOCALES = ["en"] as const;
+export const DEFAULT_LOCALE = "en";
 
 /** Static marketing routes (no dynamic slug). */
 export const STATIC_PATHS = [
   "/",
   "/journeys",
-  "/tours",
   "/destinations",
-  "/silk-trails",
+  "/destinations/central-asia",
   "/travel-styles",
-  "/services-logistics",
+  "/travel-styles/overland-4x4",
+  "/travel-styles/trekking",
+  "/travel-styles/motorcycle",
+  "/travel-styles/culture-cities",
+  "/travel-styles/horse-riding",
+  "/travel-styles/photography",
+  "/services",
   "/about",
-  "/partners",
-  "/heritage",
-  "/experiences",
-  "/stories",
-  "/blog",
-  "/faq",
   "/contact",
-  "/pricing",
-  "/portfolio",
-  "/trekking",
+  "/plan-my-journey",
+  "/faq",
   "/privacy",
   "/terms",
   "/cancellation",
@@ -71,12 +67,7 @@ export const SERVICE_SLUGS = [
 
 export const ACTIVE_DESTINATIONS = [
   "tajikistan",
-  "kyrgyzstan",
   "uzbekistan",
+  "kyrgyzstan",
   "kazakhstan",
-  "china",
-  "pakistan",
-  "turkmenistan",
-  "iran",
-  "turkey",
 ] as const;

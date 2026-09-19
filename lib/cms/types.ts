@@ -2,6 +2,7 @@ import type { CountrySlug } from "@/lib/countries";
 import type { TravelStyle } from "@/lib/travel-styles";
 
 export type CmsLocale = "en" | "ru";
+export type CmsStatus = "draft" | "review" | "published" | "archived";
 
 export type TourItineraryDay = {
   day: number;
@@ -30,6 +31,7 @@ export type TourContent = {
 export type CmsTour = {
   id: string;
   slug: string;
+  status?: CmsStatus;
   published: boolean;
   image: string;
   duration: number;
@@ -49,9 +51,76 @@ export type CmsTour = {
   nextDeparture: string;
   rating: number;
   reviews: number;
+  /** When true and Settings allow prices, USD price is shown on the public site. */
+  showPrice?: boolean;
+  seoTitle?: string;
+  seoDescription?: string;
+  startLocation?: string;
+  finishLocation?: string;
   content: Record<CmsLocale, TourContent>;
   createdAt: string;
   updatedAt: string;
+};
+
+export type CmsReview = {
+  id: string;
+  published: boolean;
+  consentRecorded: boolean;
+  guestName: string;
+  country: string;
+  year: string;
+  tourSlug?: string;
+  tourTitle?: string;
+  text: string;
+  sourceUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type DestinationContent = {
+  name: string;
+  line: string;
+  intro: string;
+  why: string;
+  season: string;
+  practical: string;
+  visa: string;
+  seoTitle?: string;
+  seoDescription?: string;
+};
+
+export type CmsDestination = {
+  id: string;
+  slug: string;
+  published: boolean;
+  image: string;
+  wide?: boolean;
+  showOnHome: boolean;
+  homeOrder: number;
+  bestTime: string;
+  content: Record<CmsLocale, DestinationContent>;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CmsSiteContact = {
+  legalName: string;
+  address: string;
+  email: string;
+  phoneDisplay: string;
+  phoneTel: string;
+  whatsapp: string;
+  hours: string;
+  emergencyNote: string;
+};
+
+export type CmsSiteSettings = {
+  showPrices: boolean;
+  showReviews: boolean;
+  showPartners: boolean;
+  contact: CmsSiteContact;
+  tagline: string;
+  whatsappGreeting: string;
 };
 
 export type StoryContent = {

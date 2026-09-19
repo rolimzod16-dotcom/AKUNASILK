@@ -2,7 +2,9 @@
 
 import type { ComponentProps } from "react";
 import { Button } from "@/components/ui/button";
-import { useBooking, type BookingPrefill } from "@/lib/automation/booking-context";
+import { Link } from "@/i18n/routing";
+import type { BookingPrefill } from "@/lib/automation/booking-context";
+import { planJourneyHref } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 type BookNowButtonProps = Omit<ComponentProps<typeof Button>, "onClick"> & {
@@ -17,16 +19,18 @@ export default function BookNowButton({
   className,
   ...props
 }: BookNowButtonProps) {
-  const { openBooking } = useBooking();
+  const href = planJourneyHref({
+    tour: prefill?.tourSlug,
+    date: prefill?.preferredDate,
+    source: prefill?.source,
+    service: prefill?.service,
+    destination: prefill?.countries,
+    style: prefill?.interests,
+  });
 
   return (
-    <Button
-      type="button"
-      className={cn(className)}
-      onClick={() => openBooking(prefill)}
-      {...props}
-    >
-      {children ?? label}
+    <Button className={cn(className)} asChild {...props}>
+      <Link href={href}>{children ?? label ?? "Plan My Journey"}</Link>
     </Button>
   );
 }

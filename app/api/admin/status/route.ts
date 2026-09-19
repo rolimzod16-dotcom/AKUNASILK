@@ -13,8 +13,8 @@ export async function GET() {
     hints: storage.canSave
       ? []
       : [
-          "Vercel → Storage → Blob → Connect to Project → Redeploy",
-          "Or: Settings → Environment Variables → GITHUB_TOKEN + GITHUB_REPO=owner/repo",
+          "Supabase is not configured. Check NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, then run node scripts/setup-supabase.mjs",
+          "Fallback: Vercel → Storage → Blob → Connect to Project → Redeploy",
         ],
   });
 }

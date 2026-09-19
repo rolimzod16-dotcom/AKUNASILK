@@ -54,3 +54,5 @@ next-env.d.ts
 # uploaded CMS images (local dev only; production uses Vercel Blob)
 /public/uploads/*
 !/public/uploads/.gitkeep
+.vercel
+.env*

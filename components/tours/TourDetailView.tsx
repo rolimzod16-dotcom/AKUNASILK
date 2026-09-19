@@ -11,6 +11,8 @@ import TourDetailActions from "@/components/automation/TourDetailActions";
 import TourDetailTabs from "@/components/tours/TourDetailTabs";
 import { Badge } from "@/components/ui/badge";
 import SilkDivider from "@/components/shared/SilkDivider";
+import { getSiteSettings } from "@/lib/cms/settings";
+import { tourShowsPrice } from "@/lib/cms/tours";
 
 type TourDetailViewProps = {
   tour: Tour;
@@ -25,6 +27,8 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
   const nav = await getTranslations({ locale, namespace: "nav" });
 
   const fullContent = resolveTourContent(tour, locale);
+  const settings = await getSiteSettings();
+  const showPrice = tourShowsPrice(tour, settings.showPrices);
   const departure = new Date(tour.nextDeparture).toLocaleDateString(locale, {
     weekday: "long",
     month: "long",
@@ -54,8 +58,9 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
             {content.desc}
           </p>
           <p className="mt-4 text-sm text-apple-muted">
-            {tour.duration} {t("days")} · {shop("perPerson")} · $
-            {tour.price.toLocaleString(locale)}
+            {countrySlugsToLabels(resolveTourCountrySlugs(tour), locale).join(" · ")} ·{" "}
+            {tour.duration} {t("days")} · {getTravelStyleLabel(tour.travelStyle, locale)} ·{" "}
+            {tour.difficulty === "adventurous" ? "Challenging" : t(`difficulty.${tour.difficulty}`)}
           </p>
         </div>
 
@@ -85,45 +90,36 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
 
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-3xl border border-silk-gold/25 bg-white p-6 shadow-xl shadow-silk-gold/10">
-              <div className="flex items-baseline gap-2">
-                {tour.originalPrice && (
-                  <span className="text-lg text-apple-muted line-through">
-                    ${tour.originalPrice.toLocaleString(locale)}
-                  </span>
-                )}
-                <span className="silk-headline text-4xl text-gradient-silk">
-                  ${tour.price.toLocaleString(locale)}
-                </span>
-              </div>
-              <p className="mt-1 text-sm text-apple-muted">{shop("perPerson")}</p>
+              <p className="silk-headline text-2xl text-silk-indigo">
+                {showPrice ? `$${tour.price.toLocaleString(locale)}` : shop("requestQuote")}
+              </p>
+              <p className="mt-1 text-sm text-apple-muted">{shop("privateDeparture")}</p>
 
               <div className="mt-6 space-y-3 border-t border-silk-gold/20 pt-6 text-sm">
                 <div className="flex items-center gap-3 text-apple-subtle">
                   <Calendar className="size-4 text-silk-turquoise" />
                   <span>
-                    {shop("nextDeparture")}:{" "}
-                    <strong className="text-silk-indigo">{departure}</strong>
+                    {tour.duration} {t("days")}
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-apple-subtle">
                   <MapPin className="size-4 text-silk-turquoise" />
                   <span>
-                    {tour.duration} {t("days")} ·{" "}
                     {countrySlugsToLabels(resolveTourCountrySlugs(tour), locale).join(", ")}
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-apple-subtle">
                   <Users className="size-4 text-silk-turquoise" />
                   <span>
-                    {t(`difficulty.${tour.difficulty}`)} · {shop("available")}
+                    {t("groupUpTo", { count: tour.maxGroupSize ?? 12 })}
                   </span>
                 </div>
               </div>
 
               <TourDetailActions
                 slug={slug}
-                price={tour.price}
-                nextDeparture={tour.nextDeparture}
+                price={undefined}
+                nextDeparture={undefined}
               />
             </div>
           </div>

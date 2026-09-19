@@ -3,6 +3,7 @@ import { appendFile, mkdir } from "fs/promises";
 import path from "path";
 import { getPublishedTours, getTourContent } from "@/lib/cms/tours";
 import { notifyTelegramInquiry } from "@/lib/notify/telegram";
+import { insertInquiry } from "@/lib/storage/supabase-cms";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -167,6 +168,17 @@ async function sendClientConfirmation(payload: ContactPayload, inquiryId: string
  * never throw; Telegram/email must still run.
  */
 async function saveInquiry(payload: ContactPayload, inquiryId: string) {
+  const record = {
+    id: inquiryId,
+    ...payload,
+    createdAt: new Date().toISOString(),
+  };
+  try {
+    await insertInquiry(inquiryId, record);
+    return true;
+  } catch (err) {
+    console.warn("[contact] supabase inquiry failed, trying file", err);
+  }
   try {
     const base =
       process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME
@@ -174,12 +186,7 @@ async function saveInquiry(payload: ContactPayload, inquiryId: string) {
         : path.join(process.cwd(), "data");
     await mkdir(base, { recursive: true });
     const file = path.join(base, "inquiries.jsonl");
-    const line = JSON.stringify({
-      id: inquiryId,
-      ...payload,
-      createdAt: new Date().toISOString(),
-    });
-    await appendFile(file, line + "\n", "utf8");
+    await appendFile(file, JSON.stringify(record) + "\n", "utf8");
     return true;
   } catch (err) {
     console.warn("[contact] saveInquiry skipped (non-fatal)", err);
@@ -190,6 +197,10 @@ async function saveInquiry(payload: ContactPayload, inquiryId: string) {
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as ContactPayload;
+
+    if ((body as ContactPayload & { website?: string }).website) {
+      return NextResponse.json({ ok: true, inquiryId: "GST-OK" });
+    }
 
     if (!body.name?.trim() || !body.email?.trim() || !body.message?.trim()) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });

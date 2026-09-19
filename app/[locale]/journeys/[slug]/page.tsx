@@ -22,8 +22,8 @@ export async function generateMetadata({
   return buildPageMetadata({
     locale,
     path: `/journeys/${slug}`,
-    title: `${content.title} — from $${tour.price}`,
-    description: content.desc,
+    title: tour.seoTitle || `${content.title} | Great Silk Trails`,
+    description: tour.seoDescription || content.desc,
     image: tour.image,
   });
 }

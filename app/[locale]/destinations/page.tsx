@@ -1,31 +1,15 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo/page-meta";
-import { getTranslations } from "next-intl/server";
+import Image from "next/image";
+import { getCatalogTours } from "@/lib/data/tours";
 import PageHero from "@/components/shared/PageHero";
-import DestinationsCatalog, {
-  type DestinationItem,
-} from "@/components/destinations/DestinationsCatalog";
+import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import {
-  SILK_ROAD_COUNTRIES,
-  type CountrySlug,
-} from "@/lib/countries";
-
-const DESTINATION_IMAGES: Record<CountrySlug, string> = {
-  china: "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=800&q=80",
-  kazakhstan: "https://images.unsplash.com/photo-1517824801-6512-773c5b6a8f0?w=800&q=80",
-  kyrgyzstan: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
-  uzbekistan: "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
-  turkmenistan: "https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800&q=80",
-  tajikistan: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=80",
-  afghanistan: "https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?w=800&q=80",
-  iran: "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
-  pakistan: "https://images.unsplash.com/photo-1584551246679-0daf3d849d1c?w=800&q=80",
-  india: "https://images.unsplash.com/photo-1524492412937-280ceb9ccd21?w=800&q=80",
-  georgia: "https://images.unsplash.com/photo-1565007996395-3ab4ddc7a9b0?w=800&q=80",
-  armenia: "https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=800&q=80",
-  azerbaijan: "https://images.unsplash.com/photo-1590073242678-ac2a4a9163bb?w=800&q=80",
-  turkey: "https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&q=80",
-};
+  getPublishedDestinations,
+  getDestinationContent,
+} from "@/lib/cms/destinations";
+import { Link } from "@/i18n/routing";
+import { tourMatchesCountry, isCountrySlug } from "@/lib/countries";
 
 export async function generateMetadata({
   params,
@@ -33,15 +17,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "pages.destinations" });
   return buildPageMetadata({
     locale,
     path: "/destinations",
-    title: t("title"),
-    description: t("subtitle"),
+    title: "Where We Travel | Great Silk Trails",
+    description:
+      "Explore the Silk Road through countries we know, routes we operate and local teams we trust.",
   });
 }
-
 
 export default async function DestinationsPage({
   params,
@@ -49,31 +32,88 @@ export default async function DestinationsPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const pages = await getTranslations({ locale, namespace: "pages.destinations" });
-
-  /** Active GST destinations with products / landings (TZ: no empty countries) */
-  const ACTIVE: CountrySlug[] = [
-    "tajikistan",
-    "kyrgyzstan",
-    "uzbekistan",
-    "kazakhstan",
-    "china",
-    "pakistan",
-    "turkmenistan",
-    "iran",
-    "turkey",
-  ];
-
-  const items: DestinationItem[] = ACTIVE.map((slug) => ({
-    slug,
-    corridor: SILK_ROAD_COUNTRIES[slug].corridor,
-    image: DESTINATION_IMAGES[slug],
-  }));
+  const [destinations, tours] = await Promise.all([
+    getPublishedDestinations(),
+    getCatalogTours(),
+  ]);
+  const cards = destinations.filter((item) => !item.wide);
+  const wide = destinations.filter((item) => item.wide);
 
   return (
     <>
-      <PageHero title={pages("title")} subtitle={pages("subtitle")} compact />
-      <DestinationsCatalog items={items} />
+      <PageHero
+        title="Where we travel"
+        subtitle="Explore the Silk Road through countries we know, routes we operate and local teams we trust."
+        compact
+      />
+      <section className="apple-section">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <Breadcrumbs
+            locale={locale}
+            items={[{ label: "Home", href: "/" }, { label: "Destinations" }]}
+          />
+          <p className="mb-6 text-sm text-apple-muted">
+            {cards.length} {cards.length === 1 ? "country" : "countries"}
+            {wide.length ? " plus multi-country journeys." : "."}
+          </p>
+          <div className="grid gap-5 sm:grid-cols-2">
+            {cards.map((item) => {
+              const content = getDestinationContent(item, locale);
+              const count = tours.filter((tour) =>
+                (tour.countrySlugs as string[] | undefined)?.includes(item.slug)
+              ).length;
+              return (
+                <Link
+                  key={item.id}
+                  href={`/destinations/${item.slug}`}
+                  className="group overflow-hidden rounded-2xl border border-silk-gold/20 bg-white shadow-sm"
+                >
+                  <div className="relative aspect-[16/9] bg-silk-indigo">
+                    {item.image ? (
+                      <Image
+                        src={item.image}
+                        alt={`${content.name} — ${content.line}`}
+                        fill
+                        className="object-cover transition duration-700 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    ) : null}
+                  </div>
+                  <div className="p-5">
+                    <h2 className="silk-headline text-2xl text-silk-indigo">{content.name}</h2>
+                    <p className="mt-1 text-sm text-apple-muted">{content.line}</p>
+                    <p className="mt-3 text-xs text-silk-turquoise">
+                      {item.bestTime ? `Best time: ${item.bestTime} · ` : ""}
+                      {count} active journey{count === 1 ? "" : "s"}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+          {wide.map((item) => {
+            const content = getDestinationContent(item, locale);
+            return (
+              <Link
+                key={item.id}
+                href={`/destinations/${item.slug}`}
+                className="group mt-5 block overflow-hidden rounded-2xl border border-silk-gold/20 bg-white shadow-sm"
+              >
+                <div className="relative aspect-[21/7] min-h-[160px] bg-silk-indigo">
+                  {item.image ? (
+                    <Image src={item.image} alt={content.line} fill className="object-cover" sizes="100vw" />
+                  ) : null}
+                  <div className="absolute inset-0 bg-gradient-to-r from-silk-indigo/75 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6">
+                    <h2 className="silk-headline text-2xl text-white">{content.name}</h2>
+                    <p className="mt-1 text-sm text-silk-sand">{content.line}</p>
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }

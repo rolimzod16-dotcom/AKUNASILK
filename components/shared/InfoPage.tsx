@@ -10,6 +10,7 @@ type InfoPageProps = {
   cta?: string;
   secondaryCta?: string;
   secondaryHref?: string;
+  serviceSlug?: string;
 };
 
 export default function InfoPage({
@@ -19,6 +20,7 @@ export default function InfoPage({
   cta,
   secondaryCta,
   secondaryHref = "/contact",
+  serviceSlug,
 }: InfoPageProps) {
   const blocks = body
     .split(/(?<=\.)\s+(?=(?:What we|Process:|Timing:|Fees:|CTA:|Permit types|Documents:|Lead times:|Restrictions:|Vehicle categories:|Seats and luggage:|Driver included:|Route suitability:|Languages:|Guide vs|Route expertise:|Pricing:|Levels we|What can be|Examples:|Scope:|Plan a Private|Ideal for:))/g)
@@ -44,7 +46,7 @@ export default function InfoPage({
                   variant="silk"
                   size="pill"
                   label={cta}
-                  prefill={{ source: "info-page", tourSlug: "any" }}
+                  prefill={{ source: "service", tourSlug: "any", service: serviceSlug }}
                 />
               )}
               {secondaryCta && (

@@ -23,7 +23,8 @@ export type BookingPrefill = {
   comfort?: string;
   budget?: string;
   interests?: string;
-  source?: "wizard" | "concierge" | "matcher" | "card" | "hero" | "header" | "info-page" | "travel-styles";
+  service?: string;
+  source?: "wizard" | "concierge" | "matcher" | "card" | "hero" | "header" | "info-page" | "travel-styles" | "tour" | "service";
 };
 
 type BookingContextValue = {

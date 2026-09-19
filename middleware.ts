@@ -8,6 +8,13 @@ const intlMiddleware = createMiddleware(routing);
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  if (pathname === "/ru" || pathname.startsWith("/ru/")) {
+    const nextPath = pathname.replace(/^\/ru/, "/en") || "/en";
+    const url = request.nextUrl.clone();
+    url.pathname = nextPath;
+    return NextResponse.redirect(url, 308);
+  }
+
   if (pathname.startsWith("/admin")) {
     if (pathname === "/admin/login") {
       return NextResponse.next();
