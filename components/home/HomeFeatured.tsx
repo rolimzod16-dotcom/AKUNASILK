@@ -13,8 +13,8 @@ export default async function HomeFeatured({ locale }: { locale: string }) {
   return (
     <section className="apple-section border-t border-silk-gold/15 bg-white">
       <div className="mx-auto max-w-[1280px] px-6">
-        <p className="text-xs font-bold uppercase tracking-[0.2em] text-silk-gold">
-          {t("eyebrow")}
+        <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-silk-gold">
+          Featured Journeys
         </p>
         <h2 className="silk-headline mt-2 text-3xl text-silk-indigo sm:text-4xl">{t("title")}</h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-apple-muted sm:text-base">

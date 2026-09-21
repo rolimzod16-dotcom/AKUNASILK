@@ -190,8 +190,14 @@ export default async function CountryLandingPage({
   return (
     <>
       <PageHero
-        title={cmsContent?.name || name}
+        title={
+          country === "tajikistan"
+            ? "Tajikistan tours and Pamir journeys"
+            : cmsContent?.name || name
+        }
         subtitle={cmsContent?.intro || cmsContent?.line || notes?.why || name}
+        image={cms?.image}
+        imageAlt={`${cmsContent?.name || name} — ${cmsContent?.line || "Silk Road destination"}`}
       />
 
       <section className="apple-section">

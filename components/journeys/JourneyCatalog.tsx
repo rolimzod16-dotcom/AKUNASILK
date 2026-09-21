@@ -79,7 +79,9 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
   const filtered = useMemo(() => {
     let list = [...items];
 
-    if (activeCountry) {
+    if (activeCountry === "central-asia") {
+      list = list.filter(({ tour }) => (tour.countrySlugs?.length ?? 0) > 1);
+    } else if (activeCountry) {
       list = list.filter(({ tour }) =>
         isCountrySlug(activeCountry)
           ? tourMatchesCountry(tour, activeCountry)
@@ -155,7 +157,7 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
   return (
     <section className="pb-12">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
-        <div className="mb-4 rounded-2xl border border-silk-gold/20 bg-white p-3 shadow-sm sm:p-4">
+        <div className="mb-4 rounded-2xl border border-silk-gold/20 bg-white p-3 shadow-sm sm:p-4 max-md:hidden">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-sm font-semibold text-silk-indigo">
               <SlidersHorizontal className="size-4 text-silk-gold" />
@@ -188,7 +190,7 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
               {t("filterByCountry")}
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {countryFilters.map((slug) => {
+              {[...countryFilters, "central-asia"].map((slug) => {
                 const active = activeCountry === slug;
                 return (
                   <Link
@@ -204,7 +206,11 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
                         : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
                     }`}
                   >
-                    {isCountrySlug(slug) ? getCountryLabel(slug, locale) : slug}
+                    {slug === "central-asia"
+                      ? "Multi-country"
+                      : isCountrySlug(slug)
+                        ? getCountryLabel(slug, locale)
+                        : slug}
                   </Link>
                 );
               })}
@@ -328,6 +334,57 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
               <option value="duration">{t("sortOptions.duration")}</option>
               <option value="departure">{t("sortOptions.departure")}</option>
             </select>
+          </div>
+        </div>
+
+        <div className="mb-4 flex items-center justify-between md:hidden">
+          <p className="text-sm text-apple-muted">{filtered.length} journeys</p>
+          <Link
+            href="#filters"
+            className="inline-flex items-center gap-2 rounded-full border border-silk-gold/40 bg-white px-4 py-2 text-sm font-semibold text-silk-indigo"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("mobile-filters")?.classList.toggle("hidden");
+            }}
+          >
+            <SlidersHorizontal className="size-4" />
+            Filters
+          </Link>
+        </div>
+        <div id="mobile-filters" className="mb-4 hidden rounded-2xl border border-silk-gold/20 bg-white p-3 md:hidden">
+          <div className="flex flex-wrap gap-1.5">
+            {[...countryFilters, "central-asia"].map((slug) => (
+              <Link
+                key={`m-${slug}`}
+                href={journeysHref({
+                  country: activeCountry === slug ? undefined : slug,
+                  style: activeStyle ?? undefined,
+                })}
+                className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${
+                  activeCountry === slug
+                    ? "bg-silk-indigo text-silk-gold"
+                    : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25"
+                }`}
+              >
+                {slug === "central-asia"
+                  ? "Multi-country"
+                  : isCountrySlug(slug)
+                    ? getCountryLabel(slug, locale)
+                    : slug}
+              </Link>
+            ))}
+          </div>
+          <div className="mt-3 flex gap-2">
+            <Link href="/journeys" className="text-sm font-semibold text-silk-gold">
+              Clear all
+            </Link>
+            <button
+              type="button"
+              className="text-sm font-semibold text-silk-indigo"
+              onClick={() => document.getElementById("mobile-filters")?.classList.add("hidden")}
+            >
+              Apply filters
+            </button>
           </div>
         </div>
 

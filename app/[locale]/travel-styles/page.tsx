@@ -87,7 +87,15 @@ export default async function TravelStylesPage({
                       ? t(`styles.${item.key}.desc`)
                       : "Motorcycle journeys on the Pamir Highway, planned with local road knowledge."}
                   </p>
-                  <p className="mt-3 text-xs font-semibold text-silk-gold">
+                  <p className="mt-3 text-xs text-apple-muted">
+                    {item.key === "overland" && "Suitable for: travellers comfortable with long driving days · Typical: 8–14 days"}
+                    {item.key === "trekking" && "Suitable for: good fitness at altitude · Typical: 8–12 days"}
+                    {item.key === "motorcycle" && "Suitable for: licensed riders · Typical: 7–14 days"}
+                    {item.key === "culture" && "Suitable for: cities, crafts and slower pace · Typical: 7–12 days"}
+                    {item.key === "horseRiding" && "Suitable for: basic riding experience · Typical: 6–10 days"}
+                    {item.key === "photo" && "Suitable for: photographers and visual travellers · Typical: 8–12 days"}
+                  </p>
+                  <p className="mt-3 text-sm font-semibold text-silk-gold">
                     Explore this style{count ? ` · ${count} journeys` : ""}
                   </p>
                 </div>

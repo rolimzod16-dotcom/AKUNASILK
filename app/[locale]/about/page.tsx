@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
-import { getTranslations } from "next-intl/server";
-import Image from "next/image";
 import PageHero from "@/components/shared/PageHero";
-import AnimateIn from "@/components/shared/AnimateIn";
-import SectionHeading from "@/components/shared/SectionHeading";
+import { getSiteSettings } from "@/lib/cms/settings";
+import { Link } from "@/i18n/routing";
+import { Button } from "@/components/ui/button";
 
 export async function generateMetadata({
   params,
@@ -21,23 +20,9 @@ export async function generateMetadata({
   });
 }
 
-
-const valueKeys = ["authentic", "sustainable", "excellence"] as const;
-const memberKeys = ["1", "2", "3"] as const;
-const founder = {
-  name: "Sultonsho Guliev",
-  role: "Founder",
-  bio: "Founder of Great Silk Trails. Local operating experience in Tajikistan, with a focus on the Pamirs, mountain roads, permits and community-based travel.",
-};
-
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "about" });
-  const pages = await getTranslations({ locale, namespace: "pages.about" });
+export default async function AboutPage() {
+  const settings = await getSiteSettings();
+  const contact = settings.contact;
 
   return (
     <>
@@ -47,67 +32,70 @@ export default async function AboutPage({
       />
 
       <section className="apple-section">
-        <div className="mx-auto max-w-[980px] px-6">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <AnimateIn>
-              <div className="silk-frame relative aspect-[4/3] overflow-hidden rounded-2xl">
-                <Image
-                  src="https://images.unsplash.com/photo-1565008576549-57569a49371d?w=900&q=80"
-                  alt="Samarkand"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-              </div>
-            </AnimateIn>
-            <AnimateIn delay={0.1}>
-              <h2 className="silk-headline text-3xl text-silk-indigo">{t("title")}</h2>
-              <p className="mt-4 text-base leading-relaxed text-apple-muted">{t("mission")}</p>
-              <div className="mt-8 rounded-2xl border border-silk-gold/20 bg-white p-5">
-                <p className="text-xs font-bold uppercase tracking-[0.16em] text-silk-gold">Founder</p>
-                <h3 className="silk-headline mt-1 text-xl text-silk-indigo">{founder.name}</h3>
-                <p className="text-sm text-silk-gold">{founder.role}</p>
-                <p className="mt-2 text-sm text-apple-muted">{founder.bio}</p>
-              </div>
-            </AnimateIn>
+        <div className="mx-auto max-w-[820px] space-y-12 px-6 text-base leading-relaxed text-apple-muted">
+          <div>
+            <h2 className="silk-headline text-2xl text-silk-indigo">How we started</h2>
+            <p className="mt-3">
+              Great Silk Trails grew from local operating work in Tajikistan — mountain roads,
+              permits, homestays and long Pamir days — into a company that designs private and
+              small-group journeys across neighbouring Silk Road countries.
+            </p>
           </div>
 
-          <div className="mt-16 grid gap-6 md:grid-cols-3">
-            {valueKeys.map((key, i) => (
-              <AnimateIn key={key} delay={i * 0.1}>
-                <div className="rounded-2xl border border-silk-gold/20 bg-white p-6 shadow-sm">
-                  <h3 className="silk-headline text-xl text-silk-gold">{t(`values.${key}.title`)}</h3>
-                  <p className="mt-2 text-sm text-apple-muted">{t(`values.${key}.desc`)}</p>
-                </div>
-              </AnimateIn>
-            ))}
+          <div className="rounded-2xl border border-silk-gold/20 bg-white p-6">
+            <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-silk-gold">
+              Founder
+            </p>
+            <h2 className="silk-headline mt-2 text-2xl text-silk-indigo">Sultonsho Guliev</h2>
+            <p className="mt-1 text-sm font-semibold text-silk-indigo">Founder</p>
+            <p className="mt-3">
+              Local operating experience in Tajikistan, with a focus on the Pamirs, mountain
+              roads, permits and community-based travel. A founder photograph will be published
+              after GST approval.
+            </p>
           </div>
-        </div>
-      </section>
 
-      <section className="silk-pattern-dark apple-section">
-        <div className="mx-auto max-w-[980px] px-6">
-          <SectionHeading title={t("team.title")} dark />
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {memberKeys.map((key, i) => (
-              <AnimateIn key={key} delay={i * 0.1}>
-                <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm">
-                  <div className="mx-auto flex size-20 items-center justify-center rounded-full bg-silk-gold/20 silk-headline text-2xl font-bold text-silk-gold">
-                    {t(`team.members.${key}.name`).charAt(0)}
-                  </div>
-                  <h3 className="mt-4 silk-headline text-xl text-white">
-                    {t(`team.members.${key}.name`)}
-                  </h3>
-                  <p className="text-sm text-silk-gold">{t(`team.members.${key}.role`)}</p>
-                  <p className="mt-3 text-sm text-white/70">
-                    {t.has(`team.members.${key}.bio`)
-                      ? t(`team.members.${key}.bio`)
-                      : t(`team.members.${key}.desc`)}
-                  </p>
-                </div>
-              </AnimateIn>
-            ))}
+          <div>
+            <h2 className="silk-headline text-2xl text-silk-indigo">How we operate</h2>
+            <p className="mt-3">
+              We operate directly in Tajikistan and work with confirmed regional partners in other
+              countries. Each itinerary is checked with local drivers, guides and hosts before it
+              is offered to travellers.
+            </p>
           </div>
+
+          <div>
+            <h2 className="silk-headline text-2xl text-silk-indigo">Why travel with us</h2>
+            <ul className="mt-3 list-disc space-y-2 pl-5">
+              <li>Local knowledge of the Pamirs, mountain roads, permits and communities.</li>
+              <li>Routes designed with people who drive and host them.</li>
+              <li>Private and small-group travel with clear vehicles and group sizes.</li>
+              <li>One team from first enquiry to the journey home.</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="silk-headline text-2xl text-silk-indigo">Responsible travel</h2>
+            <p className="mt-3">
+              We work with local drivers, guides and family stays where they are the right fit for
+              the route. Specific community and environmental actions will be published as GST
+              confirms them — we do not list generic promises here.
+            </p>
+          </div>
+
+          {(contact.legalName || contact.address) && (
+            <div>
+              <h2 className="silk-headline text-2xl text-silk-indigo">Legal details</h2>
+              <p className="mt-3">
+                {contact.legalName}
+                {contact.address ? ` · ${contact.address}` : ""}
+              </p>
+            </div>
+          )}
+
+          <Button variant="silk" size="pill" asChild>
+            <Link href="/plan-my-journey">Plan a private trip</Link>
+          </Button>
         </div>
       </section>
     </>

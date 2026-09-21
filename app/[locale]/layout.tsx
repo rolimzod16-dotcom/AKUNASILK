@@ -7,10 +7,9 @@ import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import AutomationShell from "@/components/automation/AutomationShell";
-import StickyMobileCTA from "@/components/layout/StickyMobileCTA";
 import JsonLd from "@/components/seo/JsonLd";
 import { getSiteUrl, SITE_NAME } from "@/lib/seo/site";
-import { getSiteSettings, whatsappHref } from "@/lib/cms/settings";
+import { getSiteSettings } from "@/lib/cms/settings";
 import { getPublishedDestinations, getDestinationContent } from "@/lib/cms/destinations";
 import "../globals.css";
 
@@ -160,9 +159,8 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <AutomationShell>
             <Header destinations={destNav} />
-            <main className="pb-24 lg:pb-0">{children}</main>
+            <main>{children}</main>
             <Footer settings={settings} destinations={destNav} />
-            <StickyMobileCTA whatsappUrl={whatsappHref(settings)} />
           </AutomationShell>
         </NextIntlClientProvider>
       </body>

@@ -62,7 +62,7 @@ export default function Header({ destinations = [] }: { destinations?: NavChild[
           <BookNowButton
             variant="silk"
             size="pill-sm"
-            className="hidden font-semibold shadow-md sm:inline-flex"
+            className="inline-flex font-semibold shadow-md max-sm:px-3 max-sm:text-[11px]"
             prefill={{ source: "header", tourSlug: "any" }}
             label={t("planMyJourney")}
           />
