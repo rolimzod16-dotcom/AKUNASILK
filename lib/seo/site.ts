@@ -30,7 +30,7 @@ export function localeAbsoluteUrl(locale: string, path = "/"): string {
 }
 
 export const SITE_NAME = "Great Silk Trails";
-export const LOCALES = ["en"] as const;
+export const LOCALES = ["en", "ru"] as const;
 export const DEFAULT_LOCALE = "en";
 
 /** Static marketing routes (no dynamic slug). */

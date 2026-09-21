@@ -1,15 +1,15 @@
 {
   "meta": {
-    "title": "Silk Road Tours & Central Asia Tours | GREATSILKTRAILS",
-    "description": "Book fixed-price Silk Road tours and Central Asia tours—from Uzbekistan cities to the Tajikistan Pamir Highway. Small groups, English-speaking guides, visa support. Plan or reserve with confirmation before payment."
+    "title": "Туры по Шёлковому пути и Центральной Азии | Great Silk Trails",
+    "description": "Частные и небольшие групповые путешествия по Таджикистану и Центральной Азии с местными гидами, водителями и принимающими семьями."
   },
   "nav": {
     "home": "Главная",
     "silkTrails": "Silk Trails",
     "destination": "Destinations",
     "travelStyles": "Стили путешествий",
-    "servicesLogistics": "Сервис и логистика",
-    "aboutGst": "About GST",
+    "servicesLogistics": "Услуги",
+    "aboutGst": "О нас",
     "viewAll": "Смотреть все",
     "tourChina": "Silk Road Origins Trail — Китай",
     "tourKyrgyzstan": "Nomads & Mountains — Кыргызстан",
@@ -40,8 +40,8 @@
     "serviceDrivers": "Водители и гиды",
     "serviceAccommodation": "Проживание и логистика",
     "serviceTailorMade": "Индивидуальные маршруты",
-    "destinations": "Destinations",
-    "journeys": "Туры",
+    "destinations": "Направления",
+    "journeys": "Путешествия",
     "experiences": "Впечатления",
     "heritage": "Наследие",
     "stories": "Истории",
@@ -53,10 +53,14 @@
     "portfolio": "Впечатления",
     "blog": "Истории",
     "faq": "FAQ",
-    "book": "Plan Your Journey",
-    "planYourJourney": "Plan Your Journey",
-    "getQuote": "Plan Your Journey",
-    "silkRoadMain": "The Silk Road"
+    "book": "Спланировать поездку",
+    "planYourJourney": "Спланировать поездку",
+    "getQuote": "Спланировать поездку",
+    "silkRoadMain": "The Silk Road",
+    "travelServices": "Услуги",
+    "planMyJourney": "Спланировать поездку",
+    "destCentralAsia": "Центральная Азия",
+    "styleMotorcycle": "Мото"
   },
   "traveler": {
     "trust": {
@@ -139,12 +143,12 @@
     }
   },
   "hero": {
-    "badge": "Fixed-price Silk Road tours · Small groups · English-speaking guides",
-    "title": "Silk Road tours across Central Asia",
-    "subtitle": "From Uzbekistan's golden cities to Tajikistan's Pamir Highway—fixed prices in USD, visa support, and clear confirmation before any payment.",
+    "badge": "Местные эксперты Шёлкового пути",
+    "title": "Путешествуйте по Шёлковым путям с местными экспертами",
+    "subtitle": "Частные и небольшие групповые поездки по Таджикистану и Центральной Азии с проверенными гидами, водителями и хозяевами.",
     "priceFrom": "От ${price}",
-    "cta": "Browse Silk Road tours",
-    "ctaSecondary": "See top Uzbekistan tour",
+    "cta": "Смотреть путешествия",
+    "ctaSecondary": "Спланировать частную поездку",
     "bestseller": "Хит продаж",
     "spotsUrgent": "Детали ближайшего выезда — на странице тура",
     "trust": "Flexible cancellation · Clear pricing · Availability confirmed before payment",
@@ -155,10 +159,10 @@
     "title": "Featured Silk Road tours",
     "subtitle": "Fixed-price packages for classic Silk Road travel—hotels, guides, transfers, and most meals included.",
     "bestseller": "Хит продаж",
-    "buy": "Reserve Your Spot",
-    "buyNow": "Reserve Your Spot",
-    "getQuote": "Reserve Your Spot",
-    "viewTrip": "View Tour",
+    "buy": "Запросить наличие",
+    "buyNow": "Запросить наличие",
+    "getQuote": "Запросить стоимость",
+    "viewTrip": "Смотреть маршрут",
     "perPerson": "за человека",
     "buyPackage": "Browse Tours",
     "details": "Подробнее",
@@ -205,7 +209,9 @@
         }
       }
     },
-    "reserveSpot": "Reserve Your Spot"
+    "reserveSpot": "Запросить наличие",
+    "requestQuote": "Запросить стоимость",
+    "privateDeparture": "Частный выезд по запросу"
   },
   "scrollStory": {
     "title": "Каждая миля — шедевр.",
@@ -971,6 +977,10 @@
         "photo": {
           "title": "Фото-путешествия",
           "desc": "Выезды на рассвете, горный свет и остановки для фотографов и визуальных рассказчиков."
+        },
+        "motorcycle": {
+          "title": "Мотопутешествия",
+          "desc": "Мотомаршруты по Памирскому тракту с местным знанием дорог и поддержкой."
         }
       },
       "viewFeatured": "Featured packages",
@@ -1331,5 +1341,49 @@
     "viewTours": "View Silk Road tours",
     "viewDestination": "Explore destination",
     "editorialNote": "Historical corridor illustration for orientation. Present-day GST tours operate on selected modern routes only — not every map point is a bookable product."
+  },
+  "home": {
+    "destinations": {
+      "title": "Куда мы едем",
+      "subtitle": "Четыре страны, которые мы знаем, и маршруты сразу по нескольким странам Шёлкового пути."
+    },
+    "featured": {
+      "eyebrow": "Избранные путешествия",
+      "title": "Маршруты, которые формирует Шёлковый путь",
+      "subtitle": "Небольшая подборка дорог, которые мы знаем лично и ведём с местными командами.",
+      "viewAll": "Все путешествия"
+    },
+    "why": {
+      "title": "Почему Great Silk Trails",
+      "items": {
+        "rooted": {
+          "title": "Корни в Таджикистане",
+          "desc": "Знание Памира, горных дорог, разрешений и местных сообществ."
+        },
+        "ground": {
+          "title": "Составлены людьми на земле",
+          "desc": "Маршруты сверяются с местными водителями, гидами и хозяевами до публикации."
+        },
+        "private": {
+          "title": "Частные и небольшие группы",
+          "desc": "Гибкие поездки с понятным размером группы, транспортом и сопровождением."
+        },
+        "team": {
+          "title": "Одна команда от заявки до возвращения",
+          "desc": "Практическая помощь до выезда и ответственная координация в пути."
+        }
+      }
+    },
+    "services": {
+      "title": "Нужна не вся программа, а отдельная услуга?",
+      "subtitle": "Транспорт, гиды, визы, разрешения или индивидуальный маршрут — одной местной командой.",
+      "cta": "Смотреть услуги"
+    },
+    "cta": {
+      "title": "Готовы спланировать поездку по Шёлковому пути?",
+      "subtitle": "Расскажите, куда хотите поехать, как любите путешествовать и когда рассматриваете даты. Мы ответим со следующим практическим шагом.",
+      "plan": "Спланировать поездку",
+      "whatsapp": "Написать в WhatsApp"
+    }
   }
 }

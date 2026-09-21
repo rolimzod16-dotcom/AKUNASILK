@@ -15,6 +15,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import NavMenu from "@/components/layout/NavMenu";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
 import { withDestinationNav, type NavChild } from "@/lib/navigation";
 
 export default function Header({ destinations = [] }: { destinations?: NavChild[] }) {
@@ -59,6 +60,7 @@ export default function Header({ destinations = [] }: { destinations?: NavChild[
         <NavMenu light={overHero} items={withDestinationNav(destinations)} />
 
         <div className="flex shrink-0 items-center gap-2">
+          <LanguageSwitcher light={overHero} />
           <BookNowButton
             variant="silk"
             size="pill-sm"
@@ -96,7 +98,8 @@ export default function Header({ destinations = [] }: { destinations?: NavChild[
                   items={withDestinationNav(destinations)}
                 />
               </div>
-              <div className="mt-6">
+              <div className="mt-6 space-y-3">
+                <LanguageSwitcher onLightBg />
                 <BookNowButton
                   variant="silk"
                   size="pill"

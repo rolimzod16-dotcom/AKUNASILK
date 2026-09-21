@@ -39,8 +39,6 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/ru", destination: "/en", permanent: true },
-      { source: "/ru/:path*", destination: "/en/:path*", permanent: true },
       {
         source: "/:locale/services-logistics",
         destination: "/:locale/services",

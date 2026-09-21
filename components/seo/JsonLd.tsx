@@ -36,7 +36,7 @@ export default function JsonLd({ locale, description, email, telephone }: JsonLd
     alternateName: "GREATSILKTRAILS Silk Road Tours",
     url: site,
     description,
-    inLanguage: ["en"],
+    inLanguage: locale === "ru" ? ["ru", "en"] : ["en", "ru"],
     potentialAction: {
       "@type": "SearchAction",
       target: {

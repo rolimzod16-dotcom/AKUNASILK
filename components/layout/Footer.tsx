@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import SilkDivider from "@/components/shared/SilkDivider";
 import type { CmsSiteSettings } from "@/lib/cms/types";
@@ -68,6 +68,8 @@ export default function Footer({
   destinations?: NavChild[];
 }) {
   const t = useTranslations("footer");
+  const locale = useLocale();
+  const ru = locale === "ru";
   const contact = settings.contact;
   const tagline = settings.tagline || t("tagline");
   const phone = settings.contact.whatsapp.replace(/[^\d]/g, "");
@@ -92,10 +94,48 @@ export default function Footer({
             </p>
           </div>
 
-          <FooterCol title="Journeys" links={journeyLinks} />
-          <FooterCol title="Destinations" links={destLinks} />
-          <FooterCol title="Travel Services" links={serviceLinks} />
-          <FooterCol title="Company" links={companyLinks} />
+          <FooterCol
+            title={ru ? "Путешествия" : "Journeys"}
+            links={
+              ru
+                ? [
+                    { label: "Все маршруты", href: "/journeys" },
+                    { label: "Таджикистан", href: "/destinations/tajikistan" },
+                    { label: "Узбекистан", href: "/destinations/uzbekistan" },
+                    { label: "Кыргызстан", href: "/destinations/kyrgyzstan" },
+                    { label: "Казахстан", href: "/destinations/kazakhstan" },
+                  ]
+                : journeyLinks
+            }
+          />
+          <FooterCol title={ru ? "Направления" : "Destinations"} links={destLinks} />
+          <FooterCol
+            title={ru ? "Услуги" : "Travel Services"}
+            links={
+              ru
+                ? [
+                    { label: "Транспорт и 4x4", href: "/services/transport-rental" },
+                    { label: "Водители и гиды", href: "/services/drivers-guides" },
+                    { label: "Визы", href: "/services/visa-support" },
+                    { label: "Разрешения", href: "/services/permits-gbao" },
+                    { label: "Индивидуальный маршрут", href: "/services/tailor-made" },
+                  ]
+                : serviceLinks
+            }
+          />
+          <FooterCol
+            title={ru ? "Компания" : "Company"}
+            links={
+              ru
+                ? [
+                    { label: "О нас", href: "/about" },
+                    { label: "Контакты", href: "/contact" },
+                    { label: "FAQ", href: "/faq" },
+                    { label: "Спланировать поездку", href: "/plan-my-journey" },
+                  ]
+                : companyLinks
+            }
+          />
         </div>
 
         <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/70">
