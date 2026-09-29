@@ -144,8 +144,22 @@
   },
   "hero": {
     "badge": "Local Silk Road experts",
+    "ticker": "Right now, local experts are preparing Silk Road journeys",
     "title": "Travel the Silk Roads with local experts",
     "subtitle": "Private and small-group journeys across Tajikistan and Central Asia, designed with trusted local guides, drivers and hosts.",
+    "when": "When?",
+    "howLong": "How long?",
+    "where": "Where?",
+    "durations": {
+      "short": "~ 1 week",
+      "medium": "2 weeks",
+      "long": "3 weeks +"
+    },
+    "explore": "Explore inspirations",
+    "talk": "Talk to an advisor",
+    "discover": "Discover our destinations",
+    "footnote": "Private journeys, designed with people who live on the Silk Road.",
+    "photoAlt": "Camel caravan crossing a Silk Road desert corridor",
     "priceFrom": "Request a quote",
     "cta": "Explore Journeys",
     "ctaSecondary": "Plan a Private Trip",
@@ -245,7 +259,28 @@
   "home": {
     "destinations": {
       "title": "Where we travel",
-      "subtitle": "Four countries we know well, plus multi-country Silk Road journeys."
+      "subtitle": "Four countries we know well. Pick a city on the map to open journeys in that country."
+    },
+    "map": {
+      "title": "The Silk Road",
+      "hint": "Each bright dot is a city. Tap it to open tours in that country.",
+      "open": "{city}, {country} — open tours",
+      "cities": {
+        "khiva": "Khiva",
+        "bukhara": "Bukhara",
+        "samarkand": "Samarkand",
+        "tashkent": "Tashkent",
+        "khujand": "Khujand",
+        "dushanbe": "Dushanbe",
+        "khorog": "Khorog",
+        "osh": "Osh",
+        "bishkek": "Bishkek",
+        "karakol": "Karakol",
+        "turkistan": "Turkistan",
+        "shymkent": "Shymkent",
+        "taraz": "Taraz",
+        "almaty": "Almaty"
+      }
     },
     "featured": {
       "eyebrow": "Featured Journeys",

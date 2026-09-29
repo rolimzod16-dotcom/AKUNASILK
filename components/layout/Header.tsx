@@ -50,17 +50,17 @@ export default function Header({ destinations = [] }: { destinations?: NavChild[
           <span
             className={cn(
               "text-sm font-bold tracking-[0.08em] sm:text-[15px]",
-              overHero ? "text-white" : "text-white"
+              "text-white"
             )}
           >
             GREAT SILK TRAILS
           </span>
         </Link>
 
-        <NavMenu light={overHero} items={withDestinationNav(destinations)} />
+        <NavMenu light items={withDestinationNav(destinations)} />
 
         <div className="flex shrink-0 items-center gap-2">
-          <LanguageSwitcher light={overHero} />
+          <LanguageSwitcher light />
           <BookNowButton
             variant="silk"
             size="pill-sm"

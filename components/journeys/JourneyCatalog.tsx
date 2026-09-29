@@ -48,6 +48,24 @@ function matchesDuration(days: number, filter: DurationFilter) {
   return days >= 13;
 }
 
+function isDurationFilter(value: string | null): value is Exclude<DurationFilter, "all"> {
+  return value === "short" || value === "medium" || value === "long";
+}
+
+function departureMatchesMonth(nextDeparture: string | undefined, filter: string) {
+  if (!nextDeparture) return false;
+  if (/^\d{4}-\d{2}/.test(filter)) return nextDeparture.startsWith(filter);
+  const month = Number(filter);
+  if (!Number.isInteger(month) || month < 1 || month > 12) return false;
+  return Number(nextDeparture.slice(5, 7)) === month;
+}
+
+function monthChipActive(ym: string, filter: string) {
+  if (filter === ym) return true;
+  const month = Number(filter);
+  return month >= 1 && month <= 12 && Number(ym.slice(5, 7)) === month;
+}
+
 export default function JourneyCatalog({ items, countries }: JourneyCatalogProps) {
   const countryFilters = (countries?.length ? countries : FALLBACK_COUNTRIES) as string[];
   const t = useTranslations("traveler.catalog");
@@ -57,10 +75,14 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
   const countryParam = searchParams.get("country");
   const regionParam = searchParams.get("region");
   const styleParam = searchParams.get("style");
+  const durationParam = searchParams.get("duration");
+  const monthParam = searchParams.get("month");
 
   const [difficulty, setDifficulty] = useState<DifficultyFilter>("all");
-  const [duration, setDuration] = useState<DurationFilter>("all");
-  const [month, setMonth] = useState<string>("all");
+  const [duration, setDuration] = useState<DurationFilter>(
+    isDurationFilter(durationParam) ? durationParam : "all",
+  );
+  const [month, setMonth] = useState<string>(monthParam || "all");
   const [sort, setSort] = useState<SortKey>("recommended");
 
   const activeCountry = countryParam || null;
@@ -104,7 +126,7 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
     }
 
     if (month !== "all") {
-      list = list.filter(({ tour }) => tour.nextDeparture?.startsWith(month));
+      list = list.filter(({ tour }) => departureMatchesMonth(tour.nextDeparture, month));
     }
 
     list.sort((a, b) => {
@@ -239,7 +261,7 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
                   type="button"
                   onClick={() => setMonth(ym)}
                   className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
-                    month === ym
+                    monthChipActive(ym, month)
                       ? "bg-silk-indigo text-silk-gold"
                       : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
                   }`}

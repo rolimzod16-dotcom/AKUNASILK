@@ -2,14 +2,12 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { getHomeDestinations, getDestinationContent } from "@/lib/cms/destinations";
+import SilkRoadCitiesMap from "@/components/home/SilkRoadCitiesMap";
 
 export default async function HomeDestinations({ locale }: { locale: string }) {
   const t = await getTranslations("home.destinations");
   const items = await getHomeDestinations();
   const cards = items.filter((item) => !item.wide);
-  const wide = items.filter((item) => item.wide);
-
-  if (items.length === 0) return null;
 
   return (
     <section className="apple-section bg-silk-cream">
@@ -51,35 +49,7 @@ export default async function HomeDestinations({ locale }: { locale: string }) {
           })}
         </div>
 
-        {wide.map((item) => {
-          const content = getDestinationContent(item, locale);
-          return (
-            <Link
-              key={item.id}
-              href={`/destinations/${item.slug}`}
-              className="group relative mt-4 block overflow-hidden rounded-2xl border border-silk-gold/20"
-            >
-              <div className="relative aspect-[21/7] min-h-[180px]">
-                {item.image ? (
-                  <Image
-                    src={item.image}
-                    alt={`${content.name} — ${content.line}`}
-                    fill
-                    className="object-cover transition duration-700 group-hover:scale-105"
-                    sizes="100vw"
-                  />
-                ) : (
-                  <div className="absolute inset-0 bg-silk-indigo" />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-r from-silk-indigo/80 via-silk-indigo/40 to-transparent" />
-              </div>
-              <div className="absolute inset-y-0 left-0 flex flex-col justify-end p-6 sm:p-8">
-                <p className="silk-headline text-2xl text-white sm:text-3xl">{content.name}</p>
-                <p className="mt-1 text-sm text-silk-sand/90 sm:text-base">{content.line}</p>
-              </div>
-            </Link>
-          );
-        })}
+        <SilkRoadCitiesMap locale={locale} />
       </div>
     </section>
   );

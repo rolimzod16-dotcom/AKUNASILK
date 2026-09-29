@@ -49,7 +49,7 @@ export default function LanguageSwitcher({
                 ? "bg-silk-gold text-silk-indigo"
                 : onLightBg
                   ? "text-silk-indigo/70 hover:text-silk-indigo"
-                  : "text-white/80 hover:text-white"
+                  : "text-white hover:text-white"
             )}
             aria-pressed={active}
             aria-label={loc === "ru" ? "Русский" : "English"}

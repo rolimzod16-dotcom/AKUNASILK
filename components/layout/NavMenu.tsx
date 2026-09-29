@@ -124,7 +124,7 @@ export default function NavMenu({ variant = "desktop", onNavigate, light, items 
                     ? "bg-white/15 text-white"
                     : "bg-silk-gold/15 text-silk-indigo"
                   : light
-                    ? "text-white/85 hover:bg-white/10 hover:text-white"
+                    ? "text-white hover:bg-white/10 hover:text-white"
                     : "text-apple-subtle hover:bg-silk-cream hover:text-silk-indigo"
               )}
             >
@@ -145,18 +145,18 @@ export default function NavMenu({ variant = "desktop", onNavigate, light, items 
                     ? "bg-white/15 text-white"
                     : "bg-silk-gold/15 text-silk-indigo"
                   : light
-                    ? "text-white/85 group-hover:bg-white/10 group-hover:text-white"
+                    ? "text-white group-hover:bg-white/10 group-hover:text-white"
                     : "text-apple-subtle group-hover:bg-silk-cream group-hover:text-silk-indigo"
               )}
             >
               {item.href ? (
-                <Link href={item.href} className="hover:text-silk-indigo">
+                <Link href={item.href} className={light ? "text-white hover:text-white" : "hover:text-silk-indigo"}>
                   {t(item.key)}
                 </Link>
               ) : (
                 <span>{t(item.key)}</span>
               )}
-              <ChevronDown className="size-3 opacity-60" />
+              <ChevronDown className={cn("size-3", light ? "text-white" : "opacity-60")} />
             </div>
 
             <div className="invisible absolute left-0 top-full z-50 min-w-[280px] pt-1 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
