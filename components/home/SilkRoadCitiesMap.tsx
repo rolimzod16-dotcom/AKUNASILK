@@ -3,11 +3,13 @@ import { Link } from "@/i18n/routing";
 import { getCountryLabel, type CountrySlug } from "@/lib/countries";
 import { cn } from "@/lib/utils";
 import {
-  COUNTRY_LABELS_POS,
   COUNTRY_PATHS,
   MAP_HEIGHT,
   MAP_WIDTH,
+  ROUTE_CAUCASUS,
   ROUTE_FERGANA,
+  ROUTE_KARAKORAM,
+  ROUTE_KHIVA,
   ROUTE_MAIN,
   ROUTE_PAMIR,
   SILK_CITIES,
@@ -20,6 +22,47 @@ const LABEL_CLASS = {
   left: "right-full top-1/2 mr-1.5 -translate-y-1/2",
   right: "left-full top-1/2 ml-1.5 -translate-y-1/2",
 } as const;
+
+const LAND_ORDER: CountrySlug[] = [
+  "china",
+  "kazakhstan",
+  "iran",
+  "turkey",
+  "pakistan",
+  "afghanistan",
+  "turkmenistan",
+  "uzbekistan",
+  "kyrgyzstan",
+  "tajikistan",
+  "azerbaijan",
+  "georgia",
+  "armenia",
+];
+
+const LAND_FILL: Partial<Record<CountrySlug, string>> = {
+  china: "#f6edd4",
+  kazakhstan: "#f3e6c4",
+  iran: "#f0e0c8",
+  turkey: "#f7efe0",
+  pakistan: "#e8d7bc",
+  afghanistan: "#e6d3b4",
+  turkmenistan: "#f4e8cc",
+  uzbekistan: "#f8f1df",
+  kyrgyzstan: "#efe0c0",
+  tajikistan: "#e7d2ab",
+  azerbaijan: "#f2e7d0",
+  georgia: "#efe6d2",
+  armenia: "#eadcc4",
+};
+
+const ROUTES: { ids: SilkCityId[]; color: string; width: number }[] = [
+  { ids: ROUTE_MAIN, color: "#d4a82a", width: 2.6 },
+  { ids: ROUTE_KHIVA, color: "#d4a82a", width: 2.2 },
+  { ids: ROUTE_FERGANA, color: "#c45c38", width: 2 },
+  { ids: ROUTE_PAMIR, color: "#c45c38", width: 2 },
+  { ids: ROUTE_KARAKORAM, color: "#c45c38", width: 2 },
+  { ids: ROUTE_CAUCASUS, color: "#c45c38", width: 2 },
+];
 
 function routePath(ids: SilkCityId[]) {
   const byId = new Map(SILK_CITIES.map((city) => [city.id, city]));
@@ -49,45 +92,27 @@ export default async function SilkRoadCitiesMap({ locale }: { locale: string }) 
           aria-label={t("title")}
         >
           <rect width={MAP_WIDTH} height={MAP_HEIGHT} fill="#d7e6ee" />
-          <path d={COUNTRY_PATHS.kazakhstan} fill="#f3e6c4" stroke="#c4a574" strokeWidth="1.2" />
-          <path d={COUNTRY_PATHS.uzbekistan} fill="#f8f1df" stroke="#c4a574" strokeWidth="1.2" />
-          <path d={COUNTRY_PATHS.kyrgyzstan} fill="#efe0c0" stroke="#c4a574" strokeWidth="1.2" />
-          <path d={COUNTRY_PATHS.tajikistan} fill="#e7d2ab" stroke="#c4a574" strokeWidth="1.2" />
-          <path
-            d={routePath(ROUTE_MAIN)}
-            fill="none"
-            stroke="#d4a82a"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d={routePath(ROUTE_PAMIR)}
-            fill="none"
-            stroke="#c45c38"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d={routePath(ROUTE_FERGANA)}
-            fill="none"
-            stroke="#c45c38"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          {COUNTRY_LABELS_POS.map((item) => (
-            <text
-              key={item.country}
-              x={item.x}
-              y={item.y}
-              textAnchor="middle"
-              fill="#8a7560"
-              style={{ fontSize: 15, fontWeight: 700, letterSpacing: "0.14em" }}
-            >
-              {getCountryLabel(item.country, locale).toUpperCase()}
-            </text>
+          {LAND_ORDER.map((country) =>
+            COUNTRY_PATHS[country] ? (
+              <path
+                key={country}
+                d={COUNTRY_PATHS[country]}
+                fill={LAND_FILL[country]}
+                stroke="#c4a574"
+                strokeWidth="1.1"
+              />
+            ) : null,
+          )}
+          {ROUTES.map((route) => (
+            <path
+              key={route.ids.join("-")}
+              d={routePath(route.ids)}
+              fill="none"
+              stroke={route.color}
+              strokeWidth={route.width}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           ))}
         </svg>
 
@@ -105,13 +130,13 @@ export default async function SilkRoadCitiesMap({ locale }: { locale: string }) 
                 top: `${(city.y / MAP_HEIGHT) * 100}%`,
               }}
             >
-              <span className="relative block size-3.5">
-                <span className="absolute -inset-2 rounded-full bg-silk-gold/50 blur-[1px] transition group-hover:bg-silk-gold" />
-                <span className="absolute inset-0 rounded-full border-2 border-white bg-[#ffe56a] shadow-[0_0_10px_2px_rgba(255,214,60,0.95)] transition group-hover:scale-125" />
+              <span className="relative block size-3">
+                <span className="absolute -inset-1.5 rounded-full bg-silk-gold/50 blur-[1px] transition group-hover:bg-silk-gold" />
+                <span className="absolute inset-0 rounded-full border-2 border-white bg-[#ffe56a] shadow-[0_0_8px_2px_rgba(255,214,60,0.95)] transition group-hover:scale-125" />
               </span>
               <span
                 className={cn(
-                  "pointer-events-none absolute whitespace-nowrap rounded bg-white/90 px-1.5 py-0.5 text-[10px] font-bold text-silk-indigo shadow-sm sm:text-[11px]",
+                  "pointer-events-none absolute whitespace-nowrap rounded bg-white/90 px-1 py-0.5 text-[9px] font-bold text-silk-indigo shadow-sm sm:text-[11px]",
                   LABEL_CLASS[city.label],
                 )}
               >

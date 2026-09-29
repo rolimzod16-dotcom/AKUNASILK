@@ -259,27 +259,32 @@
   "home": {
     "destinations": {
       "title": "Where we travel",
-      "subtitle": "Four countries we know well. Pick a city on the map to open journeys in that country."
+      "subtitle": "The overland road from China to the Mediterranean. Pick a city to open tours in that country."
     },
     "map": {
       "title": "The Silk Road",
-      "hint": "Each bright dot is a city. Tap it to open tours in that country.",
+      "hint": "From Xi'an to Istanbul, with the Pamir, Karakoram and Caucasus branches. Tap a city to open tours in that country.",
       "open": "{city}, {country} — open tours",
       "cities": {
-        "khiva": "Khiva",
-        "bukhara": "Bukhara",
-        "samarkand": "Samarkand",
+        "xian": "Xi'an",
+        "dunhuang": "Dunhuang",
+        "turpan": "Turpan",
+        "kashgar": "Kashgar",
+        "almaty": "Almaty",
+        "bishkek": "Bishkek",
+        "osh": "Osh",
         "tashkent": "Tashkent",
-        "khujand": "Khujand",
+        "samarkand": "Samarkand",
+        "bukhara": "Bukhara",
+        "khiva": "Khiva",
+        "merv": "Merv",
+        "mashhad": "Mashhad",
+        "tehran": "Tehran",
+        "istanbul": "Istanbul",
         "dushanbe": "Dushanbe",
         "khorog": "Khorog",
-        "osh": "Osh",
-        "bishkek": "Bishkek",
-        "karakol": "Karakol",
-        "turkistan": "Turkistan",
-        "shymkent": "Shymkent",
-        "taraz": "Taraz",
-        "almaty": "Almaty"
+        "gilgit": "Gilgit",
+        "tbilisi": "Tbilisi"
       }
     },
     "featured": {
