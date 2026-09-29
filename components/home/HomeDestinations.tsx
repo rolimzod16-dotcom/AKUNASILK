@@ -3,13 +3,23 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/routing";
 import { getHomeDestinations, getDestinationContent } from "@/lib/cms/destinations";
 import SilkRoadCitiesMap from "@/components/home/SilkRoadCitiesMap";
+import { getCatalogTours, getTourContent } from "@/lib/data/tours";
 
 export default async function HomeDestinations({ locale }: { locale: string }) {
   const t = await getTranslations("home.destinations");
-  const items = await getHomeDestinations();
+  const [items, tours] = await Promise.all([getHomeDestinations(), getCatalogTours()]);
   const cards = items.filter((item) => !item.wide);
+  const mapTours = tours.map((tour) => ({
+    slug: tour.slug,
+    title: getTourContent(tour, locale).title,
+    days: tour.duration,
+    countries: tour.countrySlugs ?? [],
+    image: tour.image,
+  }));
 
   return (
+    <>
+    <SilkRoadCitiesMap tours={mapTours} />
     <section className="apple-section bg-silk-cream">
       <div className="mx-auto max-w-[1280px] px-6">
         <h2 className="silk-headline text-3xl text-silk-indigo sm:text-4xl">{t("title")}</h2>
@@ -49,8 +59,8 @@ export default async function HomeDestinations({ locale }: { locale: string }) {
           })}
         </div>
 
-        <SilkRoadCitiesMap locale={locale} />
       </div>
     </section>
+    </>
   );
 }

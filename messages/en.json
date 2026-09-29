@@ -263,8 +263,34 @@
     },
     "map": {
       "title": "The Silk Road",
+      "eyebrow": "Ancient trading network and corridors",
       "hint": "From Xi'an to Istanbul, with the Pamir, Karakoram and Caucasus branches. Tap a city to open tours in that country.",
       "open": "{city}, {country} — open tours",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "reset": "Center map",
+      "relief": "Relief shading",
+      "close": "Close",
+      "explore": "Explore journeys",
+      "days": "{count} days",
+      "blurb": "{city} on the Silk Road, in {country}.",
+      "blurbSamarkand": "Turquoise domes, madrasas, and Registan Square, where caravans met between China, Persia, and the Mediterranean.",
+      "tabs": {
+        "all": "All routes",
+        "main": "Main corridor",
+        "pamir": "Pamir high road",
+        "karakoram": "Karakoram pass",
+        "caucasus": "Caucasus link"
+      },
+      "legend": {
+        "title": "Historical caravans",
+        "era": "Circa 100 BCE – 1450 CE",
+        "main": "Main oasis route",
+        "pamir": "Pamir highway branch",
+        "karakoram": "Karakoram southern branch",
+        "caucasus": "Caucasus corridor",
+        "tip": "Click a city to open journeys in that country."
+      },
       "cities": {
         "xian": "Xi'an",
         "dunhuang": "Dunhuang",
