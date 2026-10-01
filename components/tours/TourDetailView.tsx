@@ -160,16 +160,18 @@ export default async function TourDetailView({ tour, slug, locale, content }: To
 
         <Section id="itinerary" title="Itinerary">
           {fullContent.itinerary && fullContent.itinerary.length > 0 ? (
-            <ol className="space-y-5">
+            <Accordion type="multiple" className="rounded-xl border border-silk-gold/15 bg-white px-4">
               {fullContent.itinerary.map((day) => (
-                <li key={day.day}>
-                  <p className="font-semibold text-silk-indigo">
+                <AccordionItem key={day.day} value={`day-${day.day}`} className="border-silk-gold/15">
+                  <AccordionTrigger className="py-4 text-base font-semibold text-silk-indigo hover:no-underline">
                     Day {day.day} · {day.title}
-                  </p>
-                  <p className="mt-1">{day.description}</p>
-                </li>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-base leading-relaxed whitespace-pre-line text-apple-muted">
+                    {day.description}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </ol>
+            </Accordion>
           ) : (
             <p>{fallback}</p>
           )}
