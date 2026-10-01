@@ -4,6 +4,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
+import { Button } from "@/components/ui/button";
 import { getCountryLabel, type CountrySlug } from "@/lib/countries";
 
 const HERO_IMAGE =
@@ -21,8 +22,8 @@ type DurationKey = (typeof DURATIONS)[number];
 
 function chipClass(active: boolean) {
   return active
-    ? "bg-white text-silk-indigo border-white"
-    : "bg-white/10 text-white border-white/30 hover:bg-white/20";
+    ? "border-silk-indigo bg-silk-indigo text-silk-gold"
+    : "border-silk-gold/35 bg-white text-silk-indigo hover:border-silk-gold hover:bg-silk-gold/15";
 }
 
 export default function Hero() {
@@ -46,7 +47,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative flex min-h-[88svh] items-center justify-center overflow-hidden md:min-h-[860px]">
+    <section className="relative min-h-[88svh] overflow-hidden">
       <Image
         src={HERO_IMAGE}
         alt={t("photoAlt")}
@@ -55,115 +56,105 @@ export default function Hero() {
         className="object-cover object-center"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/70" />
-      <div className="absolute inset-0 bg-gradient-to-br from-silk-gold/20 via-transparent to-transparent opacity-40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-silk-indigo/88 via-silk-indigo/58 to-silk-indigo/20" />
 
-      <div className="relative z-10 mx-auto w-full max-w-[860px] px-6 py-24 text-center text-white md:py-28">
-        <p className="mb-5 text-xs font-medium uppercase tracking-[0.18em] text-white/85 sm:text-sm">
-          <span className="opacity-60">·</span> {t("ticker")} <span className="opacity-60">·</span>
-        </p>
-        <h1 className="silk-headline mb-5 text-4xl font-medium leading-[1.1] text-silk-gold-light md:text-5xl lg:text-[3.75rem]">
-          {t("title")}
-        </h1>
-        <p className="mx-auto mb-8 max-w-[640px] text-base leading-relaxed text-white/85 md:text-lg">
-          {t("subtitle")}
-        </p>
-
-        <div className="mx-auto mb-8 max-w-[720px] rounded-3xl border border-white/20 bg-white/10 p-5 shadow-xl backdrop-blur-md md:p-6">
-          <p className="mb-2 text-left text-[11px] font-semibold uppercase tracking-wider text-white/70 sm:text-xs">
-            {t("when")}
+      <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-[1280px] items-center px-6 pb-16 pt-28">
+        <div className="w-full max-w-[680px] text-left">
+          <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-silk-gold">
+            {t("badge")}
           </p>
-          <div className="flex flex-wrap justify-start gap-1.5">
-            {months.map((label, index) => {
-              const value = index + 1;
-              const active = month === value;
-              return (
-                <button
-                  key={label}
-                  type="button"
-                  aria-pressed={active}
-                  onClick={() => setMonth(active ? null : value)}
-                  className={`rounded-full border px-2.5 py-1 text-xs transition ${chipClass(active)}`}
-                >
-                  {label}
-                </button>
-              );
-            })}
+          <h1 className="silk-headline mt-4 text-[2.35rem] leading-[1.08] text-white sm:text-5xl md:text-6xl">
+            {t("title")}
+          </h1>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
+            {t("subtitle")}
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <Button variant="silk" size="pill" className="h-12 min-w-[180px]" asChild>
+              <Link href="/journeys">{t("cta")}</Link>
+            </Button>
+            <Button
+              variant="silkOutline"
+              size="pill"
+              className="h-12 border-white/70 bg-transparent text-white hover:bg-white/10 hover:text-white"
+              asChild
+            >
+              <Link href="/plan-my-journey">{t("ctaSecondary")}</Link>
+            </Button>
           </div>
 
-          <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <p className="mb-2 text-left text-[11px] font-semibold uppercase tracking-wider text-white/70 sm:text-xs">
-                {t("howLong")}
-              </p>
-              <div className="flex flex-wrap justify-start gap-1.5">
-                {DURATIONS.map((key) => {
-                  const active = duration === key;
-                  return (
-                    <button
-                      key={key}
-                      type="button"
-                      aria-pressed={active}
-                      onClick={() => setDuration(active ? null : key)}
-                      className={`rounded-full border px-3 py-1.5 text-xs transition sm:text-sm ${chipClass(active)}`}
-                    >
-                      {t(`durations.${key}`)}
-                    </button>
-                  );
-                })}
+          <div className="mt-8 rounded-2xl border border-silk-gold/30 bg-silk-cream/95 p-5 text-silk-indigo shadow-2xl shadow-silk-indigo/30">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/70">
+              {t("when")}
+            </p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {months.map((label, index) => {
+                const value = index + 1;
+                const active = month === value;
+                return (
+                  <button
+                    key={label}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => setMonth(active ? null : value)}
+                    className={`rounded-full border px-2.5 py-1 text-xs transition ${chipClass(active)}`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/70">
+                  {t("howLong")}
+                </p>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {DURATIONS.map((key) => {
+                    const active = duration === key;
+                    return (
+                      <button
+                        key={key}
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() => setDuration(active ? null : key)}
+                        className={`rounded-full border px-3 py-1.5 text-xs transition ${chipClass(active)}`}
+                      >
+                        {t(`durations.${key}`)}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/70">
+                  {t("where")}
+                </p>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {DESTINATIONS.map((slug) => {
+                    const active = country === slug;
+                    return (
+                      <button
+                        key={slug}
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() => setCountry(active ? null : slug)}
+                        className={`rounded-full border px-3 py-1.5 text-xs transition ${chipClass(active)}`}
+                      >
+                        {getCountryLabel(slug, locale)}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
-            <div>
-              <p className="mb-2 text-left text-[11px] font-semibold uppercase tracking-wider text-white/70 sm:text-xs">
-                {t("where")}
-              </p>
-              <div className="flex flex-wrap justify-start gap-1.5">
-                {DESTINATIONS.map((slug) => {
-                  const active = country === slug;
-                  return (
-                    <button
-                      key={slug}
-                      type="button"
-                      aria-pressed={active}
-                      onClick={() => setCountry(active ? null : slug)}
-                      className={`rounded-full border px-3 py-1.5 text-xs transition sm:text-sm ${chipClass(active)}`}
-                    >
-                      {getCountryLabel(slug, locale)}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+
+            <Button variant="silk" size="pill" className="mt-5 h-11 w-full sm:w-auto" asChild>
+              <Link href={exploreHref()}>{t("explore")}</Link>
+            </Button>
           </div>
-
-          <Link
-            href={exploreHref()}
-            className="mt-5 block w-full rounded-full bg-white/85 px-6 py-3.5 text-base font-semibold text-gray-700 transition hover:bg-white"
-          >
-            {t("explore")} →
-          </Link>
-        </div>
-
-        <div className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-          <Link
-            href="/plan-my-journey"
-            className="rounded-full bg-silk-gold px-7 py-3 text-sm font-semibold text-silk-indigo shadow-lg transition hover:brightness-110"
-          >
-            {t("talk")}
-          </Link>
-          <Link
-            href="/destinations"
-            className="rounded-full border border-white/30 bg-white/10 px-7 py-3 text-sm font-medium text-white backdrop-blur-md transition hover:bg-white/20"
-          >
-            {t("discover")}
-          </Link>
-        </div>
-        <p className="mt-8 text-xs italic tracking-wide text-white/80 sm:text-sm">{t("footnote")}</p>
-      </div>
-
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2" aria-hidden>
-        <div className="flex h-11 w-7 items-start justify-center rounded-full border-2 border-white/40 p-1.5">
-          <div className="h-2.5 w-1.5 rounded-full bg-white/60" />
         </div>
       </div>
     </section>
