@@ -1,14 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { Button } from "@/components/ui/button";
+import SilkDivider from "@/components/shared/SilkDivider";
+import SilkRoadVideoBackground from "@/components/shared/SilkRoadVideoBackground";
+import SilkRouteStrip from "@/components/shared/SilkRouteStrip";
 import { getCountryLabel, type CountrySlug } from "@/lib/countries";
-
-const HERO_IMAGE =
-  "https://images.pexels.com/videos/33255422/gobi-march-25-33255422.jpeg?auto=compress&w=2400&h=1400&fit=crop";
 
 const DESTINATIONS: CountrySlug[] = [
   "tajikistan",
@@ -23,7 +22,7 @@ type DurationKey = (typeof DURATIONS)[number];
 function chipClass(active: boolean) {
   return active
     ? "border-silk-indigo bg-silk-indigo text-silk-gold"
-    : "border-silk-gold/35 bg-white text-silk-indigo hover:border-silk-gold hover:bg-silk-gold/15";
+    : "border-silk-gold/35 bg-silk-cream text-silk-indigo hover:border-silk-gold hover:bg-silk-gold/20";
 }
 
 export default function Hero() {
@@ -47,45 +46,36 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative min-h-[88svh] overflow-hidden">
-      <Image
-        src={HERO_IMAGE}
-        alt={t("photoAlt")}
-        fill
-        priority
-        className="object-cover object-center"
-        sizes="100vw"
-      />
-      <div className="absolute inset-0 bg-gradient-to-r from-silk-indigo/88 via-silk-indigo/58 to-silk-indigo/20" />
-
-      <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-[1280px] items-center px-6 pb-16 pt-28">
-        <div className="w-full max-w-[680px] text-left">
-          <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-silk-gold">
+    <section>
+      <SilkRoadVideoBackground className="min-h-[88svh]">
+        <div className="mx-auto flex min-h-[88svh] max-w-[860px] flex-col items-center justify-center px-6 py-28 text-center">
+          <p className="rounded-full border border-silk-gold/40 bg-silk-indigo/50 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-silk-gold-light backdrop-blur-sm">
             {t("badge")}
           </p>
-          <h1 className="silk-headline mt-4 text-[2.35rem] leading-[1.08] text-white sm:text-5xl md:text-6xl">
+          <h1 className="silk-headline mt-5 text-4xl text-white sm:text-6xl md:text-7xl">
             {t("title")}
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
+          <SilkDivider light className="my-5" />
+          <p className="mx-auto max-w-xl text-lg leading-relaxed text-white/90 sm:text-xl">
             {t("subtitle")}
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button variant="silk" size="pill" className="h-12 min-w-[180px]" asChild>
               <Link href="/journeys">{t("cta")}</Link>
             </Button>
             <Button
               variant="silkOutline"
               size="pill"
-              className="h-12 border-white/70 bg-transparent text-white hover:bg-white/10 hover:text-white"
+              className="h-12 border-silk-gold/60 bg-white/10 text-white backdrop-blur-sm hover:bg-silk-gold/20 hover:text-white"
               asChild
             >
               <Link href="/plan-my-journey">{t("ctaSecondary")}</Link>
             </Button>
           </div>
 
-          <div className="mt-8 rounded-2xl border border-silk-gold/30 bg-silk-cream/95 p-5 text-silk-indigo shadow-2xl shadow-silk-indigo/30">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/70">
+          <div className="mx-auto mt-8 w-full max-w-2xl rounded-2xl border border-silk-gold/25 bg-white/95 p-4 text-left text-silk-indigo shadow-2xl shadow-silk-indigo/25 sm:p-5">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/60">
               {t("when")}
             </p>
             <div className="mt-2 flex flex-wrap gap-1.5">
@@ -105,10 +95,9 @@ export default function Hero() {
                 );
               })}
             </div>
-
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/70">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/60">
                   {t("howLong")}
                 </p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
@@ -129,7 +118,7 @@ export default function Hero() {
                 </div>
               </div>
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/70">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/60">
                   {t("where")}
                 </p>
                 <div className="mt-2 flex flex-wrap gap-1.5">
@@ -150,13 +139,13 @@ export default function Hero() {
                 </div>
               </div>
             </div>
-
-            <Button variant="silk" size="pill" className="mt-5 h-11 w-full sm:w-auto" asChild>
+            <Button variant="silk" size="pill-sm" className="mt-4" asChild>
               <Link href={exploreHref()}>{t("explore")}</Link>
             </Button>
           </div>
         </div>
-      </div>
+      </SilkRoadVideoBackground>
+      <SilkRouteStrip />
     </section>
   );
 }
