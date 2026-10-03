@@ -73,6 +73,24 @@ const FALLBACK_IMAGE =
   "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=1200&q=80";
 
 const LABEL = "var(--font-cormorant), Georgia, serif";
+const MAIN_ROUTE = "M 78 258 Q 160 300 262 332 L 348 318 L 386 304 L 436 276 L 468 258 L 498 222 L 556 242 L 632 268 L 742 214 L 828 236 L 938 286";
+const PAMIR_ROUTE = "M 468 258 L 496 304 L 538 334 L 632 268";
+const KARAKORAM_ROUTE = "M 632 268 L 590 368";
+const CAUCASUS_ROUTE = "M 78 258 Q 140 250 204 248";
+const STEPPE_ROUTE = "M 498 222 L 552 196 L 648 208";
+
+function RouteLight({ path, color, dur, begin = "0s" }: { path: string; color: string; dur: string; begin?: string }) {
+  return (
+    <g pointerEvents="none">
+      <circle r="10" fill={color} opacity="0.28">
+        <animateMotion dur={dur} begin={begin} repeatCount="indefinite" path={path} />
+      </circle>
+      <circle r="3.2" fill="#fff8e4">
+        <animateMotion dur={dur} begin={begin} repeatCount="indefinite" path={path} />
+      </circle>
+    </g>
+  );
+}
 
 function routeOn(tab: RouteId, route: Exclude<RouteId, "all">) {
   return tab === "all" || tab === route;
@@ -82,18 +100,18 @@ export default function SilkRoadCitiesMap({ tours }: { tours: SilkMapTour[] }) {
   const t = useTranslations("home.map");
   const locale = useLocale();
   const [tab, setTab] = useState<RouteId>("all");
-  const [selectedId, setSelectedId] = useState<CityId>("samarkand");
-  const [cardOpen, setCardOpen] = useState(true);
+  const [selectedId, setSelectedId] = useState<CityId | null>(null);
+  const [cardOpen, setCardOpen] = useState(false);
   const [zoom, setZoom] = useState(1);
   const [relief, setRelief] = useState(true);
 
-  const selected = CITIES.find((city) => city.id === selectedId) ?? CITIES[7];
+  const selected = CITIES.find((city) => city.id === selectedId) ?? null;
   const cityTours = useMemo(
-    () => tours.filter((tour) => tour.countries.includes(selected.country)).slice(0, 2),
-    [tours, selected.country],
+    () => (selected ? tours.filter((tour) => tour.countries.includes(selected.country)).slice(0, 2) : []),
+    [tours, selected],
   );
-  const countryName = getCountryLabel(selected.country, locale);
-  const cityName = t(`cities.${selected.id}`);
+  const countryName = selected ? getCountryLabel(selected.country, locale) : "";
+  const cityName = selected ? t(`cities.${selected.id}`) : "";
   const cardImage = cityTours[0]?.image || FALLBACK_IMAGE;
 
   const tabs: { id: RouteId; label: string }[] = [
@@ -186,28 +204,49 @@ export default function SilkRoadCitiesMap({ tours }: { tours: SilkMapTour[] }) {
                 <path d="M 700 268 l 16-11 16 11 16-10" />
               </g>
             ) : null}
+            <defs>
+              <filter id="caravanGlow" x="-80%" y="-80%" width="260%" height="260%">
+                <feGaussianBlur stdDeviation="3.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
             {routeOn(tab, "caucasus") ? (
-              <path d="M 78 258 Q 140 250 204 248" fill="none" stroke="#1a7a6d" strokeWidth="2.4" strokeDasharray="5 4" strokeLinecap="round" />
+              <path d={CAUCASUS_ROUTE} fill="none" stroke="#1a7a6d" strokeWidth="2.4" strokeDasharray="5 4" strokeLinecap="round" />
             ) : null}
             {routeOn(tab, "main") ? (
               <>
-                <path d="M 78 258 Q 160 300 262 332 L 348 318 L 386 304 L 436 276 L 468 258 L 498 222 L 556 242 L 632 268 L 742 214 L 828 236 L 938 286" fill="none" stroke="#f0c84a" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" opacity="0.28" />
-                <path d="M 78 258 Q 160 300 262 332 L 348 318 L 386 304 L 436 276 L 468 258 L 498 222 L 556 242 L 632 268 L 742 214 L 828 236 L 938 286" fill="none" stroke="#d4a82a" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                <path d={MAIN_ROUTE} fill="none" stroke="#f0c84a" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" opacity="0.28" />
+                <path d={MAIN_ROUTE} fill="none" stroke="#d4a82a" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
                 <path d="M 436 276 L 402 246" fill="none" stroke="#e8a020" strokeWidth="1.8" strokeLinecap="round" />
               </>
             ) : null}
             {routeOn(tab, "pamir") ? (
-              <path d="M 468 258 L 496 304 L 538 334 L 632 268" fill="none" stroke="#c45c38" strokeWidth="2.4" strokeDasharray="6 4" strokeLinecap="round" />
+              <path d={PAMIR_ROUTE} fill="none" stroke="#c45c38" strokeWidth="2.4" strokeDasharray="6 4" strokeLinecap="round" />
             ) : null}
             {routeOn(tab, "karakoram") ? (
-              <path d="M 632 268 L 590 368" fill="none" stroke="#9e3b3b" strokeWidth="2.4" strokeDasharray="2 4" strokeLinecap="round" />
+              <path d={KARAKORAM_ROUTE} fill="none" stroke="#9e3b3b" strokeWidth="2.4" strokeDasharray="2 4" strokeLinecap="round" />
             ) : null}
             {routeOn(tab, "main") ? (
-              <path d="M 498 222 L 552 196 L 648 208" fill="none" stroke="#e8a020" strokeWidth="1.8" strokeDasharray="4 3" strokeLinecap="round" />
+              <path d={STEPPE_ROUTE} fill="none" stroke="#e8a020" strokeWidth="1.8" strokeDasharray="4 3" strokeLinecap="round" />
             ) : null}
+            <g filter="url(#caravanGlow)">
+              {routeOn(tab, "main") ? (
+                <>
+                  <RouteLight path={MAIN_ROUTE} color="#f0c84a" dur="22s" />
+                  <RouteLight path={MAIN_ROUTE} color="#d4a82a" dur="22s" begin="-11s" />
+                  <RouteLight path={STEPPE_ROUTE} color="#e8a020" dur="9s" />
+                </>
+              ) : null}
+              {routeOn(tab, "pamir") ? <RouteLight path={PAMIR_ROUTE} color="#c45c38" dur="11s" /> : null}
+              {routeOn(tab, "karakoram") ? <RouteLight path={KARAKORAM_ROUTE} color="#9e3b3b" dur="7s" /> : null}
+              {routeOn(tab, "caucasus") ? <RouteLight path={CAUCASUS_ROUTE} color="#1a7a6d" dur="8s" /> : null}
+            </g>
 
             {CITIES.map((city) => {
-              const active = city.id === selected.id;
+              const active = city.id === selectedId;
               const name = t(`cities.${city.id}`);
               const pill = name.toUpperCase();
               const pillWidth = Math.max(92, pill.length * 8.4);
@@ -249,7 +288,7 @@ export default function SilkRoadCitiesMap({ tours }: { tours: SilkMapTour[] }) {
             })}
           </svg>
 
-          {cardOpen ? (
+          {cardOpen && selected ? (
             <article className="absolute bottom-4 right-4 z-30 w-[min(100%-2rem,22rem)] overflow-hidden rounded-2xl border border-silk-gold/30 bg-white shadow-2xl sm:bottom-auto sm:left-auto sm:right-6 sm:top-16 sm:w-80">
               <div className="relative h-36 w-full bg-silk-indigo">
                 <img src={cardImage} alt="" className="h-full w-full object-cover" />
@@ -257,7 +296,7 @@ export default function SilkRoadCitiesMap({ tours }: { tours: SilkMapTour[] }) {
                 <div className="absolute left-3 top-3 rounded-full border border-silk-gold/40 bg-silk-indigo/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-silk-gold">
                   {countryName}
                 </div>
-                <button type="button" aria-label={t("close")} className="absolute right-3 top-3 flex size-6 items-center justify-center rounded-full bg-silk-indigo/70 text-sm text-silk-cream" onClick={() => setCardOpen(false)}>
+                <button type="button" aria-label={t("close")} className="absolute right-3 top-3 flex size-6 items-center justify-center rounded-full bg-silk-indigo/70 text-sm text-silk-cream" onClick={() => { setCardOpen(false); setSelectedId(null); }}>
                   ×
                 </button>
                 <h3 className="silk-headline absolute bottom-3 left-3 right-3 text-2xl leading-none text-white">{cityName}</h3>
