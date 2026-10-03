@@ -87,20 +87,22 @@ type LightSpec = {
   color: string;
   dur: number;
   offset: number;
+  fromEnd?: boolean;
 };
 
 const LIGHTS: LightSpec[] = [
-  { id: "main-a", route: "main", path: MAIN_ROUTE, color: "#f0c84a", dur: 16000, offset: 0 },
-  { id: "main-b", route: "main", path: MAIN_ROUTE, color: "#fff1c2", dur: 16000, offset: 0.5 },
-  { id: "steppe", route: "main", path: STEPPE_ROUTE, color: "#e8a020", dur: 7000, offset: 0.2 },
+  { id: "main-a", route: "main", path: MAIN_ROUTE, color: "#f0c84a", dur: 16000, offset: 0, fromEnd: true },
+  { id: "main-b", route: "main", path: MAIN_ROUTE, color: "#fff1c2", dur: 16000, offset: 0.5, fromEnd: true },
+  { id: "steppe", route: "main", path: STEPPE_ROUTE, color: "#e8a020", dur: 7000, offset: 0.2, fromEnd: true },
   { id: "khiva", route: "main", path: KHIVA_ROUTE, color: "#e8a020", dur: 5200, offset: 0.35 },
-  { id: "pamir", route: "pamir", path: PAMIR_ROUTE, color: "#c45c38", dur: 9000, offset: 0 },
+  { id: "pamir", route: "pamir", path: PAMIR_ROUTE, color: "#c45c38", dur: 9000, offset: 0, fromEnd: true },
   { id: "karakoram", route: "karakoram", path: KARAKORAM_ROUTE, color: "#e07a6a", dur: 6000, offset: 0 },
-  { id: "caucasus", route: "caucasus", path: CAUCASUS_ROUTE, color: "#5ed0bf", dur: 6500, offset: 0 },
+  { id: "caucasus", route: "caucasus", path: CAUCASUS_ROUTE, color: "#5ed0bf", dur: 6500, offset: 0, fromEnd: true },
 ];
 
-function pathStart(d: string) {
-  const match = /[ML]\s*(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)/.exec(d);
+function pathPoint(d: string, atEnd: boolean) {
+  const matches = [...d.matchAll(/(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)/g)];
+  const match = atEnd ? matches[matches.length - 1] : matches[0];
   return { x: match ? Number(match[1]) : 0, y: match ? Number(match[2]) : 0 };
 }
 
@@ -124,11 +126,12 @@ function CaravanLights({ tab }: { tab: RouteId }) {
         const len = path.getTotalLength();
         if (!len) continue;
         const progress = (elapsed / light.dur + light.offset) % 1;
-        const head = len * progress;
+        const head = len * (light.fromEnd ? 1 - progress : progress);
         const move = (el: SVGCircleElement | null, behind: number, radius: number, opacity: number) => {
           if (!el) return;
-          let dist = head - behind;
-          if (dist < 0) dist += len;
+          const dir = light.fromEnd ? -1 : 1;
+          let dist = head - dir * behind;
+          dist = ((dist % len) + len) % len;
           const point = path.getPointAtLength(dist);
           el.setAttribute("cx", point.x.toFixed(1));
           el.setAttribute("cy", point.y.toFixed(1));
@@ -157,7 +160,7 @@ function CaravanLights({ tab }: { tab: RouteId }) {
   return (
     <g pointerEvents="none" aria-hidden="true">
       {visible.map((light) => {
-        const start = pathStart(light.path);
+        const start = pathPoint(light.path, Boolean(light.fromEnd));
         return (
           <g key={light.id}>
             <path
