@@ -37,6 +37,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [{ source: "/admin/about", destination: "/admin/partners" }];
+  },
   async redirects() {
     return [
       {
@@ -63,11 +66,6 @@ const nextConfig: NextConfig = {
         source: "/:locale(en|ru)/plan-journey",
         destination: "/:locale/plan-my-journey",
         permanent: true,
-      },
-      {
-        source: "/admin/about",
-        destination: "/admin/partners",
-        permanent: false,
       },
       ...HIDDEN_DESTINATIONS.map((slug) => ({
         source: `/:locale(en|ru)/destinations/${slug}`,
