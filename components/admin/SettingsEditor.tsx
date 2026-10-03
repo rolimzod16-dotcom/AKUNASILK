@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Loader2, Save } from "lucide-react";
-import type { CmsSiteSettings } from "@/lib/cms/types";
+import type { CmsHeroCopy, CmsLocale, CmsSiteSettings } from "@/lib/cms/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -42,7 +42,7 @@ export default function SettingsEditor({ settings }: { settings: CmsSiteSettings
         <div>
           <h1 className="silk-headline text-3xl text-silk-indigo">Настройки сайта</h1>
           <p className="mt-1 text-sm text-apple-muted">
-            Контакты, юридические данные и что показывать посетителям. Меняется без кода.
+            Контакты, текст главного экрана и что показывать посетителям. Меняется без кода.
           </p>
         </div>
         <Button variant="silk" size="pill" onClick={() => void save()} disabled={loading}>
@@ -98,6 +98,30 @@ export default function SettingsEditor({ settings }: { settings: CmsSiteSettings
 
       <Card className="border-silk-gold/20">
         <CardHeader>
+          <CardTitle className="text-silk-indigo">Текст главного экрана</CardTitle>
+        </CardHeader>
+        <CardContent className="grid gap-8 lg:grid-cols-2">
+          {(["en", "ru"] as CmsLocale[]).map((locale) => (
+            <HeroFields
+              key={locale}
+              locale={locale}
+              copy={form.hero[locale]}
+              onChange={(key, value) =>
+                setForm({
+                  ...form,
+                  hero: {
+                    ...form.hero,
+                    [locale]: { ...form.hero[locale], [key]: value },
+                  },
+                })
+              }
+            />
+          ))}
+        </CardContent>
+      </Card>
+
+      <Card className="border-silk-gold/20">
+        <CardHeader>
           <CardTitle className="text-silk-indigo">Контакты и юр. данные</CardTitle>
         </CardHeader>
         <CardContent className="grid gap-4 sm:grid-cols-2">
@@ -148,6 +172,53 @@ export default function SettingsEditor({ settings }: { settings: CmsSiteSettings
           </div>
         </CardContent>
       </Card>
+    </div>
+  );
+}
+
+const HERO_FIELDS: { key: keyof CmsHeroCopy; label: string; rows?: number }[] = [
+  { key: "badge", label: "Плашка над заголовком" },
+  { key: "title", label: "Заголовок", rows: 2 },
+  { key: "subtitle", label: "Подзаголовок", rows: 3 },
+  { key: "cta", label: "Золотая кнопка" },
+  { key: "ctaSecondary", label: "Вторая кнопка" },
+  { key: "when", label: "Подпись «Когда»" },
+  { key: "howLong", label: "Подпись «На сколько»" },
+  { key: "where", label: "Подпись «Куда»" },
+  { key: "durationShort", label: "Срок: коротко" },
+  { key: "durationMedium", label: "Срок: средне" },
+  { key: "durationLong", label: "Срок: долго" },
+  { key: "explore", label: "Кнопка в белой карточке" },
+];
+
+function HeroFields({
+  locale,
+  copy,
+  onChange,
+}: {
+  locale: CmsLocale;
+  copy: CmsHeroCopy;
+  onChange: (key: keyof CmsHeroCopy, value: string) => void;
+}) {
+  return (
+    <div className="space-y-3">
+      <p className="text-sm font-semibold uppercase tracking-[0.16em] text-silk-gold">
+        {locale === "ru" ? "Русский" : "English"}
+      </p>
+      {HERO_FIELDS.map((field) => (
+        <div key={field.key} className="space-y-2">
+          <Label>{field.label}</Label>
+          {field.rows ? (
+            <Textarea
+              rows={field.rows}
+              value={copy[field.key]}
+              onChange={(event) => onChange(field.key, event.target.value)}
+            />
+          ) : (
+            <Input value={copy[field.key]} onChange={(event) => onChange(field.key, event.target.value)} />
+          )}
+        </div>
+      ))}
     </div>
   );
 }

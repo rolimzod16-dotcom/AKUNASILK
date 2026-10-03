@@ -114,6 +114,21 @@ export type CmsSiteContact = {
   emergencyNote: string;
 };
 
+export type CmsHeroCopy = {
+  badge: string;
+  title: string;
+  subtitle: string;
+  cta: string;
+  ctaSecondary: string;
+  when: string;
+  howLong: string;
+  where: string;
+  durationShort: string;
+  durationMedium: string;
+  durationLong: string;
+  explore: string;
+};
+
 export type CmsSiteSettings = {
   showPrices: boolean;
   showReviews: boolean;
@@ -121,6 +136,7 @@ export type CmsSiteSettings = {
   contact: CmsSiteContact;
   tagline: string;
   whatsappGreeting: string;
+  hero: Record<CmsLocale, CmsHeroCopy>;
 };
 
 export type StoryContent = {

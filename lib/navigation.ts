@@ -8,10 +8,8 @@ export type NavItem =
   | { type: "link"; key: string; href: string }
   | { type: "dropdown"; key: string; href?: string; children: NavChild[] };
 
-/** Main menu — aligned with GST final TZ after full site audit */
-/** Main menu — TZ: Journeys · Destinations · Travel Styles · Travel Services · About Us · Contact */
+/** Main menu — Destinations · Travel Styles · Travel Services · About Us · Contact */
 export const mainNavigation: NavItem[] = [
-  { type: "link", key: "journeys", href: "/journeys" },
   {
     type: "dropdown",
     key: "destinations",

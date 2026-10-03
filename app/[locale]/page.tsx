@@ -8,6 +8,8 @@ import HomeServices from "@/components/home/HomeServices";
 import HomeCta from "@/components/home/HomeCta";
 import HomeReviews from "@/components/home/HomeReviews";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
+import { getSiteSettings } from "@/lib/cms/settings";
+import type { CmsLocale } from "@/lib/cms/types";
 
 export async function generateMetadata({
   params,
@@ -31,10 +33,12 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   await getTranslations({ locale, namespace: "hero" });
+  const settings = await getSiteSettings();
+  const heroLocale: CmsLocale = locale === "ru" ? "ru" : "en";
 
   return (
     <>
-      <Hero />
+      <Hero copy={settings.hero[heroLocale]} />
       <HomeDestinations locale={locale} />
       <HomeFeatured locale={locale} />
       <HomeWhy />
