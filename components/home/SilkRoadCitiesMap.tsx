@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { getCountryLabel, type CountrySlug } from "@/lib/countries";
@@ -78,16 +78,136 @@ const PAMIR_ROUTE = "M 468 258 L 496 304 L 538 334 L 632 268";
 const KARAKORAM_ROUTE = "M 632 268 L 590 368";
 const CAUCASUS_ROUTE = "M 78 258 Q 140 250 204 248";
 const STEPPE_ROUTE = "M 498 222 L 552 196 L 648 208";
+const KHIVA_ROUTE = "M 436 276 L 402 246";
 
-function RouteLight({ path, color, dur, begin = "0s" }: { path: string; color: string; dur: string; begin?: string }) {
+type LightSpec = {
+  id: string;
+  route: Exclude<RouteId, "all">;
+  path: string;
+  color: string;
+  dur: number;
+  offset: number;
+};
+
+const LIGHTS: LightSpec[] = [
+  { id: "main-a", route: "main", path: MAIN_ROUTE, color: "#f0c84a", dur: 16000, offset: 0 },
+  { id: "main-b", route: "main", path: MAIN_ROUTE, color: "#fff1c2", dur: 16000, offset: 0.5 },
+  { id: "steppe", route: "main", path: STEPPE_ROUTE, color: "#e8a020", dur: 7000, offset: 0.2 },
+  { id: "khiva", route: "main", path: KHIVA_ROUTE, color: "#e8a020", dur: 5200, offset: 0.35 },
+  { id: "pamir", route: "pamir", path: PAMIR_ROUTE, color: "#c45c38", dur: 9000, offset: 0 },
+  { id: "karakoram", route: "karakoram", path: KARAKORAM_ROUTE, color: "#e07a6a", dur: 6000, offset: 0 },
+  { id: "caucasus", route: "caucasus", path: CAUCASUS_ROUTE, color: "#5ed0bf", dur: 6500, offset: 0 },
+];
+
+function pathStart(d: string) {
+  const match = /[ML]\s*(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)/.exec(d);
+  return { x: match ? Number(match[1]) : 0, y: match ? Number(match[2]) : 0 };
+}
+
+function CaravanLights({ tab }: { tab: RouteId }) {
+  const visible = LIGHTS.filter((light) => routeOn(tab, light.route));
+  const paths = useRef<Record<string, SVGPathElement | null>>({});
+  const halos = useRef<Record<string, SVGCircleElement | null>>({});
+  const cores = useRef<Record<string, SVGCircleElement | null>>({});
+  const trails = useRef<Record<string, (SVGCircleElement | null)[]>>({});
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const active = LIGHTS.filter((light) => routeOn(tab, light.route));
+    let frame = 0;
+    const origin = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - origin;
+      for (const light of active) {
+        const path = paths.current[light.id];
+        if (!path) continue;
+        const len = path.getTotalLength();
+        if (!len) continue;
+        const progress = (elapsed / light.dur + light.offset) % 1;
+        const head = len * progress;
+        const move = (el: SVGCircleElement | null, behind: number, radius: number, opacity: number) => {
+          if (!el) return;
+          let dist = head - behind;
+          if (dist < 0) dist += len;
+          const point = path.getPointAtLength(dist);
+          el.setAttribute("cx", point.x.toFixed(1));
+          el.setAttribute("cy", point.y.toFixed(1));
+          el.setAttribute("r", radius.toFixed(1));
+          el.setAttribute("opacity", opacity.toFixed(2));
+        };
+        move(halos.current[light.id] ?? null, 0, 18, 0.4);
+        move(cores.current[light.id] ?? null, 0, 4.2, 1);
+        const gap = Math.min(22, len / 9);
+        (trails.current[light.id] ?? []).forEach((dot, index) => {
+          const behind = gap * (index + 1);
+          if (!dot) return;
+          if (behind >= len * 0.8) {
+            dot.setAttribute("opacity", "0");
+            return;
+          }
+          move(dot, behind, 12 - index * 1.6, 0.24 - index * 0.04);
+        });
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [tab]);
+
   return (
-    <g pointerEvents="none">
-      <circle r="10" fill={color} opacity="0.28">
-        <animateMotion dur={dur} begin={begin} repeatCount="indefinite" path={path} />
-      </circle>
-      <circle r="3.2" fill="#fff8e4">
-        <animateMotion dur={dur} begin={begin} repeatCount="indefinite" path={path} />
-      </circle>
+    <g pointerEvents="none" aria-hidden="true">
+      {visible.map((light) => {
+        const start = pathStart(light.path);
+        return (
+          <g key={light.id}>
+            <path
+              ref={(el) => {
+                paths.current[light.id] = el;
+              }}
+              d={light.path}
+              fill="none"
+              stroke="none"
+            />
+            {Array.from({ length: 5 }, (_, index) => (
+              <circle
+                key={index}
+                ref={(el) => {
+                  const trail = trails.current[light.id] ?? [];
+                  trail[index] = el;
+                  trails.current[light.id] = trail;
+                }}
+                cx={start.x}
+                cy={start.y}
+                r={12 - index * 1.6}
+                fill={light.color}
+                opacity={0.24 - index * 0.04}
+                filter="url(#lanternGlow)"
+              />
+            ))}
+            <circle
+              ref={(el) => {
+                halos.current[light.id] = el;
+              }}
+              cx={start.x}
+              cy={start.y}
+              r="18"
+              fill={light.color}
+              opacity="0.4"
+              filter="url(#lanternGlow)"
+            />
+            <circle
+              ref={(el) => {
+                cores.current[light.id] = el;
+              }}
+              data-caravan={light.id}
+              cx={start.x}
+              cy={start.y}
+              r="4.2"
+              fill="#fff8e4"
+            />
+          </g>
+        );
+      })}
     </g>
   );
 }
@@ -205,12 +325,8 @@ export default function SilkRoadCitiesMap({ tours }: { tours: SilkMapTour[] }) {
               </g>
             ) : null}
             <defs>
-              <filter id="caravanGlow" x="-80%" y="-80%" width="260%" height="260%">
-                <feGaussianBlur stdDeviation="3.5" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
+              <filter id="lanternGlow" x="-150%" y="-150%" width="400%" height="400%">
+                <feGaussianBlur stdDeviation="4.5" />
               </filter>
             </defs>
             {routeOn(tab, "caucasus") ? (
@@ -220,7 +336,7 @@ export default function SilkRoadCitiesMap({ tours }: { tours: SilkMapTour[] }) {
               <>
                 <path d={MAIN_ROUTE} fill="none" stroke="#f0c84a" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" opacity="0.28" />
                 <path d={MAIN_ROUTE} fill="none" stroke="#d4a82a" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M 436 276 L 402 246" fill="none" stroke="#e8a020" strokeWidth="1.8" strokeLinecap="round" />
+                <path d={KHIVA_ROUTE} fill="none" stroke="#e8a020" strokeWidth="1.8" strokeLinecap="round" />
               </>
             ) : null}
             {routeOn(tab, "pamir") ? (
@@ -232,18 +348,7 @@ export default function SilkRoadCitiesMap({ tours }: { tours: SilkMapTour[] }) {
             {routeOn(tab, "main") ? (
               <path d={STEPPE_ROUTE} fill="none" stroke="#e8a020" strokeWidth="1.8" strokeDasharray="4 3" strokeLinecap="round" />
             ) : null}
-            <g filter="url(#caravanGlow)">
-              {routeOn(tab, "main") ? (
-                <>
-                  <RouteLight path={MAIN_ROUTE} color="#f0c84a" dur="22s" />
-                  <RouteLight path={MAIN_ROUTE} color="#d4a82a" dur="22s" begin="-11s" />
-                  <RouteLight path={STEPPE_ROUTE} color="#e8a020" dur="9s" />
-                </>
-              ) : null}
-              {routeOn(tab, "pamir") ? <RouteLight path={PAMIR_ROUTE} color="#c45c38" dur="11s" /> : null}
-              {routeOn(tab, "karakoram") ? <RouteLight path={KARAKORAM_ROUTE} color="#9e3b3b" dur="7s" /> : null}
-              {routeOn(tab, "caucasus") ? <RouteLight path={CAUCASUS_ROUTE} color="#1a7a6d" dur="8s" /> : null}
-            </g>
+            <CaravanLights tab={tab} />
 
             {CITIES.map((city) => {
               const active = city.id === selectedId;
