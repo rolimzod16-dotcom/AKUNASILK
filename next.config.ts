@@ -40,32 +40,37 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/:locale/services-logistics",
+        source: "/:locale(en|ru)/services-logistics",
         destination: "/:locale/services",
         permanent: true,
       },
       {
-        source: "/:locale/silk-trails",
+        source: "/:locale(en|ru)/silk-trails",
         destination: "/:locale/destinations",
         permanent: true,
       },
       {
-        source: "/:locale/pricing",
+        source: "/:locale(en|ru)/pricing",
         destination: "/:locale/journeys",
         permanent: true,
       },
       {
-        source: "/:locale/partners",
+        source: "/:locale(en|ru)/partners",
         destination: "/:locale/about",
         permanent: true,
       },
       {
-        source: "/:locale/plan-journey",
+        source: "/:locale(en|ru)/plan-journey",
         destination: "/:locale/plan-my-journey",
         permanent: true,
       },
+      {
+        source: "/admin/about",
+        destination: "/admin/partners",
+        permanent: false,
+      },
       ...HIDDEN_DESTINATIONS.map((slug) => ({
-        source: `/:locale/destinations/${slug}`,
+        source: `/:locale(en|ru)/destinations/${slug}`,
         destination: "/:locale/destinations",
         permanent: true,
       })),
