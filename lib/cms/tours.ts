@@ -8,6 +8,7 @@ import { seedTours } from "./seed";
 import { isCountrySlug, syncTourCountries, type CountrySlug } from "@/lib/countries";
 import { isTravelStyle } from "@/lib/travel-styles";
 import { FEATURED_JOURNEY_SLUGS } from "@/lib/site";
+import { normalizeDepartureMonths } from "@/lib/tours/departure-months";
 
 const FILE = "tours.json";
 
@@ -131,6 +132,9 @@ export function normalizeTourInput(input: Partial<CmsTour> & { id?: string }): C
       input.travelStyle && isTravelStyle(input.travelStyle)
         ? input.travelStyle
         : existing.travelStyle ?? "culture",
+    departureMonths: normalizeDepartureMonths(
+      input.departureMonths ?? existing.departureMonths,
+    ),
     content: {
       en: mergeLocaleContent(existing.content.en, input.content?.en),
       ru: mergeLocaleContent(existing.content.ru, input.content?.ru),

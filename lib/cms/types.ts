@@ -48,6 +48,8 @@ export type CmsTour = {
   bestseller?: boolean;
   spotsLeft?: number;
   maxGroupSize?: number;
+  /** Months 1–12 when this journey runs. Homepage and catalog filters use this list. */
+  departureMonths?: number[];
   nextDeparture: string;
   rating: number;
   reviews: number;

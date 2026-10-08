@@ -28,6 +28,13 @@ import ImageUploadField from "@/components/admin/ImageUploadField";
 import TourLocaleEditor from "@/components/admin/TourLocaleEditor";
 import AdminStorageBanner, { AdminStorageOk } from "@/components/admin/AdminStorageBanner";
 import { TRAVEL_STYLES, TRAVEL_STYLE_LABELS } from "@/lib/travel-styles";
+import {
+  SEASONS,
+  monthFromIso,
+  normalizeDepartureMonths,
+  tourDepartureMonths,
+  upcomingDeparture,
+} from "@/lib/tours/departure-months";
 
 type TourEditorProps = {
   tour: CmsTour;
@@ -36,7 +43,10 @@ type TourEditorProps = {
 
 export default function TourEditor({ tour, isNew }: TourEditorProps) {
   const router = useRouter();
-  const [form, setForm] = useState(tour);
+  const [form, setForm] = useState<CmsTour>(() => ({
+    ...tour,
+    departureMonths: tourDepartureMonths(tour),
+  }));
   const [slugTouched, setSlugTouched] = useState(!isNew && !!tour.slug);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -44,6 +54,40 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
   const [validationIssues, setValidationIssues] = useState<string[]>([]);
 
   const completion = tourCompletionPercent(form);
+  const selectedMonths = normalizeDepartureMonths(form.departureMonths);
+  const monthLabels = Array.from({ length: 12 }, (_, index) =>
+    new Intl.DateTimeFormat("ru", { month: "short" }).format(new Date(2026, index, 1)),
+  );
+
+  function applyMonths(months: number[]) {
+    const departureMonths = normalizeDepartureMonths(months);
+    setForm((prev) => {
+      const currentMonth = monthFromIso(prev.nextDeparture);
+      const nextDeparture =
+        departureMonths.length > 0 &&
+        (currentMonth === null || !departureMonths.includes(currentMonth))
+          ? upcomingDeparture(departureMonths)
+          : prev.nextDeparture;
+      return { ...prev, departureMonths, nextDeparture };
+    });
+  }
+
+  function toggleMonth(month: number) {
+    const next = new Set(selectedMonths);
+    if (next.has(month)) next.delete(month);
+    else next.add(month);
+    applyMonths([...next]);
+  }
+
+  function toggleSeason(months: readonly number[]) {
+    const next = new Set(selectedMonths);
+    const allOn = months.every((month) => next.has(month));
+    for (const month of months) {
+      if (allOn) next.delete(month);
+      else next.add(month);
+    }
+    applyMonths([...next]);
+  }
   const previewSlug = form.slug || slugFromTitle(form.content.en.title) || "your-tour-slug";
 
   useEffect(() => {
@@ -360,6 +404,54 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
               value={form.nextDeparture}
               onChange={(e) => setForm({ ...form, nextDeparture: e.target.value })}
             />
+          </div>
+          <div className="space-y-3 sm:col-span-2">
+            <Label>Месяцы и сезоны выезда</Label>
+            <p className="text-xs text-apple-muted">
+              Эти месяцы использует фильтр на главной. Сезон отмечает сразу три месяца.
+              Если снять все, тур останется только в месяце ближайшего выезда.
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {SEASONS.map((season) => {
+                const active = season.months.every((month) => selectedMonths.includes(month));
+                return (
+                  <button
+                    key={season.id}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => toggleSeason(season.months)}
+                    className={`rounded-full border px-3 py-1.5 text-xs font-semibold transition ${
+                      active
+                        ? "border-silk-indigo bg-silk-indigo text-silk-gold"
+                        : "border-silk-gold/35 bg-silk-cream text-silk-indigo hover:border-silk-gold"
+                    }`}
+                  >
+                    {season.ru}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {monthLabels.map((label, index) => {
+                const value = index + 1;
+                const active = selectedMonths.includes(value);
+                return (
+                  <button
+                    key={value}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => toggleMonth(value)}
+                    className={`rounded-full border px-2.5 py-1 text-xs transition ${
+                      active
+                        ? "border-silk-indigo bg-silk-indigo text-silk-gold"
+                        : "border-silk-gold/35 bg-white text-silk-indigo hover:border-silk-gold"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
           <div className="space-y-2">
             <Label>Стиль путешествия</Label>

@@ -20,8 +20,15 @@ import {
   getTravelStyleLabel,
   isTravelStyle,
   tourMatchesStyle,
-  type TravelStyle,
 } from "@/lib/travel-styles";
+import {
+  SEASONS,
+  isSeasonId,
+  seasonById,
+  tourMatchesMonth,
+  tourMatchesSeason,
+  type SeasonId,
+} from "@/lib/tours/departure-months";
 
 const FALLBACK_COUNTRIES: CountrySlug[] = [
   "tajikistan",
@@ -52,18 +59,14 @@ function isDurationFilter(value: string | null): value is Exclude<DurationFilter
   return value === "short" || value === "medium" || value === "long";
 }
 
-function departureMatchesMonth(nextDeparture: string | undefined, filter: string) {
-  if (!nextDeparture) return false;
-  if (/^\d{4}-\d{2}/.test(filter)) return nextDeparture.startsWith(filter);
+function selectedMonthNumber(filter: string): number | null {
+  if (!filter || filter === "all") return null;
+  if (/^\d{4}-\d{2}/.test(filter)) {
+    const month = Number(filter.slice(5, 7));
+    return month >= 1 && month <= 12 ? month : null;
+  }
   const month = Number(filter);
-  if (!Number.isInteger(month) || month < 1 || month > 12) return false;
-  return Number(nextDeparture.slice(5, 7)) === month;
-}
-
-function monthChipActive(ym: string, filter: string) {
-  if (filter === ym) return true;
-  const month = Number(filter);
-  return month >= 1 && month <= 12 && Number(ym.slice(5, 7)) === month;
+  return Number.isInteger(month) && month >= 1 && month <= 12 ? month : null;
 }
 
 export default function JourneyCatalog({ items, countries }: JourneyCatalogProps) {
@@ -77,26 +80,18 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
   const styleParam = searchParams.get("style");
   const durationParam = searchParams.get("duration");
   const monthParam = searchParams.get("month");
+  const seasonParam = searchParams.get("season");
 
   const [difficulty, setDifficulty] = useState<DifficultyFilter>("all");
-  const [duration, setDuration] = useState<DurationFilter>(
-    isDurationFilter(durationParam) ? durationParam : "all",
-  );
-  const [month, setMonth] = useState<string>(monthParam || "all");
+  const duration: DurationFilter = isDurationFilter(durationParam) ? durationParam : "all";
+  const month = monthParam || "all";
+  const season: SeasonId | null = isSeasonId(seasonParam) ? seasonParam : null;
   const [sort, setSort] = useState<SortKey>("recommended");
 
   const activeCountry = countryParam || null;
   const activeRegion =
     !activeCountry && regionParam && isRegionSlug(regionParam) ? regionParam : null;
   const activeStyle = styleParam && isTravelStyle(styleParam) ? styleParam : null;
-
-  const availableMonths = useMemo(() => {
-    const set = new Set<string>();
-    for (const { tour } of items) {
-      if (tour.nextDeparture?.length >= 7) set.add(tour.nextDeparture.slice(0, 7));
-    }
-    return Array.from(set).sort();
-  }, [items]);
 
   const filtered = useMemo(() => {
     let list = [...items];
@@ -126,7 +121,9 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
     }
 
     if (month !== "all") {
-      list = list.filter(({ tour }) => departureMatchesMonth(tour.nextDeparture, month));
+      list = list.filter(({ tour }) => tourMatchesMonth(tour, month));
+    } else if (season) {
+      list = list.filter(({ tour }) => tourMatchesSeason(tour, season));
     }
 
     list.sort((a, b) => {
@@ -145,7 +142,7 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
     });
 
     return list;
-  }, [items, difficulty, duration, month, sort, activeCountry, activeRegion, activeStyle]);
+  }, [items, difficulty, duration, month, season, sort, activeCountry, activeRegion, activeStyle]);
 
   const difficulties: DifficultyFilter[] = ["all", "easy", "moderate", "adventurous"];
   const durations: DurationFilter[] = ["all", "short", "medium", "long"];
@@ -162,24 +159,31 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
         ? t("styleActive", { style: getTravelStyleLabel(activeStyle, locale) })
         : null;
 
-  function journeysHref(params?: { country?: string; style?: TravelStyle }) {
-    const q = new URLSearchParams();
-    if (params?.country) q.set("country", params.country);
-    if (params?.style) q.set("style", params.style);
+  function filterHref(
+    patch: Partial<
+      Record<"country" | "style" | "month" | "season" | "duration", string | null>
+    >,
+  ) {
+    const q = new URLSearchParams(searchParams.toString());
+    for (const [key, value] of Object.entries(patch)) {
+      if (value === undefined) continue;
+      if (value === null || value === "" || value === "all") q.delete(key);
+      else q.set(key, value);
+    }
     const query = q.toString();
     return query ? `/journeys?${query}` : "/journeys";
   }
 
-  function monthLabel(ym: string) {
-    const [y, m] = ym.split("-").map(Number);
-    const d = new Date(y, (m || 1) - 1, 1);
-    return d.toLocaleDateString(locale, { month: "long", year: "numeric" });
-  }
+  const monthLabels = Array.from({ length: 12 }, (_, index) =>
+    new Intl.DateTimeFormat(locale, { month: "long" }).format(new Date(2026, index, 1)),
+  );
+  const pickedMonth = selectedMonthNumber(month);
+  const seasonMonths: number[] = season ? [...seasonById(season).months] : [];
 
   return (
     <section className="pb-12">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
-        <div className="mb-4 rounded-2xl border border-silk-gold/20 bg-white p-3 shadow-sm sm:p-4 max-md:hidden">
+        <div className="mb-4 rounded-2xl border border-silk-gold/20 bg-white p-3 shadow-sm sm:p-4">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2 text-sm font-semibold text-silk-indigo">
               <SlidersHorizontal className="size-4 text-silk-gold" />
@@ -217,11 +221,7 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
                 return (
                   <Link
                     key={slug}
-                    href={
-                      active
-                        ? journeysHref({ style: activeStyle ?? undefined })
-                        : journeysHref({ country: slug, style: activeStyle ?? undefined })
-                    }
+                    href={active ? filterHref({ country: null }) : filterHref({ country: slug })}
                     className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
                       active
                         ? "bg-silk-indigo text-silk-gold"
@@ -241,34 +241,65 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
 
           <div className="mt-3">
             <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
+              {locale === "ru" ? "Сезон" : "Season"}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {SEASONS.map((item) => {
+                const active = season === item.id && !pickedMonth;
+                return (
+                  <Link
+                    key={item.id}
+                    href={filterHref({
+                      season: active ? null : item.id,
+                      month: null,
+                    })}
+                    aria-current={active ? "true" : undefined}
+                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
+                      active
+                        ? "bg-silk-indigo text-silk-gold"
+                        : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
+                    }`}
+                  >
+                    {locale === "ru" ? item.ru : item.en}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="mt-3">
+            <p className="mb-2 text-[10px] font-bold uppercase tracking-wider text-apple-muted">
               {t("filterByMonth")}
             </p>
             <div className="flex flex-wrap gap-1.5">
-              <button
-                type="button"
-                onClick={() => setMonth("all")}
+              <Link
+                href={filterHref({ month: null, season: null })}
                 className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
-                  month === "all"
+                  !pickedMonth && !season
                     ? "bg-silk-indigo text-silk-gold"
                     : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
                 }`}
               >
                 {t("monthAll")}
-              </button>
-              {availableMonths.map((ym) => (
-                <button
-                  key={ym}
-                  type="button"
-                  onClick={() => setMonth(ym)}
-                  className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
-                    monthChipActive(ym, month)
-                      ? "bg-silk-indigo text-silk-gold"
-                      : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
-                  }`}
-                >
-                  {monthLabel(ym)}
-                </button>
-              ))}
+              </Link>
+              {monthLabels.map((label, index) => {
+                const value = index + 1;
+                const active = pickedMonth === value || (!pickedMonth && seasonMonths.includes(value));
+                return (
+                  <Link
+                    key={value}
+                    href={filterHref({ month: String(value), season: null })}
+                    aria-current={pickedMonth === value ? "true" : undefined}
+                    className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
+                      active
+                        ? "bg-silk-indigo text-silk-gold"
+                        : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25 hover:ring-silk-gold/50"
+                    }`}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
             </div>
           </div>
 
@@ -278,10 +309,9 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
             </p>
             <div className="flex flex-wrap gap-1.5">
               {durations.map((d) => (
-                <button
+                <Link
                   key={d}
-                  type="button"
-                  onClick={() => setDuration(d)}
+                  href={filterHref({ duration: d === "all" ? null : d })}
                   className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
                     duration === d
                       ? "bg-silk-indigo text-silk-gold"
@@ -289,7 +319,7 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
                   }`}
                 >
                   {t(`duration.${d}`)}
-                </button>
+                </Link>
               ))}
             </div>
           </div>
@@ -304,10 +334,7 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
                 return (
                   <Link
                     key={style}
-                    href={journeysHref({
-                      country: activeCountry ?? undefined,
-                      style: active ? undefined : style,
-                    })}
+                    href={active ? filterHref({ style: null }) : filterHref({ style })}
                     className={`rounded-full px-2.5 py-1 text-[11px] font-semibold transition ${
                       active
                         ? "bg-silk-indigo text-silk-gold"
@@ -359,57 +386,6 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
           </div>
         </div>
 
-        <div className="mb-4 flex items-center justify-between md:hidden">
-          <p className="text-sm text-apple-muted">{filtered.length} journeys</p>
-          <Link
-            href="#filters"
-            className="inline-flex items-center gap-2 rounded-full border border-silk-gold/40 bg-white px-4 py-2 text-sm font-semibold text-silk-indigo"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById("mobile-filters")?.classList.toggle("hidden");
-            }}
-          >
-            <SlidersHorizontal className="size-4" />
-            Filters
-          </Link>
-        </div>
-        <div id="mobile-filters" className="mb-4 hidden rounded-2xl border border-silk-gold/20 bg-white p-3 md:hidden">
-          <div className="flex flex-wrap gap-1.5">
-            {[...countryFilters, "central-asia"].map((slug) => (
-              <Link
-                key={`m-${slug}`}
-                href={journeysHref({
-                  country: activeCountry === slug ? undefined : slug,
-                  style: activeStyle ?? undefined,
-                })}
-                className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${
-                  activeCountry === slug
-                    ? "bg-silk-indigo text-silk-gold"
-                    : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/25"
-                }`}
-              >
-                {slug === "central-asia"
-                  ? "Multi-country"
-                  : isCountrySlug(slug)
-                    ? getCountryLabel(slug, locale)
-                    : slug}
-              </Link>
-            ))}
-          </div>
-          <div className="mt-3 flex gap-2">
-            <Link href="/journeys" className="text-sm font-semibold text-silk-gold">
-              Clear all
-            </Link>
-            <button
-              type="button"
-              className="text-sm font-semibold text-silk-indigo"
-              onClick={() => document.getElementById("mobile-filters")?.classList.add("hidden")}
-            >
-              Apply filters
-            </button>
-          </div>
-        </div>
-
         {filtered.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-silk-gold/30 bg-silk-cream/50 px-6 py-12 text-center">
             <p className="text-sm text-apple-muted">{t("empty")}</p>
@@ -417,11 +393,7 @@ export default function JourneyCatalog({ items, countries }: JourneyCatalogProps
               <Link
                 href="/journeys"
                 className="text-sm font-semibold text-silk-gold hover:underline"
-                onClick={() => {
-                  setMonth("all");
-                  setDuration("all");
-                  setDifficulty("all");
-                }}
+                onClick={() => setDifficulty("all")}
               >
                 {t("clearFilter")}
               </Link>

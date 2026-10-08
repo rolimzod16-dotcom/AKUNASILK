@@ -9,6 +9,7 @@ import SilkRoadVideoBackground from "@/components/shared/SilkRoadVideoBackground
 import SilkRouteStrip from "@/components/shared/SilkRouteStrip";
 import { getCountryLabel, type CountrySlug } from "@/lib/countries";
 import type { CmsHeroCopy } from "@/lib/cms/types";
+import { SEASONS, type SeasonId } from "@/lib/tours/departure-months";
 
 const DESTINATIONS: CountrySlug[] = [
   "tajikistan",
@@ -35,6 +36,7 @@ export default function Hero({ copy }: { copy?: CmsHeroCopy }) {
   const t = useTranslations("hero");
   const locale = useLocale();
   const [month, setMonth] = useState<number | null>(null);
+  const [season, setSeason] = useState<SeasonId | null>(null);
   const [duration, setDuration] = useState<DurationKey | null>(null);
   const [country, setCountry] = useState<CountrySlug | null>(null);
 
@@ -42,13 +44,29 @@ export default function Hero({ copy }: { copy?: CmsHeroCopy }) {
     new Intl.DateTimeFormat(locale, { month: "short" }).format(new Date(2026, index, 1)),
   );
 
+  const seasonMonths: number[] = season
+    ? [...(SEASONS.find((item) => item.id === season)?.months ?? [])]
+    : [];
+
+  function selectSeason(id: SeasonId) {
+    setSeason((current) => (current === id ? null : id));
+    setMonth(null);
+  }
+
+  function selectMonth(value: number) {
+    setMonth((current) => (current === value ? null : value));
+    setSeason(null);
+  }
+
   function exploreHref() {
-    const query = new URLSearchParams();
-    if (month) query.set("month", String(month));
-    if (duration) query.set("duration", duration);
-    if (country) query.set("country", country);
-    const search = query.toString();
-    return search ? `/journeys?${search}` : "/journeys";
+    const query: Record<string, string> = {};
+    if (month) query.month = String(month);
+    else if (season) query.season = season;
+    if (duration) query.duration = duration;
+    if (country) query.country = country;
+    return Object.keys(query).length > 0
+      ? ({ pathname: "/journeys", query } as const)
+      : "/journeys";
   }
 
   return (
@@ -82,18 +100,37 @@ export default function Hero({ copy }: { copy?: CmsHeroCopy }) {
 
           <div className="mx-auto mt-8 w-full max-w-2xl rounded-2xl border border-silk-gold/25 bg-white/95 p-4 text-left text-silk-indigo shadow-2xl shadow-silk-indigo/25 sm:p-5">
             <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/60">
+              {locale === "ru" ? "Сезон" : "Season"}
+            </p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {SEASONS.map((item) => {
+                const active = season === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    aria-pressed={active}
+                    onClick={() => selectSeason(item.id)}
+                    className={`rounded-full border px-3 py-1 text-xs transition ${chipClass(active)}`}
+                  >
+                    {locale === "ru" ? item.ru : item.en}
+                  </button>
+                );
+              })}
+            </div>
+            <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/60">
               {heroText(copy?.when, t("when"))}
             </p>
             <div className="mt-2 flex flex-wrap gap-1.5">
               {months.map((label, index) => {
                 const value = index + 1;
-                const active = month === value;
+                const active = month === value || (!month && seasonMonths.includes(value));
                 return (
                   <button
                     key={label}
                     type="button"
-                    aria-pressed={active}
-                    onClick={() => setMonth(active ? null : value)}
+                    aria-pressed={month === value}
+                    onClick={() => selectMonth(value)}
                     className={`rounded-full border px-2.5 py-1 text-xs transition ${chipClass(active)}`}
                   >
                     {label}

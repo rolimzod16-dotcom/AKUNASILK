@@ -24,6 +24,7 @@ export function createEmptyTour(now = new Date().toISOString()): CmsTour {
     finishLocation: "",
     spotsLeft: 8,
     maxGroupSize: 12,
+    departureMonths: [],
     nextDeparture: now.slice(0, 10),
     rating: 4.8,
     reviews: 0,

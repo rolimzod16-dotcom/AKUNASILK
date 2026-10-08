@@ -111,7 +111,7 @@
       "filterByStyle": "Стиль путешествия",
       "styleActive": "Стиль: {style}",
       "filterByCountry": "Страны Шёлкового пути",
-      "silkRoadNote": "Filters: Destination · Departure Month · Duration · Travel Style · Difficulty · Sort. Only active GST destinations.",
+      "silkRoadNote": "Фильтры: страна, сезон, месяц выезда, длительность, стиль, сложность и сортировка.",
       "countryActive": "Туры: {country}",
       "regionActive": "Фильтр региона",
       "regionActiveLabel": "Регион: {region}",
@@ -126,15 +126,15 @@
         "anatolia": "Анатолия"
       },
       "empty": "Нет туров по этим фильтрам. Попробуйте другую страну или смотрите все туры.",
-      "filterByMonth": "Departure month",
-      "filterByDuration": "Duration",
-      "filterByDifficulty": "Difficulty",
-      "monthAll": "Any month",
+      "filterByMonth": "Месяц выезда",
+      "filterByDuration": "Длительность",
+      "filterByDifficulty": "Сложность",
+      "monthAll": "Любой месяц",
       "duration": {
-        "all": "Any duration",
-        "short": "5-8 days",
-        "medium": "9-12 days",
-        "long": "13+ days"
+        "all": "Любая длительность",
+        "short": "1–7 дней",
+        "medium": "8–12 дней",
+        "long": "13+ дней"
       }
     },
     "help": {

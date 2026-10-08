@@ -1,4 +1,5 @@
 import type { CmsTour } from "./types";
+import { normalizeDepartureMonths } from "@/lib/tours/departure-months";
 
 export type TourValidationIssue = {
   field: string;
@@ -19,6 +20,7 @@ export function applyTourDefaults(form: CmsTour): CmsTour {
     reviews: Number.isFinite(form.reviews) ? form.reviews : 0,
     nextDeparture:
       form.nextDeparture || new Date().toISOString().slice(0, 10),
+    departureMonths: normalizeDepartureMonths(form.departureMonths),
   };
 }
 
