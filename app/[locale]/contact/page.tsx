@@ -4,7 +4,6 @@ import { getTranslations } from "next-intl/server";
 import JourneyRequest from "@/components/forms/PlanJourneyForm";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getCatalogTours, getTourContent } from "@/lib/data/tours";
-import { getSiteSettings, whatsappHref } from "@/lib/cms/settings";
 
 export async function generateMetadata({
   params,
@@ -28,30 +27,19 @@ export default async function ContactPage({
 }) {
   const { locale } = await params;
   const form = await getTranslations({ locale, namespace: "contact.form" });
-  const [tours, settings] = await Promise.all([getCatalogTours(), getSiteSettings()]);
+  const tours = await getCatalogTours();
   const tourOptions = [
-    { slug: "any", label: form("tourOptions.any") },
     ...tours.map((tour) => ({
       slug: tour.slug,
       label: getTourContent(tour, locale).title,
+      price: tour.price,
     })),
     { slug: "bespoke", label: form("tourOptions.bespoke") },
   ];
-  const c = settings.contact;
 
   return (
-    <Suspense fallback={<div className="h-96 animate-pulse bg-silk-cream" />}>
-      <JourneyRequest
-        tourOptions={tourOptions}
-        contact={{
-          email: c.email,
-          phoneDisplay: c.phoneDisplay,
-          phoneTel: c.phoneTel,
-          whatsappHref: whatsappHref(settings),
-          hours: c.hours,
-          address: c.address,
-        }}
-      />
+    <Suspense fallback={<div className="h-96 animate-pulse bg-[#f6f1e8]" />}>
+      <JourneyRequest tourOptions={tourOptions} />
     </Suspense>
   );
 }
