@@ -32,7 +32,7 @@ export default function TourCard({ tour, content }: TourCardProps) {
   const bookHref = planJourneyHref({ tour: tour.slug, source: "tour-card" });
 
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-silk-sand/80 bg-white shadow-[0_16px_40px_-24px_rgba(120,72,24,0.55)] transition-all hover:-translate-y-1 hover:shadow-lg">
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-silk-gold/25 bg-white shadow-[0_25px_50px_-12px_rgba(15,18,37,0.12)] transition-all hover:-translate-y-1 hover:border-silk-gold/50 hover:shadow-lg">
       <div className="relative aspect-[16/10] overflow-hidden">
         <Link href={journeyHref} className="absolute inset-0" tabIndex={-1} aria-hidden>
           <Image
@@ -52,7 +52,7 @@ export default function TourCard({ tour, content }: TourCardProps) {
               </span>
             ) : null}
             {hasDiscount ? (
-              <span className="inline-flex items-center rounded-md bg-silk-terracotta px-2 py-0.5 text-xs font-medium text-white">
+              <span className="inline-flex items-center rounded-md bg-silk-indigo px-2 py-0.5 text-xs font-medium text-silk-gold">
                 −{discount}%
               </span>
             ) : null}
@@ -84,7 +84,7 @@ export default function TourCard({ tour, content }: TourCardProps) {
         ) : null}
 
         <h3 className="mt-2 font-display text-xl font-semibold leading-snug text-silk-indigo">
-          <Link href={journeyHref} className="hover:text-silk-terracotta">
+          <Link href={journeyHref} className="hover:text-silk-gold">
             {content.title}
           </Link>
         </h3>
@@ -96,7 +96,7 @@ export default function TourCard({ tour, content }: TourCardProps) {
           <ul className="mt-4 space-y-1.5 text-sm text-silk-indigo/80">
             {highlights.map((item) => (
               <li key={item} className="flex items-start gap-2">
-                <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-silk-emerald" aria-hidden />
+                <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-silk-gold" aria-hidden />
                 <span className="line-clamp-1">{item}</span>
               </li>
             ))}
@@ -116,7 +116,7 @@ export default function TourCard({ tour, content }: TourCardProps) {
           </span>
         </div>
 
-        <div className="mt-5 flex items-end justify-between gap-3 border-t border-silk-sand pt-4">
+        <div className="mt-5 flex items-end justify-between gap-3 border-t border-silk-gold/20 pt-4">
           <div>
             {priced ? (
               <>
@@ -125,7 +125,7 @@ export default function TourCard({ tour, content }: TourCardProps) {
                     ${compareAt.toLocaleString(locale)}
                   </div>
                 ) : null}
-                <div className="font-display text-2xl font-semibold leading-none text-silk-terracotta">
+                <div className="font-display text-2xl font-semibold leading-none text-silk-indigo">
                   ${tour.price.toLocaleString(locale)}
                 </div>
                 <div className="mt-1 text-xs text-apple-muted">{shop("perPerson")}</div>
@@ -137,13 +137,13 @@ export default function TourCard({ tour, content }: TourCardProps) {
           <div className="flex flex-col gap-2">
             <Link
               href={journeyHref}
-              className="inline-flex h-8 items-center justify-center rounded-md border border-silk-sand bg-white px-3 text-sm font-medium text-silk-indigo shadow-sm transition hover:bg-silk-cream"
+              className="inline-flex h-8 items-center justify-center rounded-md border border-silk-gold/50 bg-white px-3 text-sm font-medium text-silk-indigo transition hover:bg-silk-gold/10"
             >
               {shop("details")}
             </Link>
             <Link
               href={bookHref}
-              className="inline-flex h-8 items-center justify-center gap-1 rounded-md bg-silk-terracotta px-3 text-sm font-medium text-white transition hover:bg-silk-terracotta/90"
+              className="inline-flex h-8 items-center justify-center gap-1 rounded-md bg-gradient-to-r from-silk-gold to-silk-amber px-3 text-sm font-bold text-silk-indigo shadow-md shadow-silk-gold/30 transition hover:from-silk-gold-light hover:to-silk-gold"
             >
               {shop("book")}
               <ArrowRight className="h-3.5 w-3.5" aria-hidden />
