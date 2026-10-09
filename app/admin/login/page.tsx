@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { Loader2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,7 +19,14 @@ export default function AdminLoginPage() {
     <div className="silk-gradient-hero silk-pattern flex min-h-screen items-center justify-center px-4">
       <Card className="w-full max-w-md border-silk-gold/30 shadow-xl shadow-silk-gold/10">
         <CardContent className="p-8">
-          <p className="silk-headline text-center text-2xl text-silk-indigo">
+          <Image
+            src="/brand/logo.png"
+            alt=""
+            width={756}
+            height={571}
+            className="mx-auto h-16 w-auto"
+          />
+          <p className="silk-headline mt-3 text-center text-2xl text-silk-indigo">
             GREAT<span className="text-silk-gold">SILK</span>TRAILS
           </p>
           <p className="mt-1 text-center text-xs font-bold uppercase tracking-widest text-apple-muted">

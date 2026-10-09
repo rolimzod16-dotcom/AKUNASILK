@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/routing";
 import SilkDivider from "@/components/shared/SilkDivider";
@@ -86,7 +87,14 @@ export default function Footer({
 
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-1">
-            <p className="silk-headline text-xl tracking-wide text-white">
+            <Image
+              src="/brand/logo.png"
+              alt=""
+              width={756}
+              height={571}
+              className="h-12 w-auto"
+            />
+            <p className="silk-headline mt-3 text-xl tracking-wide text-white">
               GREAT SILK TRAILS
             </p>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-white/65">

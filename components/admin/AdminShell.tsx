@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -41,7 +42,8 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
     <div className="min-h-screen bg-silk-cream">
       <header className="border-b border-silk-gold/25 bg-white/90 backdrop-blur-md">
         <div className="mx-auto flex h-14 max-w-[1280px] items-center justify-between px-4 sm:px-6">
-          <Link href="/admin" className="silk-headline text-lg text-silk-indigo">
+          <Link href="/admin" className="flex items-center gap-2 silk-headline text-lg text-silk-indigo">
+            <Image src="/brand/logo.png" alt="" width={756} height={571} className="h-8 w-auto" />
             GREAT<span className="text-silk-gold">SILK</span>
             <span className="ml-2 text-xs font-sans font-bold uppercase tracking-widest text-apple-muted">
               Admin

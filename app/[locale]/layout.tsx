@@ -113,7 +113,8 @@ export async function generateMetadata({
     verification:
       Object.keys(verification).length > 0 ? verification : undefined,
     icons: {
-      icon: "/favicon.ico",
+      icon: "/brand/logo-mark.png",
+      apple: "/brand/logo-mark.png",
     },
   };
 }

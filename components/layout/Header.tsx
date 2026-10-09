@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { Menu } from "lucide-react";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
@@ -44,9 +45,14 @@ export default function Header({ destinations = [] }: { destinations?: NavChild[
     >
       <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between gap-3 px-4 sm:h-20 sm:px-6">
         <Link href="/" className="group flex shrink-0 items-center gap-2.5">
-          <span className="flex size-9 items-center justify-center rounded-full bg-silk-gold text-[11px] font-bold text-silk-indigo shadow-md">
-            GS
-          </span>
+          <Image
+            src="/brand/logo.png"
+            alt=""
+            width={756}
+            height={571}
+            priority
+            className="h-10 w-auto sm:h-12"
+          />
           <span
             className={cn(
               "text-sm font-bold tracking-[0.08em] sm:text-[15px]",
@@ -87,7 +93,14 @@ export default function Header({ destinations = [] }: { destinations?: NavChild[
             </SheetTrigger>
             <SheetContent side="right" className="w-80 border-l border-silk-gold/30 bg-white">
               <SheetHeader>
-                <SheetTitle className="text-left text-base font-bold tracking-wide text-silk-indigo">
+                <SheetTitle className="flex items-center gap-2 text-left text-base font-bold tracking-wide text-silk-indigo">
+                  <Image
+                    src="/brand/logo.png"
+                    alt=""
+                    width={756}
+                    height={571}
+                    className="h-8 w-auto"
+                  />
                   GREAT SILK TRAILS
                 </SheetTitle>
               </SheetHeader>
