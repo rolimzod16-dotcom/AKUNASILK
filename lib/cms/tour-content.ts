@@ -264,6 +264,8 @@ export function prepareTourForEditor(tour: CmsTour): CmsTour {
   return {
     ...tour,
     maxGroupSize: tour.maxGroupSize ?? 12,
+    seasonFavorite: tour.seasonFavorite ?? Boolean(tour.featured || tour.bestseller),
+    showPrice: tour.showPrice !== false,
     content: {
       en: merge("en", enResolved),
       ru: merge("ru", ruResolved),

@@ -141,5 +141,11 @@ export function normalizeTourInput(input: Partial<CmsTour> & { id?: string }): C
     },
     updatedAt: cmsNow(),
     createdAt: input.createdAt ?? existing.createdAt,
+    seasonFavorite: input.seasonFavorite === true,
+    showPrice: input.showPrice === true,
+    originalPrice:
+      input.originalPrice != null && Number(input.originalPrice) > 0
+        ? Number(input.originalPrice)
+        : undefined,
   });
 }

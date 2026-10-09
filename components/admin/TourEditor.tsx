@@ -120,6 +120,12 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
         body: JSON.stringify({
           ...prepared,
           countrySlugs: prepared.countrySlugs,
+          seasonFavorite: prepared.seasonFavorite === true,
+          showPrice: prepared.showPrice === true,
+          originalPrice:
+            prepared.originalPrice != null && prepared.originalPrice > 0
+              ? prepared.originalPrice
+              : null,
           content: {
             en: sanitizeLocaleContent(prepared.content.en),
             ru: sanitizeLocaleContent(prepared.content.ru),
@@ -369,14 +375,14 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
             <label className="flex items-center gap-2 text-xs text-apple-muted">
               <input
                 type="checkbox"
-                checked={!!form.showPrice}
+                checked={form.showPrice !== false}
                 onChange={(e) => setForm({ ...form, showPrice: e.target.checked })}
               />
-              Показывать цену на сайте (ещё нужно включить цены в Настройках)
+              Показывать цену на карточке тура
             </label>
           </div>
           <div className="space-y-2">
-            <Label>Старая цена (необязательно)</Label>
+            <Label>Старая цена (USD)</Label>
             <Input
               type="number"
               value={form.originalPrice ?? ""}
@@ -386,7 +392,15 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                   originalPrice: e.target.value ? Number(e.target.value) : undefined,
                 })
               }
+              placeholder="Пусто — без скидки"
             />
+            <p className="text-xs text-apple-muted">
+              {form.showPrice === false
+                ? "Сначала включите показ цены — иначе скидка на карточке не появится."
+                : form.originalPrice != null && form.originalPrice > form.price
+                  ? `На карточке будет −${Math.round(((form.originalPrice - form.price) / form.originalPrice) * 100)}% и зачёркнутая цена.`
+                  : "Укажите цену выше текущей — на карточке появятся зачёркнутая цена и бейдж скидки."}
+            </p>
           </div>
           <div className="space-y-2">
             <Label>Длительность (дней) *</Label>
@@ -615,7 +629,7 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                 checked={form.featured}
                 onChange={(e) => setForm({ ...form, featured: e.target.checked })}
               />
-              В избранном
+              В избранном на главной
             </label>
             <label className="flex items-center gap-2 text-sm">
               <input
@@ -624,6 +638,14 @@ export default function TourEditor({ tour, isNew }: TourEditorProps) {
                 onChange={(e) => setForm({ ...form, bestseller: e.target.checked })}
               />
               Бестселлер
+            </label>
+            <label className="flex items-center gap-2 text-sm">
+              <input
+                type="checkbox"
+                checked={form.seasonFavorite ?? Boolean(form.featured || form.bestseller)}
+                onChange={(e) => setForm({ ...form, seasonFavorite: e.target.checked })}
+              />
+              Бейдж «Хит сезона» на карточке
             </label>
           </div>
         </CardContent>

@@ -22,11 +22,11 @@ export default function TourCard({ tour, content }: TourCardProps) {
   const countries = countrySlugsToLabels(resolveTourCountrySlugs(tour), locale);
   const difficulty = t(`difficulty.${tour.difficulty}`);
   const nights = Math.max(tour.duration - 1, 0);
-  const priced = tour.price > 0;
+  const priced = tour.price > 0 && tour.showPrice !== false;
   const compareAt = tour.originalPrice;
   const hasDiscount = priced && compareAt != null && compareAt > tour.price;
   const discount = hasDiscount ? Math.round(((compareAt - tour.price) / compareAt) * 100) : 0;
-  const seasonFavorite = Boolean(tour.featured || tour.bestseller);
+  const seasonFavorite = tour.seasonFavorite ?? Boolean(tour.featured || tour.bestseller);
   const highlights = content.highlights.slice(0, 2);
   const journeyHref = `/journeys/${tour.slug}`;
   const bookHref = planJourneyHref({ tour: tour.slug, source: "tour-card" });

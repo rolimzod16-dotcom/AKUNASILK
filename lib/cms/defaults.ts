@@ -17,6 +17,7 @@ export function createEmptyTour(now = new Date().toISOString()): CmsTour {
     difficulty: "easy",
     travelStyle: "culture",
     featured: false,
+    seasonFavorite: false,
     showPrice: false,
     seoTitle: "",
     seoDescription: "",

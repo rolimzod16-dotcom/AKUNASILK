@@ -45,6 +45,8 @@ export type CmsTour = {
   /** Primary travel style — powers style filters and travel-styles page */
   travelStyle: TravelStyle;
   featured: boolean;
+  /** Public card badge. Independent of the homepage “featured” flag. */
+  seasonFavorite?: boolean;
   bestseller?: boolean;
   spotsLeft?: number;
   maxGroupSize?: number;
