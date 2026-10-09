@@ -35,33 +35,17 @@ function heroText(value: string | undefined, fallback: string) {
 export default function Hero({ copy }: { copy?: CmsHeroCopy }) {
   const t = useTranslations("hero");
   const locale = useLocale();
-  const [month, setMonth] = useState<number | null>(null);
   const [season, setSeason] = useState<SeasonId | null>(null);
   const [duration, setDuration] = useState<DurationKey | null>(null);
   const [country, setCountry] = useState<CountrySlug | null>(null);
 
-  const months = Array.from({ length: 12 }, (_, index) =>
-    new Intl.DateTimeFormat(locale, { month: "short" }).format(new Date(2026, index, 1)),
-  );
-
-  const seasonMonths: number[] = season
-    ? [...(SEASONS.find((item) => item.id === season)?.months ?? [])]
-    : [];
-
   function selectSeason(id: SeasonId) {
     setSeason((current) => (current === id ? null : id));
-    setMonth(null);
-  }
-
-  function selectMonth(value: number) {
-    setMonth((current) => (current === value ? null : value));
-    setSeason(null);
   }
 
   function exploreHref() {
     const query: Record<string, string> = {};
-    if (month) query.month = String(month);
-    else if (season) query.season = season;
+    if (season) query.season = season;
     if (duration) query.duration = duration;
     if (country) query.country = country;
     return Object.keys(query).length > 0
@@ -114,26 +98,6 @@ export default function Hero({ copy }: { copy?: CmsHeroCopy }) {
                     className={`rounded-full border px-3 py-1 text-xs transition ${chipClass(active)}`}
                   >
                     {locale === "ru" ? item.ru : item.en}
-                  </button>
-                );
-              })}
-            </div>
-            <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.16em] text-silk-indigo/60">
-              {heroText(copy?.when, t("when"))}
-            </p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {months.map((label, index) => {
-                const value = index + 1;
-                const active = month === value || (!month && seasonMonths.includes(value));
-                return (
-                  <button
-                    key={label}
-                    type="button"
-                    aria-pressed={month === value}
-                    onClick={() => selectMonth(value)}
-                    className={`rounded-full border px-2.5 py-1 text-xs transition ${chipClass(active)}`}
-                  >
-                    {label}
                   </button>
                 );
               })}
