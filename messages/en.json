@@ -182,6 +182,7 @@
     "perPerson": "per person",
     "buyPackage": "Browse Tours",
     "details": "Details",
+    "book": "Book",
     "departure": "Departs",
     "nextDeparture": "Next departure",
     "orMonthly": "",
@@ -379,6 +380,8 @@
     "subtitle": "Handpicked routes through the heart of the Silk Road",
     "from": "from",
     "days": "days",
+    "durationLine": "{days} days / {nights} nights",
+    "seasonFavorite": "Season Favorite",
     "viewAll": "View All Tours",
     "spotsLeft": "{count} spots left",
     "detail": {

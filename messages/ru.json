@@ -180,6 +180,7 @@
     "perPerson": "за человека",
     "buyPackage": "Browse Tours",
     "details": "Подробнее",
+    "book": "Забронировать",
     "departure": "Выезд",
     "nextDeparture": "Ближайший выезд",
     "orMonthly": "",
@@ -283,6 +284,8 @@
     "subtitle": "Отобранные пути через сердце Шёлкового пути",
     "from": "от",
     "days": "дней",
+    "durationLine": "{days} дн. / {nights} н.",
+    "seasonFavorite": "Хит сезона",
     "viewAll": "Все туры",
     "spotsLeft": "Осталось {count} мест",
     "detail": {

@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useTranslations, useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { ArrowRight, CircleCheck, Clock, MapPin, Star, TrendingUp, Users } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import type { Tour, TourContent } from "@/lib/data/tours";
 import { countrySlugsToLabels, resolveTourCountrySlugs } from "@/lib/countries";
-import { getTravelStyleLabel } from "@/lib/travel-styles";
+import { planJourneyHref } from "@/lib/site";
 
 type TourCardProps = {
   tour: Tour;
@@ -14,44 +15,142 @@ type TourCardProps = {
   showPrice?: boolean;
 };
 
-export default function TourCard({ tour, content, showPrice = false }: TourCardProps) {
+export default function TourCard({ tour, content }: TourCardProps) {
   const t = useTranslations("tours");
   const shop = useTranslations("shop");
   const locale = useLocale();
   const countries = countrySlugsToLabels(resolveTourCountrySlugs(tour), locale);
-  const difficulty =
-    tour.difficulty === "adventurous" ? "Challenging" : t(`difficulty.${tour.difficulty}`);
+  const difficulty = t(`difficulty.${tour.difficulty}`);
+  const nights = Math.max(tour.duration - 1, 0);
+  const priced = tour.price > 0;
+  const compareAt = tour.originalPrice;
+  const hasDiscount = priced && compareAt != null && compareAt > tour.price;
+  const discount = hasDiscount ? Math.round(((compareAt - tour.price) / compareAt) * 100) : 0;
+  const seasonFavorite = Boolean(tour.featured || tour.bestseller);
+  const highlights = content.highlights.slice(0, 2);
+  const journeyHref = `/journeys/${tour.slug}`;
+  const bookHref = planJourneyHref({ tour: tour.slug, source: "tour-card" });
 
   return (
-    <Link
-      href={`/journeys/${tour.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-silk-gold/25 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-silk-gold/50 hover:shadow-lg"
-    >
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <Image
-          src={tour.image}
-          alt={`${content.title} — ${countries.join(", ")}`}
-          fill
-          className="object-cover transition duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 400px"
-        />
-      </div>
-      <div className="flex flex-1 flex-col px-5 py-4">
-        <h3 className="silk-headline line-clamp-2 text-xl text-silk-indigo">{content.title}</h3>
-        <p className="mt-2 text-sm text-apple-muted">
-          {countries.join(" · ")} · {tour.duration} {t("days")} ·{" "}
-          {getTravelStyleLabel(tour.travelStyle, locale)} · {difficulty}
-        </p>
-        {content.highlights[0] ? (
-          <p className="mt-2 line-clamp-1 text-sm text-apple-subtle">{content.highlights[0]}</p>
+    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-silk-sand/80 bg-white shadow-[0_16px_40px_-24px_rgba(120,72,24,0.55)] transition-all hover:-translate-y-1 hover:shadow-lg">
+      <div className="relative aspect-[16/10] overflow-hidden">
+        <Link href={journeyHref} className="absolute inset-0" tabIndex={-1} aria-hidden>
+          <Image
+            src={tour.image}
+            alt=""
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          />
+        </Link>
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/0 to-black/0" />
+        {seasonFavorite || hasDiscount ? (
+          <div className="pointer-events-none absolute left-3 top-3 flex flex-wrap gap-2">
+            {seasonFavorite ? (
+              <span className="inline-flex items-center rounded-md bg-silk-gold px-2 py-0.5 text-xs font-medium text-silk-indigo">
+                {t("seasonFavorite")}
+              </span>
+            ) : null}
+            {hasDiscount ? (
+              <span className="inline-flex items-center rounded-md bg-silk-terracotta px-2 py-0.5 text-xs font-medium text-white">
+                −{discount}%
+              </span>
+            ) : null}
+          </div>
         ) : null}
-        <div className="mt-auto flex items-center justify-between gap-3 pt-4">
-          <p className="text-sm font-semibold text-silk-indigo">
-            {showPrice ? `$${tour.price.toLocaleString()}` : shop("requestQuote")}
-          </p>
-          <span className="text-sm font-semibold text-silk-gold">{shop("viewTrip")}</span>
+        <div className="pointer-events-none absolute bottom-3 left-3 right-3 flex flex-wrap items-center justify-between gap-2 text-white">
+          <span className="inline-flex min-w-0 items-center gap-1.5 rounded-full bg-black/40 px-2.5 py-1 text-xs backdrop-blur-sm">
+            <MapPin className="h-3 w-3 shrink-0" aria-hidden />
+            <span className="truncate">{countries.join(" / ")}</span>
+          </span>
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-black/40 px-2.5 py-1 text-xs backdrop-blur-sm">
+            <Clock className="h-3 w-3" aria-hidden />
+            {t("durationLine", { days: tour.duration, nights })}
+          </span>
         </div>
       </div>
-    </Link>
+
+      <div className="flex flex-1 flex-col p-5">
+        {tour.rating > 0 ? (
+          <div className="flex items-center gap-2 text-xs text-apple-muted">
+            <Star className="h-3.5 w-3.5 fill-silk-gold text-silk-gold" aria-hidden />
+            <span className="font-medium text-silk-indigo">{tour.rating}</span>
+            {tour.reviews > 0 ? (
+              <span>
+                · {tour.reviews} {shop("reviews")}
+              </span>
+            ) : null}
+          </div>
+        ) : null}
+
+        <h3 className="mt-2 font-display text-xl font-semibold leading-snug text-silk-indigo">
+          <Link href={journeyHref} className="hover:text-silk-terracotta">
+            {content.title}
+          </Link>
+        </h3>
+        {content.desc ? (
+          <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-apple-muted">{content.desc}</p>
+        ) : null}
+
+        {highlights.length > 0 ? (
+          <ul className="mt-4 space-y-1.5 text-sm text-silk-indigo/80">
+            {highlights.map((item) => (
+              <li key={item} className="flex items-start gap-2">
+                <CircleCheck className="mt-0.5 h-4 w-4 shrink-0 text-silk-emerald" aria-hidden />
+                <span className="line-clamp-1">{item}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
+        <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-apple-muted">
+          {tour.maxGroupSize ? (
+            <span className="inline-flex items-center gap-1">
+              <Users className="h-3.5 w-3.5" aria-hidden />
+              {t("detail.groupValue", { count: tour.maxGroupSize })}
+            </span>
+          ) : null}
+          <span className="inline-flex items-center gap-1">
+            <TrendingUp className="h-3.5 w-3.5" aria-hidden />
+            {difficulty}
+          </span>
+        </div>
+
+        <div className="mt-5 flex items-end justify-between gap-3 border-t border-silk-sand pt-4">
+          <div>
+            {priced ? (
+              <>
+                {hasDiscount ? (
+                  <div className="text-xs text-apple-muted line-through">
+                    ${compareAt.toLocaleString(locale)}
+                  </div>
+                ) : null}
+                <div className="font-display text-2xl font-semibold leading-none text-silk-terracotta">
+                  ${tour.price.toLocaleString(locale)}
+                </div>
+                <div className="mt-1 text-xs text-apple-muted">{shop("perPerson")}</div>
+              </>
+            ) : (
+              <p className="text-sm font-semibold text-silk-indigo">{shop("requestQuote")}</p>
+            )}
+          </div>
+          <div className="flex flex-col gap-2">
+            <Link
+              href={journeyHref}
+              className="inline-flex h-8 items-center justify-center rounded-md border border-silk-sand bg-white px-3 text-sm font-medium text-silk-indigo shadow-sm transition hover:bg-silk-cream"
+            >
+              {shop("details")}
+            </Link>
+            <Link
+              href={bookHref}
+              className="inline-flex h-8 items-center justify-center gap-1 rounded-md bg-silk-terracotta px-3 text-sm font-medium text-white transition hover:bg-silk-terracotta/90"
+            >
+              {shop("book")}
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </article>
   );
 }
