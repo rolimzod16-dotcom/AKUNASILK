@@ -1,13 +1,9 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
-import { Mail, Phone, Clock, MessageCircle } from "lucide-react";
-import PageHero from "@/components/shared/PageHero";
-import AnimateIn from "@/components/shared/AnimateIn";
-import PlanJourneyForm from "@/components/forms/PlanJourneyForm";
+import JourneyRequest from "@/components/forms/PlanJourneyForm";
+import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getCatalogTours, getTourContent } from "@/lib/data/tours";
-import { Card, CardContent } from "@/components/ui/card";
 import { getSiteSettings, whatsappHref } from "@/lib/cms/settings";
 
 export async function generateMetadata({
@@ -16,8 +12,6 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "pages.contact" });
-  const c = await getTranslations({ locale, namespace: "contact" });
   return buildPageMetadata({
     locale,
     path: "/contact",
@@ -27,106 +21,37 @@ export async function generateMetadata({
   });
 }
 
-
-function ContactFormFallback() {
-  return (
-    <Card className="border-silk-gold/15 shadow-sm">
-      <CardContent className="p-8">
-        <div className="h-64 animate-pulse rounded-lg bg-silk-gold/10" />
-      </CardContent>
-    </Card>
-  );
-}
-
 export default async function ContactPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const pages = await getTranslations({ locale, namespace: "pages.contact" });
-  const t = await getTranslations({ locale, namespace: "contact" });
-  const info = await getTranslations({ locale, namespace: "contact.info" });
   const form = await getTranslations({ locale, namespace: "contact.form" });
-  const [publishedTours, settings] = await Promise.all([
-    getCatalogTours(),
-    getSiteSettings(),
-  ]);
-  const c = settings.contact;
+  const [tours, settings] = await Promise.all([getCatalogTours(), getSiteSettings()]);
   const tourOptions = [
     { slug: "any", label: form("tourOptions.any") },
-    ...publishedTours.map((tour) => ({
+    ...tours.map((tour) => ({
       slug: tour.slug,
       label: getTourContent(tour, locale).title,
     })),
     { slug: "bespoke", label: form("tourOptions.bespoke") },
   ];
+  const c = settings.contact;
 
   return (
-    <>
-      <PageHero
-        title="Talk to a Silk Road travel specialist"
-        subtitle="Tell us what you are considering. A member of the GST team will review your request and reply with the next practical step."
-        compact
+    <Suspense fallback={<div className="h-96 animate-pulse bg-silk-cream" />}>
+      <JourneyRequest
+        tourOptions={tourOptions}
+        contact={{
+          email: c.email,
+          phoneDisplay: c.phoneDisplay,
+          phoneTel: c.phoneTel,
+          whatsappHref: whatsappHref(settings),
+          hours: c.hours,
+          address: c.address,
+        }}
       />
-      <section className="apple-section">
-        <div className="mx-auto max-w-[980px] px-6">
-          <div className="grid gap-10 lg:grid-cols-5">
-            <AnimateIn delay={0.1} className="lg:col-span-2">
-              <Card className="silk-pattern-dark h-full border-silk-gold/20 bg-silk-indigo text-white">
-                <CardContent className="p-8">
-                  <h3 className="silk-headline text-xl text-white">
-                    {c.legalName || "GREAT SILK TRAILS"}
-                  </h3>
-                  <ul className="mt-6 space-y-5">
-                    {c.address ? (
-                      <li className="text-sm text-white/80">{c.address}</li>
-                    ) : null}
-                    <li className="flex items-start gap-3">
-                      <Mail className="mt-0.5 size-5 text-silk-gold" />
-                      <a
-                        href={`mailto:${c.email}`}
-                        className="text-sm text-white/80 hover:text-silk-gold"
-                      >
-                        {c.email}
-                      </a>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Phone className="mt-0.5 size-5 text-silk-gold" />
-                      <a href={`tel:${c.phoneTel}`} className="text-sm text-white/80 hover:text-silk-gold">
-                        {c.phoneDisplay}
-                      </a>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <MessageCircle className="mt-0.5 size-5 text-silk-gold" />
-                      <a
-                        href={whatsappHref(settings)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sm text-white/80 hover:text-silk-gold"
-                      >
-                        WhatsApp
-                      </a>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Clock className="mt-0.5 size-5 text-silk-gold" />
-                      <span className="text-sm text-white/80">{c.hours}</span>
-                    </li>
-                    {c.emergencyNote ? (
-                      <li className="text-xs text-white/60">{c.emergencyNote}</li>
-                    ) : null}
-                  </ul>
-                </CardContent>
-              </Card>
-            </AnimateIn>
-            <AnimateIn className="lg:col-span-3">
-              <Suspense fallback={<ContactFormFallback />}>
-                <PlanJourneyForm tourOptions={tourOptions} />
-              </Suspense>
-            </AnimateIn>
-          </div>
-        </div>
-      </section>
-    </>
+    </Suspense>
   );
 }

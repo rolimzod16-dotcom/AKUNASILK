@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
-import PageHero from "@/components/shared/PageHero";
-import PlanJourneyForm from "@/components/forms/PlanJourneyForm";
-import Breadcrumbs from "@/components/seo/Breadcrumbs";
+import JourneyRequest from "@/components/forms/PlanJourneyForm";
 import { buildPageMetadata } from "@/lib/seo/page-meta";
 import { getCatalogTours, getTourContent } from "@/lib/data/tours";
+import { getSiteSettings, whatsappHref } from "@/lib/cms/settings";
 
 export async function generateMetadata({
   params,
@@ -29,7 +28,7 @@ export default async function PlanMyJourneyPage({
 }) {
   const { locale } = await params;
   const form = await getTranslations({ locale, namespace: "contact.form" });
-  const tours = await getCatalogTours();
+  const [tours, settings] = await Promise.all([getCatalogTours(), getSiteSettings()]);
   const tourOptions = [
     { slug: "any", label: form("tourOptions.any") },
     ...tours.map((tour) => ({
@@ -38,27 +37,21 @@ export default async function PlanMyJourneyPage({
     })),
     { slug: "bespoke", label: form("tourOptions.bespoke") },
   ];
+  const c = settings.contact;
 
   return (
-    <>
-      <PageHero
-        title="Plan your journey"
-        subtitle="Share what you know. Approximate dates and ideas are enough to begin."
-        compact
+    <Suspense fallback={<div className="h-96 animate-pulse bg-silk-cream" />}>
+      <JourneyRequest
+        tourOptions={tourOptions}
+        contact={{
+          email: c.email,
+          phoneDisplay: c.phoneDisplay,
+          phoneTel: c.phoneTel,
+          whatsappHref: whatsappHref(settings),
+          hours: c.hours,
+          address: c.address,
+        }}
       />
-      <section className="apple-section">
-        <div className="mx-auto max-w-[720px] px-6">
-          <Breadcrumbs
-            items={[
-              { label: "Home", href: "/" },
-              { label: "Plan my journey" },
-            ]}
-          />
-          <Suspense fallback={<div className="h-64 animate-pulse rounded-2xl bg-silk-gold/10" />}>
-            <PlanJourneyForm tourOptions={tourOptions} />
-          </Suspense>
-        </div>
-      </section>
-    </>
+    </Suspense>
   );
 }

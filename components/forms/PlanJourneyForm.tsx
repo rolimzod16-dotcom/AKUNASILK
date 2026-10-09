@@ -2,113 +2,72 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useLocale } from "next-intl";
-import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { useLocale, useTranslations } from "next-intl";
+import { Clock, Loader2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Link } from "@/i18n/routing";
-import { PUBLIC_COUNTRY_SLUGS } from "@/lib/site";
 
 type TourOption = { slug: string; label: string };
 
-type PlanJourneyFormProps = {
-  tourOptions: TourOption[];
-  compact?: boolean;
+export type JourneyContact = {
+  email: string;
+  phoneDisplay: string;
+  phoneTel: string;
+  whatsappHref: string;
+  hours: string;
+  address?: string;
 };
 
-const STYLES = [
-  "Overland and 4x4",
-  "Trekking",
-  "Motorcycle",
-  "Culture and Cities",
-  "Horse Riding",
-  "Photography",
-];
+type JourneyRequestProps = {
+  tourOptions: TourOption[];
+  contact: JourneyContact;
+};
 
-const DURATIONS = ["1–7 days", "8–12 days", "13+ days", "Flexible"];
-const STAYS = ["Homestay and guesthouse", "Mid-range hotels", "Heritage / boutique", "Flexible"];
+const fieldClass =
+  "h-11 w-full rounded-lg border border-silk-gold/30 bg-white px-3 text-sm text-silk-indigo outline-none transition placeholder:text-apple-muted/70 focus:border-silk-gold";
 
-export default function PlanJourneyForm({ tourOptions }: PlanJourneyFormProps) {
+export default function JourneyRequest({ tourOptions, contact }: JourneyRequestProps) {
+  const t = useTranslations("contact.request");
   const locale = useLocale();
   const searchParams = useSearchParams();
-  const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [inquiryId, setInquiryId] = useState("");
-
-  const [destinations, setDestinations] = useState<string[]>([]);
-  const [flexibleDates, setFlexibleDates] = useState(true);
-  const [preferredDate, setPreferredDate] = useState("");
-  const [duration, setDuration] = useState("Flexible");
-  const [travelers, setTravelers] = useState(2);
-  const [travelStyle, setTravelStyle] = useState("");
-  const [tour, setTour] = useState("any");
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [residence, setResidence] = useState("");
-  const [comfort, setComfort] = useState("Flexible");
-  const [notes, setNotes] = useState("");
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [tour, setTour] = useState("any");
   const [consent, setConsent] = useState(false);
   const [honeypot, setHoneypot] = useState("");
 
-  const service = searchParams.get("service") || "";
-
   useEffect(() => {
     const tourParam = searchParams.get("tour");
-    if (tourParam && tourOptions.some((item) => item.slug === tourParam)) {
-      setTour(tourParam);
+    const selected = tourOptions.find((item) => item.slug === tourParam);
+    if (selected && selected.slug !== "any") {
+      setTour(selected.slug);
+      setSubject((current) => current || selected.label);
     }
-    const dateParam = searchParams.get("date");
-    if (dateParam) {
-      setPreferredDate(dateParam);
-      setFlexibleDates(false);
-    }
-    const destParam = searchParams.get("destination");
-    if (destParam) {
-      setDestinations(
-        destParam
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean)
-      );
-    }
-    const styleParam = searchParams.get("style");
-    if (styleParam) setTravelStyle(styleParam);
   }, [searchParams, tourOptions]);
 
-  function toggleDestination(slug: string) {
-    setDestinations((prev) =>
-      prev.includes(slug) ? prev.filter((item) => item !== slug) : [...prev, slug]
-    );
-  }
-
-  async function submit() {
+  async function submit(event: React.FormEvent) {
+    event.preventDefault();
     setError(null);
-    if (!name.trim()) return setError("Please enter your name.");
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return setError("Please enter a valid email.");
-    if (!consent) return setError("Please confirm you agree to the Privacy Policy.");
+    if (!name.trim()) return setError(t("nameError"));
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return setError(t("emailError"));
+    if (!message.trim()) return setError(t("messageError"));
+    if (!consent) return setError(t("consentError"));
     if (honeypot) return;
 
-    setLoading(true);
-    const selectedTour = tourOptions.find((item) => item.slug === tour);
-    const message = [
-      notes.trim() || "Travel request from Plan My Journey.",
-      destinations.length ? `Destinations: ${destinations.join(", ")}` : null,
-      `Dates: ${flexibleDates ? "Flexible" : preferredDate || "Flexible"}`,
-      `Duration: ${duration}`,
-      travelStyle ? `Travel style: ${travelStyle}` : null,
-      `Accommodation: ${comfort}`,
-      residence ? `Country of residence: ${residence}` : null,
+    const service = searchParams.get("service") || "";
+    const body = [
+      subject.trim() ? `Subject: ${subject.trim()}` : null,
+      message.trim(),
       service ? `Service: ${service}` : null,
-      typeof window !== "undefined" ? `Page: ${window.location.href}` : null,
     ]
       .filter(Boolean)
       .join("\n");
 
+    setLoading(true);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -116,323 +75,205 @@ export default function PlanJourneyForm({ tourOptions }: PlanJourneyFormProps) {
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          phone: phone.trim() || undefined,
           tour,
-          message,
+          message: body,
           locale,
-          travelers,
-          preferredDate: flexibleDates ? "Flexible" : preferredDate,
-          source: searchParams.get("source") || (service ? "service" : tour !== "any" ? "tour" : "plan-my-journey"),
+          source: searchParams.get("source") || (tour !== "any" ? "tour" : "plan-my-journey"),
           sendClientConfirmation: true,
           website: honeypot,
-          tourTitle: selectedTour?.label,
+          tourTitle: tourOptions.find((item) => item.slug === tour)?.label,
           service,
         }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Could not send request");
+      if (!res.ok) throw new Error(data.error || t("error"));
       setInquiryId(data.inquiryId || "");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Could not send request");
+      setError(err instanceof Error ? err.message : t("error"));
     } finally {
       setLoading(false);
     }
   }
 
-  if (inquiryId) {
-    return (
-      <div className="rounded-2xl border border-silk-gold/30 bg-white p-8 text-center">
-        <h2 className="silk-headline text-2xl text-silk-indigo">Thank you</h2>
-        <p className="mt-3 text-sm leading-relaxed text-apple-muted">
-          Your request has been received. The GST team will review it and reply using the
-          contact details you provided.
-        </p>
-        <p className="mt-3 text-xs text-apple-muted">Reference: {inquiryId}</p>
-      </div>
-    );
-  }
+  const cards = [
+    contact.phoneDisplay
+      ? {
+          key: "phone",
+          label: t("phone"),
+          value: contact.phoneDisplay,
+          href: `tel:${contact.phoneTel}`,
+          icon: Phone,
+        }
+      : null,
+    contact.email
+      ? {
+          key: "email",
+          label: t("emailLabel"),
+          value: contact.email,
+          href: `mailto:${contact.email}`,
+          icon: Mail,
+        }
+      : null,
+    contact.address
+      ? {
+          key: "office",
+          label: t("office"),
+          value: contact.address,
+          href: "",
+          icon: MapPin,
+        }
+      : {
+          key: "whatsapp",
+          label: t("whatsapp"),
+          value: "WhatsApp",
+          href: contact.whatsappHref,
+          icon: MessageCircle,
+        },
+    contact.hours
+      ? {
+          key: "hours",
+          label: t("hours"),
+          value: contact.hours,
+          href: "",
+          icon: Clock,
+        }
+      : null,
+  ].filter((item): item is NonNullable<typeof item> => Boolean(item));
 
   return (
-    <form
-      className="rounded-2xl border border-silk-gold/20 bg-white p-6 shadow-sm sm:p-8"
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (step === 1) setStep(2);
-        else void submit();
-      }}
-    >
-      <p className="text-xs font-bold uppercase tracking-[0.18em] text-silk-gold">
-        Plan your journey · Step {step} of 2
-      </p>
-      <h2 className="silk-headline mt-2 text-2xl text-silk-indigo">
-        {step === 1 ? "Trip basics" : "Contact and preferences"}
-      </h2>
-      <p className="mt-2 text-sm text-apple-muted">
-        Share what you know. Approximate dates and ideas are enough to begin.
-      </p>
-
-      <input
-        type="text"
-        name="website"
-        tabIndex={-1}
-        autoComplete="off"
-        value={honeypot}
-        onChange={(e) => setHoneypot(e.target.value)}
-        className="absolute left-[-9999px] h-0 w-0 opacity-0"
-        aria-hidden="true"
-      />
-
-      {step === 1 ? (
-        <div className="mt-6 space-y-5">
-          {tourOptions.length > 1 && (
-            <Field label="Journey (optional)" htmlFor="tour">
-              <select
-                id="tour"
-                name="tour"
-                value={tour}
-                onChange={(e) => setTour(e.target.value)}
-                className="h-11 w-full rounded-lg border border-silk-gold/30 bg-silk-cream px-3 text-sm"
-              >
-                {tourOptions.map((item) => (
-                  <option key={item.slug} value={item.slug}>
-                    {item.label}
-                  </option>
-                ))}
-              </select>
-            </Field>
-          )}
-
-          <div>
-            <p className="mb-2 text-sm font-medium text-silk-indigo">Destination(s)</p>
-            <div className="flex flex-wrap gap-2">
-              {PUBLIC_COUNTRY_SLUGS.map((slug) => (
-                <button
-                  key={slug}
-                  type="button"
-                  onClick={() => toggleDestination(slug)}
-                  className={`rounded-full px-3 py-1.5 text-xs font-semibold capitalize ${
-                    destinations.includes(slug)
-                      ? "bg-silk-indigo text-silk-gold"
-                      : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/30"
-                  }`}
+    <section className="bg-silk-cream py-16 sm:py-24">
+      <div className="mx-auto grid max-w-6xl items-start gap-12 px-6 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-silk-gold">{t("eyebrow")}</p>
+          <h1 className="silk-headline mt-3 text-3xl text-silk-indigo sm:text-5xl">{t("heading")}</h1>
+          <p className="mt-4 text-base leading-relaxed text-apple-muted sm:text-lg">{t("intro")}</p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {cards.map((card) => {
+              const Icon = card.icon;
+              const inner = (
+                <>
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-silk-gold/15 text-silk-indigo">
+                    <Icon className="h-5 w-5" aria-hidden />
+                  </div>
+                  <span>
+                    <span className="block text-xs font-medium text-apple-muted">{card.label}</span>
+                    <span className="mt-0.5 block text-sm font-medium text-silk-indigo">{card.value}</span>
+                  </span>
+                </>
+              );
+              const className =
+                "flex items-start gap-3 rounded-2xl border border-silk-gold/25 bg-white p-4 transition hover:border-silk-gold/60";
+              return card.href ? (
+                <a
+                  key={card.key}
+                  href={card.href}
+                  className={className}
+                  {...(card.key === "whatsapp" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 >
-                  {slug}
-                </button>
-              ))}
-              <button
-                type="button"
-                onClick={() => toggleDestination("central-asia")}
-                className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
-                  destinations.includes("central-asia")
-                    ? "bg-silk-indigo text-silk-gold"
-                    : "bg-silk-cream text-silk-indigo ring-1 ring-silk-gold/30"
-                }`}
-              >
-                Multi-country
-              </button>
-            </div>
+                  {inner}
+                </a>
+              ) : (
+                <div key={card.key} className={className}>
+                  {inner}
+                </div>
+              );
+            })}
           </div>
+        </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Approximate dates" htmlFor="dates">
-              <Input
-                id="dates"
-                name="preferredDate"
-                type="month"
+        <div className="rounded-2xl border border-silk-gold/25 bg-white p-6 shadow-[0_25px_50px_-12px_rgba(15,18,37,0.12)] sm:p-8">
+          {inquiryId ? (
+            <div className="py-8 text-center">
+              <h2 className="silk-headline text-2xl text-silk-indigo">{t("success")}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-apple-muted">{t("successDetail")}</p>
+              <p className="mt-3 text-xs text-apple-muted">{t("reference", { id: inquiryId })}</p>
+            </div>
+          ) : (
+            <form onSubmit={submit} className="space-y-4">
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
                 autoComplete="off"
-                disabled={flexibleDates}
-                value={preferredDate}
-                onChange={(e) => setPreferredDate(e.target.value)}
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+                className="absolute left-[-9999px] h-0 w-0 opacity-0"
+                aria-hidden="true"
               />
-              <label className="mt-2 flex items-center gap-2 text-xs text-apple-muted">
+              <label className="block">
+                <span className="text-sm font-medium text-silk-indigo">{t("name")}</span>
+                <input
+                  className={`${fieldClass} mt-1.5`}
+                  name="name"
+                  autoComplete="name"
+                  placeholder={t("name")}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-silk-indigo">{t("email")}</span>
+                <input
+                  className={`${fieldClass} mt-1.5`}
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  placeholder="you@email.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-silk-indigo">{t("subject")}</span>
+                <input
+                  className={`${fieldClass} mt-1.5`}
+                  name="subject"
+                  placeholder={t("subjectPlaceholder")}
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                />
+              </label>
+              <label className="block">
+                <span className="text-sm font-medium text-silk-indigo">{t("message")}</span>
+                <textarea
+                  className={`${fieldClass} mt-1.5 h-32 resize-none py-3`}
+                  name="message"
+                  placeholder={t("messagePlaceholder")}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                />
+              </label>
+              <label className="flex items-start gap-2 text-sm text-apple-muted">
                 <input
                   type="checkbox"
-                  checked={flexibleDates}
-                  onChange={(e) => setFlexibleDates(e.target.checked)}
+                  className="mt-1"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
                 />
-                Flexible
+                <span>
+                  <Link href="/privacy" className="text-silk-gold underline">
+                    {t("consent")}
+                  </Link>
+                </span>
               </label>
-            </Field>
-            <Field label="Duration" htmlFor="duration">
-              <select
-                id="duration"
-                name="duration"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
-                className="h-11 w-full rounded-lg border border-silk-gold/30 bg-silk-cream px-3 text-sm"
+              {error ? (
+                <p className="text-sm text-silk-terracotta" role="alert">
+                  {error}
+                </p>
+              ) : null}
+              <button
+                type="submit"
+                disabled={loading}
+                className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-gradient-to-r from-silk-gold to-silk-amber text-sm font-bold text-silk-indigo shadow-md shadow-silk-gold/30 transition hover:from-silk-gold-light hover:to-silk-gold disabled:opacity-60"
               >
-                {DURATIONS.map((item) => (
-                  <option key={item}>{item}</option>
-                ))}
-              </select>
-            </Field>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Travellers" htmlFor="travelers">
-              <Input
-                id="travelers"
-                name="travelers"
-                type="number"
-                min={1}
-                max={12}
-                autoComplete="off"
-                value={travelers}
-                onChange={(e) => setTravelers(Number(e.target.value) || 1)}
-              />
-            </Field>
-            <Field label="Travel style" htmlFor="style">
-              <select
-                id="style"
-                name="style"
-                value={travelStyle}
-                onChange={(e) => setTravelStyle(e.target.value)}
-                className="h-11 w-full rounded-lg border border-silk-gold/30 bg-silk-cream px-3 text-sm"
-              >
-                <option value="">Not sure yet</option>
-                {STYLES.map((item) => (
-                  <option key={item}>{item}</option>
-                ))}
-              </select>
-            </Field>
-          </div>
-        </div>
-      ) : (
-        <div className="mt-6 space-y-5">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="Name" htmlFor="name">
-              <Input
-                id="name"
-                name="name"
-                autoComplete="name"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            </Field>
-            <Field label="Email" htmlFor="email">
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </Field>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Field label="WhatsApp (optional)" htmlFor="phone">
-              <Input
-                id="phone"
-                name="tel"
-                type="tel"
-                autoComplete="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-            </Field>
-            <Field label="Country of residence" htmlFor="residence">
-              <Input
-                id="residence"
-                name="country"
-                autoComplete="country-name"
-                value={residence}
-                onChange={(e) => setResidence(e.target.value)}
-              />
-            </Field>
-          </div>
-          <Field label="Accommodation level" htmlFor="comfort">
-            <select
-              id="comfort"
-              name="comfort"
-              value={comfort}
-              onChange={(e) => setComfort(e.target.value)}
-              className="h-11 w-full rounded-lg border border-silk-gold/30 bg-silk-cream px-3 text-sm"
-            >
-              {STAYS.map((item) => (
-                <option key={item}>{item}</option>
-              ))}
-            </select>
-          </Field>
-          <Field label="Notes" htmlFor="notes">
-            <Textarea
-              id="notes"
-              name="notes"
-              rows={4}
-              value={notes}
-              onChange={(e) => setNotes(e.target.value)}
-              placeholder="Pace, interests, questions"
-            />
-          </Field>
-          <label className="flex items-start gap-2 text-sm text-apple-muted">
-            <input
-              type="checkbox"
-              className="mt-1"
-              checked={consent}
-              onChange={(e) => setConsent(e.target.checked)}
-              required
-            />
-            <span>
-              I agree to the{" "}
-              <Link href="/privacy" className="text-silk-gold underline">
-                Privacy Policy
-              </Link>
-              .
-            </span>
-          </label>
-        </div>
-      )}
-
-      {error && (
-        <p className="mt-4 text-sm text-silk-terracotta" role="alert">
-          {error}
-        </p>
-      )}
-
-      <div className="mt-6 flex flex-wrap gap-3">
-        {step === 2 && (
-          <Button type="button" variant="silkOutline" size="pill" onClick={() => setStep(1)}>
-            <ChevronLeft className="size-4" />
-            Back
-          </Button>
-        )}
-        <Button type="submit" variant="silk" size="pill" disabled={loading}>
-          {loading ? (
-            <>
-              <Loader2 className="size-4 animate-spin" />
-              Sending
-            </>
-          ) : step === 1 ? (
-            <>
-              Continue
-              <ChevronRight className="size-4" />
-            </>
-          ) : (
-            "Send My Travel Request"
+                {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                {loading ? t("submitting") : t("submit")}
+              </button>
+              <p className="text-center text-xs text-apple-muted">{t("note")}</p>
+            </form>
           )}
-        </Button>
+        </div>
       </div>
-    </form>
-  );
-}
-
-function Field({
-  label,
-  htmlFor,
-  children,
-}: {
-  label: string;
-  htmlFor: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div>
-      <Label htmlFor={htmlFor} className="text-sm text-silk-indigo">
-        {label}
-      </Label>
-      <div className="mt-1.5">{children}</div>
-    </div>
+    </section>
   );
 }
